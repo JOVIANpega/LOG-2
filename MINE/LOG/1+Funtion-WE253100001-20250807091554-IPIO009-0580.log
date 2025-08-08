@@ -1,0 +1,655 @@
+2025/08/07 09:15:54 [1]	System Version is 1.1.8.64.
+2025/08/07 09:15:54 [1]	Script File is VALO360_TestFlow_20250407_Function.xlsx.
+2025/08/07 09:15:54 [1]	Script Version is 2508061510160.
+2025/08/07 09:15:54 [1]	Script Creator is jovian_li.
+2025/08/07 09:15:54 [1]	Utility Version is 1.0.9.21.
+2025/08/07 09:15:54 [1]	DeviceID is 125313.
+2025/08/07 09:15:54 [1]	SFIS is off.
+2025/08/07 09:15:54 [1]	MiniCloud2 is on.
+2025/08/07 09:15:54 [1]	FTP is off.
+2025/08/07 09:15:54 [1]	Active IPs:
+乙太網路:[6CB311319DBC]#192.168.11.3#
+DUT:[6CB311319DBD]#169.254.30.167#
+sfis:[FC34973B7871]#10.197.60.68#
+2025/08/07 09:15:54 [1]	Script has 1 phase cases
+2025/08/07 09:15:54 [1]	Script has 97 phase cases
+2025/08/07 09:15:54 [1]	QCODE: (1P) HWNDUSES1096;;(S) WE253100001;;(18V) 18VLENOK;;(10D) 250730;;(4L) MADE IN TAIWAN
+****************************************************************************************************
+2025/08/07 09:15:54 [1]	Execute Phase 0 Test.
+2025/08/07 09:15:54 [1]	Do @STEP002@Get Qcode info FOR PEGA
+2025/08/07 09:15:54 [1]	Run ITIF013-000:Compare Qrcode USER	Mode: 1, Retry: 3
+2025/08/07 09:15:54 [1]	> :GetVal,"$QCODE"
+2025/08/07 09:15:54 [1]	< (1P) HWNDUSES1096;;(S) WE253100001;;(18V) 18VLENOK;;(10D) 250730;;(4L) MADE IN TAIWAN
+2025/08/07 09:15:54 [1]	WithinString: WE253100001
+2025/08/07 09:15:54 [1]	Compare Qrcode USER Result: SSN=WE253100001
+2025/08/07 09:15:54 [1]	CurrentTestID:ITIF013-0000 - The validation: SSN = WE253100001 (@WE,)
+2025/08/07 09:15:54 [1]	ITIF013-000:@STEP002@Get Qcode info FOR PEGA Test is Pass ! 		----- 0.0098982 Sec.
+2025/08/07 09:15:54 [1]	Do @STEP003@READ ME
+2025/08/07 09:15:54 [1]	Run B7PL025-002:SET DEFAULT N3C2401C	Mode: 1, Retry: 3
+2025/08/07 09:15:54 [1]	> :SetVal,"$G_VALO360_MODEL","N3C2401C"
+2025/08/07 09:15:54 [1]	< 0
+2025/08/07 09:15:54 [1]	Run B7PL025-003:GET DEFAULT VALUE	Mode: 1, Retry: 3
+2025/08/07 09:15:54 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 09:15:54 [1]	< N3C2401C
+2025/08/07 09:15:54 [1]	Run B7PL025-004:Disconnect UART	Mode: 3, Retry: 3
+[09:15:54.775][PC] [Disconnect UART]++
+2025/08/07 09:15:54 [1]	> :Disconnect,"UART"
+2025/08/07 09:15:54 [1]	< 0
+[09:15:54.775][PC] [Disconnect UART]--
+2025/08/07 09:15:54 [1]	[PC] [Disconnect UART] ~~ TestTime:0 sec
+2025/08/07 09:15:54 [1]	Run B7PL025-005:Disconnect UARTF	Mode: 3, Retry: 3
+[09:15:54.775][PC] [Disconnect UARTF]++
+2025/08/07 09:15:54 [1]	> :Disconnect,"UARTF"
+2025/08/07 09:15:54 [1]	< 0
+[09:15:54.785][PC] [Disconnect UARTF]--
+2025/08/07 09:15:54 [1]	[PC] [Disconnect UARTF] ~~ TestTime:0.0099645 sec
+2025/08/07 09:15:54 [1]	Run OTFX079-006:Open UART	Mode: 2, Retry: 3
+2025/08/07 09:15:54 [1]	> :Connect,"UARTF"
+2025/08/07 09:15:54 [1]	< 0
+2025/08/07 09:15:54 [1]	OTFX079-006:@STEP003@READ ME Test is Pass ! 		----- 0.1402541 Sec.
+2025/08/07 09:15:54 [1]	DUT Test Completed !        ----- 0.1501523 Sec.
+2025/08/07 09:15:54 [1]	Execute Phase 1 Test.
+2025/08/07 09:15:54 [1]	Do @STEP005@CheckRoute
+2025/08/07 09:15:54 [1]	Run B7PL025-007:Show SSN  to UI	Mode: 0, Retry: 3
+[09:15:54.985][PC] [Show SSN  to UI]++
+2025/08/07 09:15:54 [1]	> :ShowISN,"WE253100001"
+2025/08/07 09:15:54 [1]	< 0
+[09:15:54.985][PC] [Show SSN  to UI]--
+2025/08/07 09:15:54 [1]	[PC] [Show SSN  to UI] ~~ TestTime:0.0096397 sec
+2025/08/07 09:15:54 [1]	B7PL025-007:@STEP005@CheckRoute Test is Pass ! 		----- 0.0096397 Sec.
+2025/08/07 09:15:54 [1]	Do @STEP006@GETSSN
+2025/08/07 09:15:54 [1]	:@STEP006@GETSSN Test is Pass ! 		----- 0 Sec.
+2025/08/07 09:15:55 [1]	Do @STEP007@GET sfisHW
+2025/08/07 09:15:55 [1]	:@STEP007@GET sfisHW Test is Pass ! 		----- 0 Sec.
+2025/08/07 09:15:55 [1]	Do @STEP008@GET sfisSKU
+2025/08/07 09:15:55 [1]	:@STEP008@GET sfisSKU Test is Pass ! 		----- 0 Sec.
+2025/08/07 09:15:55 [1]	Do @STEP009@GET sfisETH MAC
+2025/08/07 09:15:55 [1]	:@STEP009@GET sfisETH MAC Test is Pass ! 		----- 0 Sec.
+2025/08/07 09:15:55 [1]	Do @STEP010@GET sfisIVKEY
+2025/08/07 09:15:55 [1]	Pop window skips by ExecMode = 6.
+2025/08/07 09:15:55 [1]	:@STEP010@GET sfisIVKEY Test is Pass ! 		----- 0 Sec.
+2025/08/07 09:15:55 [1]	Do @STEP011@GET sfisMOKP_SN
+2025/08/07 09:15:55 [1]	:@STEP011@GET sfisMOKP_SN Test is Pass ! 		----- 0 Sec.
+2025/08/07 09:15:55 [1]	DUT Test Completed !        ----- 0.0496182 Sec.
+2025/08/07 09:15:55 [1]	Execute Phase 2 Test.
+2025/08/07 09:15:55 [1]	Do @STEP013@Check Valo360 model
+2025/08/07 09:15:55 [1]	Run B7PL025-018:Chack Custom data	Mode: 1, Retry: 3
+2025/08/07 09:15:55 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 09:15:55 [1]	< N3C2401C
+2025/08/07 09:15:55 [1]	B7PL025-018:@STEP013@Check Valo360 model Test is Pass ! 		----- 0 Sec.
+2025/08/07 09:15:55 [1]	Do @STEP014@SET iplus Modelname_Valo360_5G
+2025/08/07 09:15:55 [1]	Run B7PL025-019:Chack Custom data	Mode: 4, Retry: 3
+2025/08/07 09:15:55 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 09:15:55 [1]	< N3C2401C
+2025/08/07 09:15:55 [1]	Run B7PL025-020:Set Iplus modename	Mode: 1, Retry: 3
+2025/08/07 09:15:55 [1]	> :SetModelName,"N3C2401C"
+2025/08/07 09:15:55 [1]	< N3C2401C
+2025/08/07 09:15:55 [1]	Run B7PL025-021:Get Iplus modename	Mode: 1, Retry: 3
+2025/08/07 09:15:55 [1]	> :GetModelName
+2025/08/07 09:15:55 [1]	< N3C2401C
+2025/08/07 09:15:55 [1]	Run B7PL025-022:WaitBoot	Mode: 1, Retry: 3
+2025/08/07 09:15:55 [1]	> :Delay,"0"
+2025/08/07 09:15:55 [1]	< 0
+2025/08/07 09:15:55 [1]	B7PL025-022:@STEP014@SET iplus Modelname_Valo360_5G Test is Pass ! 		----- 0.0099944 Sec.
+2025/08/07 09:15:55 [1]	Do @STEP015@SET iplus Modelname_Valo360_WIFI
+2025/08/07 09:15:55 [1]	Run B7PL025-023:Chack Custom data	Mode: 4, Retry: 3
+2025/08/07 09:15:55 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 09:15:55 [1]	< N3C2401C
+2025/08/07 09:15:55 [1]	Run B7PL025-026:WaitBoot	Mode: 1, Retry: 3
+2025/08/07 09:15:55 [1]	> :Delay,"0"
+2025/08/07 09:15:55 [1]	< 0
+2025/08/07 09:15:55 [1]	B7PL025-026:@STEP015@SET iplus Modelname_Valo360_WIFI Test is Pass ! 		----- 0 Sec.
+2025/08/07 09:15:55 [1]	Do @STEP016@SET iplus Modelname_Valo360_noBattery
+2025/08/07 09:15:55 [1]	Run B7PL025-027:Chack Custom data	Mode: 4, Retry: 3
+2025/08/07 09:15:55 [1]	> :GetVal,"$N3C2401NB"
+2025/08/07 09:15:55 [1]	< Not Found
+2025/08/07 09:15:55 [1]	Run B7PL025-030:WaitBoot	Mode: 1, Retry: 3
+2025/08/07 09:15:55 [1]	> :Delay,"0"
+2025/08/07 09:15:55 [1]	< 0
+2025/08/07 09:15:55 [1]	Pop window skips by ExecMode = 6.
+2025/08/07 09:15:55 [1]	B7PL025-030:@STEP016@SET iplus Modelname_Valo360_noBattery Test is Pass ! 		----- 0.0099948 Sec.
+2025/08/07 09:15:55 [1]	DUT Test Completed !        ----- 0.0496312 Sec.
+2025/08/07 09:15:55 [1]	Execute Phase 3 Test.
+2025/08/07 09:15:55 [1]	Do @STEP018@Login
+2025/08/07 09:15:55 [1]	Run OTFX079-032:Open UART	Mode: 2, Retry: 3
+2025/08/07 09:15:55 [1]	> :Connect,"UARTF"
+2025/08/07 09:15:55 [1]	< 0
+2025/08/07 09:15:55 [1]	Run B7PL025-033:Power ON	Mode: 0, Retry: 3
+[09:15:55.245][FIXTURE] [Power ON]++
+2025/08/07 09:15:55 [1]	(UARTF) > G
+
+2025/08/07 09:15:55 [1]	(UARTF) < 
+[09:15:55.245][FIXTURE] [Power ON]--
+2025/08/07 09:15:55 [1]	[FIXTURE] [Power ON] ~~ TestTime:0 sec
+2025/08/07 09:15:55 [1]	Run B7PL025-034:Wait Boot	Mode: 1, Retry: 3
+2025/08/07 09:15:55 [1]	> :Delay,"1000"
+2025/08/07 09:15:56 [1]	< 0
+2025/08/07 09:15:56 [1]	Run OTFX079-035:PC##Ping Ethernet Test	Mode: 2, Retry: 3
+2025/08/07 09:15:56 [1]	> :Utility.PING,"192.168.11.143","70000","192.168.11.3"
+2025/08/07 09:16:33 [1]	< 
+2025/08/07 09:16:33 [1]	< 0
+2025/08/07 09:16:33 [1]	Run OTFX079-036:Wait	Mode: 1, Retry: 3
+[09:16:33.272][PC] [Wait]++
+2025/08/07 09:16:33 [1]	> :Delay,"2000"
+2025/08/07 09:16:35 [1]	< 0
+[09:16:35.282][PC] [Wait]--
+2025/08/07 09:16:35 [1]	[PC] [Wait] ~~ TestTime:2.0094496 sec
+2025/08/07 09:16:35 [1]	OTFX079-036:@STEP018@Login Test is Pass ! 			----- 40.036526 Sec.
+2025/08/07 09:16:35 [1]	Do @STEP019@check bootup
+2025/08/07 09:16:35 [1]	Run OTFX079-037:Open UART	Mode: 0, Retry: 3
+2025/08/07 09:16:35 [1]	> :Connect,"UART"
+2025/08/07 09:16:35 [1]	< 0
+2025/08/07 09:16:35 [1]	Run OTFX079-038:Wait	Mode: 1, Retry: 3
+[09:16:35.422][PC] [Wait]++
+2025/08/07 09:16:35 [1]	> :Delay,"10000"
+2025/08/07 09:16:45 [1]	< 0
+[09:16:45.427][PC] [Wait]--
+2025/08/07 09:16:45 [1]	[PC] [Wait] ~~ TestTime:10.0058117 sec
+2025/08/07 09:16:45 [1]	Run OTFX079-039:Check Boot	Mode: 2, Retry: 3
+[09:16:45.427][DUT] [Check Boot]++
+2025/08/07 09:16:45 [1]	(UART) > 
+
+2025/08/07 09:16:45 [1]	(UART) < 
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ 
+[09:16:45.457][DUT] [Check Boot]--
+2025/08/07 09:16:45 [1]	[DUT] [Check Boot] ~~ TestTime:0.0299153 sec
+2025/08/07 09:16:45 [1]	OTFX079-039:@STEP019@check bootup Test is Pass ! 		----- 10.1659862 Sec.
+2025/08/07 09:16:45 [1]	DUT Test Completed !        ----- 50.222279 Sec.
+2025/08/07 09:16:45 [1]	Execute Phase 4 Test.
+2025/08/07 09:16:45 [1]	Do @STEP021@Check FW version
+2025/08/07 09:16:45 [1]	Run B7PL025-040:Open UART	Mode: 1, Retry: 3
+[09:16:45.557][PC] [Open UART]++
+2025/08/07 09:16:45 [1]	> :Connect,"UART"
+2025/08/07 09:16:45 [1]	< 0
+[09:16:45.557][PC] [Open UART]--
+2025/08/07 09:16:45 [1]	[PC] [Open UART] ~~ TestTime:0 sec
+2025/08/07 09:16:45 [1]	Run B7PL025-041:BOOT UP OK	Mode: 2, Retry: 3
+[09:16:45.557][PC] [BOOT UP OK]++
+2025/08/07 09:16:45 [1]	(UART) > 
+
+2025/08/07 09:16:45 [1]	(UART) < 
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ 
+[09:16:45.597][PC] [BOOT UP OK]--
+2025/08/07 09:16:45 [1]	[PC] [BOOT UP OK] ~~ TestTime:0.0403353 sec
+2025/08/07 09:16:45 [1]	Run B7PL025-042:Wait	Mode: 0, Retry: 3
+2025/08/07 09:16:45 [1]	> :Delay,"5000"
+2025/08/07 09:16:50 [1]	< 0
+2025/08/07 09:16:50 [1]	Run VSCH026-043:Chec Frimware version	Mode: 0, Retry: 3
+[09:16:50.605][DUT] [Chec Frimware version]++
+2025/08/07 09:16:50 [1]	(UART) > pegacmd version
+
+2025/08/07 09:16:50 [1]	(UART) < pegacmd version
+0.5.4.37.0_b5838c4
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ 
+[09:16:50.665][DUT] [Chec Frimware version]--
+2025/08/07 09:16:50 [1]	[DUT] [Chec Frimware version] ~~ TestTime:0.0599686 sec
+2025/08/07 09:16:50 [1]	Run IOET151-044:Check ETH LINK status	Mode: 1, Retry: 3
+[09:16:50.665][PC] [Check ETH LINK status]++
+2025/08/07 09:16:50 [1]	(UART) > diag -g status eth0
+
+2025/08/07 09:16:51 [1]	(UART) < diag -g status eth0
+link: up
+duplex: full
+speed: 1000
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ OK
+at+cfun=0
+OK
+[5G]:+SIMCARD: NOT AVAILABLE
+at+cgps=1
+OK
+
+[09:16:51.684][PC] [Check ETH LINK status]--
+2025/08/07 09:16:51 [1]	[PC] [Check ETH LINK status] ~~ TestTime:1.0194554 sec
+2025/08/07 09:16:51 [1]	Run B7PL025-045:Wait	Mode: 0, Retry: 3
+[09:16:51.684][PC] [Wait]++
+2025/08/07 09:16:51 [1]	> :Delay,"0"
+2025/08/07 09:16:51 [1]	< 0
+[09:16:51.684][PC] [Wait]--
+2025/08/07 09:16:51 [1]	[PC] [Wait] ~~ TestTime:0 sec
+2025/08/07 09:16:51 [1]	B7PL025-045:@STEP021@Check FW version Test is Pass ! 		----- 6.1270891 Sec.
+2025/08/07 09:16:51 [1]	DUT Test Completed !        ----- 6.1367205 Sec.
+2025/08/07 09:16:51 [1]	Execute Phase 5 Test.
+2025/08/07 09:16:51 [1]	Do @STEP023@SET Product_SKU
+2025/08/07 09:16:51 [1]	Run B7PL025-046:Check SFIS Enabled	Mode: 4, Retry: 3
+2025/08/07 09:16:51 [1]	> :SfEnabled
+2025/08/07 09:16:51 [1]	< 0
+2025/08/07 09:16:51 [1]	Run B7PL025-050:Wait	Mode: 0, Retry: 3
+[09:16:51.804][PC] [Wait]++
+2025/08/07 09:16:51 [1]	> :Delay,"0"
+2025/08/07 09:16:51 [1]	< 0
+[09:16:51.804][PC] [Wait]--
+2025/08/07 09:16:51 [1]	[PC] [Wait] ~~ TestTime:0 sec
+2025/08/07 09:16:51 [1]	B7PL025-050:@STEP023@SET Product_SKU Test is Pass ! 		----- 0.0099946 Sec.
+2025/08/07 09:16:51 [1]	DUT Test Completed !        ----- 0.0196459 Sec.
+2025/08/07 09:16:51 [1]	Execute Phase 6 Test.
+2025/08/07 09:16:51 [1]	Do @STEP025@CHECK  BATTERY
+2025/08/07 09:16:51 [1]	Run OTFX076-051:Check SKU	Mode: 4, Retry: 3
+[09:16:51.934][DUT] [Check SKU]++
+2025/08/07 09:16:51 [1]	(UART) > diag -g sku
+
+2025/08/07 09:16:53 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ AT+CFUN=5
+OK
+[   44.172304] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   44.178342] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   44.185121] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   44.193205] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   44.199232] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   44.206009] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   44.214091] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   44.220118] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   44.226890] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   44.235330] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   44.241357] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   44.248126] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   44.256209] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   44.262238] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   44.269004] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   44.277086] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   44.283113] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   44.289880] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   44.573200] bq24780-charger 2-0009: gauge not yet initialized!
+
+[09:16:53.943][DUT] [Check SKU]--
+2025/08/07 09:16:53 [1]	[DUT] [Check SKU] ~~ TestTime:2.0096121 sec
+2025/08/07 09:16:53 [1]	Run B7PL025-052:Disable Battery shiping mode	Mode: 1, Retry: 3
+[09:16:53.943][PC] [Disable Battery shiping mode]++
+2025/08/07 09:16:53 [1]	(UART) > kill_processor.sh monitoring-shutdown.sh
+
+2025/08/07 09:16:54 [1]	(UART) < kill_processor.sh monitoring-shutdown.sh
+Killed
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ 
+[09:16:54.003][PC] [Disable Battery shiping mode]--
+2025/08/07 09:16:54 [1]	[PC] [Disable Battery shiping mode] ~~ TestTime:0.0600282 sec
+2025/08/07 09:16:54 [1]	Run B7PL025-053:Disable Battery limit on 55%	Mode: 1, Retry: 3
+[09:16:54.003][PC] [Disable Battery limit on 55%]++
+2025/08/07 09:16:54 [1]	(UART) > echo 0 > /sys/bus/i2c/devices/14-0055/charger_monitor_perc
+
+2025/08/07 09:16:54 [1]	(UART) < echo 0 > /sys/bus/i2c/devices/14-0055/charge
+r_monitor_perc
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ 
+[09:16:54.063][PC] [Disable Battery limit on 55%]--
+2025/08/07 09:16:54 [1]	[PC] [Disable Battery limit on 55%] ~~ TestTime:0.0598755 sec
+2025/08/07 09:16:54 [1]	Run B7PL025-054:HW ASK Wait battery stable	Mode: 0, Retry: 3
+[09:16:54.063][PC] [HW ASK Wait battery stable]++
+2025/08/07 09:16:54 [1]	> :Delay,"20000"
+2025/08/07 09:17:14 [1]	< 0
+[09:17:14.077][PC] [HW ASK Wait battery stable]--
+2025/08/07 09:17:14 [1]	[PC] [HW ASK Wait battery stable] ~~ TestTime:20.0139585 sec
+2025/08/07 09:17:14 [1]	Run IPIO006-055:read Battery info	Mode: 1, Retry: 3
+[09:17:14.077][DUT] [read Battery info]++
+2025/08/07 09:17:14 [1]	(UART) > cat /sys/bus/i2c/devices/2-0009/cmpout_gpio
+
+2025/08/07 09:17:19 [1]	(UART) < cat /sys/bus/i2c/devices/2-0009/cmpout_gpio
+0
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ [   69.053196] bq24780-charger 2-0009: gauge not yet initialized!
+
+[09:17:19.087][DUT] [read Battery info]--
+2025/08/07 09:17:19 [1]	[DUT] [read Battery info] ~~ TestTime:5.0096887 sec
+2025/08/07 09:17:19 [1]	Run IPIO006-056:read Battery info	Mode: 1, Retry: 3
+[09:17:19.087][DUT] [read Battery info]++
+2025/08/07 09:17:19 [1]	(UART) > cat /sys/bus/i2c/devices/14-0055/registers
+
+
+2025/08/07 09:17:24 [1]	(UART) < cat /sys/bus/i2c/de[   70.813802] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+vices/14-0055/registers
+[   70.820028] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   70.828918] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   70.837003] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   70.843037] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   70.849807] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   70.857890] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   70.863924] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   70.870691] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   70.879030] bq27xxx-battery 14-0055: Failed to read Temperature register:0x06, id:-121
+[   70.887030] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   70.893066] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   70.899836] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   70.907923] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   70.913955] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   70.920721] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   70.928806] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   70.934834] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   70.941603] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   70.949933] bq27xxx-battery 14-0055: Failed to read Voltage register:0x08, id:-121
+[   70.957582] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   70.963614] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   70.970381] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   70.978464] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   70.984493] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   70.991263] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   70.999351] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.005379] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.012148] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.020477] bq27xxx-battery 14-0055: Failed to read Battery Status register:0x0a, id:-121
+[   71.028736] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.034765] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.041534] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.049619] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.055651] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.062423] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.070502] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.076534] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.083310] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.091640] bq27xxx-battery 14-0055: Failed to read Current register:0x0c, id:-121
+[   71.099292] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.105324] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.112093] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.120173] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.126206] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.132997] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.141080] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.147109] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.153881] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.162212] bq27xxx-battery 14-0055: Failed to read Remaining Capacity register:0x10, id:-121
+[   71.170812] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.176844] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.183612] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.191694] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.197726] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.204494] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.212580] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.218605] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.225376] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.233705] bq27xxx-battery 14-0055: Failed to read Full Charge Capacity register:0x12, id:-121
+[   71.242482] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.248511] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.255287] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.263371] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.269398] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.276170] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.284258] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.290286] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.297075] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.305408] bq27xxx-battery 14-0055: Failed to read Average Current register:0x14, id:-121
+[   71.313757] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.319783] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.326556] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.334636] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.340665] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.347435] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.355518] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.361546] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.368315] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.376646] bq27xxx-battery 14-0055: Failed to read Time To Empty register:0x16, id:-121
+[   71.384815] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.390844] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.397616] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.405696] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.411725] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.418498] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.426582] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.432610] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.439378] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.447709] bq27xxx-battery 14-0055: Failed to read Time To Full register:0x18, id:-121
+[   71.455792] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.461821] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.468590] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.476674] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.482703] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.489472] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.497552] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.503584] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.510353] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.518683] bq27xxx-battery 14-0055: Failed to read Internal Temperature register:0x28, id:-121
+[   71.527462] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.533491] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.540260] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.548346] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.554375] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.561144] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.569226] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.575258] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.582023] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.590355] bq27xxx-battery 14-0055: Failed to read Cycle Count register:0x2a, id:-121
+[   71.598358] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.604387] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.611156] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.619240] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.625270] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.632037] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.640120] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.646154] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.652926] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.661255] bq27xxx-battery 14-0055: Failed to read State Of Charge register:0x2c, id:-121
+[   71.669597] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.675630] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.682398] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.690479] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.696507] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.703278] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.711360] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.717389] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.724163] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.732491] bq27xxx-battery 14-0055: Failed to read State Of Health register:0x2e, id:-121
+[   71.740834] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.746862] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.753633] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.761714] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.767747] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.774527] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.782608] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.788637] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.795412] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.803744] bq27xxx-battery 14-0055: Failed to read Charging Voltage register:0x30, id:-121
+[   71.812175] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.818204] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.824977] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.833058] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.839086] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.845854] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.853937] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.859966] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.866735] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.875066] bq27xxx-battery 14-0055: Failed to read Charging Current register:0x32, id:-121
+[   71.883495] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.889523] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.896292] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   71.904374] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.910403] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.917172] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   71.925258] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   71.931284] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   71.938055] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   71.946382] bq27xxx-battery 14-0055: Failed to read Design Capacity register:0x3c, id:-121
+
+============ showing gauge bq28z610-0 registers ============
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ [   73.133185] bq24780-charger 2-0009: gauge not yet initialized!
+[   74.892297] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   74.898334] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   74.905108] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   74.913191] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   74.919218] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   74.925987] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   74.934069] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   74.940095] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   74.946865] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+
+[09:17:24.096][DUT] [read Battery info]--
+2025/08/07 09:17:24 [1]	[DUT] [read Battery info] ~~ TestTime:5.0086942 sec
+2025/08/07 09:17:24 [1]	Run B7PL025-057:Wait	Mode: 0, Retry: 3
+[09:17:24.096][PC] [Wait]++
+2025/08/07 09:17:24 [1]	> :Delay,"1000"
+2025/08/07 09:17:25 [1]	< 0
+[09:17:25.115][PC] [Wait]--
+2025/08/07 09:17:25 [1]	[PC] [Wait] ~~ TestTime:1.0196099 sec
+2025/08/07 09:17:25 [1]	Run IPIO009-058:Check Battery_tempture	Mode: 1, Retry: 3
+[09:17:25.115][PC] [Check Battery_tempture]++
+2025/08/07 09:17:25 [1]	(UART) > diag -g temp bat
+
+2025/08/07 09:17:30 [1]	(UART) < diag -g temp bat
+[   76.853359] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   76.859397] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   76.866210] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   76.874336] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   76.880363] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   76.887139] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   76.895282] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   76.901312] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   76.908089] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   76.916422] bq27xxx-battery 14-0055: Failed to read register 0x06, ret -121, @555
+diag: command of getting temp bat was failed!
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ [   77.213195] bq24780-charger 2-0009: gauge not yet initialized!
+[   81.293193] bq24780-charger 2-0009: gauge not yet initialized!
+
+2025/08/07 09:17:30 [1]	Check Battery_tempture Result: gBattery_tempture=[   76.853359] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+2025/08/07 09:17:30 [1]	CurrentTestID:IPIO009-0580 - The validation: gBattery_tempture = [   76.853359] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! (10,50)
+2025/08/07 09:17:30 [1]	The type of [   76.853359] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! is not int or float.
+[09:17:30.124][PC] [Check Battery_tempture]--
+2025/08/07 09:17:30 [1]	[PC] [Check Battery_tempture] ~~ TestTime:5.0087778 sec
+2025/08/07 09:17:30 [1]	Run IPIO009-058:Check Battery_tempture	Mode: 1, Retry: 2
+[09:17:30.124][PC] [Check Battery_tempture]++
+2025/08/07 09:17:30 [1]	(UART) > diag -g temp bat
+
+2025/08/07 09:17:35 [1]	(UART) < diag -g temp bat
+[   81.863098] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   81.869138] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   81.875921] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   81.884041] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   81.890073] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   81.896844] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   81.904928] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   81.910958] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   81.917777] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   81.926113] bq27xxx-battery 14-0055: Failed to read register 0x06, ret -121, @555
+diag: command of getting temp bat was failed!
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ [   85.132303] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   85.138341] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   85.145114] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   85.153199] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   85.159227] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   85.165997] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   85.174079] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   85.180106] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   85.186877] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   85.373180] bq24780-charger 2-0009: gauge not yet initialized!
+
+2025/08/07 09:17:35 [1]	Check Battery_tempture Result: gBattery_tempture=[   81.863098] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+2025/08/07 09:17:35 [1]	CurrentTestID:IPIO009-0580 - The validation: gBattery_tempture = [   81.863098] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! (10,50)
+2025/08/07 09:17:35 [1]	The type of [   81.863098] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! is not int or float.
+[09:17:35.131][PC] [Check Battery_tempture]--
+2025/08/07 09:17:35 [1]	[PC] [Check Battery_tempture] ~~ TestTime:5.0073787 sec
+2025/08/07 09:17:35 [1]	Run IPIO009-058:Check Battery_tempture	Mode: 1, Retry: 1
+[09:17:35.131][PC] [Check Battery_tempture]++
+2025/08/07 09:17:35 [1]	(UART) > diag -g temp bat
+
+2025/08/07 09:17:40 [1]	(UART) < diag -g temp bat
+[   86.871082] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.877140] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.883911] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   86.891995] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.898042] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.904847] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   86.912933] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.918959] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.925737] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   86.934100] bq27xxx-battery 14-0055: Failed to read register 0x06, ret -121, @555
+diag: command of getting temp bat was failed!
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ [   89.453190] bq24780-charger 2-0009: gauge not yet initialized!
+
+2025/08/07 09:17:40 [1]	Check Battery_tempture Result: gBattery_tempture=[   86.871082] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+2025/08/07 09:17:40 [1]	CurrentTestID:IPIO009-0580 - The validation: gBattery_tempture = [   86.871082] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! (10,50)
+2025/08/07 09:17:40 [1]	The type of [   86.871082] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! is not int or float.
+[09:17:40.139][PC] [Check Battery_tempture]--
+2025/08/07 09:17:40 [1]	[PC] [Check Battery_tempture] ~~ TestTime:5.0077306 sec
+2025/08/07 09:17:40 [1]	Run IPIO009-058:Check Battery_tempture	Mode: 1, Retry: 0
+[09:17:40.139][PC] [Check Battery_tempture]++
+2025/08/07 09:17:40 [1]	(UART) > diag -g temp bat
+
+2025/08/07 09:17:45 [1]	(UART) < diag -g temp bat
+[   91.877681] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   91.883733] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   91.890508] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   91.898596] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   91.904629] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   91.911400] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   91.919547] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   91.925582] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   91.932373] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   91.940703] bq27xxx-battery 14-0055: Failed to read register 0x06, ret -121, @555
+diag: command of getting temp bat was failed!
+root@NOKIA360Camera-N3C2401C:/root$ 
+root@NOKIA360Camera-N3C2401C:/root$ [   93.533196] bq24780-charger 2-0009: gauge not yet initialized!
+[   95.372297] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   95.378334] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   95.385107] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   95.393191] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   95.399218] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   95.405989] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   95.414072] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   95.420098] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   95.426869] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+
+2025/08/07 09:17:45 [1]	Check Battery_tempture Result: gBattery_tempture=[   91.877681] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+2025/08/07 09:17:45 [1]	CurrentTestID:IPIO009-0580 - The validation: gBattery_tempture = [   91.877681] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! (10,50)
+2025/08/07 09:17:45 [1]	The type of [   91.877681] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! is not int or float.
+[09:17:45.146][PC] [Check Battery_tempture]--
+2025/08/07 09:17:45 [1]	[PC] [Check Battery_tempture] ~~ TestTime:5.0073274 sec
+2025/08/07 09:17:45 [1]	IPIO009-0580:Check Battery_tempture is Fail ! <ErrorCode: HHFE15>     ----- 53.2126816 Sec.
+2025/08/07 09:17:45 [1]	DUT Test Completed !        ----- 53.2223204 Sec.
+2025/08/07 09:17:47 [1]	All Test Aborted !  ErrorCode: HHFE15     ----- 112.2097647 Sec.
+2025/08/07 09:17:47 [1]	TotalCount:13-YR:31%
+2025/08/07 09:17:47 [1]	Report name: Funtion_WE253100001_2025-08-07_09-17-47.ct
+2025/08/07 09:17:47 [1]	Execute Phase 97 Test.
+2025/08/07 09:17:47 [1]	Do @STEP072@Disconnect UART
+2025/08/07 09:17:47 [1]	Run B7PL025-179:Disconnect UART	Mode: 3, Retry: 3
+[09:17:47.185][PC] [Disconnect UART]++
+2025/08/07 09:17:47 [1]	> :Disconnect,"UART"
+2025/08/07 09:17:47 [1]	< 0
+[09:17:47.315][PC] [Disconnect UART]--
+2025/08/07 09:17:47 [1]	[PC] [Disconnect UART] ~~ TestTime:0.1303267 sec
+2025/08/07 09:17:47 [1]	Run B7PL025-180:Close SSH	Mode: 3, Retry: 3
+[09:17:47.315][PC] [Close SSH]++
+2025/08/07 09:17:47 [1]	> :Disconnect,"UARTF"
+2025/08/07 09:17:47 [1]	< 0
+[09:17:47.325][PC] [Close SSH]--
+2025/08/07 09:17:47 [1]	[PC] [Close SSH] ~~ TestTime:0.009639 sec
+2025/08/07 09:17:47 [1]	Run B7PL025-181:Force reboot	Mode: 0, Retry: 3
+[09:17:47.325][DUT] [Force reboot]++
+2025/08/07 09:17:47 [1]	(UART) > shutdown.sh
+
+2025/08/07 09:17:48 [1]	(UART) < shutdown.sh
+[0;41mPlease unplug POE! (1)[0m
+
+
+[09:17:48.495][DUT] [Force reboot]--
+2025/08/07 09:17:48 [1]	[DUT] [Force reboot] ~~ TestTime:1.1696631 sec
+2025/08/07 09:17:48 [1]	Run B7PL025-182:Power OFF	Mode: 0, Retry: 3
+[09:17:48.495][FIXTURE] [Power OFF]++
+2025/08/07 09:17:48 [1]	(UARTF) > L
+
+2025/08/07 09:17:48 [1]	(UARTF) < 
+[09:17:48.605][FIXTURE] [Power OFF]--
+2025/08/07 09:17:48 [1]	[FIXTURE] [Power OFF] ~~ TestTime:0.1100077 sec
+2025/08/07 09:17:48 [1]	Run B7PL025-183:Power OFF	Mode: 0, Retry: 3
+[09:17:48.605][FIXTURE] [Power OFF]++
+2025/08/07 09:17:48 [1]	(UARTF) > N
+
+2025/08/07 09:17:48 [1]	(UARTF) < 
+[09:17:48.605][FIXTURE] [Power OFF]--
+2025/08/07 09:17:48 [1]	[FIXTURE] [Power OFF] ~~ TestTime:0 sec
+2025/08/07 09:17:48 [1]	Run B7PL025-184:Power OFF	Mode: 0, Retry: 3
+[09:17:48.605][FIXTURE] [Power OFF]++
+2025/08/07 09:17:48 [1]	(UARTF) > M
+
+2025/08/07 09:17:48 [1]	(UARTF) < 
+[09:17:48.605][FIXTURE] [Power OFF]--
+2025/08/07 09:17:48 [1]	[FIXTURE] [Power OFF] ~~ TestTime:0 sec
+2025/08/07 09:17:48 [1]	B7PL025-184:@STEP072@Disconnect UART Test is Pass ! 		----- 1.4196365 Sec.
+2025/08/07 09:17:48 [1]	Change color at 97 phase... Status:False... Error:HHFE15
+2025/08/07 09:17:48 [1]	All phase Total Test Time !        ----- 113.9288941 Sec.
+2025/08/07 09:17:48 [1]	DUT Test Completed !        ----- 1.4689266 Sec.

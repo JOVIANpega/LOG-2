@@ -1,0 +1,399 @@
+2025/03/27 01:58:09 [1]	Loop Count[418]
+2025/03/27 01:58:09 [1]	Start LoopRunning to Delay[3919] ms
+2025/03/27 01:58:13 [1]	System Version is 1.1.8.64.
+2025/03/27 01:58:13 [1]	Script File is VALO360_TestFlow_20250318_MB_ER2_chk_speakerissue.xlsx.
+2025/03/27 01:58:13 [1]	Script Version is 2503261437545.
+2025/03/27 01:58:13 [1]	Script Creator is jovian_li.
+2025/03/27 01:58:13 [1]	Utility Version is 1.0.9.21.
+2025/03/27 01:58:13 [1]	DeviceID is 125335.
+2025/03/27 01:58:13 [1]	SFIS is off.
+2025/03/27 01:58:13 [1]	MiniCloud2 is on.
+2025/03/27 01:58:13 [1]	FTP is off.
+2025/03/27 01:58:13 [1]	Active IPs:
+倍聲ETH:[98FC84E7A8C5]#192.168.11.3#
+藍牙網路連線:[803253CA2997]#169.254.186.13#
+2025/03/27 01:58:13 [1]	Script has 1 phase cases
+2025/03/27 01:58:13 [1]	Script has 97 phase cases
+****************************************************************************************************
+2025/03/27 01:58:13 [1]	Execute Phase 0 Test.
+2025/03/27 01:58:13 [1]	Do @STEP002@CheckRoute
+2025/03/27 01:58:13 [1]	Run B7PL025-000:Show ISN to UI	Mode: 1, Retry: 4
+[01:58:13.472][PC] [Show ISN to UI]++
+2025/03/27 01:58:13 [1]	> :ShowISN,"LoopRunning"
+2025/03/27 01:58:13 [1]	< 0
+[01:58:13.478][PC] [Show ISN to UI]--
+2025/03/27 01:58:13 [1]	[PC] [Show ISN to UI] ~~ TestTime:0.0077035 sec
+2025/03/27 01:58:13 [1]	Run B7PL025-001:Disconnect,"UART"	Mode: 1, Retry: 4
+[01:58:13.478][PC] [Disconnect,"UART"]++
+2025/03/27 01:58:13 [1]	> :Disconnect,"UART"
+2025/03/27 01:58:13 [1]	< 0
+[01:58:13.487][PC] [Disconnect,"UART"]--
+2025/03/27 01:58:13 [1]	[PC] [Disconnect,"UART"] ~~ TestTime:0.0090226 sec
+2025/03/27 01:58:13 [1]	B7PL025-001:@STEP002@CheckRoute Test is Pass ! 		----- 0.0167261 Sec.
+2025/03/27 01:58:13 [1]	Do @STEP003@READ ME
+2025/03/27 01:58:13 [1]	Run B7PL025-003:Pop window	Mode: 0, Retry: 4
+[01:58:13.498][PC] [Pop window]++
+2025/03/27 01:58:13 [1]	> :ShowConfirmBox,"you need SD and SIM","YES"
+2025/03/27 01:58:13 [1]	Skip by LoopRunning is enable.
+2025/03/27 01:58:13 [1]	< YES
+[01:58:13.507][PC] [Pop window]--
+2025/03/27 01:58:13 [1]	[PC] [Pop window] ~~ TestTime:0.0091451 sec
+2025/03/27 01:58:13 [1]	B7PL025-003:@STEP003@READ ME Test is Pass ! 		----- 0.0091451 Sec.
+2025/03/27 01:58:13 [1]	DUT Test Completed !        ----- 0.0660218 Sec.
+2025/03/27 01:58:13 [1]	Execute Phase 1 Test.
+2025/03/27 01:58:13 [1]	Do @STEP005@Login
+2025/03/27 01:58:13 [1]	Run IOPI113-004:PC#-Check DUT start up	Mode: 1, Retry: 4
+2025/03/27 01:58:13 [1]	> :Utility.PING,"192.168.11.143","100000","192.168.11.3"
+2025/03/27 01:58:21 [1]	< 
+2025/03/27 01:58:21 [1]	< 0
+2025/03/27 01:58:21 [1]	Run B7PL025-005:Wait Boot	Mode: 1, Retry: 4
+2025/03/27 01:58:21 [1]	> :Delay,"2000"
+2025/03/27 01:58:23 [1]	< 0
+2025/03/27 01:58:23 [1]	B7PL025-005:@STEP005@Login Test is Pass ! 			----- 10.0033817 Sec.
+2025/03/27 01:58:24 [1]	Do @STEP006@Check entry ok
+2025/03/27 01:58:24 [1]	Run B7PL025-006:Open UART	Mode: 2, Retry: 4
+2025/03/27 01:58:24 [1]	> :Connect,"UART"
+2025/03/27 01:58:24 [1]	< 0
+2025/03/27 01:58:24 [1]	Run OTFX079-007:Enter Diag	Mode: 1, Retry: 4
+[01:58:24.342][DUT] [Enter Diag]++
+2025/03/27 01:58:24 [1]	(UART) > 
+
+2025/03/27 01:58:24 [1]	(UART) < 
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[01:58:24.382][DUT] [Enter Diag]--
+2025/03/27 01:58:24 [1]	[DUT] [Enter Diag] ~~ TestTime:0.0397451 sec
+2025/03/27 01:58:24 [1]	Run B7PL025-008:Wait Boot	Mode: 1, Retry: 4
+2025/03/27 01:58:24 [1]	> :Delay,"2000"
+2025/03/27 01:58:26 [1]	< 0
+2025/03/27 01:58:26 [1]	B7PL025-008:@STEP006@Check entry ok Test is Pass ! 		----- 2.260665 Sec.
+2025/03/27 01:58:26 [1]	DUT Test Completed !        ----- 12.7683723 Sec.
+2025/03/27 01:58:26 [1]	Execute Phase 2 Test.
+2025/03/27 01:58:26 [1]	Do @STEP008@Check FW version
+2025/03/27 01:58:26 [1]	Run VSCH026-010:Chec Frimware version	Mode: 2, Retry: 4
+[01:58:26.577][DUT] [Chec Frimware version]++
+2025/03/27 01:58:26 [1]	(UART) > pegacmd version
+
+2025/03/27 01:58:26 [1]	(UART) < pegacmd version
+0.5.4.37.0_b5838c4
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[01:58:26.615][DUT] [Chec Frimware version]--
+2025/03/27 01:58:26 [1]	[DUT] [Chec Frimware version] ~~ TestTime:0.0380714 sec
+2025/03/27 01:58:26 [1]	VSCH026-010:@STEP008@Check FW version Test is Pass ! 		----- 0.0380714 Sec.
+2025/03/27 01:58:26 [1]	Do @STEP009@Check PHY Ethernet Link status
+2025/03/27 01:58:26 [1]	Run KAOT014-011:Check PHY Ethernet Link status	Mode: 1, Retry: 4
+[01:58:26.652][PC] [Check PHY Ethernet Link status]++
+2025/03/27 01:58:26 [1]	(UART) > diag -g status eth0
+
+2025/03/27 01:58:26 [1]	(UART) < diag -g status eth0
+link: up
+duplex: full
+speed: 100
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[01:58:26.687][PC] [Check PHY Ethernet Link status]--
+2025/03/27 01:58:26 [1]	[PC] [Check PHY Ethernet Link status] ~~ TestTime:0.0369484 sec
+2025/03/27 01:58:26 [1]	KAOT014-011:@STEP009@Check PHY Ethernet Link status Test is Pass ! 		----- 0.0369484 Sec.
+2025/03/27 01:58:26 [1]	DUT Test Completed !        ----- 0.1764882 Sec.
+2025/03/27 01:58:26 [1]	Execute Phase 3 Test.
+2025/03/27 01:58:26 [1]	Do @STEP011@Get wifi status
+2025/03/27 01:58:26 [1]	Run NUVO008-012:Get wifi status version	Mode: 1, Retry: 4
+[01:58:26.793][DUT] [Get wifi status version]++
+2025/03/27 01:58:26 [1]	(UART) > wpa_cli status
+
+2025/03/27 01:58:26 [1]	(UART) < wpa_cli status
+Selected interface 'wlan0'
+wpa_state=INTERFACE_DISABLED
+p2p_device_address=c2:f5:35:9d:b5:10
+address=c0:f5:35:9d:b5:10
+uuid=37d2c6e1-eb85-5259-bb22-78909213ce2f
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/03/27 01:58:26 [1]	WithinString: 37d2c6e1-eb85-5259-bb22-78909213ce2f
+2025/03/27 01:58:26 [1]	Get wifi status version Result: gWIFI_status=37d2c6e1-eb85-5259-bb22-78909213ce2f
+[01:58:26.831][DUT] [Get wifi status version]--
+2025/03/27 01:58:26 [1]	[DUT] [Get wifi status version] ~~ TestTime:0.0371287 sec
+2025/03/27 01:58:26 [1]	NUVO008-012:@STEP011@Get wifi status Test is Pass ! 		----- 0.0371287 Sec.
+2025/03/27 01:58:26 [1]	Do @STEP012@Write ISN to MB
+2025/03/27 01:58:26 [1]	Check ISN from MB skips by ExecMode = 6.
+2025/03/27 01:58:26 [1]	:@STEP012@Write ISN to MB Test is Pass ! 		----- 0 Sec.
+2025/03/27 01:58:26 [1]	DUT Test Completed !        ----- 0.0816882 Sec.
+2025/03/27 01:58:26 [1]	Execute Phase 4 Test.
+2025/03/27 01:58:26 [1]	Do @STEP014@Check BT status
+2025/03/27 01:58:26 [1]	Run BTBT018-014:Check BT Initial	Mode: 1, Retry: 4
+[01:58:26.992][DUT] [Check BT Initial]++
+2025/03/27 01:58:26 [1]	(UART) > bt_init
+
+2025/03/27 01:58:33 [1]	(UART) < bt_init
+{[9][]}
+killall: brcm_patchram_plus: no process killed
+gpio 201 = 0
+gpio 201 = 1
+BT reinit
+manufacturing
+0
+[0;41mSD card is not found!!! 5 [0m
+at+cfun=0
+OK
+at+cgps=0
+OK
+at+cgps=1
+OK
+0
+[0;41mSD card is not found!!! 4 [0m
+{[1][]}
+0
+[0;41mSD card is not found!!! 3 [0m
+0
+[0;41mSD card is not found!!! 2 [0m
+{[2][]}
+0
+[0;41mSD card is not found!!! 1 [0m
+{[3][]}
+{[4][]}
+{[5][]}
+Done setting line discpline
+{[6][Done setting line discpline]}
+BT init succeeds
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[01:58:33.935][DUT] [Check BT Initial]--
+2025/03/27 01:58:33 [1]	[DUT] [Check BT Initial] ~~ TestTime:6.9434578 sec
+2025/03/27 01:58:33 [1]	Run WUIF017-015:get BT MAC	Mode: 1, Retry: 4
+[01:58:33.937][DUT] [get BT MAC]++
+2025/03/27 01:58:33 [1]	(UART) > hciconfig hci0 revision
+
+2025/03/27 01:58:33 [1]	(UART) < hciconfig hci0 revision
+bluetoothd[1072]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/source/1
+bluetoothd[1072]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/sink/2
+bluetoothd[1072]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/source/2
+bluetoothd[1072]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/sink/1
+bluetoothd[1072]: Failed to set privacy: Rejected (0x0b)
+hci0:	Type: Primary  Bus: UART
+	BD Address: C0:F5:35:9D:B5:11  ACL MTU: 1021:8  SCO MTU: 64:1
+	Firmware 0.17 / 17
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/ro
+2025/03/27 01:58:33 [1]	WithinString: C0:F5:35:9D:B5:11
+2025/03/27 01:58:33 [1]	get BT MAC Result: gBT_status=C0:F5:35:9D:B5:11
+[01:58:33.995][DUT] [get BT MAC]--
+2025/03/27 01:58:33 [1]	[DUT] [get BT MAC] ~~ TestTime:0.0588061 sec
+2025/03/27 01:58:33 [1]	WUIF017-015:@STEP014@Check BT status Test is Pass ! 		----- 7.003335 Sec.
+2025/03/27 01:58:33 [1]	DUT Test Completed !        ----- 7.0436402 Sec.
+2025/03/27 01:58:34 [1]	Execute Phase 5 Test.
+2025/03/27 01:58:34 [1]	Do @STEP016@Check Gyro
+2025/03/27 01:58:34 [1]	Run NBOT015-016:Check Gyro	Mode: 1, Retry: 4
+[01:58:34.139][DUT] [Check Gyro]++
+2025/03/27 01:58:34 [1]	(UART) > diag -g who imu
+
+2025/03/27 01:58:34 [1]	(UART) < diag -g who imu
+Who Am I=0x6f
+Name=icm42600
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[01:58:34.171][DUT] [Check Gyro]--
+2025/03/27 01:58:34 [1]	[DUT] [Check Gyro] ~~ TestTime:0.0320969 sec
+2025/03/27 01:58:34 [1]	NBOT015-016:@STEP016@Check Gyro Test is Pass ! 		----- 0.0320969 Sec.
+2025/03/27 01:58:34 [1]	Do @STEP017@Check E compass
+2025/03/27 01:58:34 [1]	Run WUOT003-017:Check Ecompass	Mode: 1, Retry: 4
+[01:58:34.190][DUT] [Check Ecompass]++
+2025/03/27 01:58:34 [1]	(UART) > diag -g who mag
+
+2025/03/27 01:58:34 [1]	(UART) < diag -g who mag
+Who Am I=0x08
+Name=ist8308
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[01:58:34.231][DUT] [Check Ecompass]--
+2025/03/27 01:58:34 [1]	[DUT] [Check Ecompass] ~~ TestTime:0.0406928 sec
+2025/03/27 01:58:34 [1]	WUOT003-017:@STEP017@Check E compass Test is Pass ! 		----- 0.0406928 Sec.
+2025/03/27 01:58:34 [1]	DUT Test Completed !        ----- 0.1531211 Sec.
+2025/03/27 01:58:34 [1]	Execute Phase 6 Test.
+2025/03/27 01:58:34 [1]	Do @STEP019@get EMMC_ID
+2025/03/27 01:58:34 [1]	Run WUIF004-018:get EMMC_ID	Mode: 1, Retry: 4
+[01:58:34.373][DUT] [get EMMC_ID]++
+2025/03/27 01:58:34 [1]	(UART) > diag -g status emmc
+
+2025/03/27 01:58:34 [1]	(UART) < diag -g status emmc
+name: MMC128
+manfid: 0x000032
+oemid: 0x0101
+serial: 0x010667bf
+date: 11/2024
+root@NOKIA360Camera-Va
+2025/03/27 01:58:34 [1]	WithinString: 0x010667bf
+2025/03/27 01:58:34 [1]	get EMMC_ID Result: gEMMC_ID=0x010667bf
+[01:58:34.405][DUT] [get EMMC_ID]--
+2025/03/27 01:58:34 [1]	[DUT] [get EMMC_ID] ~~ TestTime:0.03201 sec
+2025/03/27 01:58:34 [1]	WUIF004-018:@STEP019@get EMMC_ID Test is Pass ! 		----- 0.0347416 Sec.
+2025/03/27 01:58:34 [1]	DUT Test Completed !        ----- 0.0840631 Sec.
+2025/03/27 01:58:34 [1]	Execute Phase 7 Test.
+2025/03/27 01:58:34 [1]	Do @STEP021@Measure Voltage 1
+2025/03/27 01:58:34 [1]	Run B7PL025-019:Wait time@#$	Mode: 0, Retry: 4
+[01:58:34.558][PC] [Wait time@#$]++
+2025/03/27 01:58:34 [1]	> :Delay,"1500"
+2025/03/27 01:58:36 [1]	< 0
+[01:58:36.080][PC] [Wait time@#$]--
+2025/03/27 01:58:36 [1]	[PC] [Wait time@#$] ~~ TestTime:1.5215114 sec
+2025/03/27 01:58:36 [1]	Run B7PL025-020:INST##ObtainDevice	Mode: 0, Retry: 4
+2025/03/27 01:58:36 [1]	> :ObtainDevice
+2025/03/27 01:58:36 [1]	< 0
+2025/03/27 01:58:36 [1]	Run B7PL025-021:Wait time@#$	Mode: 0, Retry: 4
+[01:58:36.148][PC] [Wait time@#$]++
+2025/03/27 01:58:36 [1]	> :Delay,"500"
+2025/03/27 01:58:36 [1]	< 0
+[01:58:36.672][PC] [Wait time@#$]--
+2025/03/27 01:58:36 [1]	[PC] [Wait time@#$] ~~ TestTime:0.5243391 sec
+2025/03/27 01:58:36 [1]	Run BRPW033-022:INST##Get Voltage	Mode: 0, Retry: 4
+2025/03/27 01:58:36 [1]	> :Dev.VOLTAGE,"RSE,1000,5"
+2025/03/27 01:58:36 [1]	< 0
+2025/03/27 01:58:36 [1]	INST##Get Voltage Result: Combo_4V2_TP1001=4.36320717783069
+2025/03/27 01:58:36 [1]	Run BRME027-023:INST##Release 6008	Mode: 0, Retry: 4
+2025/03/27 01:58:36 [1]	> :ReleaseDevice
+2025/03/27 01:58:36 [1]	< 0
+2025/03/27 01:58:36 [1]	Run WUPO013-024:Check Combo_4V2_TP1001 Voltage	Mode: 2, Retry: 4
+2025/03/27 01:58:36 [1]	> :CheckLimit,"4.36320717783069","4.0","4.6","%f"
+2025/03/27 01:58:36 [1]	< 0
+2025/03/27 01:58:36 [1]	Run B7PL025-025:Wait time@#$	Mode: 0, Retry: 4
+[01:58:36.870][PC] [Wait time@#$]++
+2025/03/27 01:58:36 [1]	> :Delay,"3000"
+2025/03/27 01:58:39 [1]	< 0
+[01:58:39.891][PC] [Wait time@#$]--
+2025/03/27 01:58:39 [1]	[PC] [Wait time@#$] ~~ TestTime:3.0237929 sec
+2025/03/27 01:58:39 [1]	B7PL025-025:@STEP021@Measure Voltage 1 Test is Pass ! 		----- 5.3371937 Sec.
+2025/03/27 01:58:39 [1]	Voltage Test Completed !        ----- 5.3911733 Sec.
+2025/03/27 01:58:40 [1]	Execute Phase 8 Test.
+2025/03/27 01:58:40 [1]	Do @STEP023@Measure Voltage Forward
+2025/03/27 01:58:40 [1]	Run B7PL025-026:Wait time@#$	Mode: 0, Retry: 2
+[01:58:40.107][PC] [Wait time@#$]++
+2025/03/27 01:58:40 [1]	> :Delay,"1000"
+2025/03/27 01:58:41 [1]	< 0
+[01:58:41.125][PC] [Wait time@#$]--
+2025/03/27 01:58:41 [1]	[PC] [Wait time@#$] ~~ TestTime:1.01788 sec
+2025/03/27 01:58:41 [1]	Run OTFX042-027:INST##ObtainDevice	Mode: 0, Retry: 2
+2025/03/27 01:58:41 [1]	> :ObtainDevice
+2025/03/27 01:58:41 [1]	< 0
+2025/03/27 01:58:41 [1]	Run WUIF013-028:ircut on	Mode: 1, Retry: 2
+[01:58:41.209][DUT] [ircut on]++
+2025/03/27 01:58:41 [1]	(UART) > diag -s ircut on_s 4
+
+2025/03/27 01:58:41 [1]	(UART) < 
+[01:58:41.213][DUT] [ircut on]--
+2025/03/27 01:58:41 [1]	[DUT] [ircut on] ~~ TestTime:0.0064552 sec
+2025/03/27 01:58:41 [1]	Run B7PL025-029:Delay	Mode: 0, Retry: 2
+2025/03/27 01:58:41 [1]	> :Delay,"1000"
+2025/03/27 01:58:42 [1]	< 0
+2025/03/27 01:58:42 [1]	Run BRPW033-030:INST##Get IR CUT Forwared Voltage	Mode: 0, Retry: 2
+2025/03/27 01:58:42 [1]	> :Dev.VOLTAGE,"RSE,1000,3,7"
+2025/03/27 01:58:42 [1]	< 0
+2025/03/27 01:58:42 [1]	INST##Get IR CUT Forwared Voltage Result: ICR-P_TP2302=0.00474214848753596; ICR-N_TP2301=5.07568582910878
+2025/03/27 01:58:42 [1]	Run OTFX042-031:INST##Release 6008	Mode: 0, Retry: 2
+2025/03/27 01:58:42 [1]	> :ReleaseDevice
+2025/03/27 01:58:42 [1]	< 0
+2025/03/27 01:58:42 [1]	Run WUPO015-032:Check Forward ICR-P Voltage	Mode: 2, Retry: 2
+2025/03/27 01:58:42 [1]	> :CheckLimit,"0.00474214848753596","-1","1","%f"
+2025/03/27 01:58:42 [1]	< 0
+2025/03/27 01:58:42 [1]	Run WUPO016-033:Check Forward ICR-N Voltage	Mode: 2, Retry: 2
+2025/03/27 01:58:42 [1]	> :CheckLimit,"5.07568582910878","4.845","5.355","%f"
+2025/03/27 01:58:42 [1]	< 0
+2025/03/27 01:58:42 [1]	Run B7PL025-034:Wait time@#$	Mode: 0, Retry: 2
+[01:58:42.448][PC] [Wait time@#$]++
+2025/03/27 01:58:42 [1]	> :Delay,"3000"
+2025/03/27 01:58:45 [1]	< 0
+[01:58:45.471][PC] [Wait time@#$]--
+2025/03/27 01:58:45 [1]	[PC] [Wait time@#$] ~~ TestTime:3.0224405 sec
+2025/03/27 01:58:45 [1]	B7PL025-034:@STEP023@Measure Voltage Forward Test is Pass ! 		----- 5.3633283 Sec.
+2025/03/27 01:58:45 [1]	Voltage Test Completed !        ----- 5.4483238 Sec.
+2025/03/27 01:58:45 [1]	Execute Phase 9 Test.
+2025/03/27 01:58:45 [1]	Do @STEP025@Measure Voltage Reverse
+2025/03/27 01:58:45 [1]	Run B7PL025-035:Wait time@#$	Mode: 0, Retry: 2
+[01:58:45.907][PC] [Wait time@#$]++
+2025/03/27 01:58:45 [1]	> :Delay,"2500"
+2025/03/27 01:58:48 [1]	< 0
+[01:58:48.420][PC] [Wait time@#$]--
+2025/03/27 01:58:48 [1]	[PC] [Wait time@#$] ~~ TestTime:2.525437 sec
+2025/03/27 01:58:48 [1]	Run OTFX042-036:INST##ObtainDevice	Mode: 0, Retry: 2
+2025/03/27 01:58:48 [1]	> :ObtainDevice
+2025/03/27 01:58:48 [1]	< 0
+2025/03/27 01:58:48 [1]	Run WUIF013-037:ircut on	Mode: 1, Retry: 2
+[01:58:48.451][DUT] [ircut on]++
+2025/03/27 01:58:48 [1]	(UART) > diag -s ircut off_s 4
+
+2025/03/27 01:58:48 [1]	(UART) < 
+[01:58:48.463][DUT] [ircut on]--
+2025/03/27 01:58:48 [1]	[DUT] [ircut on] ~~ TestTime:0.0117906 sec
+2025/03/27 01:58:48 [1]	Run B7PL025-038:Wait time@#$	Mode: 0, Retry: 2
+[01:58:48.474][PC] [Wait time@#$]++
+2025/03/27 01:58:48 [1]	> :Delay,"1000"
+2025/03/27 01:58:49 [1]	< 0
+[01:58:49.489][PC] [Wait time@#$]--
+2025/03/27 01:58:49 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0153269 sec
+2025/03/27 01:58:49 [1]	Run OTFX042-039:INST##Get Reverse Voltage	Mode: 0, Retry: 2
+2025/03/27 01:58:49 [1]	> :Dev.VOLTAGE,"RSE,1000,3,7"
+2025/03/27 01:58:49 [1]	< 0
+2025/03/27 01:58:49 [1]	INST##Get Reverse Voltage Result: ICR-P_TP2302=5.07456588178891; ICR-N_TP2301=0.00785762874265838
+2025/03/27 01:58:49 [1]	Run OTFX042-040:INST##Release 6008	Mode: 0, Retry: 2
+2025/03/27 01:58:49 [1]	> :ReleaseDevice
+2025/03/27 01:58:49 [1]	< 0
+2025/03/27 01:58:49 [1]	Run WUPO015-041:Check Reverse ICR-P Voltage	Mode: 2, Retry: 2
+2025/03/27 01:58:49 [1]	> :CheckLimit,"5.07456588178891","4.845","5.355","%f"
+2025/03/27 01:58:49 [1]	< 0
+2025/03/27 01:58:49 [1]	Run WUPO016-042:Check Forward ICR-N Voltage	Mode: 2, Retry: 2
+2025/03/27 01:58:49 [1]	> :CheckLimit,"0.00785762874265838","-1","1","%f"
+2025/03/27 01:58:49 [1]	< 0
+2025/03/27 01:58:49 [1]	Run B7PL025-043:Delay	Mode: 0, Retry: 2
+2025/03/27 01:58:49 [1]	> :Delay,"2000"
+2025/03/27 01:58:51 [1]	< 0
+2025/03/27 01:58:51 [1]	B7PL025-043:@STEP025@Measure Voltage Reverse Test is Pass ! 		----- 5.8938267 Sec.
+2025/03/27 01:58:51 [1]	Voltage Test Completed !        ----- 5.9506476 Sec.
+2025/03/27 01:58:52 [1]	Execute Phase 10 Test.
+2025/03/27 01:58:52 [1]	Do @STEP027@CHECK_Speaker_Freq
+2025/03/27 01:58:52 [1]	Run B7PL025-044:ObtainDevice	Mode: 0, Retry: 4
+2025/03/27 01:58:52 [1]	> :ObtainDevice
+2025/03/27 01:58:52 [1]	< 0
+2025/03/27 01:58:52 [1]	Run BRPW142-045:DUT##audio play 1k tone	Mode: 0, Retry: 4
+2025/03/27 01:58:52 [1]	(UART) > diag -s audio /usr/share/manufacturing/1kHz_0dBFS_16bit.wav
+
+2025/03/27 01:58:52 [1]	(UART) < 
+2025/03/27 01:58:52 [1]	Run BRPW142-046:CHECK_Speaker_Freq  1 k tone	Mode: 2, Retry: 4
+2025/03/27 01:58:52 [1]	> :Dev.FREQ,"DIFF,10000,0"
+2025/03/27 01:58:53 [1]	< 0
+2025/03/27 01:58:53 [1]	CHECK_Speaker_Freq  1 k tone Result: Freq=999.76
+2025/03/27 01:58:53 [1]	CurrentTestID:BRPW142-0460 - The validation: Freq = 999.76 (950,1050)
+2025/03/27 01:58:53 [1]	Run B7PL025-047:Release Device	Mode: 0, Retry: 4
+2025/03/27 01:58:53 [1]	> :ReleaseDevice
+2025/03/27 01:58:53 [1]	< 0
+2025/03/27 01:58:53 [1]	Run B7PL025-048:Wait	Mode: 0, Retry: 4
+2025/03/27 01:58:53 [1]	> :Delay,"6000"
+2025/03/27 01:58:59 [1]	< 0
+2025/03/27 01:58:59 [1]	B7PL025-048:@STEP027@CHECK_Speaker_Freq Test is Pass ! 		----- 7.1328141 Sec.
+2025/03/27 01:58:59 [1]	Voltage Test Completed !        ----- 7.2084853 Sec.
+2025/03/27 01:58:59 [1]	All Test Completed !        ----- 45.798215 Sec.
+2025/03/27 01:58:59 [1]	TotalCount:418-YR:98%
+2025/03/27 01:58:59 [1]	Report name: MB_LoopRunning_2025-03-27_01-58-59.ct
+2025/03/27 01:58:59 [1]	Execute Phase 97 Test.
+2025/03/27 01:58:59 [1]	Do @STEP029@Disconnect UART
+2025/03/27 01:58:59 [1]	Run B7PL025-049:Disconnect UART	Mode: 3, Retry: 4
+[01:58:59.610][PC] [Disconnect UART]++
+2025/03/27 01:58:59 [1]	> :Disconnect,"UART"
+2025/03/27 01:58:59 [1]	< 0
+[01:58:59.682][PC] [Disconnect UART]--
+2025/03/27 01:58:59 [1]	[PC] [Disconnect UART] ~~ TestTime:0.0719225 sec
+2025/03/27 01:58:59 [1]	B7PL025-049:@STEP029@Disconnect UART Test is Pass ! 		----- 0.0745173 Sec.
+2025/03/27 01:58:59 [1]	Do @STEP030@Check FW version
+2025/03/27 01:58:59 [1]	Run VSCH026-050:Chec Frimware version	Mode: 0, Retry: 4
+[01:58:59.702][DUT] [Chec Frimware version]++
+2025/03/27 01:58:59 [1]	(UART) > reboot
+
+2025/03/27 01:58:59 [1]	(UART) < 
+[01:58:59.898][DUT] [Chec Frimware version]--
+2025/03/27 01:58:59 [1]	[DUT] [Chec Frimware version] ~~ TestTime:0.1961988 sec
+2025/03/27 01:58:59 [1]	Run B7PL025-051:Wait Boot	Mode: 1, Retry: 4
+2025/03/27 01:58:59 [1]	> :Delay,"30000"
+2025/03/27 01:59:29 [1]	< 0
+2025/03/27 01:59:29 [1]	B7PL025-051:@STEP030@Check FW version Test is Pass ! 		----- 30.2333606 Sec.
+2025/03/27 01:59:29 [1]	Change color at 97 phase... Status:True... Error:PASS
+2025/03/27 01:59:30 [1]	All phase Total Test Time !        ----- 80.9255908 Sec.
+2025/03/27 01:59:30 [1]	End LoopRunning to Delay[4819] ms
+2025/03/27 01:59:35 [1]	DUT Test Completed !        ----- 35.7072942 Sec.

@@ -1,0 +1,2920 @@
+2025/07/30 00:09:23 [1]	Loop Count[115]
+2025/07/30 00:09:23 [1]	Start LoopRunning to Delay[4910] ms
+2025/07/30 00:09:28 [1]	System Version is 1.1.8.63.
+2025/07/30 00:09:28 [1]	Script File is MU310_TestFlow_FWdownload_20250729.xlsx.
+2025/07/30 00:09:28 [1]	Script Version is 2507291504058.
+2025/07/30 00:09:28 [1]	Script Creator is jovian_li.
+2025/07/30 00:09:28 [1]	Utility Version is 1.0.9.21.
+2025/07/30 00:09:28 [1]	DeviceID is 512314.
+2025/07/30 00:09:28 [1]	SFIS is off.
+2025/07/30 00:09:28 [1]	MiniCloud2 is on.
+2025/07/30 00:09:28 [1]	FTP is off.
+2025/07/30 00:09:28 [1]	Active IPs:
+倍聲ETH:[98FC84E7A8C5]#192.168.225.70#
+藍牙網路連線:[803253CA2997]#169.254.186.13#
+2025/07/30 00:09:28 [1]	Script has 1 phase cases
+2025/07/30 00:09:28 [1]	Script has 99 phase cases
+****************************************************************************************************
+2025/07/30 00:09:28 [1]	Execute Phase 0 Test.
+2025/07/30 00:09:28 [1]	Do @STEP002@CheckRoute
+2025/07/30 00:09:28 [1]	Run B7PL025-003:Show SSN  to UI	Mode: 0, Retry: 5
+[00:09:28.426][PC] [Show SSN  to UI]++
+2025/07/30 00:09:28 [1]	> :ShowISN,"LoopRunning"
+2025/07/30 00:09:28 [1]	< 0
+[00:09:28.439][PC] [Show SSN  to UI]--
+2025/07/30 00:09:28 [1]	[PC] [Show SSN  to UI] ~~ TestTime:0.0159024 sec
+2025/07/30 00:09:28 [1]	B7PL025-003:@STEP002@CheckRoute Test is Pass ! 		----- 0.0171563 Sec.
+2025/07/30 00:09:28 [1]	DUT Test Completed !        ----- 0.0272089 Sec.
+2025/07/30 00:09:28 [1]	Execute Phase 1 Test.
+2025/07/30 00:09:28 [1]	@STEP004@Login Skipped.
+2025/07/30 00:09:28 [1]	DUT Test Completed !        ----- 0 Sec.
+2025/07/30 00:09:28 [1]	Execute Phase 2 Test.
+2025/07/30 00:09:28 [1]	Do @STEP006@Check ADB and DM PORT
+2025/07/30 00:09:28 [1]	Run OTFX082-008:Open  Commnad Line	Mode: 1, Retry: 5
+2025/07/30 00:09:28 [1]	> :Connect,"CmdConsole"
+2025/07/30 00:09:28 [1]	< 0
+2025/07/30 00:09:28 [1]	Run OTFX082-009:Enable Iperf Server	Mode: 1, Retry: 5
+2025/07/30 00:09:28 [1]	(CmdConsole) > 
+
+2025/07/30 00:09:28 [1]	(CmdConsole) < Microsoft Windows [版本 10.0.26100.4652]
+(c) Microsoft Corporation. 著作權所有，並保留一切權利。
+
+D:\(((KANGAROO\MU310\CODE\Centimani_Kangaroo_FWDL>
+2025/07/30 00:09:28 [1]	Run NBOT035-010:flash_firmware_checkDMpor	Mode: 1, Retry: 5
+2025/07/30 00:09:28 [1]	(CmdConsole) > cmd /c "flash_firmware_DMPORT_ENG.bat" 
+
+2025/07/30 00:09:33 [1]	(CmdConsole) < cmd /c "flash_firmware_DMPORT_ENG.bat" 
+=== Step 1: Check ADB Connection ===
+Running adb devices...
+Device found: 18077de0	device
+[OK] ADB device connected.
+
+=== Step 2: Check DM PORT ===
+Found DM PORT: Quectel USB DM Port (COM7)
+[OK] DM PORT found = COM7
+
+請按任意鍵繼續 . . . 
+2025/07/30 00:09:33 [1]	Run B7PL025-011:Wait time@#$	Mode: 0, Retry: 5
+[00:09:33.751][PC] [Wait time@#$]++
+2025/07/30 00:09:33 [1]	> :Delay,"4000"
+2025/07/30 00:09:37 [1]	< 0
+[00:09:37.770][PC] [Wait time@#$]--
+2025/07/30 00:09:37 [1]	[PC] [Wait time@#$] ~~ TestTime:4.0233368 sec
+2025/07/30 00:09:37 [1]	B7PL025-011:@STEP006@Check ADB and DM PORT Test is Pass ! 		----- 9.0909258 Sec.
+2025/07/30 00:09:37 [1]	DUT Test Completed !        ----- 9.135532 Sec.
+2025/07/30 00:09:37 [1]	Execute Phase 3 Test.
+2025/07/30 00:09:38 [1]	Do @STEP008@DO burn in Fimrware
+2025/07/30 00:09:38 [1]	Run OTFX082-012:Enable Iperf Server	Mode: 1, Retry: 5
+2025/07/30 00:09:38 [1]	(CmdConsole) > 
+
+2025/07/30 00:09:38 [1]	(CmdConsole) < 
+
+D:\(((KANGAROO\MU310\CODE\Centimani_Kangaroo_FWDL>
+D:\(((KANGAROO\MU310\CODE\Centimani_Kangaroo_FWDL>
+2025/07/30 00:09:38 [1]	Run NBOT035-013:flash_firmware_checkDMpor	Mode: 0, Retry: 5
+2025/07/30 00:09:38 [1]	(CmdConsole) > cmd /c "flash_firmware_checkDMport_ENG.bat" 
+
+2025/07/30 00:10:19 [1]	(CmdConsole) < cmd /c "flash_firmware_checkDMport_ENG.bat" 
+===============================================
+   MU310 Firmware Flashing Tool v1.0
+===============================================
+=== Step 1: Check ADB Connection ===
+Running adb devices...
+Device found: 18077de0	device
+[OK] ADB device connected.
+
+=== Step 2: Check DM PORT ===
+Found DM PORT: Quectel USB DM Port (COM7)
+[OK] DM PORT found = COM7
+
+=== Step 3: Check Firmware File ===
+[OK] Firmware file found.
+
+=== Step 4: Start Firmware Flash Process ===
+
+[4.1] Uploading firmware to device...
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  0%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  1%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  2%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  3%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  4%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  5%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  6%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  7%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  8%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[  9%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 10%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 11%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 12%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 13%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 14%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 15%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 16%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 17%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 18%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 19%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 20%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 21%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 22%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 23%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 24%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 25%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 26%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 27%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 28%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 29%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 30%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 31%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 32%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 33%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 34%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 35%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 36%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 37%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 38%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 39%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 40%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 41%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 42%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 43%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 44%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 45%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 46%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 47%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 48%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 49%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 50%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 51%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 52%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 53%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 54%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 55%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 56%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 57%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 58%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 59%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 60%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 61%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 62%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 63%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 64%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 65%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 66%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 67%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 68%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 69%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 70%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 71%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 72%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 73%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 74%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 75%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 76%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 77%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 78%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 79%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 80%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 81%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 82%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 83%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 84%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 85%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 86%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 87%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 88%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 89%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 90%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 91%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 92%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 93%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 94%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 95%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 96%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 97%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 98%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[ 99%] /usrdata/cache/ufs/update.zip
+[100%] /usrdata/cache/ufs/update.zip
+tools\FW_IMAGE\MU310-Q612_V0.0.0.0_1_modem.bin: 1 file pushed. 3.4 MB/s (122067796 bytes in 34.143s)
+[OK] Firmware uploaded.
+
+[4.2] Syncing file system...
+[OK] Sync completed.
+
+[4.3] Stopping system services...
+[OK] Services stopped.
+
+[4.4] Checking /dev/smd7 status...
+[OK] Check completed.
+
+[4.5] Sending firmware update command...
+
+===============================================
+[SUCCESS] Firmware update command sent!
+
+IMPORTANT:
+1. Do not disconnect the device
+2. Wait for the update to complete
+3. Device may reboot automatically
+4. It may take several minutes
+===============================================
+
+MU310 Burn-ing please wait 
+
+D:\(((KANGAROO\MU310\CODE\Centimani_Kangaroo_FWDL>
+2025/07/30 00:10:19 [1]	Run B7PL025-014:Wait time@#$	Mode: 0, Retry: 5
+[00:10:19.710][PC] [Wait time@#$]++
+2025/07/30 00:10:19 [1]	> :Delay,"30000"
+2025/07/30 00:10:49 [1]	< 0
+[00:10:49.729][PC] [Wait time@#$]--
+2025/07/30 00:10:49 [1]	[PC] [Wait time@#$] ~~ TestTime:30.0193187 sec
+2025/07/30 00:10:49 [1]	B7PL025-014:@STEP008@DO burn in Fimrware Test is Pass ! 		----- 71.6024123 Sec.
+2025/07/30 00:10:49 [1]	DUT Test Completed !        ----- 71.6436508 Sec.
+2025/07/30 00:10:49 [1]	Execute Phase 4 Test.
+2025/07/30 00:10:50 [1]	Do @STEP010@Check Boot login
+2025/07/30 00:10:50 [1]	Run IPIP048-015:Check BOOT Status	Mode: 4, Retry: 40
+[00:10:50.229][DUT] [Check BOOT Status]++
+2025/07/30 00:10:50 [1]	(UART) >  
+
+2025/07/30 00:11:50 [1]	(UART) < 93890] i2c-msm-v2 837000.i2c: error pinctrl state-name:'i2c_sleep' is not configured
+[    4.002000] i2c-msm-v2 837000.i2c: error pinctrl state-name:'i2c_active' is not configured
+[    4.010296] i2c-msm-v2 837000.i2c: error pinctrl state-name:'i2c_sleep' is not configured
+[    4.019468] spi_qsd 836000.spi: Adding to iommu group 0
+[    4.030808] ipa 3e00000.qcom,ipa:ipa_smmu_ap: Adding to iommu group 3
+[    4.032147] ipa 3e00000.qcom,ipa:ipa_smmu_wlan: Adding to iommu group 4
+[    4.038678] ipa 3e00000.qcom,ipa:ipa_smmu_uc: Adding to iommu group 5
+[    4.045289] ipa 3e00000.qcom,ipa:ipa_smmu_eth: Adding to iommu group 6
+[    4.051903] ipa 3e00000.qcom,ipa:ipa_smmu_eth1: Adding to iommu group 7
+[    4.058142] ipa 3e00000.qcom,ipa:ipa_smmu_wlan1: Adding to iommu group 8
+[    4.064314] ipa ipa_smmu_update_fw_loader:11322 Using XBL boot load for IPA FW
+[    4.071276] ipa ipa_smmu_11ad_cb_probe:11153 11AD SMMU is disabled
+[    4.072831] gsi soc:qcom,msm_gsi: gsi_register_device:1560 GSI irq is wake enabled 37
+[    4.088650] rmnet_ipa3 started initialization
+[    4.092271] IPA driver is now in ready state
+[    4.096876] IPA SSR support = True
+[    4.100951] ipa-lnx-stats ipa_spearhead_stats_ioctl_init:1945 IPA ipa_lnx_stats_ioctl major(502) initial ok :>>>>
+[    4.104128] ipa-lnx-stats ipa_spearhead_stats_init:1973 IPA_LNX_STATS_IOCTL init success
+[    4.114471] IPA SG support = False
+[    4.122612] IPA Napi Enable = False
+[    4.125815] using default for wan-rx-desc-size = 256
+[    4.129277] IPA driver initialization was successful.
+[    4.134832] ipa-wan ipa3_wwan_register_netdev_pm_client:3835 rmnet_ipa%d register done
+[    4.140654] msm-dwc3 a600000.ssusb: Adding to iommu group 9
+[    4.147223] ipa-wan ipa3_wwan_probe:4040 rmnet_ipa completed initialization
+[    4.155354] dwc3 a600000.dwc3: [quectel] dwc->maximum_speed = 6, cfg_usb_speed 2147483647
+[    4.160116] dwc3 a600000.dwc3: changing max_speed on rev 00000000
+[    4.170765] usb_bam_init: setting SPS_BAM_SMMU_EN flag with (a704000.qcom,usbbam)
+[    4.174243] sps_register_bam_device: sps:BAM 0x0a704000 is registered
+[    4.181761] msm-dwc3 a600000.ssusb: Nominal values not found.
+[    4.187919] msm-dwc3 a600000.ssusb: Dynamic voting failed
+[    4.193726] msm-dwc3 a600000.ssusb: IRQ hs_phy_irq not found
+[    4.199387] msm-dwc3 a600000.ssusb: IRQ dp_hs_phy_irq1 not found
+[    4.204771] msm-dwc3 a600000.ssusb: IRQ dm_hs_phy_irq1 not found
+[    4.210736] msm-dwc3 a600000.ssusb: IRQ ss_phy_irq1 not found
+[    4.216850] msm-dwc3 a600000.ssusb: Could not get usb psy
+[    4.222442] msm-dwc3 a600000.ssusb: Could not get usb psy
+[    4.228017] [ubi_init:1282]mtd_devs 2
+[    4.233284] [ubi_init:1294]misc_register ubi_ctrl_cdev
+[    4.237085] [ubi_init:1321]open_mtd_device 29
+[    4.242024] [ubi_init:1333]ubi_attach_mtd_dev mtd->name=recoveryfs
+[    4.246276] ubi0: attaching mtd29
+[    4.276381] ubi0: scanning is finished
+[    4.282285] ubi0 warning: ubi_eba_init: cannot reserve enough PEBs for bad PEB handling, reserved 29, need 40
+[    4.282629] ubi0: kthread_create for ubi->bgt_thread ubi_bgt0d
+[    4.282629] 
+[    4.291352] msm-dwc3 a600000.ssusb: DWC3 exited from low power mode
+[    4.298396] ubi0: attached mtd29 (name "recoveryfs", size 21 MiB)
+[    4.304599] ubi0: PEB size: 262144 bytes (256 KiB), LEB size: 253952 bytes
+[    4.310793] ubi0: min./max. I/O unit sizes: 4096/4096, sub-page size 4096
+[    4.317552] ubi0: VID header offset: 4096 (aligned 4096), data offset: 8192
+[    4.324542] ubi0: good PEBs: 84, bad PEBs: 0, corrupted PEBs: 0
+[    4.331193] ubi0: user volume: 1, internal volumes: 1, max. volumes count: 128
+[    4.337084] ubi0: max/mean erase counter: 1/0, WL threshold: 4096, image sequence number: 182444489
+[    4.344385] ubi0: available PEBs: 0, total reserved PEBs: 84, PEBs reserved for bad PEB handling: 29
+[    4.353331] ubi0: background thread "ubi_bgt0d" started, PID 148
+[    4.362702] [ubi_init:1321]open_mtd_device 30
+[    4.368680] [ubi_init:1333]ubi_attach_mtd_dev mtd->name=modem
+[    4.372950] ubi1: attaching mtd30
+[    4.459014] ubi1: scanning is finished
+[    4.465331] ubi1: kthread_create for ubi->bgt_thread ubi_bgt1d
+[    4.465331] 
+[  4.465442] ubi1: attached mtd30 (name "modem", size 75 MiB)
+[    4.471467] ubi1: PEB size: 262144 bytes (256 KiB), LEB size: 253952 bytes
+[    4.477337] ubi1: min./max. I/O unit sizes: 4096/4096, sub-page size 4096
+[    4.484031] ubi1: VID header offset: 4096 (aligned 4096), data offset: 8192
+[    4.490887] ubi1: good PEBs: 300, bad PEBs: 0, corrupted PEBs: 0
+[    4.497650] ubi1: user volume: 1, internal volumes: 1, max. volumes count: 128
+[    4.503908] ubi1: max/mean erase counter: 1/0, WL threshold: 4096, image sequence number: 1824475301
+[    4.510941] ubi1: available PEBs: 0, total reserved PEBs: 300, PEBs reserved for bad PEB handling: 40
+[    4.520237] ubi1: background thread "ubi_bgt1d" started, PID 149
+[    4.530088] block ubiblock0_0: created from ubi0:0(recoveryfs)
+[    4.537684] @Harden Qstart_init entry !!!
+[    4.541116] [MF][ql_multi_fota_process][799] enter!
+[    4.545129] [MF][ql_check_multifota_flag][745] enter!
+[    4.549904] [MF][ql_get_bootloader_message_mtd][145] enter!
+[    4.555271] RNDIS_IPA module is loaded.
+[    4.560522] ecm driver init
+[    4.564450] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    4.568225] cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    4.576808] [MF][ql_get_bootloader_message_mtd][175] exit!
+[    4.581463] [MF][ql_check_multifota_flag][764] exit!
+[    4.587197] gcc-sdxlemur 100000.clock-controller: sync-state
+[    4.592139] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    4.597657] cfg80211: failed to load regulatory.db
+[    4.606348] ALSA device list:
+[    4.610936]   No soundc?[    4.617313] [initrd_load:153]mount_initrd=0
+[    4.621332] VFS: Mounted root (squashfs filesystem) readonly on device 252:0.
+[    4.624180] devtmpfs: mounted
+[    4.628664] Freeing unused kernel memory: 1024K
+[    4.643989] [modem_cfg] open /data/modem_cfg fail ret is  -2 
+[    4.644009] [modem_cfg] read_buf A00101A10101A20101A30101A40101A50101A60101A70101A80101A90101MQ
+[    4.648736] [modem_cfg] smem copy length=63 
+[    4.657260] [modem_cfg] smem alloc sucessfully 
+[    4.661756] @QuectelKernel command line: reboot=w noinitrd ro rootwait console=ttyMSM0,115200,n8 androidboot.hardware=qcom msm_rtb.filter=0x237 androidboot.console=ttyMSM0 lpm_levels.sleep_disabled=1 firmware_class.path=/lib/firmware/updates service_locator.enable=1 net.ifnames=0 atlantic_fwd.rx_ring_size=512 atlantic_fwd.rx_linear=1 pcie_ports=compat pci=pcie_bus_perf rootfstype=squashfs root=/dev/ubiblock0_0 ubi.block=0,0 ubi.mtd=29 ubi.mtd=30 androidboot.serialno=18077de0 androidboot.baseband=msm part.activeboot=boot recovery=1 data_interface=[0,0] ql_pcie_mode=1 ql_pcie_ssc=0 ql_switch_usb=0 tj_config0=[0,0,0] tj_config1=[0,0,0] tj_config2=[0,0,0] ql_uart=[1,1] ql_pcie_id=[0x0000,0x0000,0x0000,0x0000,0] ql_sdxap=[0,0] androidboot.force_normal_boot=1
+[    4.710432] Run /sbin/init as init process
+[    5.658693] systemd[1]: systemd 244.5+ running in system mode. (-PAM -AUDIT -SELINUX +IMA -APPARMOR -SMACK -SYSVINIT -UTMP -LIBCRYPTSETUP -GCRYPT -GNUTLS +ACL +XZ -LZ4 -SECCOMP +BLKID -ELFUTILS -KMOD -IDN2 -IDN -PCRE2 default-hierarchy=hybrid)
+[    5.659105] systemd[1]: Detected architecture arm.
+
+Welcome to [1mQTI Linux reference nogplv3 distro targeting performance builds. LE.UM.6.2.3.r1-03100-SDX65.0[0m!
+
+[    5.730624] systemd[1]: Set hostname to <sdxlemur>.
+[    5.759097] systemd[1]: Initializing machine ID from random generator.
+[    5.759290] systemd[1]: Installed transient /etc/machine-id file.
+[    5.883447] systemd[1]: local-fs.target: Wants dependency dropin /lib/systemd/system/local-fs.target.wants/systemrw.mount target /lib/systemd/system/systemrw-ubi.mount has different name
+[    5.889501] systemd[1]: Configuration file /lib/systemd/system/systemrw.mount.d/systemrw.conf is marked executable. Please remove executable permission bits. Proceeding anyway.
+[    5.919444] systemd[1]: Configuration file /lib/systemd/system/dbus.service.d/dbus.conf is marked world-writable. Please remove world writability permission bits. Proceeding anyway.
+[    6.059742] systemd[1]: Created slice system-getty.slice.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-getty.slice[0m.
+[    6.090737] systemd[1]: Created slice system-serial\x2dgetty.slice.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-serial\x2dgetty.slice[0m.
+[    6.130450] systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+[[0;32m  OK  [0m] Started [0;1;39mDispatch Password ???ts to Console Directory Watch[0m.
+[    6.170383] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Started [0;1;39mForward Password R???uests to Wall Directory Watch[0m.
+[    6.210264] systemd[1]: Reached target Paths.
+[[0;32m  OK  [0m] Reached target [0;1;39mPaths[0m.
+[    6.240191] systemd[1]: Reached target Remote File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mRemote File Systems[0m.
+[    6.280330] systemd[1]: Reached target Slices.
+[[0;32m  OK  [0m] Reached target [0;1;39mSlices[0m.
+[    6.310202] systemd[1]: Reached target Swap.
+[[0;32m  OK  [0m] Reached target [0;1;39mSwap[0m.
+[    6.340492] systemd[1]: Listening on initctl Compatibility Named Pipe.
+[[0;32m  OK  [0m] Listening on [0;1;39minitctl Compatibility Named Pipe[0m.
+[    6.382255] systemd[1]: Listening on udev Control Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mudev Control Socket[0m.
+[    6.420527] systemd[1]: Listening on udev Kernel Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mudev Kernel Socket[0m.
+[    6.462816] systemd[1]: Mounting /systemrw...
+         Mounting [0;1;39m/systemrw[0m...
+[    6.471454] systemd[159]: systemrw.mount: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    6.494751] UBIFS error (pid: 159): cannot open "ubi0:systemrw", error -19
+[    6.495748] systemd[1]: Condition check resulted in Huge Pages File System being skipped.
+[    6.503909] systemd[1]: Mounting POSIX Message Queue File System...
+[    6.511619] systemd[160]: dev-mqueue.mount: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+         Mounting [0;1;39mPOSIX Message Queue File System[0m...
+[    6.560579] systemd[1]: Condition check resulted in FUSE Control File System being skipped.
+[    6.562913] systemd[1]: Starting Ethernet Driver Service...
+[    6.569408] systemd[161]: ql_eth_driver.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+         Starting [0;1;39mEthernet Driver Service[0m...
+[    6.612369] systemd[1]: Starting Remount Root and Kernel File Systems...
+[    6.614114] systemd[162]: systemd-remount-fs.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+         Starting [0;1;39mRemount Root and Kernel File Systems[0m...
+[    6.662270] systemd[1]: Starting Apply Kernel Variables...
+         Starting [0;1;39mApply Kernel Variables[0m...
+[    6.668132] systemd[163]: systemd-sysctl.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    6.692265] systemd[1]: Starting udev Coldplug all Devices...
+         Starting [0;1;39mudev Coldplug all Devices[0m...
+[    6.698456] systemd[164]: systemd-udev-trigger.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    6.724573] systemd[1]: systemrw.mount: Mount process exited, code=exited, status=32/n/a
+[    6.724629] systemd[1]: systemrw.mount: Failed with result 'exit-code'.
+[    6.770898] systemd[1]: Failed to mount /systemrw.
+[[0;1;31mFAILED[0m] Failed to mount [0;1;39m/systemrw[0m.
+See 'systemctl status systemrw.mount' for details.
+[    6.830222] systemd[1]: Dependency failed for pcie Service.
+[[0;1;38;5;185mDEPEND[0m] Dependency failed for [0;1;39mpcie Service[0m.
+[    6.880221] systemd[1]: pcie.service: Job pcie.service/start failed with result 'dependency'.
+[    6.881091] systemd[1]: Mounted POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mPOSIX Message Queue File System[0m.
+[    6.921432] systemd[1]: Started Remount Root and Kernel File Systems.
+[[0;32m  OK  [0m] Started [0;1;39mRemount Root and Kernel File Systems[0m.
+[    6.961477] systemd[1]: Started Apply Kernel Variables.
+[[0;32m  OK  [0m] Started [0;1;39mApply Kernel Variables[0m.
+[    7.002838] systemd[1]: Mounting Kernel Configuration File System...
+         Mounting [0;1;39mKernel Configuration File System[0m.[    7.009710] systemd[165]: sys-kernel-config.mount: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+..
+[    7.052686] systemd[1]: Mounting Kernel Debug File System...
+         Mounting [0;1;39mKernel Debug File System[0m...
+[    7.092661] systemd[166]: sys-kernel-debug.mount: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    7.096723] systemd[1]: Mounting Temporary Directory (/tmp)...
+[    7.111575] systemd[167]: tmp.mount: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+         Mounting [0;1;39mTemporary Directory (/tmp)[0m...
+[    7.138915] systemd[1]: Starting usb Service...
+         [    7.151571] systemd[168]: usb.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+Starting [0;1;39musb Service[0m...
+[    7.192298] systemd[1]: Started CNSS service.
+[[0;32m  OK  [0m] Started [0;1;39mCNSS service[0m.
+[    7.221845] systemd[169]: cnss.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    7.242567] systemd[1]: Started irsc-util Service.
+[[0;32m  OK  [0m] Started [0;1;39mirsc-util Service[0m.
+[    7.249862] systemd[170]: irsc_util.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    7.292447] systemd[1]: Started qrtr-ns Service.
+[[0;32m  OK  [0m] Started [0;1;39mqrtr-ns Service[0m.
+[    7.337262] systemd[1]: Starting Create Static Device Nodes in /dev...
+         Starting [0;1;39mCreate Static Device Nodes in /dev[0[    7.344392] systemd[173]: systemd-tmpfiles-setup-dev.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+m...
+[    7.395089] systemd[1]: Mounted Kernel Configuration File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mKernel Configuration File S[    7.401753] systemd[174]: systemd-udev-trigger.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+ystem[0m.
+[    7.440924] systemd[1]: Mounted Kernel Debug File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mKernel Debug File System[0m.
+[    7.480844] systemd[1]: Mounted Temporary Directory (/tmp).
+[[0;32m  OK  [0m] Mounted [0;1;39mTemporary Directory (/tmp)[0m.
+[    7.564445] systemd-tmpfiles[173]: /etc/tmpfiles.d/platform.conf:38: Line references path below legacy directory /var/run/, updating /var/run/resolv.conf ??? /run/resolv.conf; please update the tmpfiles.d/ drop-in file accordingly.
+[    7.571219] systemd[172]: qrtr_ns.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    7.611162] systemd[1]: Started Create Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Started [0;1;39mCreate Static Device Nodes in /dev[0m.
+[    7.650846] systemd[1]: Reached target Local File Systems (Pre).
+[[0;32m  OK  [0m] Reached target [0;1;39mLocal File Systems (Pre)[0m.
+[    7.690318] systemd[1]: Reached target Local File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mLocal File Systems[0m.
+[    7.730406] systemd[1]: Condition check resulted in Commit a transient machine-id on disk being skipped.
+[    7.732423] systemd[1]: Starting Create Volatile Files and Directories...
+         Starting [0;1;39mCreate Volatile Files and Directories[0m...
+[    7.752528] systemd[175]: systemd-tmpfiles-setup.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    7.772519] systemd[1]: Starting udev Kernel Device Manager...
+         Starting [0;1;39mudev Kernel Device Manager[0m...
+[    7.778681] systemd[176]: systemd-udevd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    7.785938] systemd-tmpfiles[175]: /etc/tmpfiles.d/platform.conf:38: Line references path below legacy directory /var/run/, updating /var/run/resolv.conf ??? /run/resolv.conf; please update the tmpfiles.d/ drop-in file accordingly.
+[    7.830757] systemd[1]: Condition check resulted in Update is Completed being skipped.
+[    7.851376] systemd-tmpfiles[175]: symlink(/etc/machine-id, /var/lib/dbus/machine-id) failed: Read-only file system
+[    7.851501] systemd-tmpfiles[175]: Failed to open directory 'misc': No such file or directory
+[    7.899321] systemd-tmpfiles[175]: Failed to open directory 'data': No such file or directory
+[    7.899441] systemd-tmpfiles[175]: Failed to validate path /data/vendor/tzstorage: No such file or directory
+[    7.956889] systemd-tmpfiles[175]: Failed to open directory 'coredump': No such file or directory
+[    7.957010] systemd-tmpfiles[175]: Failed to open directory 'private': No such file or directory
+[    8.004515] systemd-tmpfiles[175]: Failed to open directory 'private': No such file or directory
+[    8.004702] systemd-tmpfiles[175]: Failed to open directory 'private': No such file or directory
+[    8.063760] systemd-tmpfiles[175]: fchmod() of /var/log/journal failed: Read-only file system
+[    8.074810] systemd[1]: Started Create Volatile Files and Directories.
+[[0;32m  OK  [0m] Started [0;1;39mCreate Volatile Files and Directories[0m.
+[    8.086144] Mass Storage Function, version: 2009/09/11
+[    8.087430] LUN: removable file: (no medium)
+[    8.103426] Mass Storage Function, version: 2009/09/11
+[    8.103456] LUN: removable file: (no medium)
+[    8.112119] file system registered
+[    8.152343] systemd[1]: Starting Run pending postinsts...
+         Starting [0;1;39mRun pending postinsts[0m...
+[    8.156953] f_cdev_alloc: port_name:at_usb0 (00000000) portno:(0)
+[    8.163928] systemd[207]: run-postinsts.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    8.170672] f_cdev_alloc: port_name:at_usb1 (00000000) portno:(1)
+[    8.190377] f_cdev_alloc: port_name:at_usb2 (00000000) portno:(2)
+[    8.341674] systemd[221]: run-postinsts.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    8.602134] systemd-udevd[176]: Network interface NamePolicy= disabled on kernel command line, ignoring.
+[    8.615780] systemd[1]: run-postinsts.service: Control process exited, code=exited, status=1/FAILURE
+[    8.616326] systemd[1]: run-postinsts.service: Failed with result 'exit-code'.
+[    8.632177] gsi_set_inst_name: prot_id = 2, prev inst do not freed yet
+[    8.653926] systemd[1]: Failed to start Run pending postinsts.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mRun pending postinsts[0m.
+See 'systemctl status run-postinsts.service' for details.
+[    8.704342] systemd-udevd[176]: /lib/udev/rules.d/50-udev-default.rules:39 Unknown group 'render', ignoring
+[    8.704511] systemd-udevd[176]: /lib/udev/rules.d/50-udev-default.rules:40 Unknown group 'render', ignoring
+[    8.726246] r8125 0000:01:00.0: Adding to iommu group 6
+[    8.726352] r8125 2.5Gigabit Ethernet driver 9.010.01_cdt-NAPI-RSS loaded
+[    8.769800] pci 0000:00:00.0: enabling device (0146 -> 0147)
+[    8.769849] r8125 0000:01:00.0: enabling device (0140 -> 0143)
+[    8.885345] r8125 0000:01:00.0 (unnamed net_device) (uninitialized): Invalid ether addr 00:00:00:00:00:00
+[    8.885384] r8125 0000:01:00.0 (unnamed net_device) (uninitialized): Random ether addr d2:77:9e:fd:8d:a8
+[    8.956323] systemd-udevd[176]: Configuration file /etc/udev/rules.d/mountpartitions.rules is marked executable. Please remove executable permission bits. Proceeding anyway.
+[    8.970174] r8125: This product is covered by one or more of the following patents: US6,570,884, US6,115,776, and US6,327,625.
+[    8.973704] systemd[273]: systemd-udevd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    8.990113] r8125  Copyright (C) 2022 Realtek NIC software team <nicfae@realtek.com> 
+[    8.990113]  This program comes with ABSOLUTELY NO WARRANTY; for details, please see <http://www.gnu.org/licenses/>. 
+[    8.990113]  This is free software, and you are welcome to redistribute it under certain conditions; see <http://www.gnu.org/licenses/>. 
+[    9.040005] Switching to composition recovery_usbcfg
+[    9.083445] systemd[1]: Started usb Service.
+[[0;32m  OK  [0m] Started [0;1;39musb Service[0m.
+[    9.097642] systemd[294]: systemd-udevd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    9.162388] systemd[1]: Started udev Kernel Device Manager.
+[[0;32m  OK  [0m] Started [0;1;39mudev Kernel Device Manager[0m.
+[    9.175944] systemd[300]: ql_eth_driver.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    9.195677] eth0: 0xd0240000, d2:77:9e:fd:8d:a8, IRQ 80
+[    9.212903] systemd[1]: Started diag-router Service.
+[[0;32m  OK  [0m] Started [0;1;39mdiag-router Service[0m.
+[    9.225210] systemd[302]: diag-router.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    9.246199] r8125 0000:01:00.0: Direct firmware load for rtl_nic/rtl8125b-2.fw failed with error -2
+[    9.246237] r8125 0000:01:00.0: Unable to load firmware rtl_nic/rtl8125b-2.fw (-2)
+[    9.282253] systemd[1]: Starting adbd Service...
+         Starting [0;1;39madbd Service[0m...
+[    9.292930] systemd[303]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    9.322394] systemd[304]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    9.329534] systemd[1]: Started udev Coldplug all Devices.
+[[0;32m  OK  [0m] Started [0;1;39mudev Coldplug all Devices[0m.
+[    9.372387] systemd[1]: Reached target System Initialization.
+[[0;32m  OK  [0m] Reached target [0;1;39mSystem Initialization[0m.
+[    9.384129] systemd[305]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    9.410401] systemd[1]: Started Daily Cleanup of Temporary Directories.
+[[0;32m  OK  [0m] Started [0;1;39mDaily Cleanup of Temporary Directories[0m.
+[    9.450343] systemd[1]: Reached target Timers.
+[[0;32m  OK  [0m] Reached target [0;1;39mTimers[0m.
+[    9.522370] systemd[1]: Listening on D-Bus System Message Bus Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mD-Bus System Message Bus Socket[0m.
+[    9.562408] systemd[1]: Started D-Bus System Message Bus.
+[[0;32m  OK  [0m] Started [0;1;39mD-Bus System Message Bus[0m.
+[    9.592739] systemd[306]: dbus.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[    9.639741] systemd[1]: Reached target Sockets.
+[[0;32m  OK  [0m] Reached target [0;1;39mSockets[0m.
+[    9.721043] systemd[1]: Condition check resulted in Bind mount volatile /etc/adb_devid being skipped.
+[    9.722146] systemd[1]: Condition check resulted in Bind mount volatile /etc/allplay/ being skipped.
+[    9.729341] systemd[1]: Condition check resulted in Bind mount volatile /etc/bluetooth/ being skipped.
+[    9.824752] systemd[1]: Condition check resulted in Bind mount volatile /etc/usb/boot_hsic_comp being skipped.
+[    9.824899] systemd[1]: Condition check resulted in Bind mount volatile /etc/usb/boot_hsusb_comp being skipped.
+[    9.881813] systemd[1]: Condition check resulted in Bind mount volatile /etc/build.prop being skipped.
+[    9.881920] systemd[1]: Condition check resulted in Bind mount volatile /etc/data/adpl/ being skipped.
+[    9.952800] read descriptors
+[    9.952892] read strings
+[    9.997647] systemd[1]: Condition check resulted in Bind mount volatile /etc/data/ipa/ being skipped.
+[    9.997769] systemd[1]: Condition check resulted in Bind mount volatile /etc/data/miniupnpd/ being skipped.
+[   10.072974] systemd[1]: Condition check resulted in Bind mount volatile /etc/data/usb/ being skipped.
+[   10.073078] systemd[1]: Condition check resulted in Bind mount volatile /etc/data/ being skipped.
+[   10.154699] systemd[1]: Starting Bind mount volatile /etc/misc/wifi/...
+         Starting [0;1;39mBind mount volatile /etc/misc/wifi/[0m...
+[   10.166932] systemd[325]: systemrw-misc-wifi.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   10.169419] [QL] symlink = f0, target = gser.0, interface_num = 0, interface_count = 1
+[   10.184101] [QL] symlink = f1, target = gser.1, interface_num = 1, interface_count = 1
+[   10.209340] [QL] symlink = f2, target = cser.dun.0, interface_num = 2, interface_count = 1
+[   10.213586] [QL] symlink = f3, target = cser.dun.2, interface_num = 3, interface_count = 1
+[   10.220308] systemd[1]: Condition check resulted in Bind mount volatile /etc/data/iproute2/rt_tables being skipped.
+[   10.224881] systemd[1]: Condition check resulted in Bind mount volatile /var/lib being skipped.
+[   10.237531] [QL] assign id 0 to function gser.0
+[   10.243820] [QL] assign id 1 to function gser.1
+[   10.248260] [QL] assign id 2 to function cser.dun.0
+[   10.261472] [QL] assign id 3 to function cser.dun.2
+[   10.318199] systemd[1]: Starting Load/Save Random Seed...
+         Starting [0;1;39mLoad/Save Random Seed[0m...
+[   10.324113] systemd[331]: systemd-random-seed.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   10.334858] android_work: did not send uevent (0 0 00000000)
+[   10.356786] systemd[1]: Started Ethernet Driver Service.
+[[0;32m  OK  [0m] Started [0;1;39mEthernet Driver Service[0m.
+[   10.391228] systemd[1]: adbd.service: Succeeded.
+[   10.391853] systemd[1]: Started adbd Service.
+[[0;32m  OK  [0m] Started [0;1;39madbd Service[0m.
+[   10.431421] systemd[1]: Started Bind mount volatile /etc/misc/wifi/.
+[[0;32m  OK  [0m] Started [0;1;39mBind mount volatile /etc/misc/wifi/[0m.
+[   10.448136] msm-dwc3 a600000.ssusb: Could not get usb psy
+[   10.455843] systemd-udevd[284]: Using default interface naming scheme 'v243'.
+[   10.457719] systemd-udevd[284]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   10.501441] systemd[1]: Started Load/Save Random Seed.
+[[0;32m  OK  [0m] Started [0;1;39mLoad/Save Random Seed[0m.
+[   10.532522] systemd[1]: adbd.service: Scheduled restart job, restart counter is at 1.
+[   10.542400] msm-dwc3 a600000.ssusb: Could not get usb psy
+[   10.615183] systemd[1]: Reached target Basic System.
+[[0;32m  OK  [0m] Reached target [0;1;39mBasic System[0m.
+[   10.630196] android_work: sent uevent USB_STATE=CONNECTED
+[   10.636756] systemd[1]: Stopped adbd Service.
+[[0;32m  OK  [0m] Stopped [0;1;39madbd Service[0m.
+[   10.702085] systemd[1]: Starting adbd Service...
+         Starting [0;1;39madbd Service[0m...
+[   10.721871] systemd[333]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   10.727072] configfs-gadget gadget: high-speed config #1: c
+[   10.743140] systemd[1]: Started USB daemon Service.
+[[0;32m  OK  [0m] Started [0;1;39mUSB daemon Service[0m.
+[   10.750152] msm-dwc3 a600000.ssusb: Could not get usb psy
+[   10.752413] android_work: sent uevent USB_STATE=CONFIGURED
+[   10.772440] systemd[334]: usbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   10.819115] systemd[1]: Starting System Logging Service...
+         Starting [0;1;39mSystem Logging Service[0m...
+[   10.829842] systemd[335]: busybox-syslog.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   10.862015] systemd[1]: Starting Recovery partition service...
+         Starting [0;1;39mRecovery partition service[0m...
+[   10.873562] systemd[336]: find-recovery-partitions.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   10.890300] systemd[1]: Condition check resulted in Getty on tty1 being skipped.
+[   10.892302] systemd[1]: Starting pcie-diag Service...
+         Starting [0;1;39mpcie-diag Service[0m...
+[   10.904747] systemd[338]: pcie-diag.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   10.972371] systemd[1]: Started Serial Getty on ttyMSM0.
+[[0;32m  OK  [0m] Started [0;1;39mSerial Getty on ttyMSM0[0m.
+[   11.010482] systemd[1]: Reached target Login Prompts.
+[[0;32m  OK  [0m] Reached target [0;1;39mLogin Prompts[0m.
+[   11.042734] systemd[1]: pcie-diag.service: Control process exited, code=exited, status=1/FAILURE
+[   11.043313] systemd[1]: pcie-diag.service: Failed with result 'exit-code'.
+[   11.063873] systemd[344]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   11.096794] MTD : Attaching UBI device /dev/mtdblock30 for modem @1
+[   11.126918] systemd[1]: Failed to start pcie-diag Service.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mpcie-diag Service[0m.
+See 'systemctl status pcie-diag.service' for details.
+[   11.210718] systemd[1]: Started System Logging Service.
+[[0;32m  OK  [0m] Started [0;1;39mSystem Logging Service[0m.
+[   11.223511] [ubi_attach_mtd_dev:924]ubi: mtd30 is already attached to ubi1
+[   11.224046] /dev/ubi1 created
+Jan  2 08:01:27 sdxlemur syslog.info syslogd started: BusyBox v1.31.1
+[   11.271541] systemd[358]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   11.354991] crw-------    1 root     root      500,   0 Jan  2 08:01 ubi0
+[   11.354991] crw-------    1 root     root      500,   1 Jan  2 08:01 ubi0_0
+[   11.354991] crw-------    1 root     root      499,   0 Jan  2 08:01 ubi1
+[   11.354991] crw-------    1 root     root      499,   1 Jan  2 08:01 ubi1_0
+[   11.354991] crw-------    1 root     root       10, 122 Jan  2 08:01 ubi_ctrl
+[   11.354991] brw-------    1 root     root      252,   0 Jan  2 08:01 ubiblock0_0
+[   11.398262] systemd[1]: adbd.service: Succeeded.
+[   11.449305] systemd[1]: Started adbd Service.
+[[0;32m  OK  [0m] Started [0;1;39madbd Service[0m.
+[   11.491098] systemd[1]: pcie-diag.service: Scheduled restart job, restart counter is at 1.
+[   11.515011] MTD : Attaching UBI device /dev/mtdblock31 for system @2
+[   11.525362] ubi2: attaching mtd31
+[   11.607448] systemd[1]: adbd.service: Scheduled restart job, restart counter is at 2.
+[   12.058902] ubi2: scanning is finished
+Jan  2 08:01:28 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/ubi/ubi2
+[   12.261424] ubi2: kthread_create for ubi->bgt_thread ubi_bgt2d
+[   12.261424] 
+[   12.261548] ubi2: attached mtd31 (name "system", size 75 MiB)
+[   12.268273] ubi2: PEB size: 262144 bytes (256 KiB), LEB size: 253952 bytes
+Jan  2 08:01:28 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/ubi/ubi2/ubi2_0
+[   12.438027] r8125: eth0: link up
+[   12.438076] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+[   12.440398] ubi2: min./max. I/O unit sizes: 4096/4096, sub-page size 4096
+[   12.446303] ubi2: VID header offset: 4096 (aligned 4096), data offset: 8192
+[   12.545813] systemd-udevd[284]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.548065] systemd-udevd[281]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.556852] systemd-udevd[279]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.567072] systemd-udevd[288]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.577495] systemd-udevd[287]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.630150] ubi2: good PEBs: 300, bad PEBs: 0, corrupted PEBs: 0
+[   12.630175] ubi2: user volume: 1, internal volumes: 1, max. volumes count: 128
+[   12.635214] ubi2: max/mean erase counter: 1/0, WL threshold: 4096, image sequence number: 159416151
+[   12.643535] systemd-udevd[283]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.652323] systemd-udevd[285]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.686639] systemd-udevd[288]: Using default interface naming scheme 'v243'.
+[   12.686913] systemd-udevd[288]: Could not set Alias=, MACAddress= or MTU= on ip6gre0: Invalid argument
+[   12.700681] systemd-udevd[287]: Using default interface naming scheme 'v243'.
+[   12.712972] systemd-udevd[287]: Could not set Alias=, MACAddress= or MTU= on ip6tnl0: Invalid argument
+[   12.713019] systemd-udevd[287]: ip6tnl0: Could not apply link config, ignoring: Invalid argument
+[   12.731740] systemd-udevd[282]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.734040] systemd-udevd[286]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.743667] systemd-udevd[283]: ethtool: autonegotiation is unset or enabled, the speed and duplex are not writable.
+[   12.773103] systemd-udevd[288]: ip6gre0: Could not apply link config, ignoring: Invalid argument
+[   12.783087] ubi2: available PEBs: 0, total reserved PEBs: 300, PEBs reserved for bad PEB handling: 40
+[   12.783128] ubi2: background thread "ubi_bgt2d" started, PID 385
+[   12.792524] /dev/ubi2 created
+[   12.926203] crw-------    1 root     root      500,   0 Jan  2 08:01 ubi0
+[   12.926203] crw-------    1 root     root      500,   1 Jan  2 08:01 ubi0_0
+[   12.926203] crw-------    1 root     root      499,   0 Jan  2 08:01 ubi1
+[   12.926203] crw-------    1 root     root      499,   1 Jan  2 08:01 ubi1_0
+[   12.926203] crw-------    1 root     root      496,   0 Jan  2 08:01 ubi2
+[   12.926203] crw-------    1 root     root      496,   1 Jan  2 08:01 ubi2_0
+[   12.926203] crw-------    1 root     root       10, 122 Jan  2 08:01 ubi_ctrl
+[   12.926203] brw-rw----    1 root     disk      252,   0 Jan  2 08:01 ubiblock0_0
+[   13.080245] systemd-udevd[281]: android0: Process '/etc/udev/scripts/automtp.sh' failed with exit code 1.
+[   13.100253] systemd-udevd[284]: android0: Process '/etc/udev/scripts/automtp.sh' failed with exit code 1.
+[   13.101398] MTD : Looking for UBI volume : /system for rootfs
+[   13.174577] Found Volume: rootfs
+Jan  2 08:01:29 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/bdi/ubifs_2_0
+[   13.191940] UBIFS error (ubi2:0 pid 422): ubifs_read_node: bad node type (1 but expected 6)
+[   13.193562] UBIFS error (ubi2:0 pid 422): ubifs_read_node: bad node at LEB 0:0, LEB mapping status 1
+[   13.220198] Not a node, first 24 bytes:
+[   13.220210] 00000000: 68 73 71 73 42 0f 00 00 ed f2 7d 68 00 00 02 00 f4 00 00 00 01 00 11 00                          hsqsB.....}h............
+[   13.222849] @quectel UBI Error 6663333 ubifs_read_node vi.dev_num=2, vi.vol_id=0 , 
+[   13.250112] CPU: 0 PID: 422 Comm: mount Tainted: G        W         5.4.265-perf #1
+[   13.250135] Hardware name: Qualcomm Technologies, Inc. SDXLEMUR (Flattened Device Tree)
+[   13.256582] [<b010eebc>] (unwind_backtrace) from [<b010c200>] (show_stack+0x10/0x14)
+[   13.280115] [<b010c200>] (show_stack) from [<b0374e48>] (ubifs_read_node+0x1fc/0x260)
+[   13.280146] [<b0374e48>] (ubifs_read_node) from [<b0371df4>] (ubifs_read_superblock+0x2a8/0xeb0)
+[   13.286919] [<b0371df4>] (ubifs_read_superblock) from [<b0370ee8>] (ubifs_mount+0xb28/0x167c)
+[   13.310103] [<b0370ee8>] (ubifs_mount) from [<b028d828>] (legacy_get_tree+0x24/0x48)
+[   13.310132] [<b028d828>] (legacy_get_tree) from [<b0255e2c>] (vfs_get_tree+0x2c/0xe4)
+[   13.316906] [<b0255e2c>] (vfs_get_tree) from [<b0278198>] (do_mount+0x928/0xa78)
+[   13.335898] [<b0278198>] (do_mount) from [<b02789e0>] (ksys_mount+0x90/0xc4)
+[   13.335928] [<b02789e0>] (ksys_mount) from [<b0101000>] (ret_fast_syscall+0x0/0x54)
+[   13.346285] systemd[1]: Reached target Hardware activated USB gadget.
+[   13.349550] Exception stack(0xca455fa8 to 0xca455ff0)
+[   13.356086] 5fa0:                   00b6a308 00000000 00b6a2e8 00b6a330 00b6a2d8 00000010
+[   13.361045] 5fc0: 00b6a308 00000000 00b6a330 00000015 a6f55914 00000010 a6f56120 00b6a2d8
+[   13.369175] 5fe0: a6f55fc8 ae9a1b70 a6f25afb a6eac25a
+[[0;32m  OK  [0m] Reached target [0;1;39mHardware activated USB gadget[0m.
+[   13.388466] [rootfs] Ubi failed to mount, try to mount Squashfs 
+[   13.410306] systemd[1]: Stopped adbd Service.
+[[0;32m  OK  [0m] Stopped [0;1;39madbd Service[0m.
+[   13.442545] block ubiblock2_0: created from ubi2:0(rootfs)
+[   13.443151] Mounting /dev/ubiblock2_0 to /system
+[   13.465228] systemd[1]: Starting adbd Service...
+         Starting [0;1;39madbd Service[0m...
+[   13.481490] systemd[426]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   13.520238] systemd[1]: Stopped pcie-diag Service.
+[[0;32m  OK  [0m] Stopped [0;1;39mpcie-diag Service[0m.
+[   13.536689] MTD[shengya] : Mounting of /dev/ubi2_0 on /system done
+[   13.549080] MTD : Detected block device : /usrdata for usrdata
+[   13.554467] ubi3: attaching mtd33
+Jan  2 08:01:29 sdxlemur user.debug usbd: Got uevent remove@/dev[   13.582335] systemd[1]: Starting pcie-diag Service...
+ices/virtual/bdi/ubifs_2_0
+[   13.592916] systemd[434]: pcie-diag.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+Jan  2 08:01:29 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/bdi/252:1
+Jan  2 08:01:29 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/block/ubiblock2_0
+         Starting [0;1;39mpcie-diag Service[0m...
+[   13.716179] systemd[1]: pcie-diag.service: Control process exited, code=exited, status=1/FAILURE
+[   13.716770] systemd[1]: pcie-diag.service: Failed with result 'exit-code'.
+[   13.731512] systemd[435]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   13.750260] systemd[1]: Failed to start pcie-diag Service.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mpcie-diag Service[0m.
+See 'systemctl status pcie-diag.service' for details.
+[   13.831518] systemd[436]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   13.835467] systemd[1]: adbd.service: Succeeded.
+[   13.850947] systemd[1]: Started adbd Service.
+[[0;32m  OK  [0m] Started [0;1;39madbd Service[0m.
+[   13.861625] ubi3: scanning is finished
+[   13.877555] ubi3: kthread_create for ubi->bgt_thread ubi_bgt3d
+[   13.877555] 
+[   13.877689] ubi3: attached mtd33 (name "usrdata", size 209 MiB)
+[   13.883836] ubi3: PEB size: 262144 bytes (256 KiB), LEB size: 253952 bytes
+[   13.889563] ubi3: min./max. I/O unit sizes: 4096/4096, sub-page size 4096
+[   13.896572] ubi3: VID header offset: 4096 (aligned 4096), data offset: 8192
+[   13.903554] ubi3: good PEBs: 837, bad PEBs: 2, corrupted PEBs: 0
+Jan  2 08:01:29 sdxlemur user.debug usbd: Got uevent add@/device[   13.917940] ubi3: user volume: 1, internal volumes: 1, max. volumes count: 128
+[   13.922316] ubi3: max/mean erase counter: 339/267, WL threshold: 4096, image sequence number: 289895828
+[   13.929537] ubi3: available PEBs: 0, total reserved PEBs: 837, PEBs reserved for bad PEB handling: 38
+[   13.938860] ubi3: background thread "ubi_bgt3d" started, PID 437
+s/virtual/ubi/ubi3
+[   13.961647] UBIFS (ubi3:0): Mounting in unauthenticated mode
+[   13.970182] UBIFS (ubi3:0): background thread "ubifs_bgt3_0" started, PID 439
+Jan  2 08:01:29 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/ubi/ubi3/ubi3_0
+Jan  2 08:01:29 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/bdi/ubifs_3_0
+[   14.029908] UBIFS (ubi3:0): recovery needed
+[   14.170759] systemd[1]: pcie-diag.service: Scheduled restart job, restart counter is at 2.
+[   14.170967] systemd[1]: adbd.service: Scheduled restart job, restart counter is at 3.
+[   14.177971] systemd[1]: Stopped adbd Service.
+[[0;32m  OK  [0m] Stopped [0;1;39madbd Service[0m.
+[   14.232003] systemd[1]: Starting adbd Service...
+         Starting [0;1;39madbd Service[0m...
+[   14.250166] systemd[440]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   14.290219] systemd[1]: Stopped pcie-diag Service.
+[[0;32m  OK  [0m] Stopped [0;1;39mpcie-diag Service[0m.
+Jan  2 08:01:30 sdxlemur user.debug usbd: Got uevent change@/dev[   14.322262] systemd[1]: Starting pcie-diag Service...
+ices/platform/regulatory.0
+[   14.332881] systemd[441]: pcie-diag.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   14.352208] UBIFS (ubi3:0): recovery completed
+[   14.352297] UBIFS (ubi3:0): UBIFS: mounted UBI device 3, volume 0, name "usrdata"
+[   14.355539] UBIFS (ubi3:0): LEB size: 253952 bytes (248 KiB), min./max. I/O unit sizes: 4096 bytes/4096 bytes
+[   14.366534] UBIFS (ubi3:0): FS size: 199352320 bytes (190 MiB, 785 LEBs), journal size 2285569 bytes (2 MiB, 7 LEBs)
+[   14.373019] UBIFS (ubi3:0): reserved for root: 0 bytes (0 KiB)
+[   14.383585] UBIFS (ubi3:0): media format: w4/r0 (latest is w5/r0), UUID 29E8E035-0F52-4C89-930F-55EE23B5E4A5, small LPT model
+         Starting [0;1;39mpcie-diag Service[0m...
+[   14.435794] systemd[1]: pcie-diag.service: Control process exited, code=exited, status=1/FAILURE
+[   14.436435] systemd[1]: pcie-diag.service: Failed with result 'exit-code'.
+[   14.445145] systemd[443]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   14.454388] systemd[1]: Failed to start pcie-diag Service.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mpcie-diag Service[0m.
+See 'systemctl status pcie-diag.service' for details.
+[   14.512598] Mount usrdata success.
+[   14.539258] systemd[452]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   14.543934] systemd[1]: adbd.service: Succeeded.
+[   14.553347] systemd[1]: Started adbd Service.
+[[0;32m  OK  [0m] Started [0;1;39madbd Service[0m.
+[   14.569612] MTD : Looking for UBI volume : /system/firmware for modem
+[   14.592592] Found Volume: modem
+Jan  2 08:01:30 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/bdi/ubifs_1_0
+[   14.604536] UBIFS error (ubi1:0 pid 462): ubifs_read_node: bad node type (1 but expected 6)
+[   14.606173] UBIFS error (ubi1:0 pid 462): ubifs_read_node: bad node at LEB 0:0, LEB mapping status 1
+[   14.615139] Not a node, first 24 bytes:
+[   14.615149] 00000000: 68 73 71 73 2f 02 00 00 c5 26 5e 68 00 00 02 00 53 00 00 00 01 00 11 00                          hsqs/....&^h....S.......
+[   14.627202] @quectel UBI Error 6663333 ubifs_read_node vi.dev_num=1, vi.vol_id=0 , 
+[   14.640114] CPU: 0 PID: 462 Comm: mount Tainted: G        W         5.4.265-perf #1
+[   14.648007] Hardware name: Qualcomm Technologies, Inc. SDXLEMUR (Flattened Device Tree)
+[   14.655489] [<b010eebc>] (unwind_backtrace) from [<b010c200>] (show_stack+0x10/0x14)
+[   14.663407] [<b010c200>] (show_stack) from [<b0374e48>] (ubifs_read_node+0x1fc/0x260)
+[   14.671506] [<b0374e48>] (ubifs_read_node) from [<b0371df4>] (ubifs_read_superblock+0x2a8/0xeb0)
+[   14.679090] [<b0371df4>] (ubifs_read_superblock) from [<b0370ee8>] (ubifs_mount+0xb28/0x167c)
+[   14.687976] [<b0370ee8>] (ubifs_mount) from [<b028d828>] (legacy_get_tree+0x24/0x48)
+[   14.696383] [<b028d828>] (legacy_get_tree) from [<b0255e2c>] (vfs_get_tree+0x2c/0xe4)
+[   14.704187] [<b0255e2c>] (vfs_get_tree) from [<b0278198>] (do_mount+0x928/0xa78)
+[   14.711909] [<b0278198>] (do_mount) from [<b02789e0>] (ksys_mount+0x90/0xc4)
+[   14.719365] [<b02789e0>] (ksys_mount) from [<b0101000>] (ret_fast_syscall+0x0/0x54)
+[   14.726401] Exception stack(0xc9e6ffa8 to 0xc9e6fff0)
+[   14.733778] ffa0:                   01f7d308 00000000 01f7d2e8 01f7d330 01f7d2d8 00000010
+[   14.739083] ffc0: 01f7d308 00000000 01f7d330 00000015 a6f4e914 00000010 a6f4f120 01f7d2d8
+[   14.747158] ffe0: a6f4efc8 aea98b60 a6f1eafb a6ea525a
+Jan  2 08:01:30 sdxlemur user.debug usbd: Got uevent remove@/dev[   14.762071] [modem] Ubi failed to mount, try to mount Squashfs
+ices/virtual/bdi/ubifs_1_0
+Jan  2 08:01:30 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/bdi/252:2
+[   14.815782] block ubiblock1_0: created from ubi1:0(modem)
+[   14.816389] Mounting /dev/ubiblock1_0 to /firmware
+Jan  2 08:01:30 sdxlemur user.debug usbd: Got uevent add@/devices/virtual/block/ubiblock1_0
+[   14.868910] systemd[1]: pcie-diag.service: Scheduled restart job, restart counter is at 3.
+[   14.869077] systemd[1]: adbd.service: Scheduled restart job, restart counter is at 4.
+[   14.880665] MTD[shengya] : Mounting of /dev/ubi1_0 on /firmware done
+[   14.899904] systemd[1]: Stopped adbd Service.
+[   14.901835] Detected block device : /misc for misc
+[   14.909736] Mounting of /dev/ on /misc done
+[[0;32m  OK  [0m] Stopped [0;1;39madbd Service[0m.
+[   14.942294] systemd[1]: Starting adbd Service...
+         Starting [0;1;39madbd Service[0m...
+[   14.951486] systemd[475]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   14.970265] systemd[1]: Stopped pcie-diag Service.
+[[0;32m  OK  [0m] Stopped [0;1;39mpcie-diag Service[0m.
+[   15.002075] systemd[1]: Starting pcie-diag Service...
+         Starting [0;1;39mpcie-diag Service[0m...
+[   15.007254] systemd[476]: pcie-diag.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   15.032306] systemd[1]: pcie-diag.service: Control process exited, code=exited, status=1/FAILURE
+[   15.032944] systemd[1]: pcie-diag.service: Failed with result 'exit-code'.
+[   15.041716] systemd[477]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   15.047668] systemd[1]: Failed to start pcie-diag Service.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mpcie-diag Service[0m.
+See 'systemctl status pcie-diag.service' for details.
+[   15.123964] systemd[478]: adbd.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   15.127737] systemd[1]: adbd.service: Succeeded.
+[   15.134649] systemd[1]: Started adbd Service.
+[[0;32m  OK  [0m] Started [0;1;39madbd Service[0m.
+[   15.470909] systemd[1]: pcie-diag.service: Scheduled restart job, restart counter is at 4.
+[   15.471110] systemd[1]: adbd.service: Scheduled restart job, restart counter is at 5.
+[   15.478119] systemd[1]: Stopped adbd Service.
+[[0;32m  OK  [0m] Stopped [0;1;39madbd Service[0m.
+[   15.520188] systemd[1]: adbd.service: Start request repeated too quickly.
+[   15.520231] systemd[1]: adbd.service: Failed with result 'start-limit-hit'.
+[   15.525984] systemd[1]: Failed to start adbd Service.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39madbd Service[0m.
+See 'systemctl status adbd.service' for details.
+[   15.600185] systemd[1]: Stopped pcie-diag Service.
+[[0;32m  OK  [0m] Stopped [0;1;39mpcie-diag Service[0m.
+[   15.631997] systemd[1]: Starting pcie-diag Service...
+         Starting [0;1;39mpcie-diag Service[0m...
+[   15.637168] systemd[479]: pcie-diag.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   15.660759] systemd[1]: pcie-diag.service: Control process exited, code=exited, status=1/FAILURE
+[   15.661253] systemd[1]: pcie-diag.service: Failed with result 'exit-code'.
+[   15.669281] systemd[1]: Failed to start pcie-diag Service.
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mpcie-diag Service[0m.
+See 'systemctl status pcie-diag.service' for details.
+[   15.971666] systemd[340]: serial-getty@ttyMSM0.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+[   15.980869] systemd[1]: pcie-diag.service: Scheduled restart job, restart counter is at 5.
+[   15.983070] systemd[1]: Stopped pcie-diag Service.
+[   15.996700] systemd[1]: pcie-diag.service: Start request repeated too quickly.
+[   15.996749] systemd[1]: pcie-diag.service: Failed with result 'exit-code'.
+[   16.003464] systemd[1]: Failed to start pcie-diag Service.
+[   16.922314] systemd[1]: Started Recovery partition service.
+[   16.924751] systemd[1]: Starting Recovery Service...
+[   16.928460] systemd[480]: recovery.service: Failed to connect stdout to the journal socket, ignoring: No such file or directory
+
+QTI Linux reference nogplv3 distro targeting performance builds. LE.UM.6.2.3.r1-03100-SDX65.0 sdxlemur ttyMSM0
+
+sdxlemur login: [   17.325834] fs_mgr: Warning: unknown flag 0
+[   17.325876] fs_mgr: Warning: unknown flag 0
+[   17.328996] fs_mgr: Warning: unknown flag 0
+[   17.333507] fs_mgr: Warning: unknown flag 0
+[   17.337156] fs_mgr: Warning: unknown flag 0
+Jan  2 08:01:33 sdxlemur user.debug usbd: Got uevent change@/devices/platform/regulatory.0
+Jan  2 08:01:36 sdxlemur user.debug usbd: Got uevent change@/devices/platform/regulatory.0
++QIND: "FOTA","START"
++QIND: "FOTA","UPDATING",0
+Jan  2 08:01:39 sdxlemur user.debug usbd: Got uevent change@/devices/platform/regulatory.0
+Jan  2 08:01:43 sdxlemur user.debug usbd: Got uevent change@/devices/platform/regulatory.0
+Jan  2 08:01:46 sdxlemur user.debug usbd: Got uevent change@/devices/platform/regulatory.0
+Jan  2 08:01:49 sdxlemur user.debug usbd: Got uevent change@/devices/platform/regulatory.0
+[   35.040105] vddpx_2: disabling
+Jan  2 08:01:52 sdxlemur user.debug usbd: Got uevent change@/devices/platform/regulatory.0
+
+[00:11:50.455][DUT] [Check BOOT Status]--
+2025/07/30 00:11:50 [1]	[DUT] [Check BOOT Status] ~~ TestTime:60.2265993 sec
+2025/07/30 00:11:50 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 40
+[00:11:50.456][DUT] [Check Login]++
+2025/07/30 00:11:50 [1]	(UART) >  
+
+2025/07/30 00:11:51 [1]	(UART) <  
+Password: 
+2025/07/30 00:11:51 [1]	UART@ 
+ executes fail. Reply=" 
+Password: " doesn't match @Kangaroo login:
+[00:11:51.472][DUT] [Check Login]--
+2025/07/30 00:11:51 [1]	[DUT] [Check Login] ~~ TestTime:1.0158201 sec
+2025/07/30 00:11:51 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:11:51.472][PC] [Wait time@#$]++
+2025/07/30 00:11:51 [1]	> :Delay,"10000"
+2025/07/30 00:12:01 [1]	< 0
+[00:12:01.489][PC] [Wait time@#$]--
+2025/07/30 00:12:01 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0206752 sec
+2025/07/30 00:12:01 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 39
+[00:12:01.496][DUT] [Check Login]++
+2025/07/30 00:12:01 [1]	(UART) >  
+
+2025/07/30 00:12:02 [1]	(UART) < 
+Jan  2 08:02:31 sdxlemur authpriv.warn login[340]: invalid password for 'UNKNOWN'  on '/dev/ttyMSM0'
++QIND: "FOTA","UPDATING",58
+[   75.936219] systemd[1]: system.mount: Succeeded.
+
+2025/07/30 00:12:02 [1]	UART@ 
+ executes fail. Reply="
+Jan  2 08:02:31 sdxlemur authpriv.warn login[340]: invalid password for 'UNKNOWN'  on '/dev/ttyMSM0'
++QIND: "FOTA","UPDATING",58
+[   75.936219] systemd[1]: system.mount: Succeeded.
+" doesn't match @Kangaroo login:
+[00:12:02.525][DUT] [Check Login]--
+2025/07/30 00:12:02 [1]	[DUT] [Check Login] ~~ TestTime:1.0331331 sec
+2025/07/30 00:12:02 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:12:02.527][PC] [Wait time@#$]++
+2025/07/30 00:12:02 [1]	> :Delay,"10000"
+2025/07/30 00:12:12 [1]	< 0
+[00:12:12.545][PC] [Wait time@#$]--
+2025/07/30 00:12:12 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0180247 sec
+2025/07/30 00:12:12 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 38
+[00:12:12.545][DUT] [Check Login]++
+2025/07/30 00:12:12 [1]	(UART) >  
+
+2025/07/30 00:12:13 [1]	(UART) <  
+
+
+sdxlemur login: 
+sdxlemur login: 
+2025/07/30 00:12:13 [1]	UART@ 
+ executes fail. Reply=" 
+
+
+sdxlemur login: 
+sdxlemur login: " doesn't match @Kangaroo login:
+[00:12:13.577][DUT] [Check Login]--
+2025/07/30 00:12:13 [1]	[DUT] [Check Login] ~~ TestTime:1.0320457 sec
+2025/07/30 00:12:13 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:12:13.586][PC] [Wait time@#$]++
+2025/07/30 00:12:13 [1]	> :Delay,"10000"
+2025/07/30 00:12:23 [1]	< 0
+[00:12:23.601][PC] [Wait time@#$]--
+2025/07/30 00:12:23 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0200096 sec
+2025/07/30 00:12:23 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 37
+[00:12:23.605][DUT] [Check Login]++
+2025/07/30 00:12:23 [1]	(UART) >  
+
+2025/07/30 00:12:24 [1]	(UART) <  
+
+
+sdxlemur login: 
+sdxlemur login: 
+2025/07/30 00:12:24 [1]	UART@ 
+ executes fail. Reply=" 
+
+
+sdxlemur login: 
+sdxlemur login: " doesn't match @Kangaroo login:
+[00:12:24.634][DUT] [Check Login]--
+2025/07/30 00:12:24 [1]	[DUT] [Check Login] ~~ TestTime:1.0316802 sec
+2025/07/30 00:12:24 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:12:24.641][PC] [Wait time@#$]++
+2025/07/30 00:12:24 [1]	> :Delay,"10000"
+2025/07/30 00:12:34 [1]	< 0
+[00:12:34.662][PC] [Wait time@#$]--
+2025/07/30 00:12:34 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0228175 sec
+2025/07/30 00:12:34 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 36
+[00:12:34.670][DUT] [Check Login]++
+2025/07/30 00:12:34 [1]	(UART) >  
+
+2025/07/30 00:12:35 [1]	(UART) <  
+
+
+sdxlemur login: 
+sdxlemur login: 
+2025/07/30 00:12:35 [1]	UART@ 
+ executes fail. Reply=" 
+
+
+sdxlemur login: 
+sdxlemur login: " doesn't match @Kangaroo login:
+[00:12:35.707][DUT] [Check Login]--
+2025/07/30 00:12:35 [1]	[DUT] [Check Login] ~~ TestTime:1.0482129 sec
+2025/07/30 00:12:35 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:12:35.715][PC] [Wait time@#$]++
+2025/07/30 00:12:35 [1]	> :Delay,"10000"
+2025/07/30 00:12:45 [1]	< 0
+[00:12:45.729][PC] [Wait time@#$]--
+2025/07/30 00:12:45 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0202004 sec
+2025/07/30 00:12:45 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 35
+[00:12:45.732][DUT] [Check Login]++
+2025/07/30 00:12:45 [1]	(UART) >  
+
+2025/07/30 00:12:46 [1]	(UART) <  
+
+
+sdxlemur login: 
+sdxlemur login: 
+2025/07/30 00:12:46 [1]	UART@ 
+ executes fail. Reply=" 
+
+
+sdxlemur login: 
+sdxlemur login: " doesn't match @Kangaroo login:
+[00:12:46.758][DUT] [Check Login]--
+2025/07/30 00:12:46 [1]	[DUT] [Check Login] ~~ TestTime:1.0264314 sec
+2025/07/30 00:12:46 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:12:46.758][PC] [Wait time@#$]++
+2025/07/30 00:12:46 [1]	> :Delay,"10000"
+2025/07/30 00:12:56 [1]	< 0
+[00:12:56.777][PC] [Wait time@#$]--
+2025/07/30 00:12:56 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0252641 sec
+2025/07/30 00:12:56 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 34
+[00:12:56.788][DUT] [Check Login]++
+2025/07/30 00:12:56 [1]	(UART) >  
+
+2025/07/30 00:12:57 [1]	(UART) < 
+2025/07/30 00:12:57 [1]	UART@ 
+ executes fail. Reply="" doesn't match @Kangaroo login:
+[00:12:57.803][DUT] [Check Login]--
+2025/07/30 00:12:57 [1]	[DUT] [Check Login] ~~ TestTime:1.0237113 sec
+2025/07/30 00:12:57 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:12:57.813][PC] [Wait time@#$]++
+2025/07/30 00:12:57 [1]	> :Delay,"10000"
+2025/07/30 00:13:07 [1]	< 0
+[00:13:07.829][PC] [Wait time@#$]--
+2025/07/30 00:13:07 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0177563 sec
+2025/07/30 00:13:07 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 33
+[00:13:07.833][DUT] [Check Login]++
+2025/07/30 00:13:07 [1]	(UART) >  
+
+2025/07/30 00:13:08 [1]	(UART) < 
+2025/07/30 00:13:08 [1]	UART@ 
+ executes fail. Reply="" doesn't match @Kangaroo login:
+[00:13:08.862][DUT] [Check Login]--
+2025/07/30 00:13:08 [1]	[DUT] [Check Login] ~~ TestTime:1.029877 sec
+2025/07/30 00:13:08 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:13:08.862][PC] [Wait time@#$]++
+2025/07/30 00:13:08 [1]	> :Delay,"10000"
+2025/07/30 00:13:18 [1]	< 0
+[00:13:18.874][PC] [Wait time@#$]--
+2025/07/30 00:13:18 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0120261 sec
+2025/07/30 00:13:18 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 32
+[00:13:18.874][DUT] [Check Login]++
+2025/07/30 00:13:18 [1]	(UART) >  
+
+2025/07/30 00:13:19 [1]	(UART) < M[K[[0;32m  OK  [0m] Started [0;1;39mModem Init Service[0m.
+[K[[0;32m  OK  [0m] Reached target [0;1;39mSockets[0m.
+         Starting [0;1;39mudev Coldplug all Devices[0m...
+       Starting [0;1;39mBind mount volatile /var/lib[0m...
+[[0;32m  OK  [0m] Started [0;1;39mBind mount volatile /var/lib[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mBasic System[0m.
+
+2025/07/30 00:13:19 [1]	UART@ 
+ executes fail. Reply="M[K[[0;32m  OK  [0m] Started [0;1;39mModem Init Service[0m.
+[K[[0;32m  OK  [0m] Reached target [0;1;39mSockets[0m.
+         Starting [0;1;39mudev Coldplug all Devices[0m...
+       Starting [0;1;39mBind mount volatile /var/lib[0m...
+[[0;32m  OK  [0m] Started [0;1;39mBind mount volatile /var/lib[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mBasic System[0m.
+" doesn't match @Kangaroo login:
+[00:13:19.895][DUT] [Check Login]--
+2025/07/30 00:13:19 [1]	[DUT] [Check Login] ~~ TestTime:1.020927 sec
+2025/07/30 00:13:19 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:13:19.895][PC] [Wait time@#$]++
+2025/07/30 00:13:19 [1]	> :Delay,"10000"
+2025/07/30 00:13:29 [1]	< 0
+[00:13:29.916][PC] [Wait time@#$]--
+2025/07/30 00:13:29 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0202454 sec
+2025/07/30 00:13:29 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 31
+[00:13:29.916][DUT] [Check Login]++
+2025/07/30 00:13:29 [1]	(UART) >  
+
+2025/07/30 00:13:30 [1]	(UART) <  
+Password: 
+2025/07/30 00:13:30 [1]	UART@ 
+ executes fail. Reply=" 
+Password: " doesn't match @Kangaroo login:
+[00:13:30.924][DUT] [Check Login]--
+2025/07/30 00:13:30 [1]	[DUT] [Check Login] ~~ TestTime:1.0083474 sec
+2025/07/30 00:13:30 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:13:30.924][PC] [Wait time@#$]++
+2025/07/30 00:13:30 [1]	> :Delay,"10000"
+2025/07/30 00:13:40 [1]	< 0
+[00:13:40.935][PC] [Wait time@#$]--
+2025/07/30 00:13:40 [1]	[PC] [Wait time@#$] ~~ TestTime:10.011359 sec
+2025/07/30 00:13:40 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 30
+[00:13:40.935][DUT] [Check Login]++
+2025/07/30 00:13:40 [1]	(UART) >  
+
+2025/07/30 00:13:41 [1]	(UART) < 
+
+2025/07/30 00:13:41 [1]	UART@ 
+ executes fail. Reply="
+" doesn't match @Kangaroo login:
+[00:13:41.948][DUT] [Check Login]--
+2025/07/30 00:13:41 [1]	[DUT] [Check Login] ~~ TestTime:1.0128366 sec
+2025/07/30 00:13:41 [1]	Run B7PL025-016:Wait time@#$	Mode: 0, Retry: 40
+[00:13:41.948][PC] [Wait time@#$]++
+2025/07/30 00:13:41 [1]	> :Delay,"10000"
+2025/07/30 00:13:51 [1]	< 0
+[00:13:51.966][PC] [Wait time@#$]--
+2025/07/30 00:13:51 [1]	[PC] [Wait time@#$] ~~ TestTime:10.0237795 sec
+2025/07/30 00:13:51 [1]	Run IPIP048-017:Check Login	Mode: 2, Retry: 29
+[00:13:51.976][DUT] [Check Login]++
+2025/07/30 00:13:51 [1]	(UART) >  
+
+2025/07/30 00:13:52 [1]	(UART) <  
+
+
+Kangaroo login: 
+Kangaroo login: 
+[00:13:52.011][DUT] [Check Login]--
+2025/07/30 00:13:52 [1]	[DUT] [Check Login] ~~ TestTime:0.0393018 sec
+2025/07/30 00:13:52 [1]	Run IPIP048-018:Login Linux_root	Mode: 1, Retry: 40
+[00:13:52.015][DUT] [Login Linux_root]++
+2025/07/30 00:13:52 [1]	(UART) > root
+
+2025/07/30 00:13:52 [1]	(UART) < root
+
+Password: 
+[00:13:52.049][DUT] [Login Linux_root]--
+2025/07/30 00:13:52 [1]	[DUT] [Login Linux_root] ~~ TestTime:0.037901 sec
+2025/07/30 00:13:52 [1]	Run IPIP048-019:Login Linux_PW	Mode: 2, Retry: 40
+[00:13:52.049][DUT] [Login Linux_PW]++
+2025/07/30 00:13:52 [1]	(UART) > oelinux123
+
+2025/07/30 00:13:55 [1]	(UART) < 
+7[r[999;999H[6nroot@Kangaroo:~# 
+[00:13:55.174][DUT] [Login Linux_PW]--
+2025/07/30 00:13:55 [1]	[DUT] [Login Linux_PW] ~~ TestTime:3.1322532 sec
+2025/07/30 00:13:55 [1]	Run IPIP048-020:Check BOOT Status	Mode: 1, Retry: 40
+[00:13:55.184][DUT] [Check BOOT Status]++
+2025/07/30 00:13:55 [1]	(UART) >  
+
+2025/07/30 00:13:55 [1]	(UART) <  
+root@Kangaroo:~# 
+root@Kangaroo:~# 
+[00:13:55.218][DUT] [Check BOOT Status]--
+2025/07/30 00:13:55 [1]	[DUT] [Check BOOT Status] ~~ TestTime:0.0362401 sec
+2025/07/30 00:13:55 [1]	Wait time@#$ skips by ExecMode = 6.
+2025/07/30 00:13:55 [1]	IPIP048-020:@STEP010@Check Boot login Test is Pass ! 		----- 184.9884832 Sec.
+2025/07/30 00:13:55 [1]	DUT Test Completed !        ----- 185.0289642 Sec.
+2025/07/30 00:13:55 [1]	Execute Phase 5 Test.
+2025/07/30 00:13:55 [1]	Do @STEP012@Check FW
+2025/07/30 00:13:55 [1]	Run KAOT006-022:Check PCIE MODE	Mode: 1, Retry: 5
+[00:13:55.352][DUT] [Check PCIE MODE]++
+2025/07/30 00:13:55 [1]	(UART) > cat /etc/pega_fwinfo
+
+2025/07/30 00:13:55 [1]	(UART) < cat /etc/pega_fwinfo
+PEGA_PROJECT='MU310'
+BRAND=''
+MODULE_SDK_TYPE='RG520NEBDK_VA'
+FW_VERSION='V0.0.0.0_1'
+LANG_VERSION='V1.0.0.0'
+DB_VERSION='1'
+BUILD_TIME='Mon, 21 Jul 2025 15:57:26 +0800'
+root@Kangaroo:~# 
+root@Kangaroo:~# 
+[00:13:55.413][DUT] [Check PCIE MODE]--
+2025/07/30 00:13:55 [1]	[DUT] [Check PCIE MODE] ~~ TestTime:0.0610231 sec
+2025/07/30 00:13:55 [1]	KAOT006-022:@STEP012@Check FW Test is Pass ! 		----- 0.0610231 Sec.
+2025/07/30 00:13:55 [1]	DUT Test Completed !        ----- 0.1111103 Sec.
+2025/07/30 00:13:55 [1]	All phase Total Test Time !        ----- 272.0678007 Sec.
+2025/07/30 00:13:55 [1]	All Test Completed !        ----- 266.9730456 Sec.
+2025/07/30 00:13:55 [1]	TotalCount:115-YR:100%
+2025/07/30 00:13:55 [1]	Report name: FWDL_LoopRunning_2025-07-30_00-13-55.ct

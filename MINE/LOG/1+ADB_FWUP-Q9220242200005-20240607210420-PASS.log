@@ -1,0 +1,4069 @@
+2024/06/07 21:04:20 [1]	System Version is 1.1.8.6223.
+2024/06/07 21:04:20 [1]	Script File is Pega_Kangaroo_TestFlow-SR3_ALL_20240607.xlsx.
+2024/06/07 21:04:20 [1]	Script Version is 2406071607297.
+2024/06/07 21:04:20 [1]	Script Creator is ricky1_lee.
+2024/06/07 21:04:20 [1]	Utility Version is 1.0.9.21.
+2024/06/07 21:04:20 [1]	DeviceID is 420956.
+2024/06/07 21:04:20 [1]	SFIS is off.
+2024/06/07 21:04:20 [1]	MiniCloud2 is on.
+2024/06/07 21:04:20 [1]	FTP is off.
+2024/06/07 21:04:20 [1]	Active IPs:
+乙太網路:[049226120E37]#169.254.85.133#
+藍牙網路連線 2:[484520501FE9]#169.254.136.19#
+2024/06/07 21:04:20 [1]	Script has 1 phase cases
+2024/06/07 21:04:20 [1]	Script has 97 phase cases
+****************************************************************************************************
+2024/06/07 21:04:20 [1]	Execute Phase 0 Test.
+2024/06/07 21:04:20 [1]	@STEP002@Start Power ON Skipped.
+2024/06/07 21:04:20 [1]	DUT Test Completed !        ----- 0 Sec.
+2024/06/07 21:04:20 [1]	Execute Phase 0 Test.
+2024/06/07 21:04:20 [1]	Do @STEP004@Power ON
+2024/06/07 21:04:20 [1]	Run IORB116-104:Power On@#$	Mode: 1, Retry: 3
+[21:04:20.448][DUT] [Power On@#$]++
+2024/06/07 21:04:20 [1]	> :ShowConfirmBox,"Please Power On","OK"
+2024/06/07 21:04:21 [1]	< OK
+[21:04:21.594][DUT] [Power On@#$]--
+2024/06/07 21:04:21 [1]	[DUT] [Power On@#$] ~~ TestTime:1.1458238 sec
+2024/06/07 21:04:21 [1]	IORB116-104:@STEP004@Power ON Test is Pass ! 		----- 1.1458238 Sec.
+2024/06/07 21:04:21 [1]	DUT Test Completed !        ----- 1.2856901 Sec.
+2024/06/07 21:04:21 [1]	Execute Phase 0 Test.
+2024/06/07 21:04:21 [1]	Do @STEP006@CONNECT_DUT
+2024/06/07 21:04:21 [1]	Run IOCD041-105:Kill exe@#$	Mode: 0, Retry: 40
+[21:04:21.703][PC] [Kill exe@#$]++
+2024/06/07 21:04:21 [1]	> :Utility.KillPro,"IQfactRun_Console.exe"
+2024/06/07 21:04:21 [1]	< 0
+[21:04:21.797][PC] [Kill exe@#$]--
+2024/06/07 21:04:21 [1]	[PC] [Kill exe@#$] ~~ TestTime:0.0937285 sec
+2024/06/07 21:04:21 [1]	Run IPIP005-106:GET_EXEPATH@#$	Mode: 1, Retry: 40
+[21:04:21.797][PC] [GET_EXEPATH@#$]++
+2024/06/07 21:04:21 [1]	> :Utility.GetPath
+2024/06/07 21:04:21 [1]	< 0
+2024/06/07 21:04:21 [1]	GET_EXEPATH@#$ Result: cPath=D:\Centimani_Kangaroo_UpdateFW
+[21:04:21.797][PC] [GET_EXEPATH@#$]--
+2024/06/07 21:04:21 [1]	[PC] [GET_EXEPATH@#$] ~~ TestTime:0 sec
+2024/06/07 21:04:21 [1]	Run B7PL025-107:Wait time@#$	Mode: 1, Retry: 40
+[21:04:21.797][PC] [Wait time@#$]++
+2024/06/07 21:04:21 [1]	> :Delay,"40000"
+2024/06/07 21:05:01 [1]	< 0
+[21:05:01.807][PC] [Wait time@#$]--
+2024/06/07 21:05:01 [1]	[PC] [Wait time@#$] ~~ TestTime:40.0106873 sec
+2024/06/07 21:05:01 [1]	Run B7PL025-108:Wait time@#$	Mode: 0, Retry: 40
+[21:05:01.807][PC] [Wait time@#$]++
+2024/06/07 21:05:01 [1]	> :Delay,"1000"
+2024/06/07 21:05:02 [1]	< 0
+[21:05:02.825][PC] [Wait time@#$]--
+2024/06/07 21:05:02 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0179826 sec
+2024/06/07 21:05:02 [1]	Run FWCK036-109:Get adb DEVICES	Mode: 2, Retry: 40
+[21:05:02.825][DUT] [Get adb DEVICES]++
+2024/06/07 21:05:02 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","devices","ON","-1","0"
+2024/06/07 21:05:02 [1]	< standard output#
+List of devices attached
+
+e8daa0fd	device
+
+
+
+
+return code#0#
+:
+2024/06/07 21:05:02 [1]	WithinString: e8daa0fd
+2024/06/07 21:05:02 [1]	Get adb DEVICES Result: DEVICESN=e8daa0fd
+[21:05:02.966][DUT] [Get adb DEVICES]--
+2024/06/07 21:05:02 [1]	[DUT] [Get adb DEVICES] ~~ TestTime:0.1409098 sec
+2024/06/07 21:05:02 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:02.966][PC] [Wait time@#$]++
+2024/06/07 21:05:02 [1]	> :Delay,"1000"
+2024/06/07 21:05:03 [1]	< 0
+[21:05:03.998][PC] [Wait time@#$]--
+2024/06/07 21:05:03 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0318595 sec
+2024/06/07 21:05:03 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 40
+[21:05:03.998][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:03 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:04 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:04 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:04.171][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:04 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1729957 sec
+2024/06/07 21:05:04 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:04.171][PC] [Wait time@#$]++
+2024/06/07 21:05:04 [1]	> :Delay,"1000"
+2024/06/07 21:05:05 [1]	< 0
+[21:05:05.189][PC] [Wait time@#$]--
+2024/06/07 21:05:05 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0183051 sec
+2024/06/07 21:05:05 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 39
+[21:05:05.189][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:05 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:05 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:05 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:05.393][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:05 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2031124 sec
+2024/06/07 21:05:05 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:05.393][PC] [Wait time@#$]++
+2024/06/07 21:05:05 [1]	> :Delay,"1000"
+2024/06/07 21:05:06 [1]	< 0
+[21:05:06.412][PC] [Wait time@#$]--
+2024/06/07 21:05:06 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0196176 sec
+2024/06/07 21:05:06 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 38
+[21:05:06.412][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:06 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:06 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:06 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:06.584][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:06 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1714157 sec
+2024/06/07 21:05:06 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:06.584][PC] [Wait time@#$]++
+2024/06/07 21:05:06 [1]	> :Delay,"1000"
+2024/06/07 21:05:07 [1]	< 0
+[21:05:07.607][PC] [Wait time@#$]--
+2024/06/07 21:05:07 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0243595 sec
+2024/06/07 21:05:07 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 37
+[21:05:07.608][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:07 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:07 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:07 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:07.796][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:07 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1883082 sec
+2024/06/07 21:05:07 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:07.796][PC] [Wait time@#$]++
+2024/06/07 21:05:07 [1]	> :Delay,"1000"
+2024/06/07 21:05:08 [1]	< 0
+[21:05:08.816][PC] [Wait time@#$]--
+2024/06/07 21:05:08 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0201758 sec
+2024/06/07 21:05:08 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 36
+[21:05:08.816][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:08 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:09 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:09 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:09.019][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:09 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2027164 sec
+2024/06/07 21:05:09 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:09.019][PC] [Wait time@#$]++
+2024/06/07 21:05:09 [1]	> :Delay,"1000"
+2024/06/07 21:05:10 [1]	< 0
+[21:05:10.040][PC] [Wait time@#$]--
+2024/06/07 21:05:10 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0209347 sec
+2024/06/07 21:05:10 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 35
+[21:05:10.040][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:10 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:10 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:10 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:10.243][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:10 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2026268 sec
+2024/06/07 21:05:10 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:10.243][PC] [Wait time@#$]++
+2024/06/07 21:05:10 [1]	> :Delay,"1000"
+2024/06/07 21:05:11 [1]	< 0
+[21:05:11.264][PC] [Wait time@#$]--
+2024/06/07 21:05:11 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0217847 sec
+2024/06/07 21:05:11 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 34
+[21:05:11.264][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:11 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:11 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:11 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:11.436][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:11 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1714109 sec
+2024/06/07 21:05:11 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:11.436][PC] [Wait time@#$]++
+2024/06/07 21:05:11 [1]	> :Delay,"1000"
+2024/06/07 21:05:12 [1]	< 0
+[21:05:12.456][PC] [Wait time@#$]--
+2024/06/07 21:05:12 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0198494 sec
+2024/06/07 21:05:12 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 33
+[21:05:12.456][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:12 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:12 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:12 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:12.629][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:12 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1729392 sec
+2024/06/07 21:05:12 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:12.629][PC] [Wait time@#$]++
+2024/06/07 21:05:12 [1]	> :Delay,"1000"
+2024/06/07 21:05:13 [1]	< 0
+[21:05:13.645][PC] [Wait time@#$]--
+2024/06/07 21:05:13 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0161138 sec
+2024/06/07 21:05:13 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 32
+[21:05:13.645][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:13 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:13 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:13 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:13.822][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:13 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1767236 sec
+2024/06/07 21:05:13 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:13.822][PC] [Wait time@#$]++
+2024/06/07 21:05:13 [1]	> :Delay,"1000"
+2024/06/07 21:05:14 [1]	< 0
+[21:05:14.839][PC] [Wait time@#$]--
+2024/06/07 21:05:14 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0172679 sec
+2024/06/07 21:05:14 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 31
+[21:05:14.839][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:14 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:14 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:14 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:14.995][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:14 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1562409 sec
+2024/06/07 21:05:14 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:14.995][PC] [Wait time@#$]++
+2024/06/07 21:05:14 [1]	> :Delay,"1000"
+2024/06/07 21:05:16 [1]	< 0
+[21:05:16.017][PC] [Wait time@#$]--
+2024/06/07 21:05:16 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0215806 sec
+2024/06/07 21:05:16 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 30
+[21:05:16.017][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:16 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:16 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:16 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:16.220][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:16 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2034609 sec
+2024/06/07 21:05:16 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:16.220][PC] [Wait time@#$]++
+2024/06/07 21:05:16 [1]	> :Delay,"1000"
+2024/06/07 21:05:17 [1]	< 0
+[21:05:17.244][PC] [Wait time@#$]--
+2024/06/07 21:05:17 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0235482 sec
+2024/06/07 21:05:17 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 29
+[21:05:17.244][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:17 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:17 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:17 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:17.417][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:17 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1730254 sec
+2024/06/07 21:05:17 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:17.417][PC] [Wait time@#$]++
+2024/06/07 21:05:17 [1]	> :Delay,"1000"
+2024/06/07 21:05:18 [1]	< 0
+[21:05:18.438][PC] [Wait time@#$]--
+2024/06/07 21:05:18 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0214213 sec
+2024/06/07 21:05:18 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 28
+[21:05:18.438][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:18 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:18 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:18 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:18.580][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:18 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.141832 sec
+2024/06/07 21:05:18 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:18.595][PC] [Wait time@#$]++
+2024/06/07 21:05:18 [1]	> :Delay,"1000"
+2024/06/07 21:05:19 [1]	< 0
+[21:05:19.604][PC] [Wait time@#$]--
+2024/06/07 21:05:19 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0236704 sec
+2024/06/07 21:05:19 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 27
+[21:05:19.604][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:19 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:19 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:19 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:19.807][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:19 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2030478 sec
+2024/06/07 21:05:19 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:19.807][PC] [Wait time@#$]++
+2024/06/07 21:05:19 [1]	> :Delay,"1000"
+2024/06/07 21:05:20 [1]	< 0
+[21:05:20.833][PC] [Wait time@#$]--
+2024/06/07 21:05:20 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0261348 sec
+2024/06/07 21:05:20 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 26
+[21:05:20.833][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:20 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:21 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:21 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:21.005][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:21 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1718887 sec
+2024/06/07 21:05:21 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:21.005][PC] [Wait time@#$]++
+2024/06/07 21:05:21 [1]	> :Delay,"1000"
+2024/06/07 21:05:22 [1]	< 0
+[21:05:22.024][PC] [Wait time@#$]--
+2024/06/07 21:05:22 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0194262 sec
+2024/06/07 21:05:22 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 25
+[21:05:22.024][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:22 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:22 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:22 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:22.197][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:22 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1729481 sec
+2024/06/07 21:05:22 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:22.197][PC] [Wait time@#$]++
+2024/06/07 21:05:22 [1]	> :Delay,"1000"
+2024/06/07 21:05:23 [1]	< 0
+[21:05:23.218][PC] [Wait time@#$]--
+2024/06/07 21:05:23 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0208924 sec
+2024/06/07 21:05:23 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 24
+[21:05:23.222][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:23 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:23 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:23 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:23.379][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:23 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1607684 sec
+2024/06/07 21:05:23 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:23.379][PC] [Wait time@#$]++
+2024/06/07 21:05:23 [1]	> :Delay,"1000"
+2024/06/07 21:05:24 [1]	< 0
+[21:05:24.397][PC] [Wait time@#$]--
+2024/06/07 21:05:24 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0182269 sec
+2024/06/07 21:05:24 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 23
+[21:05:24.397][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:24 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:24 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:24 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:24.571][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:24 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1738091 sec
+2024/06/07 21:05:24 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:24.571][PC] [Wait time@#$]++
+2024/06/07 21:05:24 [1]	> :Delay,"1000"
+2024/06/07 21:05:25 [1]	< 0
+[21:05:25.589][PC] [Wait time@#$]--
+2024/06/07 21:05:25 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0185831 sec
+2024/06/07 21:05:25 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 22
+[21:05:25.589][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:25 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:25 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:25 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:25.745][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:25 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1554766 sec
+2024/06/07 21:05:25 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:25.745][PC] [Wait time@#$]++
+2024/06/07 21:05:25 [1]	> :Delay,"1000"
+2024/06/07 21:05:26 [1]	< 0
+[21:05:26.766][PC] [Wait time@#$]--
+2024/06/07 21:05:26 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0210365 sec
+2024/06/07 21:05:26 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 21
+[21:05:26.766][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:26 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:26 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:26 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:26.937][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:26 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1714201 sec
+2024/06/07 21:05:26 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:26.937][PC] [Wait time@#$]++
+2024/06/07 21:05:26 [1]	> :Delay,"1000"
+2024/06/07 21:05:27 [1]	< 0
+[21:05:27.958][PC] [Wait time@#$]--
+2024/06/07 21:05:27 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0209495 sec
+2024/06/07 21:05:27 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 20
+[21:05:27.958][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:27 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:28 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:28 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:28.130][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:28 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1713521 sec
+2024/06/07 21:05:28 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:28.130][PC] [Wait time@#$]++
+2024/06/07 21:05:28 [1]	> :Delay,"1000"
+2024/06/07 21:05:29 [1]	< 0
+[21:05:29.151][PC] [Wait time@#$]--
+2024/06/07 21:05:29 [1]	[PC] [Wait time@#$] ~~ TestTime:1.021063 sec
+2024/06/07 21:05:29 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 19
+[21:05:29.151][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:29 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:29 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:29 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:29.290][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:29 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1397336 sec
+2024/06/07 21:05:29 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:29.290][PC] [Wait time@#$]++
+2024/06/07 21:05:29 [1]	> :Delay,"1000"
+2024/06/07 21:05:30 [1]	< 0
+[21:05:30.313][PC] [Wait time@#$]--
+2024/06/07 21:05:30 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0226803 sec
+2024/06/07 21:05:30 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 18
+[21:05:30.313][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:30 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:30 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:30 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:30.469][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:30 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1562139 sec
+2024/06/07 21:05:30 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:30.469][PC] [Wait time@#$]++
+2024/06/07 21:05:30 [1]	> :Delay,"1000"
+2024/06/07 21:05:31 [1]	< 0
+[21:05:31.494][PC] [Wait time@#$]--
+2024/06/07 21:05:31 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0250738 sec
+2024/06/07 21:05:31 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 17
+[21:05:31.494][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:31 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:31 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:31 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:31.667][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:31 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1725141 sec
+2024/06/07 21:05:31 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:31.667][PC] [Wait time@#$]++
+2024/06/07 21:05:31 [1]	> :Delay,"1000"
+2024/06/07 21:05:32 [1]	< 0
+[21:05:32.687][PC] [Wait time@#$]--
+2024/06/07 21:05:32 [1]	[PC] [Wait time@#$] ~~ TestTime:1.020624 sec
+2024/06/07 21:05:32 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 16
+[21:05:32.687][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:32 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:32 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:05:32 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:05:32.863][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:32 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1751992 sec
+2024/06/07 21:05:32 [1]	Run B7PL025-110:Wait time@#$	Mode: 1, Retry: 40
+[21:05:32.863][PC] [Wait time@#$]++
+2024/06/07 21:05:32 [1]	> :Delay,"1000"
+2024/06/07 21:05:33 [1]	< 0
+[21:05:33.881][PC] [Wait time@#$]--
+2024/06/07 21:05:33 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0179187 sec
+2024/06/07 21:05:33 [1]	Run OTFX157-111:Check_System_ReadyToTest@#$	Mode: 2, Retry: 15
+[21:05:33.881][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:05:33 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:05:34 [1]	< standard output#
+System_Ready
+
+
+
+return code#0#
+:
+[21:05:34.052][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:05:34 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1717868 sec
+2024/06/07 21:05:34 [1]	Run OTFX15C-112:Get_DUT_UnitSN	Mode: 1, Retry: 40
+[21:05:34.052][DUT] [Get_DUT_UnitSN]++
+2024/06/07 21:05:34 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell fw_printenv -n sn","ON","-1","0"
+2024/06/07 21:05:34 [1]	< standard output#
+Q9220242200005
+
+
+
+return code#0#
+:
+2024/06/07 21:05:34 [1]	WithinString: Q9220242200005
+2024/06/07 21:05:34 [1]	Get_DUT_UnitSN Result: ISN=Q9220242200005
+[21:05:34.275][DUT] [Get_DUT_UnitSN]--
+2024/06/07 21:05:34 [1]	[DUT] [Get_DUT_UnitSN] ~~ TestTime:0.2227338 sec
+2024/06/07 21:05:34 [1]	Run NUWL082-113:Get_DUT_UnitSN_LEN@#$	Mode: 2, Retry: 40
+[21:05:34.275][DUT] [Get_DUT_UnitSN_LEN@#$]++
+2024/06/07 21:05:34 [1]	> :Utility.ChkLEN,"Q9220242200005","14"
+2024/06/07 21:05:34 [1]	< 0
+2024/06/07 21:05:34 [1]	Get_DUT_UnitSN_LEN@#$ Result: ISNLEN=Success Length:14
+[21:05:34.275][DUT] [Get_DUT_UnitSN_LEN@#$]--
+2024/06/07 21:05:34 [1]	[DUT] [Get_DUT_UnitSN_LEN@#$] ~~ TestTime:0 sec
+2024/06/07 21:05:34 [1]	Run FWCK036-114:Get MBSN@#$	Mode: 1, Retry: 40
+[21:05:34.275][DUT] [Get MBSN@#$]++
+2024/06/07 21:05:34 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell fw_printenv -n mb_sn","ON","-1","0"
+2024/06/07 21:05:34 [1]	< standard output#
+2477875700005
+
+
+
+return code#0#
+:
+2024/06/07 21:05:34 [1]	WithinString: 2477875700005
+2024/06/07 21:05:34 [1]	Get MBSN@#$ Result: MBSN=2477875700005
+[21:05:34.510][DUT] [Get MBSN@#$]--
+2024/06/07 21:05:34 [1]	[DUT] [Get MBSN@#$] ~~ TestTime:0.2354123 sec
+2024/06/07 21:05:34 [1]	Run NUWL082-115:Check MBSN	Mode: 2, Retry: 40
+[21:05:34.510][DUT] [Check MBSN]++
+2024/06/07 21:05:34 [1]	> :GetVal,"$MBSN"
+2024/06/07 21:05:34 [1]	< 2477875700005
+[21:05:34.510][DUT] [Check MBSN]--
+2024/06/07 21:05:34 [1]	[DUT] [Check MBSN] ~~ TestTime:0 sec
+2024/06/07 21:05:34 [1]	Run NUWL082-116:Check MBSN LEN@#$	Mode: 2, Retry: 40
+[21:05:34.510][DUT] [Check MBSN LEN@#$]++
+2024/06/07 21:05:34 [1]	> :Utility.ChkLEN,"2477875700005","13"
+2024/06/07 21:05:34 [1]	< 0
+2024/06/07 21:05:34 [1]	Check MBSN LEN@#$ Result: ISNLEN=Success Length:13
+[21:05:34.525][DUT] [Check MBSN LEN@#$]--
+2024/06/07 21:05:34 [1]	[DUT] [Check MBSN LEN@#$] ~~ TestTime:0.0147981 sec
+2024/06/07 21:05:34 [1]	Run NBHM007-117:Get 5GModule@#$	Mode: 1, Retry: 40
+[21:05:34.525][DUT] [Get 5GModule@#$]++
+2024/06/07 21:05:34 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell atcli at+cgmm","ON","-1","0"
+2024/06/07 21:05:34 [1]	< standard output#
+at+cgmm
+
+
+
+
+RG530F-NA
+
+
+
+
+
+
+
+OK
+
+
+
+
+return code#0#
+:
+2024/06/07 21:05:34 [1]	WithinString: RG530F-NA
+2024/06/07 21:05:34 [1]	Get 5GModule@#$ Result: g5GModel=RG530F-NA
+[21:05:34.714][DUT] [Get 5GModule@#$]--
+2024/06/07 21:05:34 [1]	[DUT] [Get 5GModule@#$] ~~ TestTime:0.1882447 sec
+2024/06/07 21:05:34 [1]	Run NUVO015-118:Get IMEI@#$	Mode: 1, Retry: 40
+[21:05:34.714][DUT] [Get IMEI@#$]++
+2024/06/07 21:05:34 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell atcli at+gsn","ON","-1","0"
+2024/06/07 21:05:34 [1]	< standard output#
+at+gsn
+
+
+
+
+863225050010551
+
+
+
+
+
+
+
+OK
+
+
+
+
+return code#0#
+:
+2024/06/07 21:05:34 [1]	WithinString: 863225050010551
+2024/06/07 21:05:34 [1]	Get IMEI@#$ Result: gIMEI=863225050010551
+[21:05:34.901][DUT] [Get IMEI@#$]--
+2024/06/07 21:05:34 [1]	[DUT] [Get IMEI@#$] ~~ TestTime:0.1874901 sec
+2024/06/07 21:05:34 [1]	NUVO015-118:@STEP006@CONNECT_DUT Test is Pass ! 		----- 73.1980515 Sec.
+2024/06/07 21:05:34 [1]	DUT Test Completed !        ----- 74.592662 Sec.
+2024/06/07 21:05:34 [1]	Execute Phase 1 Test.
+2024/06/07 21:05:35 [1]	Do @STEP008@CheckRoute
+2024/06/07 21:05:35 [1]	Run CACK088-119:Show ISN to UI	Mode: 1, Retry: 3
+[21:05:35.010][PC] [Show ISN to UI]++
+2024/06/07 21:05:35 [1]	> :ShowISN,"Q9220242200005"
+2024/06/07 21:05:35 [1]	< 0
+[21:05:35.025][PC] [Show ISN to UI]--
+2024/06/07 21:05:35 [1]	[PC] [Show ISN to UI] ~~ TestTime:0.015617 sec
+2024/06/07 21:05:35 [1]	CACK088-119:@STEP008@CheckRoute Test is Pass ! 		----- 0.015617 Sec.
+2024/06/07 21:05:35 [1]	DUT Test Completed !        ----- 0.0304183 Sec.
+2024/06/07 21:05:35 [1]	Execute Phase 2 Test.
+2024/06/07 21:05:35 [1]	Do @STEP010@ADB_FWUP
+2024/06/07 21:05:35 [1]	Run NUWL082-121:Check 5GModel EU @#$	Mode: 4, Retry: 60
+[21:05:35.135][DUT] [Check 5GModel EU @#$]++
+2024/06/07 21:05:35 [1]	> :GetVal,"$g5GModel"
+2024/06/07 21:05:35 [1]	< RG530F-NA
+[21:05:35.135][DUT] [Check 5GModel EU @#$]--
+2024/06/07 21:05:35 [1]	[DUT] [Check 5GModel EU @#$] ~~ TestTime:0 sec
+2024/06/07 21:05:35 [1]	Run NUWL082-125:Check NA @#$	Mode: 0, Retry: 60
+[21:05:35.135][DUT] [Check NA @#$]++
+2024/06/07 21:05:35 [1]	> :GetVal,"$g5GModel"
+2024/06/07 21:05:35 [1]	< RG530F-NA
+[21:05:35.135][DUT] [Check NA @#$]--
+2024/06/07 21:05:35 [1]	[DUT] [Check NA @#$] ~~ TestTime:0 sec
+2024/06/07 21:05:35 [1]	Run NBHM007-126:NA Modem FW Version@#$	Mode: 1, Retry: 60
+[21:05:35.150][DUT] [NA Modem FW Version@#$]++
+2024/06/07 21:05:35 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell atcli at+qgmr","ON","-1","0"
+2024/06/07 21:05:35 [1]	< 
+2024/06/07 21:05:35 [1]	< standard output#
+at+qgmr
+
+
+
+
+RG530FNAEAR05A01M8G_OCPU_HS_BETA_20240222A_01.001.01.001
+
+
+
+
+
+
+
+OK
+
+
+
+
+return code#0#
+:
+2024/06/07 21:05:35 [1]	WithinString: RG530FNAEAR05A01M8G_OCPU_HS_BETA_20240222A_01.001.01.001
+2024/06/07 21:05:35 [1]	NA Modem FW Version@#$ Result: ModelFWVer=RG530FNAEAR05A01M8G_OCPU_HS_BETA_20240222A_01.001.01.001
+[21:05:35.322][DUT] [NA Modem FW Version@#$]--
+2024/06/07 21:05:35 [1]	[DUT] [NA Modem FW Version@#$] ~~ TestTime:0.1874563 sec
+2024/06/07 21:05:35 [1]	Run NBHM007-127:Get NA Model Name@#$	Mode: 1, Retry: 60
+[21:05:35.322][DUT] [Get NA Model Name@#$]++
+2024/06/07 21:05:35 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell fw_printenv -n pega_model","ON","-1","0"
+2024/06/07 21:05:35 [1]	< 
+2024/06/07 21:05:35 [1]	< standard output#
+M2U300-Q92
+
+
+
+return code#0#
+:
+2024/06/07 21:05:35 [1]	WithinString: M2U300-Q92
+2024/06/07 21:05:35 [1]	Get NA Model Name@#$ Result: ModelName=M2U300-Q92
+2024/06/07 21:05:35 [1]	CurrentTestID:NBHM007-1270 - The validation: ModelName = M2U300-Q92 (M2U300-Q92,)
+[21:05:35.543][DUT] [Get NA Model Name@#$]--
+2024/06/07 21:05:35 [1]	[DUT] [Get NA Model Name@#$] ~~ TestTime:0.2208291 sec
+2024/06/07 21:05:35 [1]	Run B7PL025-128:Wait time@#$	Mode: 0, Retry: 60
+[21:05:35.543][PC] [Wait time@#$]++
+2024/06/07 21:05:35 [1]	> :Delay,"000"
+2024/06/07 21:05:35 [1]	< 0
+[21:05:35.558][PC] [Wait time@#$]--
+2024/06/07 21:05:35 [1]	[PC] [Wait time@#$] ~~ TestTime:0.0152915 sec
+2024/06/07 21:05:35 [1]	Run FWCK036-129:Check FW Version@#$	Mode: 4, Retry: 60
+[21:05:35.558][DUT] [Check FW Version@#$]++
+2024/06/07 21:05:35 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.fw.cur_ver","ON","-1","0"
+2024/06/07 21:05:35 [1]	< 
+2024/06/07 21:05:35 [1]	< standard output#
+V1.0.0.4_2
+
+
+
+return code#0#
+:
+2024/06/07 21:05:35 [1]	WithinString: V1.0.0.4_2
+2024/06/07 21:05:35 [1]	Check FW Version@#$ Result: gSWVer=V1.0.0.4_2
+2024/06/07 21:05:35 [1]	CurrentTestID:FWCK036-1290 - The validation: gSWVer = V1.0.0.4_2 (V1.0.0.2_1,)
+2024/06/07 21:05:35 [1]	gSWVer's value is V1.0.0.4_2 not equal V1.0.0.2_1.
+[21:05:35.731][DUT] [Check FW Version@#$]--
+2024/06/07 21:05:35 [1]	[DUT] [Check FW Version@#$] ~~ TestTime:0.1729735 sec
+2024/06/07 21:05:35 [1]	Run NUWL082-130:Check 5GModel EU @#$	Mode: 4, Retry: 60
+[21:05:35.731][DUT] [Check 5GModel EU @#$]++
+2024/06/07 21:05:35 [1]	> :GetVal,"$g5GModel"
+2024/06/07 21:05:35 [1]	< RG530F-NA
+[21:05:35.731][DUT] [Check 5GModel EU @#$]--
+2024/06/07 21:05:35 [1]	[DUT] [Check 5GModel EU @#$] ~~ TestTime:0 sec
+2024/06/07 21:05:35 [1]	Run NUWL082-133:Check 5GModel NA @#$	Mode: 0, Retry: 60
+[21:05:35.731][DUT] [Check 5GModel NA @#$]++
+2024/06/07 21:05:35 [1]	> :GetVal,"$g5GModel"
+2024/06/07 21:05:35 [1]	< RG530F-NA
+[21:05:35.731][DUT] [Check 5GModel NA @#$]--
+2024/06/07 21:05:35 [1]	[DUT] [Check 5GModel NA @#$] ~~ TestTime:0 sec
+2024/06/07 21:05:35 [1]	Run FWCK036-134:ADB FWUPGRADE@#$	Mode: 1, Retry: 60
+[21:05:35.731][DUT] [ADB FWUPGRADE@#$]++
+2024/06/07 21:05:35 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","push D:\Centimani_Kangaroo_UpdateFW\FWIMAGE\SR3\Kangaroo_MFG_FW_V1.0.0.2_1_ForSR3Shipping-240517\M2O100-Q92_V1.0.0.2_1_modem.bin\M2O100-Q92_V1.0.0.2_1_modem.bin /cache/ufs/update.zip","ON","-1","180000"
+2024/06/07 21:06:23 [1]	< 
+2024/06/07 21:06:23 [1]	< standard output#
+D:\Centimani_Kangaroo_UpdateFW\FWIMAGE\SR3\Kangaroo_MFG_FW_V1.0.0.2_1_ForSR3Shipping-240517\M2O100-Q92_V1.0.0.2_1_modem.bin\M2O100-Q92_V1.0.0.2_1_modem.bin: 1 file pushed, 0 skipped. 3.3 MB/s (159627971 bytes in 45.740s)
+
+
+return code#0#
+:
+2024/06/07 21:06:23 [1]	ADB FWUPGRADE@#$ Result: gADB_FWUP=standard output#|D:\Centimani_Kangaroo_UpdateFW\FWIMAGE\SR3\Kangaroo_MFG_FW_V1.0.0.2_1_ForSR3Shipping-240517\M2O100-Q92_V1.0.0.2_1_modem.bin\M2O100-Q92_V1.0.0.2_1_modem.bin: 1 file pushed, 0 skipped. 3.3 MB/s (159627971 bytes in 45.740s)|||return code#0#|:
+[21:06:23.189][DUT] [ADB FWUPGRADE@#$]--
+2024/06/07 21:06:23 [1]	[DUT] [ADB FWUPGRADE@#$] ~~ TestTime:47.4575158 sec
+2024/06/07 21:06:23 [1]	Run B7PL025-135:Wait time@#$	Mode: 0, Retry: 60
+[21:06:23.189][PC] [Wait time@#$]++
+2024/06/07 21:06:23 [1]	> :Delay,"5000"
+2024/06/07 21:06:28 [1]	< 0
+[21:06:28.198][PC] [Wait time@#$]--
+2024/06/07 21:06:28 [1]	[PC] [Wait time@#$] ~~ TestTime:5.0097489 sec
+2024/06/07 21:06:28 [1]	Run FWCK036-136:Update ZIP@#$	Mode: 2, Retry: 60
+[21:06:28.198][DUT] [Update ZIP@#$]++
+2024/06/07 21:06:28 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell fotainfo -p \"update.zip\"","ON","-1","0"
+2024/06/07 21:06:28 [1]	< 
+2024/06/07 21:06:28 [1]	< standard output#
+
+return code#0#
+:
+2024/06/07 21:06:28 [1]	Update ZIP@#$ Result: gupdatezip=standard output#||return code#0#|:
+[21:06:28.433][DUT] [Update ZIP@#$]--
+2024/06/07 21:06:28 [1]	[DUT] [Update ZIP@#$] ~~ TestTime:0.2342312 sec
+2024/06/07 21:06:28 [1]	Run B7PL025-137:Wait time@#$	Mode: 0, Retry: 60
+[21:06:28.433][PC] [Wait time@#$]++
+2024/06/07 21:06:28 [1]	> :Delay,"5000"
+2024/06/07 21:06:33 [1]	< 0
+[21:06:33.448][PC] [Wait time@#$]--
+2024/06/07 21:06:33 [1]	[PC] [Wait time@#$] ~~ TestTime:5.0156976 sec
+2024/06/07 21:06:33 [1]	Run FWCK036-138:Update FW@#$	Mode: 0, Retry: 60
+[21:06:33.448][DUT] [Update FW@#$]++
+2024/06/07 21:06:33 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell ab_full_update \"start-full-fota\"","ON","-1","180000"
+2024/06/07 21:07:33 [1]	< 
+2024/06/07 21:07:33 [1]	< standard output#
+[DUAL SYSTEM UPDATE] Current system is **A**
+
+
+[DUAL SYSTEM UPDATE] Current system is **A**
+
+
+[DUAL SYSTEM UPDATE] Fota Process Start ...
+
+
+[DUAL SYSTEM UPDATE] Fota Process Start ...
+
+
+[DUAL SYSTEM UPDATE] set update stage system
+
+
+[DUAL SYSTEM UPDATE] set update stage system
+
+
+[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/sdxlemur-sysfs.ubi was writing to b_system ...
+
+
+[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/sdxlemur-sysfs.ubi was writing to b_system ...
+
+
+mtd: successfully wrote block at 0x00000000
+
+
+mtd: successfully wrote block at 0x00040000
+
+
+mtd: successfully wrote block at 0x00080000
+
+
+mtd: successfully wrote block at 0x000c0000
+
+
+mtd: successfully wrote block at 0x00100000
+
+
+mtd: successfully wrote block at 0x00140000
+
+
+mtd: successfully wrote block at 0x00180000
+
+
+mtd: successfully wrote block at 0x001c0000
+
+
+mtd: successfully wrote block at 0x00200000
+
+
+mtd: successfully wrote block at 0x00240000
+
+
+mtd: successfully wrote block at 0x00280000
+
+
+mtd: successfully wrote block at 0x002c0000
+
+
+mtd: successfully wrote block at 0x00300000
+
+
+mtd: successfully wrote block at 0x00340000
+
+
+mtd: successfully wrote block at 0x00380000
+
+
+mtd: successfully wrote block at 0x003c0000
+
+
+mtd: successfully wrote block at 0x00400000
+
+
+mtd: successfully wrote block at 0x00440000
+
+
+mtd: successfully wrote block at 0x00480000
+
+
+mtd: successfully wrote block at 0x004c0000
+
+
+mtd: successfully wrote block at 0x00500000
+
+
+mtd: successfully wrote block at 0x00540000
+
+
+mtd: successfully wrote block at 0x00580000
+
+
+mtd: successfully wrote block at 0x005c0000
+
+
+mtd: successfully wrote block at 0x00600000
+
+
+mtd: successfully wrote block at 0x00640000
+
+
+mtd: successfully wrote block at 0x00680000
+
+
+mtd: successfully wrote block at 0x006c0000
+
+
+mtd: successfully wrote block at 0x00700000
+
+
+mtd: successfully wrote block at 0x00740000
+
+
+mtd: successfully wrote block at 0x00780000
+
+
+mtd: successfully wrote block at 0x007c0000
+
+
+mtd: successfully wrote block at 0x00800000
+
+
+mtd: successfully wrote block at 0x00840000
+
+
+mtd: successfully wrote block at 0x00880000
+
+
+mtd: successfully wrote block at 0x008c0000
+
+
+mtd: successfully wrote block at 0x00900000
+
+
+mtd: successfully wrote block at 0x00940000
+
+
+mtd: successfully wrote block at 0x00980000
+
+
+mtd: successfully wrote block at 0x009c0000
+
+
+mtd: successfully wrote block at 0x00a00000
+
+
+mtd: successfully wrote block at 0x00a40000
+
+
+mtd: successfully wrote block at 0x00a80000
+
+
+mtd: successfully wrote block at 0x00ac0000
+
+
+mtd: successfully wrote block at 0x00b00000
+
+
+mtd: successfully wrote block at 0x00b40000
+
+
+mtd: successfully wrote block at 0x00b80000
+
+
+mtd: successfully wrote block at 0x00bc0000
+
+
+mtd: successfully wrote block at 0x00c00000
+
+
+mtd: successfully wrote block at 0x00c40000
+
+
+mtd: successfully wrote block at 0x00c80000
+
+
+mtd: successfully wrote block at 0x00cc0000
+
+
+mtd: successfully wrote block at 0x00d00000
+
+
+mtd: successfully wrote block at 0x00d40000
+
+
+mtd: successfully wrote block at 0x00d80000
+
+
+mtd: successfully wrote block at 0x00dc0000
+
+
+mtd: successfully wrote block at 0x00e00000
+
+
+mtd: successfully wrote block at 0x00e40000
+
+
+mtd: successfully wrote block at 0x00e80000
+
+
+mtd: successfully wrote block at 0x00ec0000
+
+
+mtd: successfully wrote block at 0x00f00000
+
+
+mtd: successfully wrote block at 0x00f40000
+
+
+mtd: successfully wrote block at 0x00f80000
+
+
+mtd: successfully wrote block at 0x00fc0000
+
+
+mtd: successfully wrote block at 0x01000000
+
+
+mtd: successfully wrote block at 0x01040000
+
+
+mtd: successfully wrote block at 0x01080000
+
+
+mtd: successfully wrote block at 0x010c0000
+
+
+mtd: successfully wrote block at 0x01100000
+
+
+mtd: successfully wrote block at 0x01140000
+
+
+mtd: successfully wrote block at 0x01180000
+
+
+mtd: successfully wrote block at 0x011c0000
+
+
+mtd: successfully wrote block at 0x01200000
+
+
+mtd: successfully wrote block at 0x01240000
+
+
+mtd: successfully wrote block at 0x01280000
+
+
+mtd: successfully wrote block at 0x012c0000
+
+
+mtd: successfully wrote block at 0x01300000
+
+
+mtd: successfully wrote block at 0x01340000
+
+
+mtd: successfully wrote block at 0x01380000
+
+
+mtd: successfully wrote block at 0x013c0000
+
+
+mtd: successfully wrote block at 0x01400000
+
+
+mtd: successfully wrote block at 0x01440000
+
+
+mtd: successfully wrote block at 0x01480000
+
+
+mtd: successfully wrote block at 0x014c0000
+
+
+mtd: successfully wrote block at 0x01500000
+
+
+mtd: successfully wrote block at 0x01540000
+
+
+mtd: successfully wrote block at 0x01580000
+
+
+mtd: successfully wrote block at 0x015c0000
+
+
+mtd: successfully wrote block at 0x01600000
+
+
+mtd: successfully wrote block at 0x01640000
+
+
+mtd: successfully wrote block at 0x01680000
+
+
+mtd: successfully wrote block at 0x016c0000
+
+
+mtd: successfully wrote block at 0x01700000
+
+
+mtd: successfully wrote block at 0x01740000
+
+
+mtd: successfully wrote block at 0x01780000
+
+
+mtd: successfully wrote block at 0x017c0000
+
+
+mtd: successfully wrote block at 0x01800000
+
+
+mtd: successfully wrote block at 0x01840000
+
+
+mtd: successfully wrote block at 0x01880000
+
+
+mtd: successfully wrote block at 0x018c0000
+
+
+mtd: successfully wrote block at 0x01900000
+
+
+mtd: successfully wrote block at 0x01940000
+
+
+mtd: successfully wrote block at 0x01980000
+
+
+mtd: successfully wrote block at 0x019c0000
+
+
+mtd: successfully wrote block at 0x01a00000
+
+
+mtd: successfully wrote block at 0x01a40000
+
+
+mtd: successfully wrote block at 0x01a80000
+
+
+mtd: successfully wrote block at 0x01ac0000
+
+
+mtd: successfully wrote block at 0x01b00000
+
+
+mtd: successfully wrote block at 0x01b40000
+
+
+mtd: successfully wrote block at 0x01b80000
+
+
+mtd: successfully wrote block at 0x01bc0000
+
+
+mtd: successfully wrote block at 0x01c00000
+
+
+mtd: successfully wrote block at 0x01c40000
+
+
+mtd: successfully wrote block at 0x01c80000
+
+
+mtd: successfully wrote block at 0x01cc0000
+
+
+mtd: successfully wrote block at 0x01d00000
+
+
+mtd: successfully wrote block at 0x01d40000
+
+
+mtd: successfully wrote block at 0x01d80000
+
+
+mtd: successfully wrote block at 0x01dc0000
+
+
+mtd: successfully wrote block at 0x01e00000
+
+
+mtd: successfully wrote block at 0x01e40000
+
+
+mtd: successfully wrote block at 0x01e80000
+
+
+mtd: successfully wrote block at 0x01ec0000
+
+
+mtd: successfully wrote block at 0x01f00000
+
+
+mtd: successfully wrote block at 0x01f40000
+
+
+mtd: successfully wrote block at 0x01f80000
+
+
+mtd: successfully wrote block at 0x01fc0000
+
+
+mtd: successfully wrote block at 0x02000000
+
+
+mtd: successfully wrote block at 0x02040000
+
+
+mtd: successfully wrote block at 0x02080000
+
+
+mtd: successfully wrote block at 0x020c0000
+
+
+mtd: successfully wrote block at 0x02100000
+
+
+mtd: successfully wrote block at 0x02140000
+
+
+mtd: successfully wrote block at 0x02180000
+
+
+mtd: successfully wrote block at 0x021c0000
+
+
+mtd: successfully wrote block at 0x02200000
+
+
+mtd: successfully wrote block at 0x02240000
+
+
+mtd: successfully wrote block at 0x02280000
+
+
+mtd: successfully wrote block at 0x022c0000
+
+
+mtd: successfully wrote block at 0x02300000
+
+
+mtd: successfully wrote block at 0x02340000
+
+
+mtd: successfully wrote block at 0x02380000
+
+
+mtd: successfully wrote block at 0x023c0000
+
+
+mtd: successfully wrote block at 0x02400000
+
+
+mtd: successfully wrote block at 0x02440000
+
+
+mtd: successfully wrote block at 0x02480000
+
+
+mtd: successfully wrote block at 0x024c0000
+
+
+mtd: successfully wrote block at 0x02500000
+
+
+mtd: successfully wrote block at 0x02540000
+
+
+mtd: successfully wrote block at 0x02580000
+
+
+mtd: successfully wrote block at 0x025c0000
+
+
+mtd: successfully wrote block at 0x02600000
+
+
+mtd: successfully wrote block at 0x02640000
+
+
+mtd: successfully wrote block at 0x02680000
+
+
+mtd: successfully wrote block at 0x026c0000
+
+
+mtd: successfully wrote block at 0x02700000
+
+
+mtd: successfully wrote block at 0x02740000
+
+
+mtd: successfully wrote block at 0x02780000
+
+
+mtd: successfully wrote block at 0x027c0000
+
+
+mtd: successfully wrote block at 0x02800000
+
+
+mtd: successfully wrote block at 0x02840000
+
+
+mtd: successfully wrote block at 0x02880000
+
+
+mtd: successfully wrote block at 0x028c0000
+
+
+mtd: successfully wrote block at 0x02900000
+
+
+mtd: successfully wrote block at 0x02940000
+
+
+mtd: successfully wrote block at 0x02980000
+
+
+mtd: successfully wrote block at 0x029c0000
+
+
+mtd: successfully wrote block at 0x02a00000
+
+
+mtd: successfully wrote block at 0x02a40000
+
+
+mtd: successfully wrote block at 0x02a80000
+
+
+mtd: successfully wrote block at 0x02ac0000
+
+
+mtd: successfully wrote block at 0x02b00000
+
+
+mtd: successfully wrote block at 0x02b40000
+
+
+mtd: successfully wrote block at 0x02b80000
+
+
+mtd: successfully wrote block at 0x02bc0000
+
+
+mtd: successfully wrote block at 0x02c00000
+
+
+mtd: successfully wrote block at 0x02c40000
+
+
+mtd: successfully wrote block at 0x02c80000
+
+
+mtd: successfully wrote block at 0x02cc0000
+
+
+mtd: successfully wrote block at 0x02d00000
+
+
+mtd: successfully wrote block at 0x02d40000
+
+
+mtd: successfully wrote block at 0x02d80000
+
+
+mtd: successfully wrote block at 0x02dc0000
+
+
+mtd: successfully wrote block at 0x02e00000
+
+
+mtd: successfully wrote block at 0x02e40000
+
+
+mtd: successfully wrote block at 0x02e80000
+
+
+mtd: successfully wrote block at 0x02ec0000
+
+
+mtd: successfully wrote block at 0x02f00000
+
+
+mtd: successfully wrote block at 0x02f40000
+
+
+mtd: successfully wrote block at 0x02f80000
+
+
+mtd: successfully wrote block at 0x02fc0000
+
+
+mtd: successfully wrote block at 0x03000000
+
+
+mtd: successfully wrote block at 0x03040000
+
+
+mtd: successfully wrote block at 0x03080000
+
+
+mtd: successfully wrote block at 0x030c0000
+
+
+mtd: successfully wrote block at 0x03100000
+
+
+mtd: successfully wrote block at 0x03140000
+
+
+mtd: successfully wrote block at 0x03180000
+
+
+mtd: successfully wrote block at 0x031c0000
+
+
+mtd: successfully wrote block at 0x03200000
+
+
+mtd: successfully wrote block at 0x03240000
+
+
+mtd: successfully wrote block at 0x03280000
+
+
+mtd: successfully wrote block at 0x032c0000
+
+
+mtd: successfully wrote block at 0x03300000
+
+
+mtd: successfully wrote block at 0x03340000
+
+
+mtd: successfully wrote block at 0x03380000
+
+
+mtd: successfully wrote block at 0x033c0000
+
+
+mtd: successfully wrote block at 0x03400000
+
+
+mtd: successfully wrote block at 0x03440000
+
+
+mtd: successfully wrote block at 0x03480000
+
+
+mtd: successfully wrote block at 0x034c0000
+
+
+mtd: successfully wrote block at 0x03500000
+
+
+mtd: successfully wrote block at 0x03540000
+
+
+mtd: successfully wrote block at 0x03580000
+
+
+mtd: successfully wrote block at 0x035c0000
+
+
+mtd: successfully wrote block at 0x03600000
+
+
+mtd: successfully wrote block at 0x03640000
+
+
+mtd: successfully wrote block at 0x03680000
+
+
+mtd: successfully wrote block at 0x036c0000
+
+
+mtd: successfully wrote block at 0x03700000
+
+
+mtd: successfully wrote block at 0x03740000
+
+
+mtd: successfully wrote block at 0x03780000
+
+
+mtd: successfully wrote block at 0x037c0000
+
+
+mtd: successfully wrote block at 0x03800000
+
+
+mtd: successfully wrote block at 0x03840000
+
+
+mtd: successfully wrote block at 0x03880000
+
+
+mtd: successfully wrote block at 0x038c0000
+
+
+mtd: successfully wrote block at 0x03900000
+
+
+mtd: successfully wrote block at 0x03940000
+
+
+mtd: successfully wrote block at 0x03980000
+
+
+mtd: successfully wrote block at 0x039c0000
+
+
+mtd: successfully wrote block at 0x03a00000
+
+
+mtd: successfully wrote block at 0x03a40000
+
+
+mtd: successfully wrote block at 0x03a80000
+
+
+mtd: successfully wrote block at 0x03ac0000
+
+
+mtd: successfully wrote block at 0x03b00000
+
+
+mtd: successfully wrote block at 0x03b40000
+
+
+mtd: successfully wrote block at 0x03b80000
+
+
+mtd: successfully wrote block at 0x03bc0000
+
+
+mtd: successfully wrote block at 0x03c00000
+
+
+mtd: successfully wrote block at 0x03c40000
+
+
+mtd: successfully wrote block at 0x03c80000
+
+
+mtd: successfully wrote block at 0x03cc0000
+
+
+mtd: successfully wrote block at 0x03d00000
+
+
+mtd: successfully wrote block at 0x03d40000
+
+
+mtd: successfully wrote block at 0x03d80000
+
+
+mtd: successfully wrote block at 0x03dc0000
+
+
+mtd: successfully wrote block at 0x03e00000
+
+
+mtd: successfully wrote block at 0x03e40000
+
+
+mtd: successfully wrote block at 0x03e80000
+
+
+mtd: successfully wrote block at 0x03ec0000
+
+
+mtd: successfully wrote block at 0x03f00000
+
+
+mtd: successfully wrote block at 0x03f40000
+
+
+mtd: successfully wrote block at 0x03f80000
+
+
+mtd: successfully wrote block at 0x03fc0000
+
+
+mtd: successfully wrote block at 0x04000000
+
+
+mtd: successfully wrote block at 0x04040000
+
+
+mtd: successfully wrote block at 0x04080000
+
+
+mtd: successfully wrote block at 0x040c0000
+
+
+mtd: successfully wrote block at 0x04100000
+
+
+mtd: successfully wrote block at 0x04140000
+
+
+mtd: successfully wrote block at 0x04180000
+
+
+mtd: successfully wrote block at 0x041c0000
+
+
+mtd: successfully wrote block at 0x04200000
+
+
+mtd: successfully wrote block at 0x04240000
+
+
+mtd: successfully wrote block at 0x04280000
+
+
+mtd: successfully wrote block at 0x042c0000
+
+
+mtd: successfully wrote block at 0x04300000
+
+
+mtd: successfully wrote block at 0x04340000
+
+
+mtd: successfully wrote block at 0x04380000
+
+
+mtd: successfully wrote block at 0x043c0000
+
+
+mtd: successfully wrote block at 0x04400000
+
+
+mtd: successfully wrote block at 0x04440000
+
+
+mtd: successfully wrote block at 0x04480000
+
+
+mtd: successfully wrote block at 0x044c0000
+
+
+mtd: successfully wrote block at 0x04500000
+
+
+mtd: successfully wrote block at 0x04540000
+
+
+mtd: successfully wrote block at 0x04580000
+
+
+mtd: successfully wrote block at 0x045c0000
+
+
+mtd: successfully wrote block at 0x04600000
+
+
+mtd: successfully wrote block at 0x04640000
+
+
+mtd: successfully wrote block at 0x04680000
+
+
+mtd: successfully wrote block at 0x046c0000
+
+
+mtd: successfully wrote block at 0x04700000
+
+
+mtd: successfully wrote block at 0x04740000
+
+
+mtd: successfully wrote block at 0x04780000
+
+
+mtd: successfully wrote block at 0x047c0000
+
+
+mtd: successfully wrote block at 0x04800000
+
+
+mtd: successfully wrote block at 0x04840000
+
+
+mtd: successfully wrote block at 0x04880000
+
+
+mtd: successfully wrote block at 0x048c0000
+
+
+mtd: successfully wrote block at 0x04900000
+
+
+mtd: successfully wrote block at 0x04940000
+
+
+mtd: successfully wrote block at 0x04980000
+
+
+mtd: successfully wrote block at 0x049c0000
+
+
+mtd: successfully wrote block at 0x04a00000
+
+
+mtd: successfully wrote block at 0x04a40000
+
+
+mtd: successfully wrote block at 0x04a80000
+
+
+mtd: successfully wrote block at 0x04ac0000
+
+
+mtd: successfully wrote block at 0x04b00000
+
+
+mtd: successfully wrote block at 0x04b40000
+
+
+mtd: successfully wrote block at 0x04b80000
+
+
+mtd: successfully wrote block at 0x04bc0000
+
+
+mtd: successfully wrote block at 0x04c00000
+
+
+mtd: successfully wrote block at 0x04c40000
+
+
+mtd: successfully wrote block at 0x04c80000
+
+
+mtd: successfully wrote block at 0x04cc0000
+
+
+mtd: successfully wrote block at 0x04d00000
+
+
+mtd: successfully wrote block at 0x04d40000
+
+
+mtd: successfully wrote block at 0x04d80000
+
+
+mtd: successfully wrote block at 0x04dc0000
+
+
+mtd: successfully wrote block at 0x04e00000
+
+
+mtd: successfully wrote block at 0x04e40000
+
+
+mtd: successfully wrote block at 0x04e80000
+
+
+mtd: successfully wrote block at 0x04ec0000
+
+
+mtd: successfully wrote block at 0x04f00000
+
+
+mtd: successfully wrote block at 0x04f40000
+
+
+mtd: successfully wrote block at 0x04f80000
+
+
+[DUAL SYSTEM UPDATE] b_system write done
+
+
+[DUAL SYSTEM UPDATE] b_system write done
+
+
+[DUAL SYSTEM UPDATE] set update stage boot
+
+
+[DUAL SYSTEM UPDATE] set update stage boot
+
+
+[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/sdxlemur-boot.img was writing to b_boot ...
+
+
+[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/sdxlemur-boot.img was writing to b_boot ...
+
+
+mtd: successfully wrote block at 0x00000000
+
+
+mtd: successfully wrote block at 0x00040000
+
+
+mtd: successfully wrote block at 0x00080000
+
+
+mtd: successfully wrote block at 0x000c0000
+
+
+mtd: successfully wrote block at 0x00100000
+
+
+mtd: successfully wrote block at 0x00140000
+
+
+mtd: successfully wrote block at 0x00180000
+
+
+mtd: successfully wrote block at 0x001c0000
+
+
+mtd: successfully wrote block at 0x00200000
+
+
+mtd: successfully wrote block at 0x00240000
+
+
+mtd: successfully wrote block at 0x00280000
+
+
+mtd: successfully wrote block at 0x002c0000
+
+
+mtd: successfully wrote block at 0x00300000
+
+
+mtd: successfully wrote block at 0x00340000
+
+
+mtd: successfully wrote block at 0x00380000
+
+
+mtd: successfully wrote block at 0x003c0000
+
+
+mtd: successfully wrote block at 0x00400000
+
+
+mtd: successfully wrote block at 0x00440000
+
+
+mtd: successfully wrote block at 0x00480000
+
+
+mtd: successfully wrote block at 0x004c0000
+
+
+mtd: successfully wrote block at 0x00500000
+
+
+mtd: successfully wrote block at 0x00540000
+
+
+mtd: successfully wrote block at 0x00580000
+
+
+mtd: successfully wrote block at 0x005c0000
+
+
+mtd: successfully wrote block at 0x00600000
+
+
+mtd: successfully wrote block at 0x00640000
+
+
+mtd: successfully wrote block at 0x00680000
+
+
+mtd: successfully wrote block at 0x006c0000
+
+
+mtd: successfully wrote block at 0x00700000
+
+
+mtd: successfully wrote block at 0x00740000
+
+
+mtd: successfully wrote block at 0x00780000
+
+
+mtd: successfully wrote block at 0x007c0000
+
+
+mtd: successfully wrote block at 0x00800000
+
+
+mtd: successfully wrote block at 0x00840000
+
+
+mtd: successfully wrote block at 0x00880000
+
+
+mtd: successfully wrote block at 0x008c0000
+
+
+mtd: successfully wrote block at 0x00900000
+
+
+mtd: successfully wrote block at 0x00940000
+
+
+mtd: successfully wrote block at 0x00980000
+
+
+mtd: successfully wrote block at 0x009c0000
+
+
+mtd: successfully wrote block at 0x00a00000
+
+
+mtd: successfully wrote block at 0x00a40000
+
+
+[DUAL SYSTEM UPDATE] b_boot write done
+
+
+[DUAL SYSTEM UPDATE] b_boot write done
+
+
+[DUAL SYSTEM UPDATE] set update stage modem
+
+
+[DUAL SYSTEM UPDATE] set update stage modem
+
+
+[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/NON-HLOS.ubi was writing to b_modem ...
+
+
+[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/NON-HLOS.ubi was writing to b_modem ...
+
+
+mtd: successfully wrote block at 0x00000000
+
+
+mtd: successfully wrote block at 0x00040000
+
+
+mtd: successfully wrote block at 0x00080000
+
+
+mtd: successfully wrote block at 0x000c0000
+
+
+mtd: successfully wrote block at 0x00100000
+
+
+mtd: successfully wrote block at 0x00140000
+
+
+mtd: successfully wrote block at 0x00180000
+
+
+mtd: successfully wrote block at 0x001c0000
+
+
+mtd: successfully wrote block at 0x00200000
+
+
+mtd: successfully wrote block at 0x00240000
+
+
+mtd: successfully wrote block at 0x00280000
+
+
+mtd: successfully wrote block at 0x002c0000
+
+
+mtd: successfully wrote block at 0x00300000
+
+
+mtd: successfully wrote block at 0x00340000
+
+
+mtd: successfully wrote block at 0x00380000
+
+
+mtd: successfully wrote block at 0x003c0000
+
+
+mtd: successfully wrote block at 0x00400000
+
+
+mtd: successfully wrote block at 0x00440000
+
+
+mtd: successfully wrote block at 0x00480000
+
+
+mtd: successfully wrote block at 0x004c0000
+
+
+mtd: successfully wrote block at 0x00500000
+
+
+mtd: successfully wrote block at 0x00540000
+
+
+mtd: successfully wrote block at 0x00580000
+
+
+mtd: successfully wrote block at 0x005c0000
+
+
+mtd: successfully wrote block at 0x00600000
+
+
+mtd: successfully wrote block at 0x00640000
+
+
+mtd: successfully wrote block at 0x00680000
+
+
+mtd: successfully wrote block at 0x006c0000
+
+
+mtd: successfully wrote block at 0x00700000
+
+
+mtd: successfully wrote block at 0x00740000
+
+
+mtd: successfully wrote block at 0x00780000
+
+
+mtd: successfully wrote block at 0x007c0000
+
+
+mtd: successfully wrote block at 0x00800000
+
+
+mtd: successfully wrote block at 0x00840000
+
+
+mtd: successfully wrote block at 0x00880000
+
+
+mtd: successfully wrote block at 0x008c0000
+
+
+mtd: successfully wrote block at 0x00900000
+
+
+mtd: successfully wrote block at 0x00940000
+
+
+mtd: successfully wrote block at 0x00980000
+
+
+mtd: successfully wrote block at 0x009c0000
+
+
+mtd: successfully wrote block at 0x00a00000
+
+
+mtd: successfully wrote block at 0x00a40000
+
+
+mtd: successfully wrote block at 0x00a80000
+
+
+mtd: successfully wrote block at 0x00ac0000
+
+
+mtd: successfully wrote block at 0x00b00000
+
+
+mtd: successfully wrote block at 0x00b40000
+
+
+mtd: successfully wrote block at 0x00b80000
+
+
+mtd: successfully wrote block at 0x00bc0000
+
+
+mtd: successfully wrote block at 0x00c00000
+
+
+mtd: successfully wrote block at 0x00c40000
+
+
+mtd: successfully wrote block at 0x00c80000
+
+
+mtd: successfully wrote block at 0x00cc0000
+
+
+mtd: successfully wrote block at 0x00d00000
+
+
+mtd: successfully wrote block at 0x00d40000
+
+
+mtd: successfully wrote block at 0x00d80000
+
+
+mtd: successfully wrote block at 0x00dc0000
+
+
+mtd: successfully wrote block at 0x00e00000
+
+
+mtd: successfully wrote block at 0x00e40000
+
+
+mtd: successfully wrote block at 0x00e80000
+
+
+mtd: successfully wrote block at 0x00ec0000
+
+
+mtd: successfully wrote block at 0x00f00000
+
+
+mtd: successfully wrote block at 0x00f40000
+
+
+mtd: successfully wrote block at 0x00f80000
+
+
+mtd: successfully wrote block at 0x00fc0000
+
+
+mtd: successfully wrote block at 0x01000000
+
+
+mtd: successfully wrote block at 0x01040000
+
+
+mtd: successfully wrote block at 0x01080000
+
+
+mtd: successfully wrote block at 0x010c0000
+
+
+mtd: successfully wrote block at 0x01100000
+
+
+mtd: successfully wrote block at 0x01140000
+
+
+mtd: successfully wrote block at 0x01180000
+
+
+mtd: successfully wrote block at 0x011c0000
+
+
+mtd: successfully wrote block at 0x01200000
+
+
+mtd: successfully wrote block at 0x01240000
+
+
+mtd: successfully wrote block at 0x01280000
+
+
+mtd: successfully wrote block at 0x012c0000
+
+
+mtd: successfully wrote block at 0x01300000
+
+
+mtd: successfully wrote block at 0x01340000
+
+
+mtd: successfully wrote block at 0x01380000
+
+
+mtd: successfully wrote block at 0x013c0000
+
+
+mtd: successfully wrote block at 0x01400000
+
+
+mtd: successfully wrote block at 0x01440000
+
+
+mtd: successfully wrote block at 0x01480000
+
+
+mtd: successfully wrote block at 0x014c0000
+
+
+mtd: successfully wrote block at 0x01500000
+
+
+mtd: successfully wrote block at 0x01540000
+
+
+mtd: successfully wrote block at 0x01580000
+
+
+mtd: successfully wrote block at 0x015c0000
+
+
+mtd: successfully wrote block at 0x01600000
+
+
+mtd: successfully wrote block at 0x01640000
+
+
+mtd: successfully wrote block at 0x01680000
+
+
+mtd: successfully wrote block at 0x016c0000
+
+
+mtd: successfully wrote block at 0x01700000
+
+
+mtd: successfully wrote block at 0x01740000
+
+
+mtd: successfully wrote block at 0x01780000
+
+
+mtd: successfully wrote block at 0x017c0000
+
+
+mtd: successfully wrote block at 0x01800000
+
+
+mtd: successfully wrote block at 0x01840000
+
+
+mtd: successfully wrote block at 0x01880000
+
+
+mtd: successfully wrote block at 0x018c0000
+
+
+mtd: successfully wrote block at 0x01900000
+
+
+mtd: successfully wrote block at 0x01940000
+
+
+mtd: successfully wrote block at 0x01980000
+
+
+mtd: successfully wrote block at 0x019c0000
+
+
+mtd: successfully wrote block at 0x01a00000
+
+
+mtd: successfully wrote block at 0x01a40000
+
+
+mtd: successfully wrote block at 0x01a80000
+
+
+mtd: successfully wrote block at 0x01ac0000
+
+
+mtd: successfully wrote block at 0x01b00000
+
+
+mtd: successfully wrote block at 0x01b40000
+
+
+mtd: successfully wrote block at 0x01b80000
+
+
+mtd: successfully wrote block at 0x01bc0000
+
+
+mtd: successfully wrote block at 0x01c00000
+
+
+mtd: successfully wrote block at 0x01c40000
+
+
+mtd: successfully wrote block at 0x01c80000
+
+
+mtd: successfully wrote block at 0x01cc0000
+
+
+mtd: successfully wrote block at 0x01d00000
+
+
+mtd: successfully wrote block at 0x01d40000
+
+
+mtd: successfully wrote block at 0x01d80000
+
+
+mtd: successfully wrote block at 0x01dc0000
+
+
+mtd: successfully wrote block at 0x01e00000
+
+
+mtd: successfully wrote block at 0x01e40000
+
+
+mtd: successfully wrote block at 0x01e80000
+
+
+mtd: successfully wrote block at 0x01ec0000
+
+
+mtd: successfully wrote block at 0x01f00000
+
+
+mtd: successfully wrote block at 0x01f40000
+
+
+mtd: successfully wrote block at 0x01f80000
+
+
+mtd: successfully wrote block at 0x01fc0000
+
+
+mtd: successfully wrote block at 0x02000000
+
+
+mtd: successfully wrote block at 0x02040000
+
+
+mtd: successfully wrote block at 0x02080000
+
+
+mtd: successfully wrote block at 0x020c0000
+
+
+mtd: successfully wrote block at 0x02100000
+
+
+mtd: successfully wrote block at 0x02140000
+
+
+mtd: successfully wrote block at 0x02180000
+
+
+mtd: successfully wrote block at 0x021c0000
+
+
+mtd: successfully wrote block at 0x02200000
+
+
+mtd: successfully wrote block at 0x02240000
+
+
+mtd: successfully wrote block at 0x02280000
+
+
+mtd: successfully wrote block at 0x022c0000
+
+
+mtd: successfully wrote block at 0x02300000
+
+
+mtd: successfully wrote block at 0x02340000
+
+
+mtd: successfully wrote block at 0x02380000
+
+
+mtd: successfully wrote block at 0x023c0000
+
+
+mtd: successfully wrote block at 0x02400000
+
+
+mtd: successfully wrote block at 0x02440000
+
+
+mtd: successfully wrote block at 0x02480000
+
+
+mtd: successfully wrote block at 0x024c0000
+
+
+mtd: successfully wrote block at 0x02500000
+
+
+mtd: successfully wrote block at 0x02540000
+
+
+mtd: successfully wrote block at 0x02580000
+
+
+mtd: successfully wrote block at 0x025c0000
+
+
+mtd: successfully wrote block at 0x02600000
+
+
+mtd: successfully wrote block at 0x02640000
+
+
+mtd: successfully wrote block at 0x02680000
+
+
+mtd: successfully wrote block at 0x026c0000
+
+
+mtd: successfully wrote block at 0x02700000
+
+
+mtd: successfully wrote block at 0x02740000
+
+
+mtd: successfully wrote block at 0x02780000
+
+
+mtd: successfully wrote block at 0x027c0000
+
+
+mtd: successfully wrote block at 0x02800000
+
+
+mtd: successfully wrote block at 0x02840000
+
+
+mtd: successfully wrote block at 0x02880000
+
+
+mtd: successfully wrote block at 0x028c0000
+
+
+mtd: successfully wrote block at 0x02900000
+
+
+mtd: successfully wrote block at 0x02940000
+
+
+mtd: successfully wrote block at 0x02980000
+
+
+mtd: successfully wrote block at 0x029c0000
+
+
+mtd: successfully wrote block at 0x02a00000
+
+
+mtd: successfully wrote block at 0x02a40000
+
+
+mtd: successfully wrote block at 0x02a80000
+
+
+mtd: successfully wrote block at 0x02ac0000
+
+
+mtd: successfully wrote block at 0x02b00000
+
+
+mtd: successfully wrote block at 0x02b40000
+
+
+mtd: successfully wrote block at 0x02b80000
+
+
+mtd: successfully wrote block at 0x02bc0000
+
+
+mtd: successfully wrote block at 0x02c00000
+
+
+mtd: successfully wrote block at 0x02c40000
+
+
+mtd: successfully wrote block at 0x02c80000
+
+
+mtd: successfully wrote block at 0x02cc0000
+
+
+mtd: successfully wrote block at 0x02d00000
+
+
+mtd: successfully wrote block at 0x02d40000
+
+
+mtd: successfully wrote block at 0x02d80000
+
+
+mtd: successfully wrote block at 0x02dc0000
+
+
+mtd: successfully wrote block at 0x02e00000
+
+
+mtd: successfully wrote block at 0x02e40000
+
+
+mtd: successfully wrote block at 0x02e80000
+
+
+mtd: successfully wrote block at 0x02ec0000
+
+
+mtd: successfully wrote block at 0x02f00000
+
+
+mtd: successfully wrote block at 0x02f40000
+
+
+mtd: successfully wrote block at 0x02f80000
+
+
+mtd: successfully wrote block at 0x02fc0000
+
+
+mtd: successfully wrote block at 0x03000000
+
+
+mtd: successfully wrote block at 0x03040000
+
+
+mtd: successfully wrote block at 0x03080000
+
+
+mtd: successfully wrote block at 0x030c0000
+
+
+mtd: successfully wrote block at 0x03100000
+
+
+mtd: successfully wrote block at 0x03140000
+
+
+mtd: successfully wrote block at 0x03180000
+
+
+mtd: successfully wrote block at 0x031c0000
+
+
+mtd: successfully wrote block at 0x03200000
+
+
+mtd: successfully wrote block at 0x03240000
+
+
+mtd: successfully wrote block at 0x03280000
+
+
+mtd: successfully wrote block at 0x032c0000
+
+
+mtd: successfully wrote block at 0x03300000
+
+
+mtd: successfully wrote block at 0x03340000
+
+
+mtd: successfully wrote block at 0x03380000
+
+
+mtd: successfully wrote block at 0x033c0000
+
+
+mtd: successfully wrote block at 0x03400000
+
+
+mtd: successfully wrote block at 0x03440000
+
+
+mtd: successfully wrote block at 0x03480000
+
+
+mtd: successfully wrote block at 0x034c0000
+
+
+mtd: successfully wrote block at 0x03500000
+
+
+mtd: successfully wrote block at 0x03540000
+
+
+mtd: successfully wrote block at 0x03580000
+
+
+mtd: successfully wrote block at 0x035c0000
+
+
+mtd: successfully wrote block at 0x03600000
+
+
+mtd: successfully wrote block at 0x03640000
+
+
+mtd: successfully wrote block at 0x03680000
+
+
+mtd: successfully wrote block at 0x036c0000
+
+
+mtd: successfully wrote block at 0x03700000
+
+
+mtd: successfully wrote block at 0x03740000
+
+
+mtd: successfully wrote block at 0x03780000
+
+
+mtd: successfully wrote block at 0x037c0000
+
+
+mtd: successfully wrote block at 0x03800000
+
+
+mtd: successfully wrote block at 0x03840000
+
+
+mtd: successfully wrote block at 0x03880000
+
+
+mtd: successfully wrote block at 0x038c0000
+
+
+mtd: successfully wrote block at 0x03900000
+
+
+mtd: successfully wrote block at 0x03940000
+
+
+mtd: successfully wrote block at 0x03980000
+
+
+mtd: successfully wrote block at 0x039c0000
+
+
+mtd: successfully wrote block at 0x03a00000
+
+
+mtd: successfully wrote block at 0x03a40000
+
+
+mtd: successfully wrote block at 0x03a80000
+
+
+mtd: successfully wrote block at 0x03ac0000
+
+
+mtd: successfully wrote block at 0x03b00000
+
+
+mtd: successfully wrote block at 0x03b40000
+
+
+mtd: successfully wrote block at 0x03b80000
+
+
+mtd: successfully wrote block at 0x03bc0000
+
+
+mtd: successfully wrote block at 0x03c00000
+
+
+mtd: successfully wrote block at 0x03c40000
+
+
+mtd: successfully wrote block at 0x03c80000
+
+
+mtd: successfully wrote block at 0x03cc0000
+
+
+mtd: successfully wrote block at 0x03d00000
+
+
+mtd: successfully wrote block at 0x03d40000
+
+
+mtd: successfully wrote block at 0x03d80000
+
+
+mtd: successfully wrote block at 0x03dc0000
+
+
+mtd: successfully wrote block at 0x03e00000
+
+
+mtd: successfully wrote block at 0x03e40000
+
+
+mtd: successfully wrote block at 0x03e80000
+
+
+mtd: successfully wrote block at 0x03ec0000
+
+
+mtd: successfully wrote block at 0x03f00000
+
+
+mtd: successfully wrote block at 0x03f40000
+
+
+mtd: successfully wrote block at 0x03f80000
+
+
+mtd: successfully wrote block at 0x03fc0000
+
+
+mtd: successfully wrote block at 0x04000000
+
+
+mtd: successfully wrote block at 0x04040000
+
+
+mtd: successfully wrote block at 0x04080000
+
+
+mtd: successfully wrote block at 0x040c0000
+
+
+mtd: successfully wrote block at 0x04100000
+
+
+mtd: successfully wrote block at 0x04140000
+
+
+mtd: successfully wrote block at 0x04180000
+
+
+mtd: successfully wrote block at 0x041c0000
+
+
+mtd: successfully wrote block at 0x04200000
+
+
+mtd: successfully wrote block at 0x04240000
+
+
+mtd: successfully wrote block at 0x04280000
+
+
+mtd: successfully wrote block at 0x042c0000
+
+
+mtd: successfully wrote block at 0x04300000
+
+
+mtd: successfully wrote block at 0x04340000
+
+
+[DUAL SYSTEM UPDATE] b_modem write done
+
+
+[DUAL SYSTEM UPDATE] b_modem write done
+
+
+[DUAL SYSTEM UPDATE] Check /run/fotatmp/multifota.bin software image md5 d8690789809164926fc263efae513b50 (wait for a little time ...)
+
+
+[DUAL SYSTEM UPDATE] Check /run/fotatmp/multifota.bin software image md5 d8690789809164926fc263efae513b50 (wait for a little time ...)
+
+
+[DUAL SYSTEM UPDATE] Check /run/fotatmp/multifota.bin software image MD5 OK
+
+
+[DUAL SYSTEM UPDATE] Check /run/fotatmp/multifota.bin software image MD5 OK
+
+
+[DUAL SYSTEM UPDATE] /run/fotatmp/multifota.bin 4.4M
+
+
+[DUAL SYSTEM UPDATE] /run/fotatmp/multifota.bin 4.4M
+
+
+[DUAL SYSTEM UPDATE] multi_fota 23 0x00a80000 0x00040000 42 40
+
+
+[DUAL SYSTEM UPDATE] multi_fota 23 0x00a80000 0x00040000 42 40
+
+
+[DUAL SYSTEM UPDATE] 0
+
+
+[DUAL SYSTEM UPDATE] 0
+
+
+Erased 262144 bytes from address 0x00000000 in flash
+
+
+[DUAL SYSTEM UPDATE] 262144
+
+
+[DUAL SYSTEM UPDATE] 262144
+
+
+Erased 262144 bytes from address 0x00040000 in flash
+
+
+[DUAL SYSTEM UPDATE] 524288
+
+
+[DUAL SYSTEM UPDATE] 524288
+
+
+Erased 262144 bytes from address 0x00080000 in flash
+
+
+[DUAL SYSTEM UPDATE] 786432
+
+
+[DUAL SYSTEM UPDATE] 786432
+
+
+Erased 262144 bytes from address 0x000c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 1048576
+
+
+[DUAL SYSTEM UPDATE] 1048576
+
+
+Erased 262144 bytes from address 0x00100000 in flash
+
+
+[DUAL SYSTEM UPDATE] 1310720
+
+
+[DUAL SYSTEM UPDATE] 1310720
+
+
+Erased 262144 bytes from address 0x00140000 in flash
+
+
+[DUAL SYSTEM UPDATE] 1572864
+
+
+[DUAL SYSTEM UPDATE] 1572864
+
+
+Erased 262144 bytes from address 0x00180000 in flash
+
+
+[DUAL SYSTEM UPDATE] 1835008
+
+
+[DUAL SYSTEM UPDATE] 1835008
+
+
+Erased 262144 bytes from address 0x001c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 2097152
+
+
+[DUAL SYSTEM UPDATE] 2097152
+
+
+Erased 262144 bytes from address 0x00200000 in flash
+
+
+[DUAL SYSTEM UPDATE] 2359296
+
+
+[DUAL SYSTEM UPDATE] 2359296
+
+
+Erased 262144 bytes from address 0x00240000 in flash
+
+
+[DUAL SYSTEM UPDATE] 2621440
+
+
+[DUAL SYSTEM UPDATE] 2621440
+
+
+Erased 262144 bytes from address 0x00280000 in flash
+
+
+[DUAL SYSTEM UPDATE] 2883584
+
+
+[DUAL SYSTEM UPDATE] 2883584
+
+
+Erased 262144 bytes from address 0x002c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 3145728
+
+
+[DUAL SYSTEM UPDATE] 3145728
+
+
+Erased 262144 bytes from address 0x00300000 in flash
+
+
+[DUAL SYSTEM UPDATE] 3407872
+
+
+[DUAL SYSTEM UPDATE] 3407872
+
+
+Erased 262144 bytes from address 0x00340000 in flash
+
+
+[DUAL SYSTEM UPDATE] 3670016
+
+
+[DUAL SYSTEM UPDATE] 3670016
+
+
+Erased 262144 bytes from address 0x00380000 in flash
+
+
+[DUAL SYSTEM UPDATE] 3932160
+
+
+[DUAL SYSTEM UPDATE] 3932160
+
+
+Erased 262144 bytes from address 0x003c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 4194304
+
+
+[DUAL SYSTEM UPDATE] 4194304
+
+
+Erased 262144 bytes from address 0x00400000 in flash
+
+
+[DUAL SYSTEM UPDATE] 4456448
+
+
+[DUAL SYSTEM UPDATE] 4456448
+
+
+Erased 262144 bytes from address 0x00440000 in flash
+
+
+[DUAL SYSTEM UPDATE] 4718592
+
+
+[DUAL SYSTEM UPDATE] 4718592
+
+
+Erased 262144 bytes from address 0x00480000 in flash
+
+
+[DUAL SYSTEM UPDATE] 4980736
+
+
+[DUAL SYSTEM UPDATE] 4980736
+
+
+Erased 262144 bytes from address 0x004c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 5242880
+
+
+[DUAL SYSTEM UPDATE] 5242880
+
+
+Erased 262144 bytes from address 0x00500000 in flash
+
+
+[DUAL SYSTEM UPDATE] 5505024
+
+
+[DUAL SYSTEM UPDATE] 5505024
+
+
+Erased 262144 bytes from address 0x00540000 in flash
+
+
+[DUAL SYSTEM UPDATE] 5767168
+
+
+[DUAL SYSTEM UPDATE] 5767168
+
+
+Erased 262144 bytes from address 0x00580000 in flash
+
+
+[DUAL SYSTEM UPDATE] 6029312
+
+
+[DUAL SYSTEM UPDATE] 6029312
+
+
+Erased 262144 bytes from address 0x005c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 6291456
+
+
+[DUAL SYSTEM UPDATE] 6291456
+
+
+Erased 262144 bytes from address 0x00600000 in flash
+
+
+[DUAL SYSTEM UPDATE] 6553600
+
+
+[DUAL SYSTEM UPDATE] 6553600
+
+
+Erased 262144 bytes from address 0x00640000 in flash
+
+
+[DUAL SYSTEM UPDATE] 6815744
+
+
+[DUAL SYSTEM UPDATE] 6815744
+
+
+Erased 262144 bytes from address 0x00680000 in flash
+
+
+[DUAL SYSTEM UPDATE] 7077888
+
+
+[DUAL SYSTEM UPDATE] 7077888
+
+
+Erased 262144 bytes from address 0x006c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 7340032
+
+
+[DUAL SYSTEM UPDATE] 7340032
+
+
+Erased 262144 bytes from address 0x00700000 in flash
+
+
+[DUAL SYSTEM UPDATE] 7602176
+
+
+[DUAL SYSTEM UPDATE] 7602176
+
+
+Erased 262144 bytes from address 0x00740000 in flash
+
+
+[DUAL SYSTEM UPDATE] 7864320
+
+
+[DUAL SYSTEM UPDATE] 7864320
+
+
+Erased 262144 bytes from address 0x00780000 in flash
+
+
+[DUAL SYSTEM UPDATE] 8126464
+
+
+[DUAL SYSTEM UPDATE] 8126464
+
+
+Erased 262144 bytes from address 0x007c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 8388608
+
+
+[DUAL SYSTEM UPDATE] 8388608
+
+
+Erased 262144 bytes from address 0x00800000 in flash
+
+
+[DUAL SYSTEM UPDATE] 8650752
+
+
+[DUAL SYSTEM UPDATE] 8650752
+
+
+Erased 262144 bytes from address 0x00840000 in flash
+
+
+[DUAL SYSTEM UPDATE] 8912896
+
+
+[DUAL SYSTEM UPDATE] 8912896
+
+
+Erased 262144 bytes from address 0x00880000 in flash
+
+
+[DUAL SYSTEM UPDATE] 9175040
+
+
+[DUAL SYSTEM UPDATE] 9175040
+
+
+Erased 262144 bytes from address 0x008c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 9437184
+
+
+[DUAL SYSTEM UPDATE] 9437184
+
+
+Erased 262144 bytes from address 0x00900000 in flash
+
+
+[DUAL SYSTEM UPDATE] 9699328
+
+
+[DUAL SYSTEM UPDATE] 9699328
+
+
+Erased 262144 bytes from address 0x00940000 in flash
+
+
+[DUAL SYSTEM UPDATE] 9961472
+
+
+[DUAL SYSTEM UPDATE] 9961472
+
+
+Erased 262144 bytes from address 0x00980000 in flash
+
+
+[DUAL SYSTEM UPDATE] 10223616
+
+
+[DUAL SYSTEM UPDATE] 10223616
+
+
+Erased 262144 bytes from address 0x009c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] 10485760
+
+
+[DUAL SYSTEM UPDATE] 10485760
+
+
+Erased 262144 bytes from address 0x00a00000 in flash
+
+
+[DUAL SYSTEM UPDATE] multi_fota erase done
+
+
+[DUAL SYSTEM UPDATE] multi_fota erase done
+
+
+[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/multifota.bin was writing to multi_fota ...
+
+
+[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/multifota.bin was writing to multi_fota ...
+
+
+mtd: successfully wrote block at 0x00000000
+
+
+mtd: successfully wrote block at 0x00040000
+
+
+mtd: successfully wrote block at 0x00080000
+
+
+mtd: successfully wrote block at 0x000c0000
+
+
+mtd: successfully wrote block at 0x00100000
+
+
+mtd: successfully wrote block at 0x00140000
+
+
+mtd: successfully wrote block at 0x00180000
+
+
+mtd: successfully wrote block at 0x001c0000
+
+
+mtd: successfully wrote block at 0x00200000
+
+
+mtd: successfully wrote block at 0x00240000
+
+
+mtd: successfully wrote block at 0x00280000
+
+
+mtd: successfully wrote block at 0x002c0000
+
+
+mtd: successfully wrote block at 0x00300000
+
+
+mtd: successfully wrote block at 0x00340000
+
+
+mtd: successfully wrote block at 0x00380000
+
+
+mtd: successfully wrote block at 0x003c0000
+
+
+mtd: successfully wrote block at 0x00400000
+
+
+mtd: successfully wrote block at 0x00440000
+
+
+[DUAL SYSTEM UPDATE] multi_fota write done
+
+
+[DUAL SYSTEM UPDATE] multi_fota write done
+
+
+[DUAL SYSTEM UPDATE] clear update stage
+
+
+[DUAL SYSTEM UPDATE] clear update stage
+
+
+[DUAL SYSTEM UPDATE] DualSystem will update multiple small partition image
+
+
+[DUAL SYSTEM UPDATE] DualSystem will update multiple small partition image
+
+
+[DUAL SYSTEM UPDATE] misc 24 0x00140000 0x00040000 5 3
+
+
+[DUAL SYSTEM UPDATE] misc 24 0x00140000 0x00040000 5 3
+
+
+[DUAL SYSTEM UPDATE] 0
+
+
+[DUAL SYSTEM UPDATE] 0
+
+
+Erased 262144 bytes from address 0x00000000 in flash
+
+
+[DUAL SYSTEM UPDATE] 262144
+
+
+[DUAL SYSTEM UPDATE] 262144
+
+
+Erased 262144 bytes from address 0x00040000 in flash
+
+
+[DUAL SYSTEM UPDATE] 524288
+
+
+[DUAL SYSTEM UPDATE] 524288
+
+
+Erased 262144 bytes from address 0x00080000 in flash
+
+
+[DUAL SYSTEM UPDATE] 786432
+
+
+[DUAL SYSTEM UPDATE] 786432
+
+
+Erased 262144 bytes from address 0x000c0000 in flash
+
+
+[DUAL SYSTEM UPDATE] misc erase done
+
+
+[DUAL SYSTEM UPDATE] misc erase done
+
+
+mtd: successfully wrote block at 0x00000000
+
+
+multi_fota=1 ret=0
+
+
+[DUAL SYSTEM UPDATE] Clear bind_flag
+
+
+[DUAL SYSTEM UPDATE] Clear bind_flag
+
+
+[DUAL SYSTEM UPDATE] Dual system UPDATE end,will reboot
+
+
+[DUAL SYSTEM UPDATE] Dual system UPDATE end,will reboot
+
+
+
+return code#0#
+:
+2024/06/07 21:07:33 [1]	Update FW@#$ Result: gfota=standard output#|[DUAL SYSTEM UPDATE] Current system is **A**|||[DUAL SYSTEM UPDATE] Current system is **A**|||[DUAL SYSTEM UPDATE] Fota Process Start ...|||[DUAL SYSTEM UPDATE] Fota Process Start ...|||[DUAL SYSTEM UPDATE] set update stage system|||[DUAL SYSTEM UPDATE] set update stage system|||[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/sdxlemur-sysfs.ubi was writing to b_system ...|||[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/sdxlemur-sysfs.ubi was writing to b_system ...|||mtd: successfully wrote block at 0x00000000|||mtd: successfully wrote block at 0x00040000|||mtd: successfully wrote block at 0x00080000|||mtd: successfully wrote block at 0x000c0000|||mtd: successfully wrote block at 0x00100000|||mtd: successfully wrote block at 0x00140000|||mtd: successfully wrote block at 0x00180000|||mtd: successfully wrote block at 0x001c0000|||mtd: successfully wrote block at 0x00200000|||mtd: successfully wrote block at 0x00240000|||mtd: successfully wrote block at 0x00280000|||mtd: successfully wrote block at 0x002c0000|||mtd: successfully wrote block at 0x00300000|||mtd: successfully wrote block at 0x00340000|||mtd: successfully wrote block at 0x00380000|||mtd: successfully wrote block at 0x003c0000|||mtd: successfully wrote block at 0x00400000|||mtd: successfully wrote block at 0x00440000|||mtd: successfully wrote block at 0x00480000|||mtd: successfully wrote block at 0x004c0000|||mtd: successfully wrote block at 0x00500000|||mtd: successfully wrote block at 0x00540000|||mtd: successfully wrote block at 0x00580000|||mtd: successfully wrote block at 0x005c0000|||mtd: successfully wrote block at 0x00600000|||mtd: successfully wrote block at 0x00640000|||mtd: successfully wrote block at 0x00680000|||mtd: successfully wrote block at 0x006c0000|||mtd: successfully wrote block at 0x00700000|||mtd: successfully wrote block at 0x00740000|||mtd: successfully wrote block at 0x00780000|||mtd: successfully wrote block at 0x007c0000|||mtd: successfully wrote block at 0x00800000|||mtd: successfully wrote block at 0x00840000|||mtd: successfully wrote block at 0x00880000|||mtd: successfully wrote block at 0x008c0000|||mtd: successfully wrote block at 0x00900000|||mtd: successfully wrote block at 0x00940000|||mtd: successfully wrote block at 0x00980000|||mtd: successfully wrote block at 0x009c0000|||mtd: successfully wrote block at 0x00a00000|||mtd: successfully wrote block at 0x00a40000|||mtd: successfully wrote block at 0x00a80000|||mtd: successfully wrote block at 0x00ac0000|||mtd: successfully wrote block at 0x00b00000|||mtd: successfully wrote block at 0x00b40000|||mtd: successfully wrote block at 0x00b80000|||mtd: successfully wrote block at 0x00bc0000|||mtd: successfully wrote block at 0x00c00000|||mtd: successfully wrote block at 0x00c40000|||mtd: successfully wrote block at 0x00c80000|||mtd: successfully wrote block at 0x00cc0000|||mtd: successfully wrote block at 0x00d00000|||mtd: successfully wrote block at 0x00d40000|||mtd: successfully wrote block at 0x00d80000|||mtd: successfully wrote block at 0x00dc0000|||mtd: successfully wrote block at 0x00e00000|||mtd: successfully wrote block at 0x00e40000|||mtd: successfully wrote block at 0x00e80000|||mtd: successfully wrote block at 0x00ec0000|||mtd: successfully wrote block at 0x00f00000|||mtd: successfully wrote block at 0x00f40000|||mtd: successfully wrote block at 0x00f80000|||mtd: successfully wrote block at 0x00fc0000|||mtd: successfully wrote block at 0x01000000|||mtd: successfully wrote block at 0x01040000|||mtd: successfully wrote block at 0x01080000|||mtd: successfully wrote block at 0x010c0000|||mtd: successfully wrote block at 0x01100000|||mtd: successfully wrote block at 0x01140000|||mtd: successfully wrote block at 0x01180000|||mtd: successfully wrote block at 0x011c0000|||mtd: successfully wrote block at 0x01200000|||mtd: successfully wrote block at 0x01240000|||mtd: successfully wrote block at 0x01280000|||mtd: successfully wrote block at 0x012c0000|||mtd: successfully wrote block at 0x01300000|||mtd: successfully wrote block at 0x01340000|||mtd: successfully wrote block at 0x01380000|||mtd: successfully wrote block at 0x013c0000|||mtd: successfully wrote block at 0x01400000|||mtd: successfully wrote block at 0x01440000|||mtd: successfully wrote block at 0x01480000|||mtd: successfully wrote block at 0x014c0000|||mtd: successfully wrote block at 0x01500000|||mtd: successfully wrote block at 0x01540000|||mtd: successfully wrote block at 0x01580000|||mtd: successfully wrote block at 0x015c0000|||mtd: successfully wrote block at 0x01600000|||mtd: successfully wrote block at 0x01640000|||mtd: successfully wrote block at 0x01680000|||mtd: successfully wrote block at 0x016c0000|||mtd: successfully wrote block at 0x01700000|||mtd: successfully wrote block at 0x01740000|||mtd: successfully wrote block at 0x01780000|||mtd: successfully wrote block at 0x017c0000|||mtd: successfully wrote block at 0x01800000|||mtd: successfully wrote block at 0x01840000|||mtd: successfully wrote block at 0x01880000|||mtd: successfully wrote block at 0x018c0000|||mtd: successfully wrote block at 0x01900000|||mtd: successfully wrote block at 0x01940000|||mtd: successfully wrote block at 0x01980000|||mtd: successfully wrote block at 0x019c0000|||mtd: successfully wrote block at 0x01a00000|||mtd: successfully wrote block at 0x01a40000|||mtd: successfully wrote block at 0x01a80000|||mtd: successfully wrote block at 0x01ac0000|||mtd: successfully wrote block at 0x01b00000|||mtd: successfully wrote block at 0x01b40000|||mtd: successfully wrote block at 0x01b80000|||mtd: successfully wrote block at 0x01bc0000|||mtd: successfully wrote block at 0x01c00000|||mtd: successfully wrote block at 0x01c40000|||mtd: successfully wrote block at 0x01c80000|||mtd: successfully wrote block at 0x01cc0000|||mtd: successfully wrote block at 0x01d00000|||mtd: successfully wrote block at 0x01d40000|||mtd: successfully wrote block at 0x01d80000|||mtd: successfully wrote block at 0x01dc0000|||mtd: successfully wrote block at 0x01e00000|||mtd: successfully wrote block at 0x01e40000|||mtd: successfully wrote block at 0x01e80000|||mtd: successfully wrote block at 0x01ec0000|||mtd: successfully wrote block at 0x01f00000|||mtd: successfully wrote block at 0x01f40000|||mtd: successfully wrote block at 0x01f80000|||mtd: successfully wrote block at 0x01fc0000|||mtd: successfully wrote block at 0x02000000|||mtd: successfully wrote block at 0x02040000|||mtd: successfully wrote block at 0x02080000|||mtd: successfully wrote block at 0x020c0000|||mtd: successfully wrote block at 0x02100000|||mtd: successfully wrote block at 0x02140000|||mtd: successfully wrote block at 0x02180000|||mtd: successfully wrote block at 0x021c0000|||mtd: successfully wrote block at 0x02200000|||mtd: successfully wrote block at 0x02240000|||mtd: successfully wrote block at 0x02280000|||mtd: successfully wrote block at 0x022c0000|||mtd: successfully wrote block at 0x02300000|||mtd: successfully wrote block at 0x02340000|||mtd: successfully wrote block at 0x02380000|||mtd: successfully wrote block at 0x023c0000|||mtd: successfully wrote block at 0x02400000|||mtd: successfully wrote block at 0x02440000|||mtd: successfully wrote block at 0x02480000|||mtd: successfully wrote block at 0x024c0000|||mtd: successfully wrote block at 0x02500000|||mtd: successfully wrote block at 0x02540000|||mtd: successfully wrote block at 0x02580000|||mtd: successfully wrote block at 0x025c0000|||mtd: successfully wrote block at 0x02600000|||mtd: successfully wrote block at 0x02640000|||mtd: successfully wrote block at 0x02680000|||mtd: successfully wrote block at 0x026c0000|||mtd: successfully wrote block at 0x02700000|||mtd: successfully wrote block at 0x02740000|||mtd: successfully wrote block at 0x02780000|||mtd: successfully wrote block at 0x027c0000|||mtd: successfully wrote block at 0x02800000|||mtd: successfully wrote block at 0x02840000|||mtd: successfully wrote block at 0x02880000|||mtd: successfully wrote block at 0x028c0000|||mtd: successfully wrote block at 0x02900000|||mtd: successfully wrote block at 0x02940000|||mtd: successfully wrote block at 0x02980000|||mtd: successfully wrote block at 0x029c0000|||mtd: successfully wrote block at 0x02a00000|||mtd: successfully wrote block at 0x02a40000|||mtd: successfully wrote block at 0x02a80000|||mtd: successfully wrote block at 0x02ac0000|||mtd: successfully wrote block at 0x02b00000|||mtd: successfully wrote block at 0x02b40000|||mtd: successfully wrote block at 0x02b80000|||mtd: successfully wrote block at 0x02bc0000|||mtd: successfully wrote block at 0x02c00000|||mtd: successfully wrote block at 0x02c40000|||mtd: successfully wrote block at 0x02c80000|||mtd: successfully wrote block at 0x02cc0000|||mtd: successfully wrote block at 0x02d00000|||mtd: successfully wrote block at 0x02d40000|||mtd: successfully wrote block at 0x02d80000|||mtd: successfully wrote block at 0x02dc0000|||mtd: successfully wrote block at 0x02e00000|||mtd: successfully wrote block at 0x02e40000|||mtd: successfully wrote block at 0x02e80000|||mtd: successfully wrote block at 0x02ec0000|||mtd: successfully wrote block at 0x02f00000|||mtd: successfully wrote block at 0x02f40000|||mtd: successfully wrote block at 0x02f80000|||mtd: successfully wrote block at 0x02fc0000|||mtd: successfully wrote block at 0x03000000|||mtd: successfully wrote block at 0x03040000|||mtd: successfully wrote block at 0x03080000|||mtd: successfully wrote block at 0x030c0000|||mtd: successfully wrote block at 0x03100000|||mtd: successfully wrote block at 0x03140000|||mtd: successfully wrote block at 0x03180000|||mtd: successfully wrote block at 0x031c0000|||mtd: successfully wrote block at 0x03200000|||mtd: successfully wrote block at 0x03240000|||mtd: successfully wrote block at 0x03280000|||mtd: successfully wrote block at 0x032c0000|||mtd: successfully wrote block at 0x03300000|||mtd: successfully wrote block at 0x03340000|||mtd: successfully wrote block at 0x03380000|||mtd: successfully wrote block at 0x033c0000|||mtd: successfully wrote block at 0x03400000|||mtd: successfully wrote block at 0x03440000|||mtd: successfully wrote block at 0x03480000|||mtd: successfully wrote block at 0x034c0000|||mtd: successfully wrote block at 0x03500000|||mtd: successfully wrote block at 0x03540000|||mtd: successfully wrote block at 0x03580000|||mtd: successfully wrote block at 0x035c0000|||mtd: successfully wrote block at 0x03600000|||mtd: successfully wrote block at 0x03640000|||mtd: successfully wrote block at 0x03680000|||mtd: successfully wrote block at 0x036c0000|||mtd: successfully wrote block at 0x03700000|||mtd: successfully wrote block at 0x03740000|||mtd: successfully wrote block at 0x03780000|||mtd: successfully wrote block at 0x037c0000|||mtd: successfully wrote block at 0x03800000|||mtd: successfully wrote block at 0x03840000|||mtd: successfully wrote block at 0x03880000|||mtd: successfully wrote block at 0x038c0000|||mtd: successfully wrote block at 0x03900000|||mtd: successfully wrote block at 0x03940000|||mtd: successfully wrote block at 0x03980000|||mtd: successfully wrote block at 0x039c0000|||mtd: successfully wrote block at 0x03a00000|||mtd: successfully wrote block at 0x03a40000|||mtd: successfully wrote block at 0x03a80000|||mtd: successfully wrote block at 0x03ac0000|||mtd: successfully wrote block at 0x03b00000|||mtd: successfully wrote block at 0x03b40000|||mtd: successfully wrote block at 0x03b80000|||mtd: successfully wrote block at 0x03bc0000|||mtd: successfully wrote block at 0x03c00000|||mtd: successfully wrote block at 0x03c40000|||mtd: successfully wrote block at 0x03c80000|||mtd: successfully wrote block at 0x03cc0000|||mtd: successfully wrote block at 0x03d00000|||mtd: successfully wrote block at 0x03d40000|||mtd: successfully wrote block at 0x03d80000|||mtd: successfully wrote block at 0x03dc0000|||mtd: successfully wrote block at 0x03e00000|||mtd: successfully wrote block at 0x03e40000|||mtd: successfully wrote block at 0x03e80000|||mtd: successfully wrote block at 0x03ec0000|||mtd: successfully wrote block at 0x03f00000|||mtd: successfully wrote block at 0x03f40000|||mtd: successfully wrote block at 0x03f80000|||mtd: successfully wrote block at 0x03fc0000|||mtd: successfully wrote block at 0x04000000|||mtd: successfully wrote block at 0x04040000|||mtd: successfully wrote block at 0x04080000|||mtd: successfully wrote block at 0x040c0000|||mtd: successfully wrote block at 0x04100000|||mtd: successfully wrote block at 0x04140000|||mtd: successfully wrote block at 0x04180000|||mtd: successfully wrote block at 0x041c0000|||mtd: successfully wrote block at 0x04200000|||mtd: successfully wrote block at 0x04240000|||mtd: successfully wrote block at 0x04280000|||mtd: successfully wrote block at 0x042c0000|||mtd: successfully wrote block at 0x04300000|||mtd: successfully wrote block at 0x04340000|||mtd: successfully wrote block at 0x04380000|||mtd: successfully wrote block at 0x043c0000|||mtd: successfully wrote block at 0x04400000|||mtd: successfully wrote block at 0x04440000|||mtd: successfully wrote block at 0x04480000|||mtd: successfully wrote block at 0x044c0000|||mtd: successfully wrote block at 0x04500000|||mtd: successfully wrote block at 0x04540000|||mtd: successfully wrote block at 0x04580000|||mtd: successfully wrote block at 0x045c0000|||mtd: successfully wrote block at 0x04600000|||mtd: successfully wrote block at 0x04640000|||mtd: successfully wrote block at 0x04680000|||mtd: successfully wrote block at 0x046c0000|||mtd: successfully wrote block at 0x04700000|||mtd: successfully wrote block at 0x04740000|||mtd: successfully wrote block at 0x04780000|||mtd: successfully wrote block at 0x047c0000|||mtd: successfully wrote block at 0x04800000|||mtd: successfully wrote block at 0x04840000|||mtd: successfully wrote block at 0x04880000|||mtd: successfully wrote block at 0x048c0000|||mtd: successfully wrote block at 0x04900000|||mtd: successfully wrote block at 0x04940000|||mtd: successfully wrote block at 0x04980000|||mtd: successfully wrote block at 0x049c0000|||mtd: successfully wrote block at 0x04a00000|||mtd: successfully wrote block at 0x04a40000|||mtd: successfully wrote block at 0x04a80000|||mtd: successfully wrote block at 0x04ac0000|||mtd: successfully wrote block at 0x04b00000|||mtd: successfully wrote block at 0x04b40000|||mtd: successfully wrote block at 0x04b80000|||mtd: successfully wrote block at 0x04bc0000|||mtd: successfully wrote block at 0x04c00000|||mtd: successfully wrote block at 0x04c40000|||mtd: successfully wrote block at 0x04c80000|||mtd: successfully wrote block at 0x04cc0000|||mtd: successfully wrote block at 0x04d00000|||mtd: successfully wrote block at 0x04d40000|||mtd: successfully wrote block at 0x04d80000|||mtd: successfully wrote block at 0x04dc0000|||mtd: successfully wrote block at 0x04e00000|||mtd: successfully wrote block at 0x04e40000|||mtd: successfully wrote block at 0x04e80000|||mtd: successfully wrote block at 0x04ec0000|||mtd: successfully wrote block at 0x04f00000|||mtd: successfully wrote block at 0x04f40000|||mtd: successfully wrote block at 0x04f80000|||[DUAL SYSTEM UPDATE] b_system write done|||[DUAL SYSTEM UPDATE] b_system write done|||[DUAL SYSTEM UPDATE] set update stage boot|||[DUAL SYSTEM UPDATE] set update stage boot|||[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/sdxlemur-boot.img was writing to b_boot ...|||[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/sdxlemur-boot.img was writing to b_boot ...|||mtd: successfully wrote block at 0x00000000|||mtd: successfully wrote block at 0x00040000|||mtd: successfully wrote block at 0x00080000|||mtd: successfully wrote block at 0x000c0000|||mtd: successfully wrote block at 0x00100000|||mtd: successfully wrote block at 0x00140000|||mtd: successfully wrote block at 0x00180000|||mtd: successfully wrote block at 0x001c0000|||mtd: successfully wrote block at 0x00200000|||mtd: successfully wrote block at 0x00240000|||mtd: successfully wrote block at 0x00280000|||mtd: successfully wrote block at 0x002c0000|||mtd: successfully wrote block at 0x00300000|||mtd: successfully wrote block at 0x00340000|||mtd: successfully wrote block at 0x00380000|||mtd: successfully wrote block at 0x003c0000|||mtd: successfully wrote block at 0x00400000|||mtd: successfully wrote block at 0x00440000|||mtd: successfully wrote block at 0x00480000|||mtd: successfully wrote block at 0x004c0000|||mtd: successfully wrote block at 0x00500000|||mtd: successfully wrote block at 0x00540000|||mtd: successfully wrote block at 0x00580000|||mtd: successfully wrote block at 0x005c0000|||mtd: successfully wrote block at 0x00600000|||mtd: successfully wrote block at 0x00640000|||mtd: successfully wrote block at 0x00680000|||mtd: successfully wrote block at 0x006c0000|||mtd: successfully wrote block at 0x00700000|||mtd: successfully wrote block at 0x00740000|||mtd: successfully wrote block at 0x00780000|||mtd: successfully wrote block at 0x007c0000|||mtd: successfully wrote block at 0x00800000|||mtd: successfully wrote block at 0x00840000|||mtd: successfully wrote block at 0x00880000|||mtd: successfully wrote block at 0x008c0000|||mtd: successfully wrote block at 0x00900000|||mtd: successfully wrote block at 0x00940000|||mtd: successfully wrote block at 0x00980000|||mtd: successfully wrote block at 0x009c0000|||mtd: successfully wrote block at 0x00a00000|||mtd: successfully wrote block at 0x00a40000|||[DUAL SYSTEM UPDATE] b_boot write done|||[DUAL SYSTEM UPDATE] b_boot write done|||[DUAL SYSTEM UPDATE] set update stage modem|||[DUAL SYSTEM UPDATE] set update stage modem|||[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/NON-HLOS.ubi was writing to b_modem ...|||[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/NON-HLOS.ubi was writing to b_modem ...|||mtd: successfully wrote block at 0x00000000|||mtd: successfully wrote block at 0x00040000|||mtd: successfully wrote block at 0x00080000|||mtd: successfully wrote block at 0x000c0000|||mtd: successfully wrote block at 0x00100000|||mtd: successfully wrote block at 0x00140000|||mtd: successfully wrote block at 0x00180000|||mtd: successfully wrote block at 0x001c0000|||mtd: successfully wrote block at 0x00200000|||mtd: successfully wrote block at 0x00240000|||mtd: successfully wrote block at 0x00280000|||mtd: successfully wrote block at 0x002c0000|||mtd: successfully wrote block at 0x00300000|||mtd: successfully wrote block at 0x00340000|||mtd: successfully wrote block at 0x00380000|||mtd: successfully wrote block at 0x003c0000|||mtd: successfully wrote block at 0x00400000|||mtd: successfully wrote block at 0x00440000|||mtd: successfully wrote block at 0x00480000|||mtd: successfully wrote block at 0x004c0000|||mtd: successfully wrote block at 0x00500000|||mtd: successfully wrote block at 0x00540000|||mtd: successfully wrote block at 0x00580000|||mtd: successfully wrote block at 0x005c0000|||mtd: successfully wrote block at 0x00600000|||mtd: successfully wrote block at 0x00640000|||mtd: successfully wrote block at 0x00680000|||mtd: successfully wrote block at 0x006c0000|||mtd: successfully wrote block at 0x00700000|||mtd: successfully wrote block at 0x00740000|||mtd: successfully wrote block at 0x00780000|||mtd: successfully wrote block at 0x007c0000|||mtd: successfully wrote block at 0x00800000|||mtd: successfully wrote block at 0x00840000|||mtd: successfully wrote block at 0x00880000|||mtd: successfully wrote block at 0x008c0000|||mtd: successfully wrote block at 0x00900000|||mtd: successfully wrote block at 0x00940000|||mtd: successfully wrote block at 0x00980000|||mtd: successfully wrote block at 0x009c0000|||mtd: successfully wrote block at 0x00a00000|||mtd: successfully wrote block at 0x00a40000|||mtd: successfully wrote block at 0x00a80000|||mtd: successfully wrote block at 0x00ac0000|||mtd: successfully wrote block at 0x00b00000|||mtd: successfully wrote block at 0x00b40000|||mtd: successfully wrote block at 0x00b80000|||mtd: successfully wrote block at 0x00bc0000|||mtd: successfully wrote block at 0x00c00000|||mtd: successfully wrote block at 0x00c40000|||mtd: successfully wrote block at 0x00c80000|||mtd: successfully wrote block at 0x00cc0000|||mtd: successfully wrote block at 0x00d00000|||mtd: successfully wrote block at 0x00d40000|||mtd: successfully wrote block at 0x00d80000|||mtd: successfully wrote block at 0x00dc0000|||mtd: successfully wrote block at 0x00e00000|||mtd: successfully wrote block at 0x00e40000|||mtd: successfully wrote block at 0x00e80000|||mtd: successfully wrote block at 0x00ec0000|||mtd: successfully wrote block at 0x00f00000|||mtd: successfully wrote block at 0x00f40000|||mtd: successfully wrote block at 0x00f80000|||mtd: successfully wrote block at 0x00fc0000|||mtd: successfully wrote block at 0x01000000|||mtd: successfully wrote block at 0x01040000|||mtd: successfully wrote block at 0x01080000|||mtd: successfully wrote block at 0x010c0000|||mtd: successfully wrote block at 0x01100000|||mtd: successfully wrote block at 0x01140000|||mtd: successfully wrote block at 0x01180000|||mtd: successfully wrote block at 0x011c0000|||mtd: successfully wrote block at 0x01200000|||mtd: successfully wrote block at 0x01240000|||mtd: successfully wrote block at 0x01280000|||mtd: successfully wrote block at 0x012c0000|||mtd: successfully wrote block at 0x01300000|||mtd: successfully wrote block at 0x01340000|||mtd: successfully wrote block at 0x01380000|||mtd: successfully wrote block at 0x013c0000|||mtd: successfully wrote block at 0x01400000|||mtd: successfully wrote block at 0x01440000|||mtd: successfully wrote block at 0x01480000|||mtd: successfully wrote block at 0x014c0000|||mtd: successfully wrote block at 0x01500000|||mtd: successfully wrote block at 0x01540000|||mtd: successfully wrote block at 0x01580000|||mtd: successfully wrote block at 0x015c0000|||mtd: successfully wrote block at 0x01600000|||mtd: successfully wrote block at 0x01640000|||mtd: successfully wrote block at 0x01680000|||mtd: successfully wrote block at 0x016c0000|||mtd: successfully wrote block at 0x01700000|||mtd: successfully wrote block at 0x01740000|||mtd: successfully wrote block at 0x01780000|||mtd: successfully wrote block at 0x017c0000|||mtd: successfully wrote block at 0x01800000|||mtd: successfully wrote block at 0x01840000|||mtd: successfully wrote block at 0x01880000|||mtd: successfully wrote block at 0x018c0000|||mtd: successfully wrote block at 0x01900000|||mtd: successfully wrote block at 0x01940000|||mtd: successfully wrote block at 0x01980000|||mtd: successfully wrote block at 0x019c0000|||mtd: successfully wrote block at 0x01a00000|||mtd: successfully wrote block at 0x01a40000|||mtd: successfully wrote block at 0x01a80000|||mtd: successfully wrote block at 0x01ac0000|||mtd: successfully wrote block at 0x01b00000|||mtd: successfully wrote block at 0x01b40000|||mtd: successfully wrote block at 0x01b80000|||mtd: successfully wrote block at 0x01bc0000|||mtd: successfully wrote block at 0x01c00000|||mtd: successfully wrote block at 0x01c40000|||mtd: successfully wrote block at 0x01c80000|||mtd: successfully wrote block at 0x01cc0000|||mtd: successfully wrote block at 0x01d00000|||mtd: successfully wrote block at 0x01d40000|||mtd: successfully wrote block at 0x01d80000|||mtd: successfully wrote block at 0x01dc0000|||mtd: successfully wrote block at 0x01e00000|||mtd: successfully wrote block at 0x01e40000|||mtd: successfully wrote block at 0x01e80000|||mtd: successfully wrote block at 0x01ec0000|||mtd: successfully wrote block at 0x01f00000|||mtd: successfully wrote block at 0x01f40000|||mtd: successfully wrote block at 0x01f80000|||mtd: successfully wrote block at 0x01fc0000|||mtd: successfully wrote block at 0x02000000|||mtd: successfully wrote block at 0x02040000|||mtd: successfully wrote block at 0x02080000|||mtd: successfully wrote block at 0x020c0000|||mtd: successfully wrote block at 0x02100000|||mtd: successfully wrote block at 0x02140000|||mtd: successfully wrote block at 0x02180000|||mtd: successfully wrote block at 0x021c0000|||mtd: successfully wrote block at 0x02200000|||mtd: successfully wrote block at 0x02240000|||mtd: successfully wrote block at 0x02280000|||mtd: successfully wrote block at 0x022c0000|||mtd: successfully wrote block at 0x02300000|||mtd: successfully wrote block at 0x02340000|||mtd: successfully wrote block at 0x02380000|||mtd: successfully wrote block at 0x023c0000|||mtd: successfully wrote block at 0x02400000|||mtd: successfully wrote block at 0x02440000|||mtd: successfully wrote block at 0x02480000|||mtd: successfully wrote block at 0x024c0000|||mtd: successfully wrote block at 0x02500000|||mtd: successfully wrote block at 0x02540000|||mtd: successfully wrote block at 0x02580000|||mtd: successfully wrote block at 0x025c0000|||mtd: successfully wrote block at 0x02600000|||mtd: successfully wrote block at 0x02640000|||mtd: successfully wrote block at 0x02680000|||mtd: successfully wrote block at 0x026c0000|||mtd: successfully wrote block at 0x02700000|||mtd: successfully wrote block at 0x02740000|||mtd: successfully wrote block at 0x02780000|||mtd: successfully wrote block at 0x027c0000|||mtd: successfully wrote block at 0x02800000|||mtd: successfully wrote block at 0x02840000|||mtd: successfully wrote block at 0x02880000|||mtd: successfully wrote block at 0x028c0000|||mtd: successfully wrote block at 0x02900000|||mtd: successfully wrote block at 0x02940000|||mtd: successfully wrote block at 0x02980000|||mtd: successfully wrote block at 0x029c0000|||mtd: successfully wrote block at 0x02a00000|||mtd: successfully wrote block at 0x02a40000|||mtd: successfully wrote block at 0x02a80000|||mtd: successfully wrote block at 0x02ac0000|||mtd: successfully wrote block at 0x02b00000|||mtd: successfully wrote block at 0x02b40000|||mtd: successfully wrote block at 0x02b80000|||mtd: successfully wrote block at 0x02bc0000|||mtd: successfully wrote block at 0x02c00000|||mtd: successfully wrote block at 0x02c40000|||mtd: successfully wrote block at 0x02c80000|||mtd: successfully wrote block at 0x02cc0000|||mtd: successfully wrote block at 0x02d00000|||mtd: successfully wrote block at 0x02d40000|||mtd: successfully wrote block at 0x02d80000|||mtd: successfully wrote block at 0x02dc0000|||mtd: successfully wrote block at 0x02e00000|||mtd: successfully wrote block at 0x02e40000|||mtd: successfully wrote block at 0x02e80000|||mtd: successfully wrote block at 0x02ec0000|||mtd: successfully wrote block at 0x02f00000|||mtd: successfully wrote block at 0x02f40000|||mtd: successfully wrote block at 0x02f80000|||mtd: successfully wrote block at 0x02fc0000|||mtd: successfully wrote block at 0x03000000|||mtd: successfully wrote block at 0x03040000|||mtd: successfully wrote block at 0x03080000|||mtd: successfully wrote block at 0x030c0000|||mtd: successfully wrote block at 0x03100000|||mtd: successfully wrote block at 0x03140000|||mtd: successfully wrote block at 0x03180000|||mtd: successfully wrote block at 0x031c0000|||mtd: successfully wrote block at 0x03200000|||mtd: successfully wrote block at 0x03240000|||mtd: successfully wrote block at 0x03280000|||mtd: successfully wrote block at 0x032c0000|||mtd: successfully wrote block at 0x03300000|||mtd: successfully wrote block at 0x03340000|||mtd: successfully wrote block at 0x03380000|||mtd: successfully wrote block at 0x033c0000|||mtd: successfully wrote block at 0x03400000|||mtd: successfully wrote block at 0x03440000|||mtd: successfully wrote block at 0x03480000|||mtd: successfully wrote block at 0x034c0000|||mtd: successfully wrote block at 0x03500000|||mtd: successfully wrote block at 0x03540000|||mtd: successfully wrote block at 0x03580000|||mtd: successfully wrote block at 0x035c0000|||mtd: successfully wrote block at 0x03600000|||mtd: successfully wrote block at 0x03640000|||mtd: successfully wrote block at 0x03680000|||mtd: successfully wrote block at 0x036c0000|||mtd: successfully wrote block at 0x03700000|||mtd: successfully wrote block at 0x03740000|||mtd: successfully wrote block at 0x03780000|||mtd: successfully wrote block at 0x037c0000|||mtd: successfully wrote block at 0x03800000|||mtd: successfully wrote block at 0x03840000|||mtd: successfully wrote block at 0x03880000|||mtd: successfully wrote block at 0x038c0000|||mtd: successfully wrote block at 0x03900000|||mtd: successfully wrote block at 0x03940000|||mtd: successfully wrote block at 0x03980000|||mtd: successfully wrote block at 0x039c0000|||mtd: successfully wrote block at 0x03a00000|||mtd: successfully wrote block at 0x03a40000|||mtd: successfully wrote block at 0x03a80000|||mtd: successfully wrote block at 0x03ac0000|||mtd: successfully wrote block at 0x03b00000|||mtd: successfully wrote block at 0x03b40000|||mtd: successfully wrote block at 0x03b80000|||mtd: successfully wrote block at 0x03bc0000|||mtd: successfully wrote block at 0x03c00000|||mtd: successfully wrote block at 0x03c40000|||mtd: successfully wrote block at 0x03c80000|||mtd: successfully wrote block at 0x03cc0000|||mtd: successfully wrote block at 0x03d00000|||mtd: successfully wrote block at 0x03d40000|||mtd: successfully wrote block at 0x03d80000|||mtd: successfully wrote block at 0x03dc0000|||mtd: successfully wrote block at 0x03e00000|||mtd: successfully wrote block at 0x03e40000|||mtd: successfully wrote block at 0x03e80000|||mtd: successfully wrote block at 0x03ec0000|||mtd: successfully wrote block at 0x03f00000|||mtd: successfully wrote block at 0x03f40000|||mtd: successfully wrote block at 0x03f80000|||mtd: successfully wrote block at 0x03fc0000|||mtd: successfully wrote block at 0x04000000|||mtd: successfully wrote block at 0x04040000|||mtd: successfully wrote block at 0x04080000|||mtd: successfully wrote block at 0x040c0000|||mtd: successfully wrote block at 0x04100000|||mtd: successfully wrote block at 0x04140000|||mtd: successfully wrote block at 0x04180000|||mtd: successfully wrote block at 0x041c0000|||mtd: successfully wrote block at 0x04200000|||mtd: successfully wrote block at 0x04240000|||mtd: successfully wrote block at 0x04280000|||mtd: successfully wrote block at 0x042c0000|||mtd: successfully wrote block at 0x04300000|||mtd: successfully wrote block at 0x04340000|||[DUAL SYSTEM UPDATE] b_modem write done|||[DUAL SYSTEM UPDATE] b_modem write done|||[DUAL SYSTEM UPDATE] Check /run/fotatmp/multifota.bin software image md5 d8690789809164926fc263efae513b50 (wait for a little time ...)|||[DUAL SYSTEM UPDATE] Check /run/fotatmp/multifota.bin software image md5 d8690789809164926fc263efae513b50 (wait for a little time ...)|||[DUAL SYSTEM UPDATE] Check /run/fotatmp/multifota.bin software image MD5 OK|||[DUAL SYSTEM UPDATE] Check /run/fotatmp/multifota.bin software image MD5 OK|||[DUAL SYSTEM UPDATE] /run/fotatmp/multifota.bin 4.4M|||[DUAL SYSTEM UPDATE] /run/fotatmp/multifota.bin 4.4M|||[DUAL SYSTEM UPDATE] multi_fota 23 0x00a80000 0x00040000 42 40|||[DUAL SYSTEM UPDATE] multi_fota 23 0x00a80000 0x00040000 42 40|||[DUAL SYSTEM UPDATE] 0|||[DUAL SYSTEM UPDATE] 0|||Erased 262144 bytes from address 0x00000000 in flash|||[DUAL SYSTEM UPDATE] 262144|||[DUAL SYSTEM UPDATE] 262144|||Erased 262144 bytes from address 0x00040000 in flash|||[DUAL SYSTEM UPDATE] 524288|||[DUAL SYSTEM UPDATE] 524288|||Erased 262144 bytes from address 0x00080000 in flash|||[DUAL SYSTEM UPDATE] 786432|||[DUAL SYSTEM UPDATE] 786432|||Erased 262144 bytes from address 0x000c0000 in flash|||[DUAL SYSTEM UPDATE] 1048576|||[DUAL SYSTEM UPDATE] 1048576|||Erased 262144 bytes from address 0x00100000 in flash|||[DUAL SYSTEM UPDATE] 1310720|||[DUAL SYSTEM UPDATE] 1310720|||Erased 262144 bytes from address 0x00140000 in flash|||[DUAL SYSTEM UPDATE] 1572864|||[DUAL SYSTEM UPDATE] 1572864|||Erased 262144 bytes from address 0x00180000 in flash|||[DUAL SYSTEM UPDATE] 1835008|||[DUAL SYSTEM UPDATE] 1835008|||Erased 262144 bytes from address 0x001c0000 in flash|||[DUAL SYSTEM UPDATE] 2097152|||[DUAL SYSTEM UPDATE] 2097152|||Erased 262144 bytes from address 0x00200000 in flash|||[DUAL SYSTEM UPDATE] 2359296|||[DUAL SYSTEM UPDATE] 2359296|||Erased 262144 bytes from address 0x00240000 in flash|||[DUAL SYSTEM UPDATE] 2621440|||[DUAL SYSTEM UPDATE] 2621440|||Erased 262144 bytes from address 0x00280000 in flash|||[DUAL SYSTEM UPDATE] 2883584|||[DUAL SYSTEM UPDATE] 2883584|||Erased 262144 bytes from address 0x002c0000 in flash|||[DUAL SYSTEM UPDATE] 3145728|||[DUAL SYSTEM UPDATE] 3145728|||Erased 262144 bytes from address 0x00300000 in flash|||[DUAL SYSTEM UPDATE] 3407872|||[DUAL SYSTEM UPDATE] 3407872|||Erased 262144 bytes from address 0x00340000 in flash|||[DUAL SYSTEM UPDATE] 3670016|||[DUAL SYSTEM UPDATE] 3670016|||Erased 262144 bytes from address 0x00380000 in flash|||[DUAL SYSTEM UPDATE] 3932160|||[DUAL SYSTEM UPDATE] 3932160|||Erased 262144 bytes from address 0x003c0000 in flash|||[DUAL SYSTEM UPDATE] 4194304|||[DUAL SYSTEM UPDATE] 4194304|||Erased 262144 bytes from address 0x00400000 in flash|||[DUAL SYSTEM UPDATE] 4456448|||[DUAL SYSTEM UPDATE] 4456448|||Erased 262144 bytes from address 0x00440000 in flash|||[DUAL SYSTEM UPDATE] 4718592|||[DUAL SYSTEM UPDATE] 4718592|||Erased 262144 bytes from address 0x00480000 in flash|||[DUAL SYSTEM UPDATE] 4980736|||[DUAL SYSTEM UPDATE] 4980736|||Erased 262144 bytes from address 0x004c0000 in flash|||[DUAL SYSTEM UPDATE] 5242880|||[DUAL SYSTEM UPDATE] 5242880|||Erased 262144 bytes from address 0x00500000 in flash|||[DUAL SYSTEM UPDATE] 5505024|||[DUAL SYSTEM UPDATE] 5505024|||Erased 262144 bytes from address 0x00540000 in flash|||[DUAL SYSTEM UPDATE] 5767168|||[DUAL SYSTEM UPDATE] 5767168|||Erased 262144 bytes from address 0x00580000 in flash|||[DUAL SYSTEM UPDATE] 6029312|||[DUAL SYSTEM UPDATE] 6029312|||Erased 262144 bytes from address 0x005c0000 in flash|||[DUAL SYSTEM UPDATE] 6291456|||[DUAL SYSTEM UPDATE] 6291456|||Erased 262144 bytes from address 0x00600000 in flash|||[DUAL SYSTEM UPDATE] 6553600|||[DUAL SYSTEM UPDATE] 6553600|||Erased 262144 bytes from address 0x00640000 in flash|||[DUAL SYSTEM UPDATE] 6815744|||[DUAL SYSTEM UPDATE] 6815744|||Erased 262144 bytes from address 0x00680000 in flash|||[DUAL SYSTEM UPDATE] 7077888|||[DUAL SYSTEM UPDATE] 7077888|||Erased 262144 bytes from address 0x006c0000 in flash|||[DUAL SYSTEM UPDATE] 7340032|||[DUAL SYSTEM UPDATE] 7340032|||Erased 262144 bytes from address 0x00700000 in flash|||[DUAL SYSTEM UPDATE] 7602176|||[DUAL SYSTEM UPDATE] 7602176|||Erased 262144 bytes from address 0x00740000 in flash|||[DUAL SYSTEM UPDATE] 7864320|||[DUAL SYSTEM UPDATE] 7864320|||Erased 262144 bytes from address 0x00780000 in flash|||[DUAL SYSTEM UPDATE] 8126464|||[DUAL SYSTEM UPDATE] 8126464|||Erased 262144 bytes from address 0x007c0000 in flash|||[DUAL SYSTEM UPDATE] 8388608|||[DUAL SYSTEM UPDATE] 8388608|||Erased 262144 bytes from address 0x00800000 in flash|||[DUAL SYSTEM UPDATE] 8650752|||[DUAL SYSTEM UPDATE] 8650752|||Erased 262144 bytes from address 0x00840000 in flash|||[DUAL SYSTEM UPDATE] 8912896|||[DUAL SYSTEM UPDATE] 8912896|||Erased 262144 bytes from address 0x00880000 in flash|||[DUAL SYSTEM UPDATE] 9175040|||[DUAL SYSTEM UPDATE] 9175040|||Erased 262144 bytes from address 0x008c0000 in flash|||[DUAL SYSTEM UPDATE] 9437184|||[DUAL SYSTEM UPDATE] 9437184|||Erased 262144 bytes from address 0x00900000 in flash|||[DUAL SYSTEM UPDATE] 9699328|||[DUAL SYSTEM UPDATE] 9699328|||Erased 262144 bytes from address 0x00940000 in flash|||[DUAL SYSTEM UPDATE] 9961472|||[DUAL SYSTEM UPDATE] 9961472|||Erased 262144 bytes from address 0x00980000 in flash|||[DUAL SYSTEM UPDATE] 10223616|||[DUAL SYSTEM UPDATE] 10223616|||Erased 262144 bytes from address 0x009c0000 in flash|||[DUAL SYSTEM UPDATE] 10485760|||[DUAL SYSTEM UPDATE] 10485760|||Erased 262144 bytes from address 0x00a00000 in flash|||[DUAL SYSTEM UPDATE] multi_fota erase done|||[DUAL SYSTEM UPDATE] multi_fota erase done|||[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/multifota.bin was writing to multi_fota ...|||[DUAL SYSTEM UPDATE] mtdimg /run/fotatmp/multifota.bin was writing to multi_fota ...|||mtd: successfully wrote block at 0x00000000|||mtd: successfully wrote block at 0x00040000|||mtd: successfully wrote block at 0x00080000|||mtd: successfully wrote block at 0x000c0000|||mtd: successfully wrote block at 0x00100000|||mtd: successfully wrote block at 0x00140000|||mtd: successfully wrote block at 0x00180000|||mtd: successfully wrote block at 0x001c0000|||mtd: successfully wrote block at 0x00200000|||mtd: successfully wrote block at 0x00240000|||mtd: successfully wrote block at 0x00280000|||mtd: successfully wrote block at 0x002c0000|||mtd: successfully wrote block at 0x00300000|||mtd: successfully wrote block at 0x00340000|||mtd: successfully wrote block at 0x00380000|||mtd: successfully wrote block at 0x003c0000|||mtd: successfully wrote block at 0x00400000|||mtd: successfully wrote block at 0x00440000|||[DUAL SYSTEM UPDATE] multi_fota write done|||[DUAL SYSTEM UPDATE] multi_fota write done|||[DUAL SYSTEM UPDATE] clear update stage|||[DUAL SYSTEM UPDATE] clear update stage|||[DUAL SYSTEM UPDATE] DualSystem will update multiple small partition image|||[DUAL SYSTEM UPDATE] DualSystem will update multiple small partition image|||[DUAL SYSTEM UPDATE] misc 24 0x00140000 0x00040000 5 3|||[DUAL SYSTEM UPDATE] misc 24 0x00140000 0x00040000 5 3|||[DUAL SYSTEM UPDATE] 0|||[DUAL SYSTEM UPDATE] 0|||Erased 262144 bytes from address 0x00000000 in flash|||[DUAL SYSTEM UPDATE] 262144|||[DUAL SYSTEM UPDATE] 262144|||Erased 262144 bytes from address 0x00040000 in flash|||[DUAL SYSTEM UPDATE] 524288|||[DUAL SYSTEM UPDATE] 524288|||Erased 262144 bytes from address 0x00080000 in flash|||[DUAL SYSTEM UPDATE] 786432|||[DUAL SYSTEM UPDATE] 786432|||Erased 262144 bytes from address 0x000c0000 in flash|||[DUAL SYSTEM UPDATE] misc erase done|||[DUAL SYSTEM UPDATE] misc erase done|||mtd: successfully wrote block at 0x00000000|||multi_fota=1 ret=0|||[DUAL SYSTEM UPDATE] Clear bind_flag|||[DUAL SYSTEM UPDATE] Clear bind_flag|||[DUAL SYSTEM UPDATE] Dual system UPDATE end,will reboot|||[DUAL SYSTEM UPDATE] Dual system UPDATE end,will reboot||||return code#0#|:
+[21:07:33.239][DUT] [Update FW@#$]--
+2024/06/07 21:07:33 [1]	[DUT] [Update FW@#$] ~~ TestTime:59.7905465 sec
+2024/06/07 21:07:33 [1]	Run B7PL025-139:Wait time@#$	Mode: 1, Retry: 60
+[21:07:33.239][PC] [Wait time@#$]++
+2024/06/07 21:07:33 [1]	> :Delay,"100000"
+2024/06/07 21:09:13 [1]	< 0
+[21:09:13.264][PC] [Wait time@#$]--
+2024/06/07 21:09:13 [1]	[PC] [Wait time@#$] ~~ TestTime:100.0253472 sec
+2024/06/07 21:09:13 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:13.264][PC] [Wait time@#$]++
+2024/06/07 21:09:13 [1]	> :Delay,"1000"
+2024/06/07 21:09:14 [1]	< 0
+[21:09:14.269][PC] [Wait time@#$]--
+2024/06/07 21:09:14 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0052331 sec
+2024/06/07 21:09:14 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 60
+[21:09:14.269][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:14 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:14 [1]	< 
+2024/06/07 21:09:14 [1]	< standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:
+2024/06/07 21:09:14 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:14.457][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:14 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1871714 sec
+2024/06/07 21:09:14 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:14.457][PC] [Wait time@#$]++
+2024/06/07 21:09:14 [1]	> :Delay,"1000"
+2024/06/07 21:09:15 [1]	< 0
+[21:09:15.479][PC] [Wait time@#$]--
+2024/06/07 21:09:15 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0229241 sec
+2024/06/07 21:09:15 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 59
+[21:09:15.479][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:15 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:15 [1]	< 
+2024/06/07 21:09:15 [1]	< standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:
+2024/06/07 21:09:15 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:15.651][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:15 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1713849 sec
+2024/06/07 21:09:15 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:15.651][PC] [Wait time@#$]++
+2024/06/07 21:09:15 [1]	> :Delay,"1000"
+2024/06/07 21:09:16 [1]	< 0
+[21:09:16.674][PC] [Wait time@#$]--
+2024/06/07 21:09:16 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0227553 sec
+2024/06/07 21:09:16 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 58
+[21:09:16.674][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:16 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:16 [1]	< 
+2024/06/07 21:09:16 [1]	< standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:
+2024/06/07 21:09:16 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:16.830][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:16 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1561412 sec
+2024/06/07 21:09:16 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:16.830][PC] [Wait time@#$]++
+2024/06/07 21:09:16 [1]	> :Delay,"1000"
+2024/06/07 21:09:17 [1]	< 0
+[21:09:17.855][PC] [Wait time@#$]--
+2024/06/07 21:09:17 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0254638 sec
+2024/06/07 21:09:17 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 57
+[21:09:17.855][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:17 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:18 [1]	< 
+2024/06/07 21:09:18 [1]	< standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:
+2024/06/07 21:09:18 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:18.075][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:18 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.21983 sec
+2024/06/07 21:09:18 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:18.075][PC] [Wait time@#$]++
+2024/06/07 21:09:18 [1]	> :Delay,"1000"
+2024/06/07 21:09:19 [1]	< 0
+[21:09:19.094][PC] [Wait time@#$]--
+2024/06/07 21:09:19 [1]	[PC] [Wait time@#$] ~~ TestTime:1.01935 sec
+2024/06/07 21:09:19 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 56
+[21:09:19.094][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:19 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:19 [1]	< 
+2024/06/07 21:09:19 [1]	< standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:
+2024/06/07 21:09:19 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:19.347][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:19 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2523588 sec
+2024/06/07 21:09:19 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:19.347][PC] [Wait time@#$]++
+2024/06/07 21:09:19 [1]	> :Delay,"1000"
+2024/06/07 21:09:20 [1]	< 0
+[21:09:20.362][PC] [Wait time@#$]--
+2024/06/07 21:09:20 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0154166 sec
+2024/06/07 21:09:20 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 55
+[21:09:20.362][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:20 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:20 [1]	< 
+2024/06/07 21:09:20 [1]	< standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:
+2024/06/07 21:09:20 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+uci: Entry not found
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:20.553][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:20 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1908314 sec
+2024/06/07 21:09:20 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:20.553][PC] [Wait time@#$]++
+2024/06/07 21:09:20 [1]	> :Delay,"1000"
+2024/06/07 21:09:21 [1]	< 0
+[21:09:21.570][PC] [Wait time@#$]--
+2024/06/07 21:09:21 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0173596 sec
+2024/06/07 21:09:21 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 54
+[21:09:21.570][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:21 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:21 [1]	< 
+2024/06/07 21:09:21 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:21 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:21.791][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:21 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2201488 sec
+2024/06/07 21:09:21 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:21.791][PC] [Wait time@#$]++
+2024/06/07 21:09:21 [1]	> :Delay,"1000"
+2024/06/07 21:09:22 [1]	< 0
+[21:09:22.815][PC] [Wait time@#$]--
+2024/06/07 21:09:22 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0241556 sec
+2024/06/07 21:09:22 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 53
+[21:09:22.815][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:22 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:23 [1]	< 
+2024/06/07 21:09:23 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:23 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:23.017][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:23 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2022517 sec
+2024/06/07 21:09:23 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:23.017][PC] [Wait time@#$]++
+2024/06/07 21:09:23 [1]	> :Delay,"1000"
+2024/06/07 21:09:24 [1]	< 0
+[21:09:24.023][PC] [Wait time@#$]--
+2024/06/07 21:09:24 [1]	[PC] [Wait time@#$] ~~ TestTime:1.005758 sec
+2024/06/07 21:09:24 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 52
+[21:09:24.023][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:24 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:24 [1]	< 
+2024/06/07 21:09:24 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:24 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:24.210][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:24 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1873606 sec
+2024/06/07 21:09:24 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:24.210][PC] [Wait time@#$]++
+2024/06/07 21:09:24 [1]	> :Delay,"1000"
+2024/06/07 21:09:25 [1]	< 0
+[21:09:25.231][PC] [Wait time@#$]--
+2024/06/07 21:09:25 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0206654 sec
+2024/06/07 21:09:25 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 51
+[21:09:25.231][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:25 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:25 [1]	< 
+2024/06/07 21:09:25 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:25 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:25.434][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:25 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2030374 sec
+2024/06/07 21:09:25 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:25.434][PC] [Wait time@#$]++
+2024/06/07 21:09:25 [1]	> :Delay,"1000"
+2024/06/07 21:09:26 [1]	< 0
+[21:09:26.456][PC] [Wait time@#$]--
+2024/06/07 21:09:26 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0223329 sec
+2024/06/07 21:09:26 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 50
+[21:09:26.456][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:26 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:26 [1]	< 
+2024/06/07 21:09:26 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:26 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:26.628][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:26 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1717537 sec
+2024/06/07 21:09:26 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:26.628][PC] [Wait time@#$]++
+2024/06/07 21:09:26 [1]	> :Delay,"1000"
+2024/06/07 21:09:27 [1]	< 0
+[21:09:27.647][PC] [Wait time@#$]--
+2024/06/07 21:09:27 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0193984 sec
+2024/06/07 21:09:27 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 49
+[21:09:27.647][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:27 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:27 [1]	< 
+2024/06/07 21:09:27 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:27 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:27.819][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:27 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1714023 sec
+2024/06/07 21:09:27 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:27.819][PC] [Wait time@#$]++
+2024/06/07 21:09:27 [1]	> :Delay,"1000"
+2024/06/07 21:09:28 [1]	< 0
+[21:09:28.840][PC] [Wait time@#$]--
+2024/06/07 21:09:28 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0211127 sec
+2024/06/07 21:09:28 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 48
+[21:09:28.840][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:28 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:29 [1]	< 
+2024/06/07 21:09:29 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:29 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:29.011][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:29 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1714159 sec
+2024/06/07 21:09:29 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:29.011][PC] [Wait time@#$]++
+2024/06/07 21:09:29 [1]	> :Delay,"1000"
+2024/06/07 21:09:30 [1]	< 0
+[21:09:30.031][PC] [Wait time@#$]--
+2024/06/07 21:09:30 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0196632 sec
+2024/06/07 21:09:30 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 47
+[21:09:30.031][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:30 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:30 [1]	< 
+2024/06/07 21:09:30 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:30 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:30.251][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:30 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2198974 sec
+2024/06/07 21:09:30 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:30.251][PC] [Wait time@#$]++
+2024/06/07 21:09:30 [1]	> :Delay,"1000"
+2024/06/07 21:09:31 [1]	< 0
+[21:09:31.266][PC] [Wait time@#$]--
+2024/06/07 21:09:31 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0153611 sec
+2024/06/07 21:09:31 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 46
+[21:09:31.266][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:31 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:31 [1]	< 
+2024/06/07 21:09:31 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:31 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:31.454][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:31 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1882894 sec
+2024/06/07 21:09:31 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:31.454][PC] [Wait time@#$]++
+2024/06/07 21:09:31 [1]	> :Delay,"1000"
+2024/06/07 21:09:32 [1]	< 0
+[21:09:32.463][PC] [Wait time@#$]--
+2024/06/07 21:09:32 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0082242 sec
+2024/06/07 21:09:32 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 45
+[21:09:32.463][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:32 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:32 [1]	< 
+2024/06/07 21:09:32 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:32 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:32.681][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:32 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.2186927 sec
+2024/06/07 21:09:32 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:32.681][PC] [Wait time@#$]++
+2024/06/07 21:09:32 [1]	> :Delay,"1000"
+2024/06/07 21:09:33 [1]	< 0
+[21:09:33.697][PC] [Wait time@#$]--
+2024/06/07 21:09:33 [1]	[PC] [Wait time@#$] ~~ TestTime:1.015287 sec
+2024/06/07 21:09:33 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 44
+[21:09:33.697][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:33 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:33 [1]	< 
+2024/06/07 21:09:33 [1]	< standard output#
+Booting
+
+
+
+return code#0#
+:
+2024/06/07 21:09:33 [1]	Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0" executes fail. Reply="standard output#
+Booting
+
+
+
+return code#0#
+:" doesn't match @System_Ready
+[21:09:33.883][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:33 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.186624 sec
+2024/06/07 21:09:33 [1]	Run B7PL025-142:Wait time@#$	Mode: 1, Retry: 60
+[21:09:33.883][PC] [Wait time@#$]++
+2024/06/07 21:09:33 [1]	> :Delay,"1000"
+2024/06/07 21:09:34 [1]	< 0
+[21:09:34.904][PC] [Wait time@#$]--
+2024/06/07 21:09:34 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0212933 sec
+2024/06/07 21:09:34 [1]	Run OTFX157-143:Check_System_ReadyToTest@#$	Mode: 2, Retry: 43
+[21:09:34.904][DUT] [Check_System_ReadyToTest@#$]++
+2024/06/07 21:09:34 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.led.booting_state","ON","-1","0"
+2024/06/07 21:09:35 [1]	< 
+2024/06/07 21:09:35 [1]	< standard output#
+System_Ready
+
+
+
+return code#0#
+:
+[21:09:35.076][DUT] [Check_System_ReadyToTest@#$]--
+2024/06/07 21:09:35 [1]	[DUT] [Check_System_ReadyToTest@#$] ~~ TestTime:0.1713848 sec
+2024/06/07 21:09:35 [1]	Run B7PL025-144:Wait time@#$	Mode: 0, Retry: 60
+[21:09:35.076][PC] [Wait time@#$]++
+2024/06/07 21:09:35 [1]	> :Delay,"000"
+2024/06/07 21:09:35 [1]	< 0
+[21:09:35.076][PC] [Wait time@#$]--
+2024/06/07 21:09:35 [1]	[PC] [Wait time@#$] ~~ TestTime:0 sec
+2024/06/07 21:09:35 [1]	B7PL025-144:@STEP010@ADB_FWUP Test is Pass ! 		----- 239.9413683 Sec.
+2024/06/07 21:09:35 [1]	DUT Test Completed !        ----- 239.9566775 Sec.
+2024/06/07 21:09:35 [1]	Execute Phase 3 Test.
+2024/06/07 21:09:35 [1]	Do @STEP012@Check FWVer
+2024/06/07 21:09:35 [1]	Run FWCK036-145:Get MBSN@#$	Mode: 1, Retry: 3
+[21:09:35.185][DUT] [Get MBSN@#$]++
+2024/06/07 21:09:35 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell fw_printenv -n mb_sn ","ON","-1","0"
+2024/06/07 21:09:35 [1]	< 
+2024/06/07 21:09:35 [1]	< standard output#
+2477875700005
+
+
+
+return code#0#
+:
+2024/06/07 21:09:35 [1]	WithinString: 2477875700005
+2024/06/07 21:09:35 [1]	Get MBSN@#$ Result: MBSN=2477875700005
+2024/06/07 21:09:35 [1]	CurrentTestID:FWCK036-1450 - The validation: MBSN = 2477875700005 (13,13)
+[21:09:35.532][DUT] [Get MBSN@#$]--
+2024/06/07 21:09:35 [1]	[DUT] [Get MBSN@#$] ~~ TestTime:0.3469493 sec
+2024/06/07 21:09:35 [1]	Run FWCK036-146:Check FW Version@#$	Mode: 1, Retry: 3
+[21:09:35.532][DUT] [Check FW Version@#$]++
+2024/06/07 21:09:35 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell uci -P /var/state get pega.fw.cur_ver","ON","-1","0"
+2024/06/07 21:09:35 [1]	< 
+2024/06/07 21:09:35 [1]	< standard output#
+V1.0.0.2_1
+
+
+
+return code#0#
+:
+2024/06/07 21:09:35 [1]	WithinString: V1.0.0.2_1
+2024/06/07 21:09:35 [1]	Check FW Version@#$ Result: gSWVer=V1.0.0.2_1
+2024/06/07 21:09:35 [1]	CurrentTestID:FWCK036-1460 - The validation: gSWVer = V1.0.0.2_1 (V1.0.0.2_1,)
+[21:09:35.720][DUT] [Check FW Version@#$]--
+2024/06/07 21:09:35 [1]	[DUT] [Check FW Version@#$] ~~ TestTime:0.1885198 sec
+2024/06/07 21:09:35 [1]	Run NUWL082-147:Check 5GModel EU @#$	Mode: 4, Retry: 3
+[21:09:35.720][DUT] [Check 5GModel EU @#$]++
+2024/06/07 21:09:35 [1]	> :GetVal,"$g5GModel"
+2024/06/07 21:09:35 [1]	< RG530F-NA
+[21:09:35.720][DUT] [Check 5GModel EU @#$]--
+2024/06/07 21:09:35 [1]	[DUT] [Check 5GModel EU @#$] ~~ TestTime:0 sec
+2024/06/07 21:09:35 [1]	Run NUWL082-151:Check NA @#$	Mode: 0, Retry: 3
+[21:09:35.720][DUT] [Check NA @#$]++
+2024/06/07 21:09:35 [1]	> :GetVal,"$g5GModel"
+2024/06/07 21:09:35 [1]	< RG530F-NA
+[21:09:35.720][DUT] [Check NA @#$]--
+2024/06/07 21:09:35 [1]	[DUT] [Check NA @#$] ~~ TestTime:0 sec
+2024/06/07 21:09:35 [1]	Run NBHM007-152:NA Modem FW Version@#$	Mode: 1, Retry: 3
+[21:09:35.736][DUT] [NA Modem FW Version@#$]++
+2024/06/07 21:09:35 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell atcli at+qgmr","ON","-1","0"
+2024/06/07 21:09:35 [1]	< 
+2024/06/07 21:09:35 [1]	< standard output#
+at+qgmr
+
+
+
+
+RG530FNAEAR05A01M8G_OCPU_HS_BETA_20231129A_01.001.01.001
+
+
+
+
+
+
+
+OK
+
+
+
+
+return code#0#
+:
+2024/06/07 21:09:35 [1]	WithinString: RG530FNAEAR05A01M8G_OCPU_HS_BETA_20231129A_01.001.01.001
+2024/06/07 21:09:35 [1]	NA Modem FW Version@#$ Result: ModelFWVer2=RG530FNAEAR05A01M8G_OCPU_HS_BETA_20231129A_01.001.01.001
+2024/06/07 21:09:35 [1]	CurrentTestID:NBHM007-1520 - The validation: ModelFWVer2 = RG530FNAEAR05A01M8G_OCPU_HS_BETA_20231129A_01.001.01.001 (RG530FNAEAR05A01M8G_OCPU_HS_BETA_20231129A_01.001.01.001,)
+[21:09:35.908][DUT] [NA Modem FW Version@#$]--
+2024/06/07 21:09:35 [1]	[DUT] [NA Modem FW Version@#$] ~~ TestTime:0.1718347 sec
+2024/06/07 21:09:35 [1]	Run NBHM007-153:Get NA Model Name@#$	Mode: 1, Retry: 3
+[21:09:35.908][DUT] [Get NA Model Name@#$]++
+2024/06/07 21:09:35 [1]	> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell fw_printenv -n pega_model","ON","-1","0"
+2024/06/07 21:09:36 [1]	< 
+2024/06/07 21:09:36 [1]	< standard output#
+M2U300-Q92
+
+
+
+return code#0#
+:
+2024/06/07 21:09:36 [1]	WithinString: M2U300-Q92
+2024/06/07 21:09:36 [1]	Get NA Model Name@#$ Result: ModelName2=M2U300-Q92
+2024/06/07 21:09:36 [1]	CurrentTestID:NBHM007-1530 - The validation: ModelName2 = M2U300-Q92 (M2U300-Q92,)
+[21:09:36.126][DUT] [Get NA Model Name@#$]--
+2024/06/07 21:09:36 [1]	[DUT] [Get NA Model Name@#$] ~~ TestTime:0.2186988 sec
+2024/06/07 21:09:36 [1]	Run B7PL025-154:Wait time@#$	Mode: 0, Retry: 3
+[21:09:36.126][PC] [Wait time@#$]++
+2024/06/07 21:09:36 [1]	> :Delay,"000"
+2024/06/07 21:09:36 [1]	< 0
+[21:09:36.126][PC] [Wait time@#$]--
+2024/06/07 21:09:36 [1]	[PC] [Wait time@#$] ~~ TestTime:0 sec
+2024/06/07 21:09:36 [1]	B7PL025-154:@STEP012@Check FWVer Test is Pass ! 		----- 0.9413292 Sec.
+2024/06/07 21:09:36 [1]	DUT Test Completed !        ----- 0.9722844 Sec.
+2024/06/07 21:09:36 [1]	All Test Completed !        ----- 241.2253024 Sec.
+2024/06/07 21:09:36 [1]	TotalCount:33-YR:91%
+2024/06/07 21:09:36 [1]	Report name: ADB_FWUP_Q9220242200005_2024-06-07_21-09-36.ct
+2024/06/07 21:09:36 [1]	Execute Phase 97 Test.
+2024/06/07 21:09:36 [1]	Do @STEP014@Disconnection
+2024/06/07 21:09:36 [1]	Run B7PL025-167:Close Message@#$	Mode: 3, Retry: 3
+[21:09:36.283][PC] [Close Message@#$]++
+2024/06/07 21:09:36 [1]	> :CloseMessage
+2024/06/07 21:09:36 [1]	< 0
+[21:09:36.329][PC] [Close Message@#$]--
+2024/06/07 21:09:36 [1]	[PC] [Close Message@#$] ~~ TestTime:0.0468747 sec
+2024/06/07 21:09:36 [1]	B7PL025-167:@STEP014@Disconnection Test is Pass ! 		----- 0.0468747 Sec.
+2024/06/07 21:09:36 [1]	Change color at 97 phase... Status:True... Error:PASS
+2024/06/07 21:09:36 [1]	All phase Total Test Time !        ----- 316.1423936 Sec.
+2024/06/07 21:09:36 [1]	DUT Test Completed !        ----- 0.1712875 Sec.
+2024/06/07 21:09:36 [1]	Execute Phase 97 Test.
+2024/06/07 21:09:36 [1]	@STEP016@End Power OFF Skipped.
+2024/06/07 21:09:36 [1]	Change color at 97 phase... Status:True... Error:PASS
+2024/06/07 21:09:36 [1]	All phase Total Test Time !        ----- 316.2829859 Sec.
+2024/06/07 21:09:36 [1]	DUT Test Completed !        ----- 0.327501 Sec.

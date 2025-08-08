@@ -1,0 +1,721 @@
+未找到回應 [+展開]	 改成 [+點擊展開]使用橘色
+調整文字大小/選擇單一檔等等按鍵 不要彈出視窗說儲存了 只有保存設定按鈕才須要
+介面字體的數字跟設定標籤頁的不一致 須要確認大小數字
+
+
+
+
+
+
+＝＝＝＝
+請修改我的程式，將所有 Markdown（.md）文件集中存放到 docs/ 資料夾，並調整程式邏輯：
+1. 原本在程式同目錄下讀取的 .md 檔，改為從 docs/ 目錄讀取。
+2. 路徑要用相對路徑寫法，確保打包成 EXE 之後也能正常讀取。
+3. 如果找不到 docs/ 目錄或指定的 .md 檔，需顯示錯誤訊息。
+
+
+PASS測試項目
+例如：
+2025/08/07 09:12:37 [1]	Do @STEP050@CHECK SIM CARD
+
+
+顯示紅色文字 應該是RETRY2次以上
+但我查詢這行指令 在LOG只出現一次 這是誤判
+最簡單判斷指令出現次數 而不是基於 Retry: N 關鍵字來判斷 這個會誤判
+例如
+Do @STEP027@GET BT MAC 只出現一次 即使出現  Retry: N 關鍵字 也沒有RETRY
+如果retry 會執行很多次這個命令， 但其實他只在LOG出現一次 這部分須要重新思考判斷邏輯
+
+測試LOG分析器的文字 用一個大方塊淺藍色當背景 FONT =26 
+
+介面文字不要控制PASS 測項 跟FAIL測項的內容 應該要讓內容字體大小 的選項控制它
+介面文字大小要控制的是 PASS測項標籤頁 /FAIL測項標籤頁/原始LOG標籤頁 
+開啟GUI跟關閉GUI 要讀取寫入設定
+GUI調整左右視窗切割大小 無法記住（修复它）
+介面文字大小跟設定標籤頁的介面文字大小要聯動，保存設定要有彈出視窗提醒保存了
+
+
+原始LOG標籤頁 沒有scroller bar  (做大一點方便拖拉）
+
+
+
+＝＝＝＝＝＝＝＝
+雙擊展開功能顯示完整測試過程（從Do @STEPxxx@到root@的完整內容）   
+這部分仍然沒完成 我點開後，沒有詳細的內容
+
+PASS的邏輯 就是 計算做了多少個測試項目 ，一條條PASS ，每一個測試項目都有一個+的按鈕 ，按下去可以顯示完整的測試過程 ，再按一下就消失 內容可以用鼠標反白複製
+也要計算有沒有RETRY 有可能做三次 －前兩次都FAIL 後來PASS了 這些都須要詳細顯示在＋的符號打開時完整顯示在這個視窗
+（字太多要有scroller bar)
+
+例如：
+2025/07/08 14:10:45 [1]	Do @STEP025@CHECK  BATTERY
+2025/07/08 14:10:45 [1]	Run OTFX076-046:Check SKU	Mode: 4, Retry: 3
+[14:10:45.072][DUT] [Check SKU]++
+2025/07/08 14:10:45 [1]	(UART) > diag -g sku
+2025/07/08 14:10:47 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-WE251300012:/root$ 
+
+這是起始 Do @STEP025@CHECK  BATTERY
+這是結束 root@NOKIA360Camera-WE251300012:/root$ 
+
+所以按下＋符號或者按鈕會跳出一個延伸視窗 應該顯示這些內容
+2025/07/08 14:10:45 [1]	Do @STEP025@CHECK  BATTERY
+2025/07/08 14:10:45 [1]	Run OTFX076-046:Check SKU	Mode: 4, Retry: 3
+[14:10:45.072][DUT] [Check SKU]++
+2025/07/08 14:10:45 [1]	(UART) > diag -g sku
+2025/07/08 14:10:47 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+
+---
+
+請改寫 log_parser.py，將原本單純搜尋 "Test is Pass" / "Test is Fail" 的邏輯改為以下規則：
+
+1. 先依檔名判斷 PASS / FAIL
+   - 有 "PASS" 字樣 → PASS 分析
+   - 無 "PASS" 字樣 → FAIL 分析
+
+2. PASS 分析：
+   - 逐行找 Do @STEPxxx@ 與 root@ 行組成測項
+   - 擷取第一條指令、第一個回應、結果 PASS
+   - 檢查是否有 Retry，若有 → 用紅色字加註 Retry 次數
+   - 可展開完整測試過程
+
+3. FAIL 分析：
+   - 從檔案底部往上找 FAIL 關鍵字
+   - 擷取最後 FAIL 測項的指令、回應、Retry 次數、錯誤原因
+   - 顯示完整 FAIL 區塊（紅色字）
+   - 繼續往上找其他 FAIL 區塊（標記為歷史 FAIL）
+
+4. 原始 LOG 標籤：
+   - Step 區塊背景色
+   - PASS → 綠字、FAIL → 紅字
+   - Hover 效果 + 點擊跳轉
+
+5. 保持與 GUI 模組的資料結構一致，方便 UI 呈現與展開
+--
+目前AI 的邏輯是這樣判斷 PASS/FAIL－我要怎麼跟他講邏輯或者演算法幫助修改代碼呢
+
+根據程式碼分析，PASS/FAIL判斷邏輯主要用到以下幾個PY檔案：
+主要檔案
+1. log_parser.py - 核心判斷邏輯
+主要功能：解析log檔案，判斷PASS/FAIL
+判斷邏輯：
+搜尋 "Test is Pass" → PASS
+搜尋 "Test is Fail" 或其他錯誤關鍵字 → FAIL
+沒有明確結果時，檢查錯誤指標，預設為PASS
+
+=====
+我個人的判斷方式是
+先看開啟的檔案名稱 有沒有顯示PASS 有的話就是PASS LOG
+1+Funtion-WE33-20250708141022-PASS.log
+像這就一定是FAIL，因為沒有顯示PASS文字的檔名
+1+Funtion-WE253100001-20250807091554-IPIO009-0580.log
+
+PASS的邏輯 就是 計算做了多少個測試項目 ，一條條PASS ，每一個測試項目都有一個+的按鈕 ，按下去可以顯示完整的測試過程 ，再按一下就消失 內容可以用鼠標反白複製
+也要計算有沒有RETRY 有可能做三次 －前兩次都FAIL 後來PASS了 這些都須要詳細顯示在＋的符號－或者GUI提醒 這個測試項目有RETRY但最後PASS（用紅色顯示）
+（字太多要有scroller bar)
+
+例如：
+2025/07/08 14:10:45 [1]	Do @STEP025@CHECK  BATTERY
+2025/07/08 14:10:45 [1]	Run OTFX076-046:Check SKU	Mode: 4, Retry: 3
+[14:10:45.072][DUT] [Check SKU]++
+2025/07/08 14:10:45 [1]	(UART) > diag -g sku
+2025/07/08 14:10:47 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-WE251300012:/root$ 
+
+這是起始 Do @STEP025@CHECK  BATTERY
+這是結束 root@NOKIA360Camera-WE251300012:/root$ 
+所以按下＋符號或者按鈕會跳出一個延伸視窗 應該顯示這些內容
+2025/07/08 14:10:45 [1]	Do @STEP025@CHECK  BATTERY
+2025/07/08 14:10:45 [1]	Run OTFX076-046:Check SKU	Mode: 4, Retry: 3
+[14:10:45.072][DUT] [Check SKU]++
+2025/07/08 14:10:45 [1]	(UART) > diag -g sku
+2025/07/08 14:10:47 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+
+＝＝＝＝
+FAIL的LOG的FAIL部分也是如此 ，跟PASS作法一樣 ，一個個列出，唯獨切到FAIL 標籤頁會顯示內容，且應該要顯示FAIL 的內容
+最快的找法就是打開LOG到最下面一行往上找 FAIL、FAILED、ERRORy 字串
+最先出現的指令集那一串就是 測試FAIL的測試項目
+例如：
+2025/08/07 09:27:48 [1]	(UART) > diag -g temp bat
+2025/08/07 09:27:53 [1]	(UART) < diag -g temp bat
+[   86.904689] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.910728] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.917521] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   86.925613] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.931644] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.938453] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   86.946538] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.952575] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.959343] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   86.967719] bq27xxx-battery 14-0055: Failed to read register 0x06, ret -121, @555
+diag: command of getting temp bat was failed!
+root@NOKIA360Camera-N3C2401C:/root$ 
+ 
+這是起始 > diag -g temp bat
+這是結束 root@NOKIA360Camera-N3C2401C:/root$ 
+所以按下＋符號或者按鈕會跳出一個延伸視窗 應該顯示這些內容 或者顯示在錯誤完整區塊 
+這時候就去檢查有沒有retry 如果有就計算出幾次 完整顯示 做了幾次結果如何的測試過程字串 （字太多要有scroller bar)
+
+這樣做完後 還要繼續往上找 是不是有其它FAIL的內容 也要列出－邏輯跟上面一樣－但這個不是主要FAIL原因，只是有曾經發生FAIL
+
+＝＝＝＝＝＝＝＝
+
+先來修改PASS 展示部分
+切換PASS側項的標籤頁 文字全部應該是黑色的 ，setup name 會顯示 @stepxxx @XXXX
+把它顯示 只要  
+例如:@STEP016@SET iplus Modelname_Valo360_noBattery 顯示為 SET iplus Modelname_Valo360_noBattery 這樣即可
+這邊的文字當鼠標反白時 要能夠複製ctrl+C 複製
+展開細項部分 點開應該要有完整的測試項目
+
+例如：
+Do @STEP025@CHECK  BATTERY
+2025/07/08 14:10:45 [1]	Run OTFX076-046:Check SKU	Mode: 4, Retry: 3
+[14:10:45.072][DUT] [Check SKU]++
+2025/07/08 14:10:45 [1]	(UART) > diag -g sku
+2025/07/08 14:10:47 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-WE251300012:/root$ 
+
+這是起始 STEP025@CHECK  BATTERY
+這是結束 root@NOKIA360Camera-WE251300012:/root$ 
+所以按下＋符號或者按鈕會跳出一個延伸視窗 應該顯示這些內容 再按一下就關閉視窗
+2025/07/08 14:10:45 [1]	Do @STEP025@CHECK  BATTERY
+2025/07/08 14:10:45 [1]	Run OTFX076-046:Check SKU	Mode: 4, Retry: 3
+[14:10:45.072][DUT] [Check SKU]++
+2025/07/08 14:10:45 [1]	(UART) > diag -g sku
+2025/07/08 14:10:47 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+
+----------
+請改寫 log_parser.py，將原本單純搜尋 "Test is Pass" / "Test is Fail" 的邏輯改為以下規則：
+
+1. 先依檔名判斷 PASS / FAIL
+   - 有 "PASS" 字樣 → PASS 分析
+   - 無 "PASS" 字樣 → FAIL 分析
+
+2. PASS 分析：
+   - 逐行找 Do @STEPxxx@ 與 root@ 行組成測項
+   - 擷取第一條指令、第一個回應、結果 PASS
+   - 檢查是否有 Retry，若有 → 用紅色字加註 Retry 次數
+   - 可展開完整測試過程
+
+3. FAIL 分析：
+   - 從檔案底部往上找 FAIL 關鍵字
+   - 擷取最後 FAIL 測項的指令、回應、Retry 次數、錯誤原因
+   - 顯示完整 FAIL 區塊（紅色字）
+   - 繼續往上找其他 FAIL 區塊（標記為歷史 FAIL）
+
+4. 原始 LOG 標籤：
+   - Step 區塊背景色
+   - PASS → 綠字、FAIL → 紅字
+   - Hover 效果 + 點擊跳轉
+
+5. 保持與 GUI 模組的資料結構一致，方便 UI 呈現與展開
+--
+目前AI 的邏輯是這樣判斷 PASS/FAIL－我要怎麼跟他講邏輯或者演算法幫助修改代碼呢
+
+根據程式碼分析，PASS/FAIL判斷邏輯主要用到以下幾個PY檔案：
+主要檔案
+1. log_parser.py - 核心判斷邏輯
+主要功能：解析log檔案，判斷PASS/FAIL
+判斷邏輯：
+搜尋 "Test is Pass" → PASS
+搜尋 "Test is Fail" 或其他錯誤關鍵字 → FAIL
+沒有明確結果時，檢查錯誤指標，預設為PASS
+
+=====
+我個人的判斷方式是
+先看開啟的檔案名稱 有沒有顯示PASS 有的話就是PASS LOG
+1+Funtion-WE33-20250708141022-PASS.log
+像這就一定是FAIL，因為沒有顯示PASS文字的檔名
+1+Funtion-WE253100001-20250807091554-IPIO009-0580.log
+
+PASS的邏輯 就是 計算做了多少個測試項目 ，一條條PASS ，每一個測試項目都有一個+的按鈕 ，按下去可以顯示完整的測試過程 ，再按一下就消失 內容可以用鼠標反白複製
+也要計算有沒有RETRY 有可能做三次 －前兩次都FAIL 後來PASS了 這些都須要詳細顯示在＋的符號－或者GUI提醒 這個測試項目有RETRY但最後PASS（用紅色顯示）
+（字太多要有scroller bar)
+
+例如：
+2025/07/08 14:10:45 [1]	Do @STEP025@CHECK  BATTERY
+2025/07/08 14:10:45 [1]	Run OTFX076-046:Check SKU	Mode: 4, Retry: 3
+[14:10:45.072][DUT] [Check SKU]++
+2025/07/08 14:10:45 [1]	(UART) > diag -g sku
+2025/07/08 14:10:47 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-WE251300012:/root$ 
+
+這是起始 Do @STEP025@CHECK  BATTERY
+這是結束 root@NOKIA360Camera-WE251300012:/root$ 
+所以按下＋符號或者按鈕會跳出一個延伸視窗 應該顯示這些內容
+2025/07/08 14:10:45 [1]	Do @STEP025@CHECK  BATTERY
+2025/07/08 14:10:45 [1]	Run OTFX076-046:Check SKU	Mode: 4, Retry: 3
+[14:10:45.072][DUT] [Check SKU]++
+2025/07/08 14:10:45 [1]	(UART) > diag -g sku
+2025/07/08 14:10:47 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+
+＝＝＝＝
+FAIL的LOG的FAIL部分也是如此 ，跟PASS作法一樣 ，一個個列出，唯獨切到FAIL 標籤頁會顯示內容，且應該要顯示FAIL 的內容
+最快的找法就是打開LOG到最下面一行往上找 FAIL、FAILED、ERRORy 字串
+最先出現的指令集那一串就是 測試FAIL的測試項目
+例如：
+2025/08/07 09:27:48 [1]	(UART) > diag -g temp bat
+2025/08/07 09:27:53 [1]	(UART) < diag -g temp bat
+[   86.904689] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.910728] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.917521] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   86.925613] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.931644] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.938453] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   86.946538] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.952575] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.959343] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   86.967719] bq27xxx-battery 14-0055: Failed to read register 0x06, ret -121, @555
+diag: command of getting temp bat was failed!
+root@NOKIA360Camera-N3C2401C:/root$ 
+ 
+這是起始 > diag -g temp bat
+這是結束 root@NOKIA360Camera-N3C2401C:/root$ 
+所以按下＋符號或者按鈕會跳出一個延伸視窗 應該顯示這些內容 或者顯示在錯誤完整區塊 
+這時候就去檢查有沒有retry 如果有就計算出幾次 完整顯示 做了幾次結果如何的測試過程字串 （字太多要有scroller bar)
+
+這樣做完後 還要繼續往上找 是不是有其它FAIL的內容 也要列出－邏輯跟上面一樣－但這個不是主要FAIL原因，只是有曾經發生FAIL
+
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+繼續修改GUI 工具來分析測試 log 檔，以下是完整規格與邏輯需求：
+修改好 RUN GUI
+標籤頁文字FONT 14 鼠標經過會變色
+
+我使用 python main.py enhanced  來執行GUI
+
+
+
+
+PASS測試項目
+裡面的回應 可以顯示更多文字
+例如
+我下的指令是	(UART) > hciconfig hci0 revision
+他會依直到下一個指令時吐出很多字串 直到 2025/03/27 01:58:34 [1]	(UART) > diag -g who imu
+我會希望能夠顯示出來 看是不是有一個小按鍵 按一下全部顯示 沒有按下就是只顯示 簡單內容 
+例如	BD Address: C0:F5:35:9D:B5:11  ACL MTU: 1021:8  SCO MTU: 64:1
+
+2025/03/27 01:58:33 [1]	(UART) > hciconfig hci0 revision
+
+2025/03/27 01:58:33 [1]	(UART) < hciconfig hci0 revision
+bluetoothd[1072]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/source/1
+bluetoothd[1072]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/sink/2
+bluetoothd[1072]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/source/2
+bluetoothd[1072]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/sink/1
+bluetoothd[1072]: Failed to set privacy: Rejected (0x0b)
+hci0:	Type: Primary  Bus: UART
+	BD Address: C0:F5:35:9D:B5:11  ACL MTU: 1021:8  SCO MTU: 64:1
+	Firmware 0.17 / 17
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/ro
+2025/03/27 01:58:33 [1]	WithinString: C0:F5:35:9D:B5:11
+2025/03/27 01:58:33 [1]	get BT MAC Result: gBT_status=C0:F5:35:9D:B5:11
+[01:58:33.995][DUT] [get BT MAC]--
+2025/03/27 01:58:33 [1]	[DUT] [get BT MAC] ~~ TestTime:0.0588061 sec
+2025/03/27 01:58:33 [1]	WUIF017-015:@STEP014@Check BT status Test is Pass ! 		----- 7.003335 Sec.
+2025/03/27 01:58:33 [1]	DUT Test Completed !        ----- 7.0436402 Sec.
+2025/03/27 01:58:34 [1]	Execute Phase 5 Test.
+2025/03/27 01:58:34 [1]	Do @STEP016@Check Gyro
+2025/03/27 01:58:34 [1]	Run NBOT015-016:Check Gyro	Mode: 1, Retry: 4
+[01:58:34.139][DUT] [Check Gyro]++
+2025/03/27 01:58:34 [1]	(UART) > diag -g who imu
+
+
+
+
+
+
+
+
+
+
+
+根據程式碼分析，PASS/FAIL判斷邏輯主要用到以下幾個PY檔案：
+主要檔案
+1. log_parser.py - 核心判斷邏輯
+主要功能：解析log檔案，判斷PASS/FAIL
+判斷邏輯：
+搜尋 "Test is Pass" → PASS
+搜尋 "Test is Fail" 或其他錯誤關鍵字 → FAIL
+沒有明確結果時，檢查錯誤指標，預設為PASS
+
+
+
+
+===============
+
+標籤頁文字FONT 13 鼠標經過會變色
+FAIL測試項目的標籤 仍然不會顯示內容 即使我選擇FAIL LOG 
+
+**2. FAIL 測項（Tab2）** 當我選擇這個LOG時 應該要在TAB2 顯示所有錯誤的指令跟吐出來的字串 
+目前都是空白的 修正這個錯誤
+
+- 欄位：
+  | Step Name |  指令 | 錯誤回應 | Retry 次數 | 錯誤原因 |
+- Tab2：FAIL 測項列表
+  - 欄位：Step Name、指令、錯誤回應、Retry 次數、錯誤原因
+  - FAIL 結果為紅色字體
+  - 若該 log 有 FAIL：
+    - 顯示最後錯誤測項的資訊（包含 Retry 次數、錯誤內容）
+    - 最下方顯示「錯誤完整區塊」：從下指令開始到 FAIL 的原始內容（可複製）
+通常FIAL都會有類似的顯示文字 FAIL /ERROR 的文字 
+ex:
+2025/08/07 09:27:53 [1]	(UART) < diag -g temp bat
+[   86.904689] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.910728] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.917521] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   86.925613] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.931644] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.938453] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   86.946538] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.952575] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.959343] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   86.967719] bq27xxx-battery 14-0055: Failed to read register 0x06, ret -121, @555
+diag: command of getting temp bat was failed!
+root@NOKIA360Camera-N3C2401C:/root$ 
+修改好 RUN GUI
+
+
+
+字體大小對於PASS或者FAIL 的內文 沒有連動效果 無法控制字體大小
+
+
+
+
+
+
+======================
+
+原始LOG標籤頁內容
+ctrl+F 可以跳出搜尋的小方格 方便搜尋文字 
+
+PASS/FAIL 選項超過視窗要產生scroller bar
+繼續修改GUI 工具來分析測試 log 檔，以下是完整規格與邏輯需求：
+先從PASS/FAIL 單一LOG檔案來優化
+
+step name  要列出1234 
+PASS/FAIL PASS 顯示綠色文字 FAIL顯示紅色文字
+
+原始LOG標籤 
+每一個 下過的指令tep name 用過的指令 PASS/FAIL 都用色彩標註 方便觀看
+這邊的標籤經過時要有顏色變化 hand over change color
+
+FAIL標籤 即使你選擇FAIL的LOG 他也沒任何變化 這邊應該要 列出最後FIAL的項目 是什麼指令 ，回應值是什麼 ，複測幾次 全部列出來
+最好下方 把錯誤那一整個區塊從下指令到FAIL結束 所有字串列出來檢查
+原始LOG標籤也要把錯誤那一整個區塊全部顯示紅色 ，其他正常文字就是黑色文字 
+
+**1. PASS 測項（Tab1）**
+- 欄位：
+  | Step Name |指令 | 回應 | 結果 | 
+
+**2. FAIL 測項（Tab2）**
+- 欄位：
+  | Step Name |  指令 | 錯誤回應 | Retry 次數 | 錯誤原因 |
+
+
+
+PROMPT
+
+
+請幫我繼續優化 GUI 工具，目前我要優化的是【單一 log 檔案】的 PASS / FAIL 分析與視覺呈現。
+
+以下是具體需求，請依照模組化方式撰寫（不要全部塞在一個 .py 超過 1000 行）：
+
+---
+
+🔷 介面設計
+- GUI 左右分割：左側為檔案選擇，右側為 Tab 顯示結果（PASS / FAIL / 原始 LOG/腳本比對）
+- Tab1：PASS 測項列表
+  - 欄位：Step Name（自動加上 1、2、3...）、指令、回應、結果
+  - 所有 PASS 資料文字為綠色
+
+- Tab2：FAIL 測項列表
+  - 欄位：Step Name、指令、錯誤回應、Retry 次數、錯誤原因
+  - FAIL 結果為紅色字體
+  - 若該 log 有 FAIL：
+    - 顯示最後錯誤測項的資訊（包含 Retry 次數、錯誤內容）
+    - 最下方顯示「錯誤完整區塊」：從下指令開始到 FAIL 的原始內容（可複製）
+通常FIAL都會有類似的顯示文字 FAIL /ERROR 的文字 
+ex:
+2025/08/07 09:27:53 [1]	(UART) < diag -g temp bat
+[   86.904689] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.910728] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.917521] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 2 
+[   86.925613] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.931644] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.938453] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer addr 0x55 ret -121 rtytimes remain 1 
+[   86.946538] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   86.952575] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   86.959343] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   86.967719] bq27xxx-battery 14-0055: Failed to read register 0x06, ret -121, @555
+diag: command of getting temp bat was failed!
+root@NOKIA360Camera-N3C2401C:/root$ 
+
+
+
+
+- Tab3：原始 LOG 檢視
+  - 每個 Step 用不同背景色區分（例如淺藍、淺紫）
+  - PASS 區段用綠字、FAIL 區段用紅字
+  - 滑鼠經過每個標籤頁時要變色（hover 效果）
+  - 點擊 Step Name 可跳到該段
+  - 若是 FAIL 檔，預設顯示最後錯誤段落並標紅
+
+TAB4我們先不處理
+
+原始LOG標籤 
+每一個 下過的指令tep name 用過的指令 PASS/FAIL 都用色彩標註 方便觀看
+這邊的標籤經過時要有顏色變化 hand over change color
+
+---
+
+🔷 額外規則
+- 所有欄位文字大小可透過 + / - 調整，設定值保存在設定檔，下次自動載入
+- 請將代碼分開模組化，若超過 1000 行，請拆成：
+  - `main_gui.py`
+  - `log_parser.py`
+  - `ui_tabs.py`
+  - `settings_loader.py`
+
+---
+
+
+繼續修改GUI 工具來分析測試 log 檔，以下是完整規格與邏輯需求：
+
+
+
+🔷【GUI 結構需求】
+
+1. 主畫面需採用 **左右分割視窗**：
+   - 左邊視窗：用來選擇 log 檔案或資料夾 文字大小設定
+     - 可選單一檔案或整個資料夾
+     - 支援拖拉進視窗或點選按鈕選擇
+   - 右邊視窗：為分析結果區域（包含多個 Tab）
+     - Tab1：PASS 測項清單
+     - Tab2：FAIL 測項清單
+     - Tab3：原始 LOG（會根據 FAIL 自動跳轉與標紅）
+
+2. 左右視窗需可拖拉調整寬度（採用 `PanedWindow` 或等效方式）
+
+3. 支援調整整體 **字體與介面大小**：
+   - 預設文字大小為 11
+   - 用 `+ / -` 按鈕調整介面與文字大小（從 10 到 15）所有標籤頁都要聯動控制
+   - 不使用滑桿（slider bar）
+   - 調整後需 **即時套用**
+   - 設定需存入本地檔案（如：`settings.json`），下次開啟 GUI 自動載入
+
+---
+
+🔷【LOG 分析邏輯】
+
+請幫我從每個 log 中解析出：
+- 測項名稱（如：@STEP002@Get Qcode info FOR PEGA）
+- 傳送的指令（例如：> :GetVal,"$QCODE"）
+- 裝置回應內容（例如：< N3C2401C）
+- 結果（Test is Pass 或 Test is Fail）
+- 錯誤訊息（若 Fail）
+
+Log 中可能包含多個測項，請逐一分析並分類為 PASS 或 FAIL。
+
+---
+
+🔷【分析顯示行為】
+
+如果選擇的是「單一檔案」：
+- 若該 log 是 FAIL：
+  - 右邊的 Tab1 顯示該 log 中所有 PASS 測項
+  - Tab2 顯示該 log 中最後 FAIL 的項目（錯誤訊息需標紅）
+  - Tab3 顯示原始 log 並跳轉到錯誤位置，並標記紅色
+- 若該 log 是 PASS：
+  - Tab1 顯示所有測項
+  - Tab2 顯示空白（無錯誤）
+
+---
+
+🔷【Excel 輸出規則】
+
+**1. PASS 測項（Tab1）**
+- 欄位：
+  | Step Name |指令 | 回應 | 結果 | 
+
+**2. FAIL 測項（Tab2）**
+- 欄位：
+  | Step Name |  指令 | 錯誤回應 | Retry 次數 | 錯誤原因 |
+
+單一檔案LOG不須匯出 把它DISABLE。
+
+---
+
+🔷【開發規模管理】
+
+- 若 Python 主程式碼超過 1000 行，請自動將模組或功能拆成新的檔案（例如：log_parser.py、excel_writer.py、settings_loader.py、ui_components.py）
+- 每一個 py 檔開頭要加上說明用途
+- 所有字串處理使用 UTF-8 格式
+
+---
+
+請依此需求：
+1. 設計 GUI 結構
+2. 建立 log 分析邏輯（支援多個 log、單個 log）
+3. 撰寫匯出 Excel 的功能模組
+4. 包含字體與介面大小可調整機制與設定儲存
+5. 模組化程式結構（超過 1000 行自動拆分）
+
+我希望可以一步步開發，如果你願意，請先從 GUI 雛形開始，接著再實作 log 分析功能。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+======
+
+我需要開發一個 GUI 工具來分析測試 log 檔，功能如下，請幫我拆解邏輯、設計實作步驟：
+我的LOG 含有執行腳本的EXCEL 都放在這裡MINE＼目錄下
+入口名稱統一為main.py
+---
+
+🔹【主要目標】
+根據輸入的 log 檔（可能是一個或一整個資料夾），自動分析每一個測項的執行情況，並將結果分類為 PASS 或 FAIL，顯示在 GUI 中，並能匯出成 Excel。
+
+---
+
+🔹【功能需求】
+1. GUI 介面使用 Tab 分頁：
+   - Tab1：PASS 測項分析（全部通過的項目）
+   - Tab2：FAIL 測項分析（失敗的項目與原因）
+   - Tab3（可選）：腳本比對報告（若載入測試腳本 Excel）
+
+2. 使用者可選擇：
+   - 分析單一 log 檔
+   - 分析整個資料夾內所有 log 檔
+
+3. 使用者可載入一份測試腳本 Excel 檔，裡面是測項清單（例如 Test ID、Step 名稱）
+
+---
+GUI需要切分成兩個視窗，左視窗選擇檔案 選擇LOG 右視窗顯示分析結果 的TAB，左右視窗可以調整
+文字大小預設11 ，可以調整文字跟介面大小 從 10~15 採用+-調整 不要有slider bar
+設定後的值 要即刻變動 關閉GUI 開啟GUI要去讀取設定
+超過一千行的代碼要產生新的PY不要繼續寫
+
+
+🔷【GUI 結構需求】
+
+1. 主畫面需採用 **左右分割視窗**：
+   - 左邊視窗：用來選擇 log 檔案或資料夾 文字大小設定
+     - 可選單一檔案或整個資料夾
+     - 支援拖拉進視窗或點選按鈕選擇
+   - 右邊視窗：為分析結果區域（包含多個 Tab）
+     - Tab1：PASS 測項清單
+     - Tab2：FAIL 測項清單
+     - Tab3：原始 LOG（會根據 FAIL 自動跳轉與標紅）
+
+2. 左右視窗需可拖拉調整寬度（採用 `PanedWindow` 或等效方式）
+
+3. 支援調整整體 **字體與介面大小**：
+   - 預設文字大小為 11
+   - 用 `+ / -` 按鈕調整介面與文字大小（從 10 到 15）所有標籤頁都要聯動控制
+   - 不使用滑桿（slider bar）
+   - 調整後需 **即時套用**
+   - 設定需存入本地檔案（如：`settings.json`），下次開啟 GUI 自動載入
+
+---
+
+🔷【LOG 分析邏輯】
+
+請幫我從每個 log 中解析出：
+- 測項名稱（如：@STEP002@Get Qcode info FOR PEGA）
+- 傳送的指令（例如：> :GetVal,"$QCODE"）
+- 裝置回應內容（例如：< N3C2401C）
+- 結果（Test is Pass 或 Test is Fail）
+- 錯誤訊息（若 Fail）
+
+Log 中可能包含多個測項，請逐一分析並分類為 PASS 或 FAIL。
+
+---
+
+🔷【分析顯示行為】
+
+如果選擇的是「單一檔案」：
+- 若該 log 是 FAIL：
+  - 右邊的 Tab1 顯示該 log 中所有 PASS 測項
+  - Tab2 顯示該 log 中最後 FAIL 的項目（錯誤訊息需標紅）
+  - Tab3 顯示原始 log 並跳轉到錯誤位置，並標記紅色
+- 若該 log 是 PASS：
+  - Tab1 顯示所有測項
+  - Tab2 顯示空白（無錯誤）
+
+---
+
+🔷【Excel 輸出規則】
+
+**1. PASS 測項（Tab1）**
+- 欄位：
+  | Step Name |指令 | 回應 | 結果 | 
+
+**2. FAIL 測項（Tab2）**
+- 欄位：
+  | Step Name |  指令 | 錯誤回應 | Retry 次數 | 錯誤原因 |
+
+單一檔案LOG不須匯出 把它DISABLE。
+
+---
+
+🔷【開發規模管理】
+
+- 若 Python 主程式碼超過 1000 行，請自動將模組或功能拆成新的檔案（例如：log_parser.py、excel_writer.py、settings_loader.py、ui_components.py）
+- 每一個 py 檔開頭要加上說明用途
+- 所有字串處理使用 UTF-8 格式
+
+
+---
+
+🔹【測試腳本比對（Excel 檔）】
+- 載入 Excel 檔之後：
+  - 比對哪些測項已執行（✅）
+  - 哪些漏執行（⚠️）
+  - 哪些執行但失敗（❌）
+- 顯示比對報告（可在 Tab3），並可匯出
+
+---
+
+🔹【輸出格式】
+所有資料應該可以匯出為 Excel 檔（.xlsx）格式：
+- Sheet1：PASS 測項
+- Sheet2：FAIL 測項
+- Sheet3（可選）：腳本比對報告
+
+---
+
+🔹【附加功能】
+- GUI 保留原始 log 內容供點選展開查看
+- 分析後允許用戶再次載入 log 或清除畫面重來
+- 若 log 檔案很大，請加入 Loading 或進度提示
+
+做完以後可以執行GUI 確認是可以運作的
+
+
+都做完以後須要產生MD說明格式如下
+🧾 目標工作內容
+1. 逐一處理每個 .py 檔案 已經有MD的就是修整內容確認是否符合
+幫我 將每一個 Python .py 檔案內容轉成 Markdown 格式。
+
+每個 function、class、程式段落都要加上 詳細的中文註解，說明「這段是在做什麼」、「為什麼這樣做」。
+如果有創建測試腳本做完要刪除
+做完後不須要解釋太多文字只要告知你做完了並同時運行GUI讓我操作
+

@@ -1,0 +1,961 @@
+2025/08/05 17:38:18 [1]	System Version is 1.1.8.63.
+2025/08/05 17:38:18 [1]	Script File is Pega_MU310_TestFlow_Mainboard__250805.xlsx.
+2025/08/05 17:38:18 [1]	Script Version is 2508051043296.
+2025/08/05 17:38:18 [1]	Script Creator is jovian_li.
+2025/08/05 17:38:18 [1]	Utility Version is 1.0.9.21.
+2025/08/05 17:38:18 [1]	DeviceID is 512302.
+2025/08/05 17:38:18 [1]	SFIS is off.
+2025/08/05 17:38:18 [1]	MiniCloud2 is off.
+2025/08/05 17:38:18 [1]	FTP is off.
+2025/08/05 17:38:18 [1]	Active IPs:
+倍聲ETH:[98FC84E7A8C5]#192.168.225.10#
+藍牙網路連線:[803253CA2997]#169.254.186.13#
+2025/08/05 17:38:18 [1]	Script has 1 phase cases
+2025/08/05 17:38:18 [1]	Script has 97 phase cases
+2025/08/05 17:38:18 [1]	ISN: 222
+****************************************************************************************************
+2025/08/05 17:38:18 [1]	Execute Phase 1 Test.
+2025/08/05 17:38:18 [1]	Do @STEP002@CheckRoute
+2025/08/05 17:38:18 [1]	Run B7PL025-000:Show ISN to UI	Mode: 0, Retry: 3
+[17:38:18.942][PC] [Show ISN to UI]++
+2025/08/05 17:38:18 [1]	> :ShowISN,"222"
+2025/08/05 17:38:18 [1]	< 0
+[17:38:18.959][PC] [Show ISN to UI]--
+2025/08/05 17:38:18 [1]	[PC] [Show ISN to UI] ~~ TestTime:0.02273 sec
+2025/08/05 17:38:18 [1]	Run OTFX082-002:connect UART	Mode: 1, Retry: 3
+[17:38:18.965][PC] [connect UART]++
+2025/08/05 17:38:18 [1]	> :Connect,"UART"
+2025/08/05 17:38:19 [1]	< 0
+[17:38:19.119][PC] [connect UART]--
+2025/08/05 17:38:19 [1]	[PC] [connect UART] ~~ TestTime:0.155976 sec
+2025/08/05 17:38:19 [1]	connect FUART skips by ExecMode = 6.
+2025/08/05 17:38:19 [1]	Set Relay OFF skips by ExecMode = 6.
+2025/08/05 17:38:19 [1]	OTFX082-002:@STEP002@CheckRoute Test is Pass ! 		----- 0.1845223 Sec.
+2025/08/05 17:38:19 [1]	DUT Test Completed !        ----- 0.223438 Sec.
+2025/08/05 17:38:19 [1]	Execute Phase 2 Test.
+2025/08/05 17:38:19 [1]	Do @STEP004@GETMAC
+2025/08/05 17:38:19 [1]	Run B7PL025-005:Check SFIS Enabled	Mode: 4, Retry: 3
+2025/08/05 17:38:19 [1]	> :SfEnabled
+2025/08/05 17:38:19 [1]	< 0
+2025/08/05 17:38:19 [1]	Run B7PL025-00G:Wait@#$	Mode: 0, Retry: 3
+[17:38:19.238][PC] [Wait@#$]++
+2025/08/05 17:38:19 [1]	> :Delay,"000"
+2025/08/05 17:38:19 [1]	< 0
+[17:38:19.255][PC] [Wait@#$]--
+2025/08/05 17:38:19 [1]	[PC] [Wait@#$] ~~ TestTime:0.0219059 sec
+2025/08/05 17:38:19 [1]	B7PL025-00G:@STEP004@GETMAC Test is Pass ! 		----- 0.0334731 Sec.
+2025/08/05 17:38:19 [1]	Do @STEP005@GET_69PN
+2025/08/05 17:38:19 [1]	:@STEP005@GET_69PN Test is Pass ! 		----- 0.0020027 Sec.
+2025/08/05 17:38:19 [1]	DUT Test Completed !        ----- 0.1273651 Sec.
+2025/08/05 17:38:19 [1]	Execute Phase 3 Test.
+2025/08/05 17:38:19 [1]	Do @STEP007@Set iPLAS Model Name
+2025/08/05 17:38:19 [1]	Run B7PL025-00J:Check SFIS Enabled@#$	Mode: 4, Retry: 3
+[17:38:19.497][PC] [Check SFIS Enabled@#$]++
+2025/08/05 17:38:19 [1]	> :SfEnabled
+2025/08/05 17:38:19 [1]	< 0
+[17:38:19.518][PC] [Check SFIS Enabled@#$]--
+2025/08/05 17:38:19 [1]	[PC] [Check SFIS Enabled@#$] ~~ TestTime:0.0339076 sec
+2025/08/05 17:38:19 [1]	Run B7PL025-00X:Wait time@#$	Mode: 3, Retry: 3
+[17:38:19.528][PC] [Wait time@#$]++
+2025/08/05 17:38:19 [1]	> :Delay,"000"
+2025/08/05 17:38:19 [1]	< 0
+[17:38:19.533][PC] [Wait time@#$]--
+2025/08/05 17:38:19 [1]	[PC] [Wait time@#$] ~~ TestTime:0.0041664 sec
+2025/08/05 17:38:19 [1]	B7PL025-00X:@STEP007@Set iPLAS Model Name Test is Pass ! 		----- 0.0412465 Sec.
+2025/08/05 17:38:19 [1]	DUT Test Completed !        ----- 0.0788464 Sec.
+2025/08/05 17:38:19 [1]	Execute Phase 4 Test.
+2025/08/05 17:38:19 [1]	Do @STEP009@Check Boot ready
+2025/08/05 17:38:19 [1]	Run OTFX157-104:connect UART	Mode: 1, Retry: 3
+[17:38:19.735][PC] [connect UART]++
+2025/08/05 17:38:19 [1]	> :Connect,"UART"
+2025/08/05 17:38:19 [1]	< 0
+[17:38:19.777][PC] [connect UART]--
+2025/08/05 17:38:19 [1]	[PC] [connect UART] ~~ TestTime:0.0526096 sec
+2025/08/05 17:38:19 [1]	Run B7PL025-105:Wait	Mode: 0, Retry: 3
+[17:38:19.785][PC] [Wait]++
+2025/08/05 17:38:19 [1]	> :Delay,"10000"
+2025/08/05 17:38:29 [1]	< 0
+[17:38:29.801][PC] [Wait]--
+2025/08/05 17:38:29 [1]	[PC] [Wait] ~~ TestTime:10.0198779 sec
+2025/08/05 17:38:29 [1]	Run OTFX157-106:Check Ready	Mode: 2, Retry: 3
+[17:38:29.804][DUT] [Check Ready]++
+2025/08/05 17:38:29 [1]	(UART) >  
+
+2025/08/05 17:39:03 [1]	(UART) < [[0;32m  OK  [0m] Started [0;1;39mdiagrebootapp service[0m.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-dnsmasq_service.slice[0m.
+         Starting [0;1;39mdnsmasq service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mdnsmasq service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mQCMAP connectionManager service[0m.
+         Starting [0;1;39mLoading of ethernet config modules[0m...
+[[0;32m  OK  [0m] Started [0;1;39mLoading of ethernet config modules[0m.
+         Starting [0;1;39mModem Init Service[0m...
+[[0m[0;31m*     [0m] (1 of 2) A start job is running for /dev/input/event0 (14s / 1min 30s)
+M[K[[0;1;31m*[0m[0;31m*    [0m] (1 of 2) A start job is running for /dev/input/event0 (14s / 1min 30s)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] (1 of 2) A start job is running for /dev/input/event0 (15s / 1min 30s)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] (2 of 2) A start job is running for???odem Init Service (16s / 1min 38s)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] (2 of 2) A start job is running for???odem Init Service (16s / 1min 38s)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] (2 of 2) A start job is running for???odem Init Service (17s / 1min 38s)
+M[K[    [0;31m*[0;1;31m*[0m] (1 of 2) A start job is running for /dev/input/event0 (17s / 1min 30s)
+M[K[     [0;31m*[0m] (1 of 2) A start job is running for /dev/input/event0 (18s / 1min 30s)
+M[K[    [0;31m*[0;1;31m*[0m] (1 of 2) A start job is running for /dev/input/event0 (19s / 1min 30s)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] (2 of 2) A start job is running for???odem Init Service (19s / 1min 38s)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] (2 of 2) A start job is running for???odem Init Service (20s / 1min 38s)
+M[K[[0;32m  OK  [0m] Started [0;1;39mModem Init Service[0m.
+[K[[0;32m  OK  [0m] Reached target [0;1;39mSockets[0m.
+     Starting [0;1;39mudev Coldplug all Devices[0m...
+         Starting [0;1;39mBind mount volatile /var/lib[0m...
+[[0;32m  OK  [0m] Started [0;1;39mBind mount volatile /var/lib[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mBasic System[0m.
+[[0;32m  OK  [0m] Started [0;1;39mUSB daemon Service[0m.
+         Starting [0;1;39madpl service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mAgm Server Init[0m.
+[[0;32m  OK  [0m] Started [0;1;39mdata-init service[0m.
+         Starting [0;1;39mAudio Init Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mIPACM DIAG Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mGPS Location process launcher[0m.
+[[0;32m  OK  [0m] Started [0;1;39mlocation remote service launcher[0m.
+         Starting [0;1;39mMCM RIL Services[0m...
+[[0;32m  OK  [0m] Started [0;1;39mRespond to IPv6 Node Information Queries[0m.
+[[0;32m  OK  [0m] Started [0;1;39matcmder service[0m.
+         Starting [0;1;39mPEGA framework init service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mSetting the power config[0m.
+[[0;32m  OK  [0m] Started [0;1;39mQUECTEL NW msg Services[0m.
+[[0;32m  OK  [0m] Started [0;1;39mstart quectel remotefs daemon[0m.
+[[0;32m  OK  [0m] Started [0;1;39mql_wlanmgr daemon Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mQUECTEL DATA Manager Services[0m.
+[[0;32m  OK  [0m] Started [0;1;39mQseecomd Service[0m.
+         Starting [0;1;39mqti_ppp service[0m...
+         Starting [0;1;39mqti service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mql-voice-server daemon Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mquectel-slic-daemon daemon Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mstart quectel daemon[0m.
+[[0;32m  OK  [0m] Started [0;1;39mQwesd Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Router Discovery Daemon[0m.
+[[0;32m  OK  [0m] Started [0;1;39mreboot-daemon service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mReset reboot cookie[0m.
+[[0;32m  OK  [0m] Started [0;1;39mSerial Getty on ttyMSM0[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mLogin Prompts[0m.
+[[0;32m  OK  [0m] Started [0;1;39mService manager Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39msfs configuration Service[0m.
+SIM ready
+         Starting [0;1;39mLoad/Save Random Seed[0m...
+         Starting [0;1;39mThermal Engine Service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mudev Coldplug all Devices[0m.
+[[0;32m  OK  [0m] Started [0;1;39madpl service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mqti_ppp service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mLoad/Save Random Seed[0m.
+[[0;32m  OK  [0m] Started [0;1;39mqti service[0m.
+[[0;32m  OK  [0m] Found device [0;1;39m/dev/input/event0[0m.
+[095mmodel=MU310,[0m
+[095msn=,[0m
+[095mssid=,[0m
+[095mkey=,[0m
+[[0;32m  OK  [0m] Reached target [0;1;39mHardware activated USB gadget[0m.
+[[0;32m  OK  [0m] Started [0;1;39mModem Shutdown Service[0m.
+Unknown
+[095m$eth0_addr=,[0m
+[[0;32m  OK  [0m] Reached target [0;1;39mSound Card[0m.
+[[0;32m  OK  [0m] Started [0;1;39mAudio Init Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mThermal Engine Service[0m.
+Run /etc/initscripts/pega-framework-init.sh done
+[[0;32m  OK  [0m] Started [0;1;39mPEGA framework init service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mDropbear SSH server[0m.
+[[0;32m  OK  [0m] Started [0;1;39mLighttpd Daemon[0m.
+[[0;32m  OK  [0m] Started [0;1;39mNetmgrd Service[0m.
+Starting lighttpd
+[[0;32m  OK  [0m] Started [0;1;39mNetwork Time Servi???he daemon start to time sync.[0m.
+[[0;32m  OK  [0m] Started [0;1;39mInit 5G-NR service[0m.
+         Starting [0;1;39mStart bluetooth service.[0m...
+         Starting [0;1;39mPEGA DHCP service[0m...
+         Starting [0;1;39mPEGA firewall service[0m...
+         Starting [0;1;39mPEGA system service[0m...
+[[0;32m  OK  [0m] Started [0;1;39mUbus server Service[0m.
+Starting LAN config 
+Start ntpd 
+Starting system config 
+service: /etc/initscripts/pega-5GNR-init.sh action: restart
+[[0;32m  OK  [0m] Started [0;1;39mLogd Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mLogging Service[0m.
+[[0;32m  OK  [0m] Started [0;1;39mPEGA Qualcomm Message handler[0m.
+[[0;32m  OK  [0m] Started [0;1;39mpu_resetBtn_monito???ccording the pressed seconds.[0m.
+[[0;32m  OK  [0m] Started [0;1;39mQUECTEL NET Services[0m.
+done
+/etc/initscripts/pega-system.sh start done
+/etc/initscripts/pega-firewall.sh start ...
+[AT] AT+CEREG?
++CEREG: 0,0
+
+OK
+[AT] AT+CEREG=2
+[AT] AT+C5GREG?
++C5GREG: 0,0
+
+OK
+[AT] AT+C5GREG=2
+[AT] AT+QNETRC?
++QNETRC: "emm_cause",0
++QNETRC: "esm_cause",0
++QNETRC: "5gmm_cause",0
+
+OK
+[AT] AT+QNETRC=7
+Set WWAN ...
+
+QTI Linux reference nogplv3 distro targeting performance builds. LE.UM.6.2.3.r1-03100-SDX65.0 MU310 ttyMSM0
+
+MU310 login: [AT] AT+QNWPREFCFG="ue_capability_band"
++QNWPREFCFG: "gw_band",0
++QNWPREFCFG: "lte_band",42:43:48
++QNWPREFCFG: "nsa_nr5g_band",48:77:78
++QNWPREFCFG: "nr5g_band",48:77:78
++QNWPREFCFG: "nrdc_nr5g_band",0
+
+OK
+[AT] AT+QNWPREFCFG="lte_band",42:43:48
+[AT] AT+QNWPREFCFG="ue_capability_band"
++QNWPREFCFG: "gw_band",0
++QNWPREFCFG: "lte_band",42:43:48
++QNWPREFCFG: "nsa_nr5g_band",48:77:78
++QNWPREFCFG: "nr5g_band",48:77:78
++QNWPREFCFG: "nrdc_nr5g_band",0
+
+OK
+[AT] AT+QNWPREFCFG="nr5g_band",48:77:78
+[AT] AT+QNWPREFCFG="ue_capability_band"
++QNWPREFCFG: "gw_band",0
++QNWPREFCFG: "lte_band",42:43:48
++QNWPREFCFG: "nsa_nr5g_band",48:77:78
++QNWPREFCFG: "nr5g_band",48:77:78
++QNWPREFCFG: "nrdc_nr5g_band",0
+
+OK
+[AT] AT+QNWPREFCFG="nsa_nr5g_band",48:77:78
+===DHCP config changed or DUT init===
+lighttpd boot .. certificateCheck() ............
+ check https key expire  
+===DHCP Address Reservation init ===
+certificate is good for another day !
+/etc/initscripts/pega-odhcpd.sh restart done
+done
+/etc/initscripts/pega-dhcp.sh start done
+[AT] at+qnwcfg="eth_cfg"
++QNWCFG: "eth_cfg",0
+
+OK
+[AT] AT+QICSGP=1
++QICSGP: 3,"","","",0
+
+OK
+[AT] AT+QICSGP=1,3,"","","",0
+[AT] AT+QWDSCFG="profile"
++QWDSCFG: "profile",1,"IPV4V6","",0,0
++QWDSCFG: "profile",2,"IPV4V6","ims",0,0
++QWDSCFG: "profile",3,"IPV4V6","sos",0,0
+
+OK
+[AT] AT+CGDCONT=10
+/etc/initscripts/pega-firewall.sh start done
+[AT] AT+QWDSCFG="profile"
++QWDSCFG: "profile",1,"IPV4V6","",0,0
++QWDSCFG: "profile",2,"IPV4V6","ims",0,0
++QWDSCFG: "profile",3,"IPV4V6","sos",0,0
+
+OK
+[AT] AT+CGDCONT=11
+[AT] AT+QWDSCFG="profile"
++QWDSCFG: "profile",1,"IPV4V6","",0,0
++QWDSCFG: "profile",2,"IPV4V6","ims",0,0
++QWDSCFG: "profile",3,"IPV4V6","sos",0,0
+
+OK
+[AT] AT+CGDCONT=12
+/etc/init.post_boot.sh done
+
+[17:39:03.451][DUT] [Check Ready]--
+2025/08/05 17:39:03 [1]	[DUT] [Check Ready] ~~ TestTime:33.6485465 sec
+2025/08/05 17:39:03 [1]	OTFX157-106:@STEP009@Check Boot ready Test is Pass ! 		----- 43.7242737 Sec.
+2025/08/05 17:39:03 [1]	Do @STEP010@Login Linux
+2025/08/05 17:39:03 [1]	Run B7PL025-107:Wait	Mode: 0, Retry: 3
+[17:39:03.489][PC] [Wait]++
+2025/08/05 17:39:03 [1]	> :Delay,"2000"
+2025/08/05 17:39:05 [1]	< 0
+[17:39:05.495][PC] [Wait]--
+2025/08/05 17:39:05 [1]	[PC] [Wait] ~~ TestTime:2.0138345 sec
+2025/08/05 17:39:05 [1]	Run OTFX157-108:Login Linux_root	Mode: 1, Retry: 3
+[17:39:05.505][DUT] [Login Linux_root]++
+2025/08/05 17:39:05 [1]	(UART) > root
+
+2025/08/05 17:39:05 [1]	(UART) < root
+Password: 
+[17:39:05.568][DUT] [Login Linux_root]--
+2025/08/05 17:39:05 [1]	[DUT] [Login Linux_root] ~~ TestTime:0.0706273 sec
+2025/08/05 17:39:05 [1]	Run CHXO033-109:Login Linux_PW	Mode: 2, Retry: 3
+[17:39:05.572][DUT] [Login Linux_PW]++
+2025/08/05 17:39:05 [1]	(UART) > oelinux123
+
+2025/08/05 17:39:08 [1]	(UART) < 
+7[r[999;999H[6nroot@MU310:~# 
+[17:39:08.688][DUT] [Login Linux_PW]--
+2025/08/05 17:39:08 [1]	[DUT] [Login Linux_PW] ~~ TestTime:3.125829 sec
+2025/08/05 17:39:08 [1]	Run B7PL025-110:Wait	Mode: 0, Retry: 3
+[17:39:08.700][PC] [Wait]++
+2025/08/05 17:39:08 [1]	> :Delay,"1000"
+2025/08/05 17:39:09 [1]	< 0
+[17:39:09.712][PC] [Wait]--
+2025/08/05 17:39:09 [1]	[PC] [Wait] ~~ TestTime:1.0157921 sec
+2025/08/05 17:39:09 [1]	Run OTFX157-111:Check Ready	Mode: 0, Retry: 3
+[17:39:09.720][DUT] [Check Ready]++
+2025/08/05 17:39:09 [1]	(UART) >  
+
+2025/08/05 17:39:09 [1]	(UART) <  
+root@MU310:~# 
+root@MU310:~# 
+[17:39:09.762][DUT] [Check Ready]--
+2025/08/05 17:39:09 [1]	[DUT] [Check Ready] ~~ TestTime:0.0450135 sec
+2025/08/05 17:39:09 [1]	Run B7PL025-112:Wait	Mode: 0, Retry: 3
+[17:39:09.763][PC] [Wait]++
+2025/08/05 17:39:09 [1]	> :Delay,"1000"
+2025/08/05 17:39:10 [1]	< 0
+[17:39:10.775][PC] [Wait]--
+2025/08/05 17:39:10 [1]	[PC] [Wait] ~~ TestTime:1.0117971 sec
+2025/08/05 17:39:10 [1]	B7PL025-112:@STEP010@Login Linux Test is Pass ! 		----- 7.2959776 Sec.
+2025/08/05 17:39:10 [1]	DUT Test Completed !        ----- 51.11335 Sec.
+2025/08/05 17:39:10 [1]	Execute Phase 5 Test.
+2025/08/05 17:39:10 [1]	Do @STEP012@Check_FW version
+2025/08/05 17:39:10 [1]	Run VSCH014-02F:Check CHIP Name	Mode: 1, Retry: 3
+[17:39:10.972][DUT] [Check CHIP Name]++
+2025/08/05 17:39:10 [1]	(UART) > atcli AT+CGMM
+
+2025/08/05 17:39:11 [1]	(UART) < atcli AT+CGMM
+AT+CGMM
+RG520N-GT
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:11 [1]	WithinString: RG520N-GT
+2025/08/05 17:39:11 [1]	Check CHIP Name Result: SKU=RG520N-GT
+[17:39:11.011][DUT] [Check CHIP Name]--
+2025/08/05 17:39:11 [1]	[DUT] [Check CHIP Name] ~~ TestTime:0.0381406 sec
+2025/08/05 17:39:11 [1]	Run VSCH014-02G:Get FW_VERSION	Mode: 1, Retry: 3
+[17:39:11.013][DUT] [Get FW_VERSION]++
+2025/08/05 17:39:11 [1]	(UART) > uci -P /var/state get pega.fw.cur_ver
+
+2025/08/05 17:39:11 [1]	(UART) < uci -P /var/state get pega.fw.cur_ver
+V1.1.0.0_1
+root@MU310:~# 
+root@MU310:~# 
+[17:39:11.048][DUT] [Get FW_VERSION]--
+2025/08/05 17:39:11 [1]	[DUT] [Get FW_VERSION] ~~ TestTime:0.0368645 sec
+2025/08/05 17:39:11 [1]	Run NUWL086-02H:Get 5G Module_FWVer	Mode: 1, Retry: 3
+[17:39:11.048][DUT] [Get 5G Module_FWVer]++
+2025/08/05 17:39:11 [1]	(UART) > atcli at+qgmr
+
+2025/08/05 17:39:11 [1]	(UART) < atcli at+qgmr
+at+qgmr
+RG520NGTAAR05A01M4G_OCPU_HS_BETA_20250627A_01.001.01.001
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:11 [1]	WithinString: RG520NGTAAR05A01M4G_OCPU_HS_BETA_20250627A_01.001.01.001
+2025/08/05 17:39:11 [1]	Get 5G Module_FWVer Result: g5G_Module=RG520NGTAAR05A01M4G_OCPU_HS_BETA_20250627A_01.001.01.001
+[17:39:11.109][DUT] [Get 5G Module_FWVer]--
+2025/08/05 17:39:11 [1]	[DUT] [Get 5G Module_FWVer] ~~ TestTime:0.0608864 sec
+2025/08/05 17:39:11 [1]	Run B7PL025-02J:Check SFIS Enabled@#$	Mode: 4, Retry: 3
+[17:39:11.109][PC] [Check SFIS Enabled@#$]++
+2025/08/05 17:39:11 [1]	> :SfEnabled
+2025/08/05 17:39:11 [1]	< 0
+[17:39:11.109][PC] [Check SFIS Enabled@#$]--
+2025/08/05 17:39:11 [1]	[PC] [Check SFIS Enabled@#$] ~~ TestTime:0 sec
+2025/08/05 17:39:11 [1]	Run CACK227-02K:Get 69PN	Mode: 1, Retry: 3
+[17:39:11.109][DUT] [Get 69PN]++
+2025/08/05 17:39:11 [1]	> :SetVal,"$69PN","69BD05M10A01"
+2025/08/05 17:39:11 [1]	< 0
+[17:39:11.120][DUT] [Get 69PN]--
+2025/08/05 17:39:11 [1]	[DUT] [Get 69PN] ~~ TestTime:0.0103803 sec
+2025/08/05 17:39:11 [1]	Run CACK226-02L:Check EU 69PN	Mode: 4, Retry: 3
+[17:39:11.124][DUT] [Check EU 69PN]++
+2025/08/05 17:39:11 [1]	> :GetVal,"$69PN"
+2025/08/05 17:39:11 [1]	< 69BD05M10A01
+[17:39:11.128][DUT] [Check EU 69PN]--
+2025/08/05 17:39:11 [1]	[DUT] [Check EU 69PN] ~~ TestTime:0.0043181 sec
+2025/08/05 17:39:11 [1]	Run CACK226-02R:Check NA 69PN	Mode: 4, Retry: 3
+[17:39:11.128][DUT] [Check NA 69PN]++
+2025/08/05 17:39:11 [1]	> :GetVal,"$69PN"
+2025/08/05 17:39:11 [1]	< 69BD05M10A01
+2025/08/05 17:39:11 [1]	CACK226-02R:@STEP012@Check_FW version Test is Pass ! 		----- 0.1576604 Sec.
+2025/08/05 17:39:11 [1]	DUT Test Completed !        ----- 0.2241586 Sec.
+2025/08/05 17:39:11 [1]	Execute Phase 6 Test.
+2025/08/05 17:39:11 [1]	Do @STEP014@Get MAC addrs
+2025/08/05 17:39:11 [1]	Run B7PL025-037:Check SFIS Enabled	Mode: 4, Retry: 3
+[17:39:11.253][PC] [Check SFIS Enabled]++
+2025/08/05 17:39:11 [1]	> :SfEnabled
+2025/08/05 17:39:11 [1]	< 0
+[17:39:11.255][PC] [Check SFIS Enabled]--
+2025/08/05 17:39:11 [1]	[PC] [Check SFIS Enabled] ~~ TestTime:0.0018927 sec
+2025/08/05 17:39:11 [1]	Run B7PL025-03C:Wait time@#$	Mode: 0, Retry: 3
+[17:39:11.260][PC] [Wait time@#$]++
+2025/08/05 17:39:11 [1]	> :Delay,"000"
+2025/08/05 17:39:11 [1]	< 0
+[17:39:11.265][PC] [Wait time@#$]--
+2025/08/05 17:39:11 [1]	[PC] [Wait time@#$] ~~ TestTime:0.0065104 sec
+2025/08/05 17:39:11 [1]	B7PL025-03C:@STEP014@Get MAC addrs Test is Pass ! 		----- 0.0127757 Sec.
+2025/08/05 17:39:11 [1]	DUT Test Completed !        ----- 0.0544352 Sec.
+2025/08/05 17:39:11 [1]	Execute Phase 7 Test.
+2025/08/05 17:39:11 [1]	Do @STEP016@Set MBSN
+2025/08/05 17:39:11 [1]	Run IPIO01Y-03R:Check_Looprunning ISN	Mode: 4, Retry: 3
+[17:39:11.395][PC] [Check_Looprunning ISN]++
+2025/08/05 17:39:11 [1]	> :GetVal,"$ISN"
+2025/08/05 17:39:11 [1]	< 222
+[17:39:11.402][PC] [Check_Looprunning ISN]--
+2025/08/05 17:39:11 [1]	[PC] [Check_Looprunning ISN] ~~ TestTime:0.0064233 sec
+2025/08/05 17:39:11 [1]	Run KAOT013-03S:Set MBSN	Mode: 1, Retry: 3
+[17:39:11.405][DUT] [Set MBSN]++
+2025/08/05 17:39:11 [1]	(UART) > fw_setenv mb_sn 222
+
+2025/08/05 17:39:11 [1]	(UART) < fw_setenv mb_sn 222
+root@MU310:~# 
+root@MU310:~# 
+[17:39:11.555][DUT] [Set MBSN]--
+2025/08/05 17:39:11 [1]	[DUT] [Set MBSN] ~~ TestTime:0.154224 sec
+2025/08/05 17:39:11 [1]	Run KAOT013-03T:Check MBSN	Mode: 2, Retry: 3
+[17:39:11.556][DUT] [Check MBSN]++
+2025/08/05 17:39:11 [1]	(UART) > fw_printenv -n mb_sn
+
+2025/08/05 17:39:11 [1]	(UART) < fw_printenv -n mb_sn
+222
+root@MU310:~# 
+root@MU310:~# 
+[17:39:11.614][DUT] [Check MBSN]--
+2025/08/05 17:39:11 [1]	[DUT] [Check MBSN] ~~ TestTime:0.0602132 sec
+2025/08/05 17:39:11 [1]	Run B7PL025-03V:Wait time	Mode: 0, Retry: 3
+[17:39:11.616][PC] [Wait time]++
+2025/08/05 17:39:11 [1]	> :Delay,"000"
+2025/08/05 17:39:11 [1]	< 0
+[17:39:11.620][PC] [Wait time]--
+2025/08/05 17:39:11 [1]	[PC] [Wait time] ~~ TestTime:0.0060077 sec
+2025/08/05 17:39:11 [1]	B7PL025-03V:@STEP016@Set MBSN Test is Pass ! 		----- 0.2268682 Sec.
+2025/08/05 17:39:11 [1]	Do @STEP017@Write_Read Data
+2025/08/05 17:39:11 [1]	Run B7PL025-03W:Check SFIS Enabled	Mode: 4, Retry: 3
+[17:39:11.672][PC] [Check SFIS Enabled]++
+2025/08/05 17:39:11 [1]	> :SfEnabled
+2025/08/05 17:39:11 [1]	< 0
+[17:39:11.678][PC] [Check SFIS Enabled]--
+2025/08/05 17:39:11 [1]	[PC] [Check SFIS Enabled] ~~ TestTime:0.0059589 sec
+2025/08/05 17:39:11 [1]	Run WFOT032-03X:Set WIFI_SSID	Mode: 1, Retry: 3
+[17:39:11.681][DUT] [Set WIFI_SSID]++
+2025/08/05 17:39:11 [1]	(UART) > fw_printenv -n wifi0_ssid
+
+2025/08/05 17:39:11 [1]	(UART) < 
+[17:39:11.686][DUT] [Set WIFI_SSID]--
+2025/08/05 17:39:11 [1]	[DUT] [Set WIFI_SSID] ~~ TestTime:0.009352 sec
+2025/08/05 17:39:11 [1]	Run KAOT008-03Y:Check wifi_password	Mode: 1, Retry: 3
+[17:39:11.688][DUT] [Check wifi_password]++
+2025/08/05 17:39:11 [1]	(UART) > fw_printenv -n wifi0_password
+
+2025/08/05 17:39:11 [1]	(UART) < 
+[17:39:11.690][DUT] [Check wifi_password]--
+2025/08/05 17:39:11 [1]	[DUT] [Check wifi_password] ~~ TestTime:0.0030404 sec
+2025/08/05 17:39:11 [1]	Run CACK064-03Z:Check ETH_MAC	Mode: 1, Retry: 3
+[17:39:11.692][DUT] [Check ETH_MAC]++
+2025/08/05 17:39:11 [1]	(UART) > fw_printenv -n eth0_addr
+
+2025/08/05 17:39:11 [1]	(UART) < 
+[17:39:11.693][DUT] [Check ETH_MAC]--
+2025/08/05 17:39:11 [1]	[DUT] [Check ETH_MAC] ~~ TestTime:0.0020227 sec
+2025/08/05 17:39:11 [1]	Run NBLW006-040:Check WIFI_MAC	Mode: 1, Retry: 3
+[17:39:11.694][DUT] [Check WIFI_MAC]++
+2025/08/05 17:39:11 [1]	(UART) > fw_printenv -n wifi0_addr
+
+2025/08/05 17:39:11 [1]	(UART) < 
+[17:39:11.699][DUT] [Check WIFI_MAC]--
+2025/08/05 17:39:11 [1]	[DUT] [Check WIFI_MAC] ~~ TestTime:0.0056146 sec
+2025/08/05 17:39:11 [1]	Run CACK137-041:Check hwver	Mode: 1, Retry: 3
+[17:39:11.701][DUT] [Check hwver]++
+2025/08/05 17:39:11 [1]	(UART) > fw_printenv -n hwver
+
+2025/08/05 17:39:11 [1]	(UART) < 
+[17:39:11.703][DUT] [Check hwver]--
+2025/08/05 17:39:11 [1]	[DUT] [Check hwver] ~~ TestTime:0.00404 sec
+2025/08/05 17:39:11 [1]	Run B7PL025-042:Wait time	Mode: 4, Retry: 3
+[17:39:11.705][PC] [Wait time]++
+2025/08/05 17:39:11 [1]	> :Delay,"000"
+2025/08/05 17:39:11 [1]	< 0
+[17:39:11.711][PC] [Wait time]--
+2025/08/05 17:39:11 [1]	[PC] [Wait time] ~~ TestTime:0.0066819 sec
+2025/08/05 17:39:11 [1]	Run B7PL025-04D:Wait time	Mode: 0, Retry: 3
+[17:39:11.713][PC] [Wait time]++
+2025/08/05 17:39:11 [1]	> :Delay,"000"
+2025/08/05 17:39:11 [1]	< 0
+[17:39:11.718][PC] [Wait time]--
+2025/08/05 17:39:11 [1]	[PC] [Wait time] ~~ TestTime:0.0061124 sec
+2025/08/05 17:39:11 [1]	B7PL025-04D:@STEP017@Write_Read Data Test is Pass ! 		----- 0.046095 Sec.
+2025/08/05 17:39:11 [1]	DUT Test Completed !        ----- 0.3758374 Sec.
+2025/08/05 17:39:11 [1]	Execute Phase 8 Test.
+2025/08/05 17:39:11 [1]	Do @STEP019@Get_IMEI
+2025/08/05 17:39:11 [1]	Run B7PL025-04E:Wait	Mode: 0, Retry: 3
+2025/08/05 17:39:11 [1]	> :Delay,"500"
+2025/08/05 17:39:12 [1]	< 0
+2025/08/05 17:39:12 [1]	Run NUVO018-04F:get_IMEI	Mode: 2, Retry: 3
+[17:39:12.387][DUT] [get_IMEI]++
+2025/08/05 17:39:12 [1]	(UART) > atcli at+gsn
+
+2025/08/05 17:39:12 [1]	(UART) < atcli at+gsn
+at+gsn
+869222060002961
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:12 [1]	WithinString: 869222060002961
+2025/08/05 17:39:12 [1]	get_IMEI Result: gIMEI=869222060002961
+[17:39:12.437][DUT] [get_IMEI]--
+2025/08/05 17:39:12 [1]	[DUT] [get_IMEI] ~~ TestTime:0.0507339 sec
+2025/08/05 17:39:12 [1]	Run NUOP003-04G:Check_IMEI_Integrity	Mode: 2, Retry: 3
+[17:39:12.437][PC] [Check_IMEI_Integrity]++
+2025/08/05 17:39:12 [1]	> :Utility.IMEIAPI,"veyIMEI","869222060002961"
+2025/08/05 17:39:12 [1]	< 
+2025/08/05 17:39:12 [1]	< 0
+[17:39:12.437][PC] [Check_IMEI_Integrity]--
+2025/08/05 17:39:12 [1]	[PC] [Check_IMEI_Integrity] ~~ TestTime:0 sec
+2025/08/05 17:39:12 [1]	NUOP003-04G:@STEP019@Get_IMEI Test is Pass ! 		----- 0.5657652 Sec.
+2025/08/05 17:39:12 [1]	DUT Test Completed !        ----- 0.6098063 Sec.
+2025/08/05 17:39:12 [1]	Execute Phase 9 Test.
+2025/08/05 17:39:12 [1]	Do @STEP021@Check LAN Link
+2025/08/05 17:39:12 [1]	Run B7PL025-07H:Wait time@#$	Mode: 4, Retry: 30
+[17:39:12.569][PC] [Wait time@#$]++
+2025/08/05 17:39:12 [1]	> :Delay,"000"
+2025/08/05 17:39:12 [1]	< 0
+[17:39:12.573][PC] [Wait time@#$]--
+2025/08/05 17:39:12 [1]	[PC] [Wait time@#$] ~~ TestTime:0.0083452 sec
+2025/08/05 17:39:12 [1]	Run NBHM007-069:Get LAN LINK SPEED@#$	Mode: 2, Retry: 30
+[17:39:12.573][DUT] [Get LAN LINK SPEED@#$]++
+2025/08/05 17:39:12 [1]	(UART) > ethtool eth0
+
+2025/08/05 17:39:12 [1]	(UART) < ethtool eth0
+Settings for eth0:
+	Supported ports: [ TP ]
+	Supported link modes:   10baseT/Half 10baseT/Full 
+	                        100baseT/Half 100baseT/Full 
+	                        1000baseT/Full 
+	                        2500baseT/Full 
+	Supported pause frame use: Symmetric Receive-only
+	Supports auto-negotiation: Yes
+	Supported FEC modes: Not reported
+	Advertised link modes:  10baseT/Half 10baseT/Full 
+	                        100baseT/Half 100baseT/Full 
+	                        1000baseT/Full 
+	                        2500baseT/Full 
+	Advertised pause frame use: Symmetric Receive-only
+	Advertised auto-negotiation: Yes
+	Advertised FEC modes: Not reported
+	Link partner advertised link modes:  10baseT/Half 10baseT/Full 
+	                                     100baseT/Half 100baseT/Full 
+	                                     1000baseT/Full 
+	Link partner advertised pause frame use: Symmetric Receive-only
+	Link partner advertised auto-negotiation: Yes
+	Link partner advertised FEC modes: Not reported
+	Speed: 1000Mb/s
+	Duplex: Full
+	Port: Twisted Pair
+	PHYAD: 0
+	Transceiver: internal
+	Auto-negotiation: on
+	MDI-X: Unknown
+	Supports Wake-on: pumbg
+	Wake-on: pg
+	Current message level: 0x00000033 (51)
+			       drv probe ifdown ifup
+	Link detected: yes
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:12 [1]	Get LAN LINK SPEED@#$ Result: LAN_Status=ethtool eth0|Settings for eth0:|	Supported ports: [ TP ]|	Supported link modes:   10baseT/Half 10baseT/Full |	                        100baseT/Half 100baseT/Full |	                        1000baseT/Full |	                        2500baseT/Full |	Supported pause frame use: Symmetric Receive-only|	Supports auto-negotiation: Yes|	Supported FEC modes: Not reported|	Advertised link modes:  10baseT/Half 10baseT/Full |	                        100baseT/Half 100baseT/Full |	                        1000baseT/Full |	                        2500baseT/Full |	Advertised pause frame use: Symmetric Receive-only|	Advertised auto-negotiation: Yes|	Advertised FEC modes: Not reported|	Link partner advertised link modes:  10baseT/Half 10baseT/Full |	                                     100baseT/Half 100baseT/Full |	                                     1000baseT/Full |	Link partner advertised pause frame use: Symmetric Receive-only|	Link partner advertised auto-negotiation: Yes|	Link partner advertised FEC modes: Not reported|	Speed: 1000Mb/s|	Duplex: Full|	Port: Twisted Pair|	PHYAD: 0|	Transceiver: internal|	Auto-negotiation: on|	MDI-X: Unknown|	Supports Wake-on: pumbg|	Wake-on: pg|	Current message level: 0x00000033 (51)|			       drv probe ifdown ifup|	Link detected: yes|root@MU310:~# |root@MU310:~# 
+[17:39:12.766][DUT] [Get LAN LINK SPEED@#$]--
+2025/08/05 17:39:12 [1]	[DUT] [Get LAN LINK SPEED@#$] ~~ TestTime:0.1931158 sec
+2025/08/05 17:39:12 [1]	Run NUWL082-06A:Check LAN LINK SPEED	Mode: 2, Retry: 30
+[17:39:12.766][DUT] [Check LAN LINK SPEED]++
+2025/08/05 17:39:12 [1]	> :GetVal,"$LAN_Status"
+2025/08/05 17:39:12 [1]	< ethtool eth0
+Settings for eth0:
+	Supported ports: [ TP ]
+	Supported link modes:   10baseT/Half 10baseT/Full 
+	                        100baseT/Half 100baseT/Full 
+	                        1000baseT/Full 
+	                        2500baseT/Full 
+	Supported pause frame use: Symmetric Receive-only
+	Supports auto-negotiation: Yes
+	Supported FEC modes: Not reported
+	Advertised link modes:  10baseT/Half 10baseT/Full 
+	                        100baseT/Half 100baseT/Full 
+	                        1000baseT/Full 
+	                        2500baseT/Full 
+	Advertised pause frame use: Symmetric Receive-only
+	Advertised auto-negotiation: Yes
+	Advertised FEC modes: Not reported
+	Link partner advertised link modes:  10baseT/Half 10baseT/Full 
+	                                     100baseT/Half 100baseT/Full 
+	                                     1000baseT/Full 
+	Link partner advertised pause frame use: Symmetric Receive-only
+	Link partner advertised auto-negotiation: Yes
+	Link partner advertised FEC modes: Not reported
+	Speed: 1000Mb/s
+	Duplex: Full
+	Port: Twisted Pair
+	PHYAD: 0
+	Transceiver: internal
+	Auto-negotiation: on
+	MDI-X: Unknown
+	Supports Wake-on: pumbg
+	Wake-on: pg
+	Current message level: 0x00000033 (51)
+			       drv probe ifdown ifup
+	Link detected: yes
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:12 [1]	WithinString: 1000
+2025/08/05 17:39:12 [1]	WithinString: yes
+2025/08/05 17:39:12 [1]	Check LAN LINK SPEED Result: LAN_SPEED=1000; LAN_LINK=yes
+2025/08/05 17:39:12 [1]	CurrentTestID:NUWL082-06A0 - The validation: LAN_SPEED = 1000 (1000,)
+2025/08/05 17:39:12 [1]	CurrentTestID:NUWL082-06A1 - The validation: LAN_LINK = yes (yes,)
+[17:39:12.771][DUT] [Check LAN LINK SPEED]--
+2025/08/05 17:39:12 [1]	[DUT] [Check LAN LINK SPEED] ~~ TestTime:0.005399 sec
+2025/08/05 17:39:12 [1]	Run B7PL025-07K:Wait time@#$	Mode: 1, Retry: 30
+[17:39:12.780][PC] [Wait time@#$]++
+2025/08/05 17:39:12 [1]	> :Delay,"1000"
+2025/08/05 17:39:13 [1]	< 0
+[17:39:13.788][PC] [Wait time@#$]--
+2025/08/05 17:39:13 [1]	[PC] [Wait time@#$] ~~ TestTime:1.0222872 sec
+2025/08/05 17:39:13 [1]	Run NBHM007-06B:Check LAN ping PC@#$	Mode: 2, Retry: 30
+[17:39:13.800][DUT] [Check LAN ping PC@#$]++
+2025/08/05 17:39:13 [1]	(UART) > ping 192.168.225.10 -c 2
+
+2025/08/05 17:39:14 [1]	(UART) < ping 192.168.225.10 -c 2
+PING 192.168.225.10 (192.168.225.10) 56(84) bytes of data.
+64 bytes from 192.168.225.10: icmp_seq=1 ttl=128 time=4.12 ms
+64 bytes from 192.168.225.10: icmp_seq=2 ttl=128 time=2.30 ms
+
+--- 192.168.225.10 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 2.301/3.212/4.124/0.911 ms
+root@MU310:~# 
+root@MU310:~# 
+[17:39:14.895][DUT] [Check LAN ping PC@#$]--
+2025/08/05 17:39:14 [1]	[DUT] [Check LAN ping PC@#$] ~~ TestTime:1.0987165 sec
+2025/08/05 17:39:14 [1]	NBHM007-06B:@STEP021@Check LAN Link Test is Pass ! 		----- 2.3316384 Sec.
+2025/08/05 17:39:14 [1]	DUT Test Completed !        ----- 2.3750337 Sec.
+2025/08/05 17:39:15 [1]	Execute Phase 10 Test.
+2025/08/05 17:39:15 [1]	Do @STEP023@Check 5G Thermal
+2025/08/05 17:39:15 [1]	Run NUWL007-04H:Read thermal level@#$	Mode: 1, Retry: 3
+[17:39:15.085][DUT] [Read thermal level@#$]++
+2025/08/05 17:39:15 [1]	(UART) > atcli 'AT+QTHERMAL="thermal_level"'
+
+2025/08/05 17:39:15 [1]	(UART) < atcli 'AT+QTHERMAL="thermal_level"'
+AT+QTHERMAL="thermal_level"
++QTHERMAL: "thermal_level","modem_lte_dsc",0
++QTHERMAL: "thermal_level","modem_nr_dsc",0
++QTHERMAL: "thermal_level","modem_nr_scg_dsc",0
++QTHERMAL: "thermal_level","pa_lte_sdr0_dsc",0
++QTHERMAL: "thermal_level","pa_nr_sdr0_dsc",0
++QTHERMAL: "thermal_level","pa_nr_sdr0_scg_dsc",0
++QTHERMAL: "thermal_level","mmw0_dsc",0
++QTHERMAL: "thermal_level","mmw_ific_dsc",0
+
+OK
+root@MU310:~# 
+
+2025/08/05 17:39:15 [1]	Read thermal level@#$ Result: gthermal_level=atcli 'AT+QTHERMAL="thermal_level"'|AT+QTHERMAL="thermal_level"|||+QTHERMAL: "thermal_level","modem_lte_dsc",0||+QTHERMAL: "thermal_level","modem_nr_dsc",0||+QTHERMAL: "thermal_level","modem_nr_scg_dsc",0||+QTHERMAL: "thermal_level","pa_lte_sdr0_dsc",0||+QTHERMAL: "thermal_level","pa_nr_sdr0_dsc",0||+QTHERMAL: "thermal_level","pa_nr_sdr0_scg_dsc",0||+QTHERMAL: "thermal_level","mmw0_dsc",0||+QTHERMAL: "thermal_level","mmw_ific_dsc",0||||OK||root@MU310:~# |
+[17:39:15.155][DUT] [Read thermal level@#$]--
+2025/08/05 17:39:15 [1]	[DUT] [Read thermal level@#$] ~~ TestTime:0.0703573 sec
+2025/08/05 17:39:15 [1]	Run NUWL007-04J:Check thermal level@#$	Mode: 2, Retry: 3
+[17:39:15.157][DUT] [Check thermal level@#$]++
+2025/08/05 17:39:15 [1]	> :GetVal,"$gthermal_level"
+2025/08/05 17:39:15 [1]	< atcli 'AT+QTHERMAL="thermal_level"'
+AT+QTHERMAL="thermal_level"
++QTHERMAL: "thermal_level","modem_lte_dsc",0
++QTHERMAL: "thermal_level","modem_nr_dsc",0
++QTHERMAL: "thermal_level","modem_nr_scg_dsc",0
++QTHERMAL: "thermal_level","pa_lte_sdr0_dsc",0
++QTHERMAL: "thermal_level","pa_nr_sdr0_dsc",0
++QTHERMAL: "thermal_level","pa_nr_sdr0_scg_dsc",0
++QTHERMAL: "thermal_level","mmw0_dsc",0
++QTHERMAL: "thermal_level","mmw_ific_dsc",0
+
+OK
+root@MU310:~# 
+
+2025/08/05 17:39:15 [1]	WithinString: 0
+2025/08/05 17:39:15 [1]	WithinString: 0
+2025/08/05 17:39:15 [1]	WithinString: 0
+2025/08/05 17:39:15 [1]	WithinString: 0
+2025/08/05 17:39:15 [1]	WithinString: 0
+2025/08/05 17:39:15 [1]	WithinString: 0
+2025/08/05 17:39:15 [1]	WithinString: 0
+2025/08/05 17:39:15 [1]	WithinString: 0
+2025/08/05 17:39:15 [1]	Check thermal level@#$ Result: modem_lte_dsc=0; modem_nr_dsc=0; modem_nr_scg_dsc=0; pa_lte_sdr0_dsc=0; pa_nr_sdr0_dsc=0; pa_nr_sdr0_scg_dsc=0; mmw0_dsc=0; mmw_ific_dsc=0
+[17:39:15.165][DUT] [Check thermal level@#$]--
+2025/08/05 17:39:15 [1]	[DUT] [Check thermal level@#$] ~~ TestTime:0.0079979 sec
+2025/08/05 17:39:15 [1]	Run NUWL007-04K:Check Module Thermal	Mode: 1, Retry: 3
+[17:39:15.165][DUT] [Check Module Thermal]++
+2025/08/05 17:39:15 [1]	(UART) > atcli 'AT+QTHERMAL="thermal_sensor", "mdm"'
+
+2025/08/05 17:39:15 [1]	(UART) < atcli 'AT+QTHERMAL="thermal_sensor", "mdm"'
+AT+QTHERMAL="thermal_sensor", "mdm"
++QTHERMAL: "thermal_sensor","mdm",36
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:15 [1]	WithinString: 36
+2025/08/05 17:39:15 [1]	Check Module Thermal Result: Module Thermal=36
+2025/08/05 17:39:15 [1]	CurrentTestID:NUWL007-04K0 - The validation: Module Thermal = 36 (-30,75)
+[17:39:15.265][DUT] [Check Module Thermal]--
+2025/08/05 17:39:15 [1]	[DUT] [Check Module Thermal] ~~ TestTime:0.1002368 sec
+2025/08/05 17:39:15 [1]	Run NUWL007-04L:Check mmw thermal	Mode: 1, Retry: 3
+[17:39:15.265][DUT] [Check mmw thermal]++
+2025/08/05 17:39:15 [1]	(UART) > atcli 'AT+QTHERMAL="thermal_sensor", "mmw"'
+
+2025/08/05 17:39:15 [1]	(UART) < atcli 'AT+QTHERMAL="thermal_sensor", "mmw"'
+AT+QTHERMAL="thermal_sensor", "mmw"
++QTHERMAL: "thermal_sensor","mmw",0
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:15 [1]	WithinString: 0
+2025/08/05 17:39:15 [1]	Check mmw thermal Result: mmw=0
+[17:39:15.337][DUT] [Check mmw thermal]--
+2025/08/05 17:39:15 [1]	[DUT] [Check mmw thermal] ~~ TestTime:0.0716241 sec
+2025/08/05 17:39:15 [1]	Run NUWL007-04M:Check mmw_ific thermal	Mode: 1, Retry: 3
+[17:39:15.337][DUT] [Check mmw_ific thermal]++
+2025/08/05 17:39:15 [1]	(UART) > atcli 'AT+QTHERMAL="thermal_sensor", "mmw_ific"'
+
+2025/08/05 17:39:15 [1]	(UART) < atcli 'AT+QTHERMAL="thermal_sensor", "mmw_ific"'
+AT+QTHERMAL="thermal_sensor", "mmw_ific"
++QTHERMAL: "thermal_sensor","mmw_ific",-273
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:15 [1]	WithinString: -273
+2025/08/05 17:39:15 [1]	Check mmw_ific thermal Result: mmw_ific=-273
+[17:39:15.414][DUT] [Check mmw_ific thermal]--
+2025/08/05 17:39:15 [1]	[DUT] [Check mmw_ific thermal] ~~ TestTime:0.0771456 sec
+2025/08/05 17:39:15 [1]	NUWL007-04M:@STEP023@Check 5G Thermal Test is Pass ! 		----- 0.329438 Sec.
+2025/08/05 17:39:15 [1]	DUT Test Completed !        ----- 0.3881348 Sec.
+2025/08/05 17:39:15 [1]	Execute Phase 11 Test.
+2025/08/05 17:39:15 [1]	Do @STEP025@Check_eSIM
+2025/08/05 17:39:15 [1]	Run B7PL025-050:Wait time@#$	Mode: 4, Retry: 3
+[17:39:15.584][PC] [Wait time@#$]++
+2025/08/05 17:39:15 [1]	> :Delay,"000"
+2025/08/05 17:39:15 [1]	< 0
+[17:39:15.590][PC] [Wait time@#$]--
+2025/08/05 17:39:15 [1]	[PC] [Wait time@#$] ~~ TestTime:0.0057484 sec
+2025/08/05 17:39:15 [1]	Run KAOT015-052:Check_CPIN_Status@#$	Mode: 2, Retry: 3
+[17:39:15.591][DUT] [Check_CPIN_Status@#$]++
+2025/08/05 17:39:15 [1]	(UART) > atcli 'AT+CPIN?'
+
+2025/08/05 17:39:15 [1]	(UART) < atcli 'AT+CPIN?'
+AT+CPIN?
++CPIN: READY
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+[17:39:15.625][DUT] [Check_CPIN_Status@#$]--
+2025/08/05 17:39:15 [1]	[DUT] [Check_CPIN_Status@#$] ~~ TestTime:0.034496 sec
+2025/08/05 17:39:15 [1]	Run B7PL025-053:Wait time@#$	Mode: 0, Retry: 3
+[17:39:15.626][PC] [Wait time@#$]++
+2025/08/05 17:39:15 [1]	> :Delay,"500"
+2025/08/05 17:39:16 [1]	< 0
+[17:39:16.139][PC] [Wait time@#$]--
+2025/08/05 17:39:16 [1]	[PC] [Wait time@#$] ~~ TestTime:0.5136741 sec
+2025/08/05 17:39:16 [1]	Run KAOT052-054:Set_DUT_lpa_enable_1@#$	Mode: 2, Retry: 3
+[17:39:16.150][DUT] [Set_DUT_lpa_enable_1@#$]++
+2025/08/05 17:39:16 [1]	(UART) > atcli 'AT+QESIM="lpa_enable",1'
+
+2025/08/05 17:39:16 [1]	(UART) < atcli 'AT+QESIM="lpa_enable",1'
+AT+QESIM="lpa_enable",1
+OK
+root@MU310:~# 
+root@MU310:~# 
+[17:39:16.191][DUT] [Set_DUT_lpa_enable_1@#$]--
+2025/08/05 17:39:16 [1]	[DUT] [Set_DUT_lpa_enable_1@#$] ~~ TestTime:0.0425486 sec
+2025/08/05 17:39:16 [1]	KAOT052-054:@STEP025@Check_eSIM Test is Pass ! 		----- 0.6068652 Sec.
+2025/08/05 17:39:16 [1]	DUT Test Completed !        ----- 0.667161 Sec.
+2025/08/05 17:39:16 [1]	Execute Phase 12 Test.
+2025/08/05 17:39:16 [1]	Do @STEP027@ADB shell on
+2025/08/05 17:39:16 [1]	Run KAOT016-065:ADB shell on	Mode: 1, Retry: 3
+[17:39:16.323][DUT] [ADB shell on]++
+2025/08/05 17:39:16 [1]	(UART) > atcli 'AT+QCFG="usbcfg",0x2C7C,0x0801,2,1,1,0,0,1,0'
+
+2025/08/05 17:39:16 [1]	(UART) < atcli 'AT+QCFG="usbcfg",0x2C7C,0x0801,2,1,1,0,0,1,0'
+AT+QCFG="usbcfg",0x2C7C,0x0801,2,1,1,0,0,1,0
+OK
+root@MU310:~# 
+[17:39:16.353][DUT] [ADB shell on]--
+2025/08/05 17:39:16 [1]	[DUT] [ADB shell on] ~~ TestTime:0.0382426 sec
+2025/08/05 17:39:16 [1]	Run KAOT016-066:Confirm shell on	Mode: 2, Retry: 3
+[17:39:16.355][DUT] [Confirm shell on]++
+2025/08/05 17:39:16 [1]	(UART) > atcli 'AT+QCFG="usbcfg"'
+
+2025/08/05 17:39:16 [1]	(UART) < atcli 'AT+QCFG="usbcfg"'
+AT+QCFG="usbcfg"
++QCFG: "usbcfg",0x2C7C,0x0801,2,1,1,0,0,1,0
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+[17:39:16.384][DUT] [Confirm shell on]--
+2025/08/05 17:39:16 [1]	[DUT] [Confirm shell on] ~~ TestTime:0.0301354 sec
+2025/08/05 17:39:16 [1]	KAOT016-066:@STEP027@ADB shell on Test is Pass ! 		----- 0.068378 Sec.
+2025/08/05 17:39:16 [1]	DUT Test Completed !        ----- 0.1118667 Sec.
+2025/08/05 17:39:16 [1]	Execute Phase 13 Test.
+2025/08/05 17:39:16 [1]	Do @STEP029@Set MFG ON
+2025/08/05 17:39:16 [1]	Run KAOT007-067:fw_setenv mfg ON	Mode: 1, Retry: 3
+[17:39:16.526][DUT] [fw_setenv mfg ON]++
+2025/08/05 17:39:16 [1]	(UART) > fw_setenv mfg 1
+
+2025/08/05 17:39:16 [1]	(UART) < fw_setenv mfg 1
+root@MU310:~# 
+root@MU310:~# 
+[17:39:16.587][DUT] [fw_setenv mfg ON]--
+2025/08/05 17:39:16 [1]	[DUT] [fw_setenv mfg ON] ~~ TestTime:0.0630673 sec
+2025/08/05 17:39:16 [1]	Run KAOT007-068:Confirm MFG mode	Mode: 2, Retry: 3
+[17:39:16.587][DUT] [Confirm MFG mode]++
+2025/08/05 17:39:16 [1]	(UART) > fw_printenv -n mfg
+
+2025/08/05 17:39:16 [1]	(UART) < fw_printenv -n mfg
+1
+root@MU310:~# 
+root@MU310:~# 
+[17:39:16.650][DUT] [Confirm MFG mode]--
+2025/08/05 17:39:16 [1]	[DUT] [Confirm MFG mode] ~~ TestTime:0.0630231 sec
+2025/08/05 17:39:16 [1]	KAOT007-068:@STEP029@Set MFG ON Test is Pass ! 		----- 0.1287228 Sec.
+2025/08/05 17:39:16 [1]	DUT Test Completed !        ----- 0.1924096 Sec.
+2025/08/05 17:39:16 [1]	Execute Phase 14 Test.
+2025/08/05 17:39:16 [1]	Do @STEP031@Check SIM
+2025/08/05 17:39:16 [1]	Run NBHM007-06C:Check Sim Card Detection@#$	Mode: 1, Retry: 5
+[17:39:16.817][DUT] [Check Sim Card Detection@#$]++
+2025/08/05 17:39:16 [1]	(UART) > atcli at+qsimdet?
+
+2025/08/05 17:39:16 [1]	(UART) < atcli at+qsimdet?
+at+qsimdet?
++QSIMDET: 1,1
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:16 [1]	WithinString: at+qsimdet?
++QSIMDET: 1,1
+2025/08/05 17:39:16 [1]	Check Sim Card Detection@#$ Result: gSIMDET=at+qsimdet?|||+QSIMDET: 1,1
+[17:39:16.855][DUT] [Check Sim Card Detection@#$]--
+2025/08/05 17:39:16 [1]	[DUT] [Check Sim Card Detection@#$] ~~ TestTime:0.0372051 sec
+2025/08/05 17:39:16 [1]	Run B7PL025-06D:Wait time@#$	Mode: 4, Retry: 5
+[17:39:16.856][PC] [Wait time@#$]++
+2025/08/05 17:39:16 [1]	> :Delay,"000"
+2025/08/05 17:39:16 [1]	< 0
+[17:39:16.859][PC] [Wait time@#$]--
+2025/08/05 17:39:16 [1]	[PC] [Wait time@#$] ~~ TestTime:0.0054731 sec
+2025/08/05 17:39:16 [1]	Run KAOT015-06F:Check SIM CPIN	Mode: 2, Retry: 5
+[17:39:16.861][DUT] [Check SIM CPIN]++
+2025/08/05 17:39:16 [1]	(UART) > atcli at+cpin? 
+
+2025/08/05 17:39:16 [1]	(UART) < atcli at+cpin? 
+at+cpin?
++CPIN: READY
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+[17:39:16.891][DUT] [Check SIM CPIN]--
+2025/08/05 17:39:16 [1]	[DUT] [Check SIM CPIN] ~~ TestTime:0.0330259 sec
+2025/08/05 17:39:16 [1]	Run ITIF009-06G:Check SIM CCID	Mode: 1, Retry: 5
+[17:39:16.893][DUT] [Check SIM CCID]++
+2025/08/05 17:39:16 [1]	(UART) > atcli at+ccid
+
+2025/08/05 17:39:16 [1]	(UART) < atcli at+ccid
+at+ccid
++CCID: 89859800070005443659
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:16 [1]	WithinString: 89859800070005443659
+2025/08/05 17:39:16 [1]	Check SIM CCID Result: gSIMccid=89859800070005443659
+2025/08/05 17:39:16 [1]	CurrentTestID:ITIF009-06G0 - The validation: gSIMccid = 89859800070005443659 (89859800070005443659,)
+[17:39:16.924][DUT] [Check SIM CCID]--
+2025/08/05 17:39:16 [1]	[DUT] [Check SIM CCID] ~~ TestTime:0.0306016 sec
+2025/08/05 17:39:16 [1]	Run B7PL025-06H:Wait time@#$	Mode: 1, Retry: 5
+[17:39:16.924][PC] [Wait time@#$]++
+2025/08/05 17:39:16 [1]	> :Delay,"500"
+2025/08/05 17:39:17 [1]	< 0
+[17:39:17.436][PC] [Wait time@#$]--
+2025/08/05 17:39:17 [1]	[PC] [Wait time@#$] ~~ TestTime:0.5118323 sec
+2025/08/05 17:39:17 [1]	Run ITIF010-06J:Check SIM IMSI	Mode: 2, Retry: 5
+[17:39:17.436][DUT] [Check SIM IMSI]++
+2025/08/05 17:39:17 [1]	(UART) > atcli at+cimi
+
+2025/08/05 17:39:17 [1]	(UART) < atcli at+cimi
+at+cimi
+454006320263659
+
+OK
+root@MU310:~# 
+root@MU310:~# 
+2025/08/05 17:39:17 [1]	WithinString: 454006320263659
+2025/08/05 17:39:17 [1]	Check SIM IMSI Result: gSIMcimi=454006320263659
+2025/08/05 17:39:17 [1]	CurrentTestID:ITIF010-06J0 - The validation: gSIMcimi = 454006320263659 (454006320263659,)
+[17:39:17.468][DUT] [Check SIM IMSI]--
+2025/08/05 17:39:17 [1]	[DUT] [Check SIM IMSI] ~~ TestTime:0.0322594 sec
+2025/08/05 17:39:17 [1]	ITIF010-06J:@STEP031@Check SIM Test is Pass ! 		----- 0.6503974 Sec.
+2025/08/05 17:39:17 [1]	DUT Test Completed !        ----- 0.6934254 Sec.
+2025/08/05 17:39:17 [1]	Execute Phase 15 Test.
+2025/08/05 17:39:17 [1]	Do @STEP033@Update SFIS
+2025/08/05 17:39:17 [1]	:@STEP033@Update SFIS Test is Pass ! 		----- 0 Sec.
+2025/08/05 17:39:17 [1]	Do @STEP034@WhiteBox USFIS
+2025/08/05 17:39:17 [1]	Run CACK226-06R:Check WhiteBox 69PN	Mode: 4, Retry: 3
+[17:39:17.682][DUT] [Check WhiteBox 69PN]++
+2025/08/05 17:39:17 [1]	> :GetVal,"$69PN"
+2025/08/05 17:39:17 [1]	< 69BD05M10A01
+[17:39:17.687][DUT] [Check WhiteBox 69PN]--
+2025/08/05 17:39:17 [1]	[DUT] [Check WhiteBox 69PN] ~~ TestTime:0.0060525 sec
+2025/08/05 17:39:17 [1]	Run B7PL025-06V:Wait time@#$	Mode: 3, Retry: 3
+[17:39:17.688][PC] [Wait time@#$]++
+2025/08/05 17:39:17 [1]	> :Delay,"000"
+2025/08/05 17:39:17 [1]	< 0
+[17:39:17.693][PC] [Wait time@#$]--
+2025/08/05 17:39:17 [1]	[PC] [Wait time@#$] ~~ TestTime:0.0043867 sec
+2025/08/05 17:39:17 [1]	B7PL025-06V:@STEP034@WhiteBox USFIS Test is Pass ! 		----- 0.011492 Sec.
+2025/08/05 17:39:17 [1]	@STEP035@CBNG USFIS Skipped.
+2025/08/05 17:39:17 [1]	DUT Test Completed !        ----- 0.1060128 Sec.
+2025/08/05 17:39:17 [1]	All Test Completed !        ----- 58.9430024 Sec.
+2025/08/05 17:39:17 [1]	TotalCount:18-YR:11%
+2025/08/05 17:39:17 [1]	Report name: MBFUNCTION_222_2025-08-05_17-39-17.ct
+2025/08/05 17:39:17 [1]	Execute Phase 97 Test.
+2025/08/05 17:39:17 [1]	Do @STEP037@Disconnection
+2025/08/05 17:39:17 [1]	Run B7PL025-071:Close Message	Mode: 3, Retry: 3
+[17:39:17.879][PC] [Close Message]++
+2025/08/05 17:39:17 [1]	> :CloseMessage
+2025/08/05 17:39:17 [1]	< 0
+[17:39:17.931][PC] [Close Message]--
+2025/08/05 17:39:17 [1]	[PC] [Close Message] ~~ TestTime:0.0526663 sec
+2025/08/05 17:39:17 [1]	Set Fixture skips by ExecMode = 6.
+2025/08/05 17:39:17 [1]	Set Fixture skips by ExecMode = 6.
+2025/08/05 17:39:17 [1]	Reboot@#$ skips by ExecMode = 6.
+2025/08/05 17:39:17 [1]	Run B7PL025-075:Close Uart Fixture	Mode: 3, Retry: 3
+[17:39:17.934][PC] [Close Uart Fixture]++
+2025/08/05 17:39:17 [1]	> :Disconnect,"UARTF"
+2025/08/05 17:39:17 [1]	< 0
+[17:39:17.944][PC] [Close Uart Fixture]--
+2025/08/05 17:39:17 [1]	[PC] [Close Uart Fixture] ~~ TestTime:0.0101546 sec
+2025/08/05 17:39:17 [1]	Run B7PL025-076:Close Uart	Mode: 3, Retry: 3
+[17:39:17.944][PC] [Close Uart]++
+2025/08/05 17:39:17 [1]	> :Disconnect,"UART"
+2025/08/05 17:39:17 [1]	< 0
+[17:39:17.991][PC] [Close Uart]--
+2025/08/05 17:39:17 [1]	[PC] [Close Uart] ~~ TestTime:0.0471457 sec
+2025/08/05 17:39:17 [1]	B7PL025-076:@STEP037@Disconnection Test is Pass ! 		----- 0.1119872 Sec.
+2025/08/05 17:39:18 [1]	Change color at 97 phase... Status:True... Error:PASS
+2025/08/05 17:39:18 [1]	All phase Total Test Time !        ----- 59.3449545 Sec.
+2025/08/05 17:39:18 [1]	DUT Test Completed !        ----- 0.1665935 Sec.

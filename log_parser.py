@@ -1,0 +1,515 @@
+# log_parser.py
+# 用途：基於檔名判斷PASS/FAIL，使用不同分析邏輯的測試log解析器
+import re
+import os
+from pathlib import Path
+
+class LogParser:
+    def __init__(self):
+        # 正則表達式模式
+        self.step_pattern = re.compile(r'Do\s+(@STEP\d+@[^@\n]+)')
+        self.test_id_pattern = re.compile(r'Run ([A-Z0-9]+-\d+):')
+        self.cmd_pattern = re.compile(r'\(UART\)\s*>\s*(.+)')
+        self.resp_pattern = re.compile(r'\(UART\)\s*<\s*(.+)')
+        self.retry_pattern = re.compile(r'Retry:\s*(\d+)')
+        self.root_pattern = re.compile(r'root@.*:/root\$')
+        self.fail_keywords = ['FAIL', 'FAILED', 'ERROR', 'failed', 'error', 'NACK', 'timeout']
+
+    def parse_log_file(self, file_path):
+        """
+        解析單一log檔案，基於檔名判斷PASS/FAIL並使用不同的分析邏輯
+        保持與現有GUI模組相容的資料結構
+        """
+        try:
+            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                lines = f.readlines()
+        except Exception as e:
+            print(f"讀取檔案失敗: {e}")
+            return self._empty_result()
+        
+        raw_lines = [line.rstrip('\n') for line in lines]
+        
+        # 1. 依檔名判斷PASS/FAIL
+        file_name = Path(file_path).name.upper()
+        is_pass_log = "PASS" in file_name
+        
+        # 產生UI標註資訊
+        ui_annotations = self._generate_ui_annotations(raw_lines, is_pass_log)
+        
+        if is_pass_log:
+            result = self._parse_pass_log(raw_lines, file_path)
+        else:
+            result = self._parse_fail_log(raw_lines, file_path)
+        
+        # 添加UI標註資訊
+        result['ui_annotations'] = ui_annotations
+        return result
+    
+    def _empty_result(self):
+        """回傳空結果"""
+        return {
+            'pass_items': [],
+            'fail_items': [],
+            'raw_lines': [],
+            'last_fail': None,
+            'fail_line_idx': None,
+            'log_type': 'UNKNOWN'
+        }
+    
+    def _parse_pass_log(self, raw_lines, file_path):
+        """
+        PASS分析模式：
+        - 從頭到尾逐行讀取
+        - Do @STEPxxx@ 行視為測項開始
+        - @STEPxxx@ Test is Pass ! 行視為測項結束
+        - 結果一律標記 "PASS"
+        - 檢查是否有 "Retry: N" 關鍵字，若有且N>1 用紅字註記（RETRY）
+        """
+        pass_items = []
+        current_step = None
+        
+        for idx, line in enumerate(raw_lines):
+            # 找到 Do @STEPxxx@ 行 - 測項開始
+            step_match = self.step_pattern.search(line)
+            if step_match:
+                # 完成前一個測項
+                if current_step:
+                    current_step['end_idx'] = idx - 1
+                    self._finalize_pass_step(current_step, pass_items)
+                
+                # 開始新測項
+                step_name_clean = step_match.group(1).strip()
+                # 提取STEP號碼
+                step_number = ''
+                if step_name_clean.startswith('@STEP') and '@' in step_name_clean[1:]:
+                    # 提取STEP號碼，例如 @STEP048@CHECK SD 提取 048
+                    step_parts = step_name_clean.split('@')
+                    if len(step_parts) >= 2:
+                        step_number = step_parts[1]
+                    step_name_clean = step_name_clean.split('@', 2)[-1]
+                
+                current_step = {
+                    'step_name': step_name_clean,
+                    'test_id': '',
+                    'command': '',
+                    'response': '',
+                    'result': 'PASS',
+                    'retry': 0,
+                    'error': '',
+                    'raw_idx': idx,
+                    'full_log': [line],  # 完整測試過程
+                    'has_retry_but_pass': False,
+                    'start_idx': idx,
+                    'end_idx': None,
+                    'step_number': step_number
+                }
+                continue
+            
+            if current_step:
+                current_step['full_log'].append(line)
+                
+                # 檢查是否為測項結束行（@STEPxxx@ Test is Pass !）
+                if self._is_step_end_line(line, current_step.get('step_number', '')):
+                    current_step['end_idx'] = idx
+                    self._finalize_pass_step(current_step, pass_items)
+                    current_step = None
+                    continue
+                
+                # 檢查是否為指令行
+                cmd_match = self.cmd_pattern.search(line)
+                if cmd_match:
+                    # 第一條指令
+                    if not current_step['command']:
+                        current_step['command'] = cmd_match.group(1).strip()
+                
+                # 第一個回應 - 測項開始後第一個 < 行
+                if not current_step['response']:
+                    resp_match = self.resp_pattern.search(line)
+                    if resp_match:
+                        current_step['response'] = resp_match.group(1).strip()
+        
+        # 處理最後一個測項
+        if current_step:
+            current_step['end_idx'] = len(raw_lines) - 1
+            self._finalize_pass_step(current_step, pass_items)
+        
+        return {
+            'pass_items': pass_items,
+            'fail_items': [],
+            'raw_lines': raw_lines,
+            'last_fail': None,
+            'fail_line_idx': None,
+            'log_type': 'PASS'
+        }
+    
+    def _is_step_end_line(self, line, step_number):
+        """檢查是否為測項結束行（@STEPxxx@ Test is Pass !）"""
+        if not step_number:
+            return False
+        
+        # 檢查是否包含 @STEPxxx@ Test is Pass ! 格式
+        # 支援多種可能的格式：
+        # @STEP048@CHECK SD  Inserted Test is Pass !
+        # @STEP048@ Test is Pass !
+        end_pattern = re.compile(rf'@{step_number}@.*Test is Pass !', re.IGNORECASE)
+        return end_pattern.search(line) is not None
+    
+    def _finalize_pass_step(self, step, pass_items):
+        """完成PASS步驟的處理"""
+        # 為展開內容加上數字編碼
+        numbered_content = []
+        for i, line in enumerate(step['full_log'], 1):
+            numbered_content.append(f"{i:4d}. {line}")
+        
+        # 設定完整回應為整個測項內容（供+按鈕展開使用）
+        step['full_response'] = '\n'.join(numbered_content)
+        
+        # 設定預設值
+        if not step.get('command'):
+            step['command'] = '未找到指令'
+        if not step.get('response'):
+            step['response'] = '未找到回應'
+        
+        # 基於"Retry: N"關鍵字判斷RETRY，而不是指令出現次數
+        retry_count = 0
+        for line in step['full_log']:
+            retry_match = self.retry_pattern.search(line)
+            if retry_match:
+                retry_count = int(retry_match.group(1))
+                break
+        
+        # 只有當真正有"Retry: N"關鍵字且N>1時才標記為RETRY
+        if retry_count > 1:
+            step['has_retry_but_pass'] = True
+            step['retry'] = retry_count
+            step['result'] = f"PASS (Retry {retry_count})"
+        else:
+            step['has_retry_but_pass'] = False
+            step['retry'] = 0
+            step['result'] = 'PASS'
+        
+        pass_items.append(step)
+
+    def _annotate_attempts(self, lines):
+        """在完整內容中為每次指令嘗試加入 Attempt 1/2/3 標註（已棄用）"""
+        # 這個方法已經不再使用，真正的RETRY判斷基於"Retry: N"關鍵字
+        return '\n'.join(lines)
+
+    def _parse_fail_log(self, raw_lines, file_path):
+        """
+        FAIL分析邏輯：
+        - 從檔案底部往上找 FAIL、FAILED、ERROR 關鍵字
+        - 最先找到的是主要FAIL原因
+        - 繼續往上找其他FAIL（歷史FAIL）
+        - 每個FAIL區塊從指令開始到root@結束
+        """
+        fail_items = []
+        
+        # 從底部往上找所有FAIL區塊
+        fail_blocks = self._find_fail_blocks_from_bottom(raw_lines)
+        
+        last_fail = None
+        fail_line_idx = None
+        
+        for i, fail_block in enumerate(fail_blocks):
+            step_info = self._extract_fail_step_info(fail_block, raw_lines)
+            
+            # 標記是否為主要FAIL（最後發生的）
+            if i == 0:
+                step_info['is_main_fail'] = True
+                last_fail = step_info
+                fail_line_idx = step_info.get('fail_idx', 0)
+            else:
+                step_info['is_main_fail'] = False
+                step_info['step_name'] = f"[歷史FAIL] {step_info['step_name']}"
+            
+            fail_items.append(step_info)
+        
+        return {
+            'pass_items': [],
+            'fail_items': fail_items,
+            'raw_lines': raw_lines,
+            'last_fail': last_fail,
+            'fail_line_idx': fail_line_idx,
+            'log_type': 'FAIL'
+        }
+    
+    def _find_fail_blocks_from_bottom(self, raw_lines):
+        """從檔案尾部往上找FAIL區塊"""
+        fail_blocks = []
+        visited_lines = set()
+        
+        # 從最後一行往上掃描，找符合關鍵字的行
+        for idx in range(len(raw_lines) - 1, -1, -1):
+            line = raw_lines[idx]
+            
+            # 檢查是否包含FAIL關鍵字且未被處理過
+            if (any(keyword in line.upper() for keyword in ["FAIL", "FAILED", "ERROR"]) 
+                and idx not in visited_lines):
+                
+                # 往上回溯到該測項的 Do @STEPxxx@ 行（或指令行 >）
+                block_start = self._find_block_start(raw_lines, idx)
+                
+                # 往下延伸到 root@ 行
+                block_end = self._find_block_end(raw_lines, idx)
+                
+                if block_start is not None and block_end is not None:
+                    # 提取完整錯誤區塊
+                    block_lines = raw_lines[block_start:block_end + 1]
+                    
+                    fail_block = {
+                        'block_lines': block_lines,
+                        'start_idx': block_start,
+                        'end_idx': block_end,
+                        'fail_idx': idx,
+                        'full_log': block_lines  # 錯誤區塊完整內容（顯示紅字）
+                    }
+                    
+                    fail_blocks.append(fail_block)
+                    
+                    # 標記已處理的行
+                    visited_lines.update(range(block_start, block_end + 1))
+        
+        return fail_blocks
+    
+    def _find_block_start(self, raw_lines, fail_idx):
+        """往上回溯到該測項的 Do @STEPxxx@ 行（或指令行 >）"""
+        # 先找 Do @STEPxxx@ 行
+        for i in range(fail_idx, max(0, fail_idx - 200), -1):
+            if self.step_pattern.search(raw_lines[i]):
+                return i
+        
+        # 如果沒找到 Do @STEPxxx@，找指令行 >
+        for i in range(fail_idx, max(0, fail_idx - 100), -1):
+            if self.cmd_pattern.search(raw_lines[i]):
+                return i
+        
+        # 都沒找到，使用fail_idx往前50行
+        return max(0, fail_idx - 50)
+    
+    def _find_block_end(self, raw_lines, fail_idx):
+        """往下延伸到下一個 Do @STEPxxx@ 行或檔案結束"""
+        for i in range(fail_idx, min(len(raw_lines), fail_idx + 200)):
+            # 找到下一個 Do @STEPxxx@ 行
+            if self.step_pattern.search(raw_lines[i]):
+                return i - 1
+            
+            # 如果到達檔案結尾
+            if i == len(raw_lines) - 1:
+                return i
+        
+        # 如果沒找到下一個測項，使用fail_idx往後200行
+        return min(len(raw_lines) - 1, fail_idx + 200)
+    
+    def _find_fail_blocks(self, raw_lines):
+        """從底部往上找 FAIL/ERROR 區塊"""
+        blocks = []
+        visited_lines = set()
+        
+        # 從底部往上掃描
+        for idx in range(len(raw_lines) - 1, -1, -1):
+            line = raw_lines[idx]
+            
+            # 檢查是否包含FAIL關鍵字且未被處理過
+            if any(keyword in line.upper() for keyword in self.fail_keywords) and idx not in visited_lines:
+                block_info = self._extract_fail_block(raw_lines, idx)
+                if block_info:
+                    blocks.append(block_info)
+                    # 標記已處理的行
+                    start_idx = block_info.get('start_idx', idx)
+                    end_idx = block_info.get('end_idx', idx)
+                    visited_lines.update(range(start_idx, end_idx + 1))
+        
+        return blocks
+    
+    def _extract_fail_block(self, raw_lines, fail_idx):
+        """提取FAIL區塊：從指令開始到結束"""
+        start_idx = fail_idx
+        end_idx = fail_idx
+        
+        # 往上找到指令起點
+        for i in range(fail_idx, max(0, fail_idx - 50), -1):
+            if self.cmd_pattern.search(raw_lines[i]):
+                start_idx = i
+                break
+        
+        # 往下找到結束點（root@行或下一個指令）
+        for i in range(fail_idx, min(len(raw_lines), fail_idx + 20)):
+            if i > fail_idx and (self.root_pattern.search(raw_lines[i]) or self.cmd_pattern.search(raw_lines[i])):
+                end_idx = i
+                break
+            end_idx = i
+        
+        # 提取區塊
+        block_lines = raw_lines[start_idx:end_idx + 1]
+        
+        return {
+            'block_lines': block_lines,
+            'start_idx': start_idx,
+            'end_idx': end_idx,
+            'fail_idx': fail_idx
+        }
+    
+    def _extract_fail_step_info(self, fail_block, raw_lines):
+        """從FAIL區塊中提取步驟資訊"""
+        block_lines = fail_block['block_lines']
+        fail_idx = fail_block['fail_idx']
+        
+        # Step Name - 從區塊中找 Do @STEPxxx@ 或從附近找
+        step_name = self._find_step_name_in_block(block_lines, raw_lines, fail_block['start_idx'])
+        
+        # 錯誤指令 - 該錯誤區塊的第一個 > 行
+        command = ''
+        for line in block_lines:
+            cmd_match = self.cmd_pattern.search(line)
+            if cmd_match:
+                command = cmd_match.group(1).strip()
+                break
+        
+        # 錯誤回應 - 該錯誤區塊的第一個 < 行
+        response = ''
+        for line in block_lines:
+            resp_match = self.resp_pattern.search(line)
+            if resp_match:
+                response = resp_match.group(1).strip()
+                break
+        
+        # Retry 次數
+        retry_count = 0
+        for line in block_lines:
+            retry_match = self.retry_pattern.search(line)
+            if retry_match:
+                retry_count = int(retry_match.group(1))
+                break
+        
+        # 錯誤原因 - 從錯誤訊息行擷取
+        error_reason = self._find_error_reason(block_lines)
+        
+        # full_log - 錯誤區塊完整內容（顯示紅字），加入Attempt標註
+        full_log = block_lines
+        
+        # 設定預設值
+        if not command:
+            command = '未找到指令'
+        if not response:
+            response = '未找到回應'
+        
+        return {
+            'step_name': step_name,
+            'test_id': '',
+            'command': command,
+            'response': response,
+            'result': 'FAIL',
+            'retry': retry_count,
+            'error': error_reason,
+            'full_response': '\n'.join(full_log),
+            'full_log': full_log,
+            'raw_idx': fail_block['start_idx'],
+            'fail_idx': fail_idx,
+            'start_idx': fail_block['start_idx'],
+            'end_idx': fail_block['end_idx']
+        }
+    
+    def _find_nearest_step_name(self, raw_lines, start_idx):
+        """從起始行往上找最近的 Step 名稱"""
+        for i in range(start_idx, max(0, start_idx - 100), -1):
+            step_match = self.step_pattern.search(raw_lines[i])
+            if step_match:
+                return step_match.group(1).strip()
+        return "Unknown Step"
+    
+    def _find_error_reason(self, block_lines):
+        """尋找錯誤原因"""
+        for line in block_lines:
+            line_lower = line.lower()
+            if any(keyword in line_lower for keyword in ['failed', 'error', 'nack', 'timeout']):
+                return line.strip()
+        return "Unknown Error"
+    
+    def _find_step_name_in_block(self, block_lines, raw_lines, start_idx):
+        """從區塊中或附近找Step名稱"""
+        # 先在區塊中找
+        for line in block_lines:
+            step_match = self.step_pattern.search(line)
+            if step_match:
+                step_name_clean = step_match.group(1).strip()
+                # 移除 @STEPxxx@ 前綴，只保留後面的名稱
+                if step_name_clean.startswith('@STEP') and '@' in step_name_clean[1:]:
+                    step_name_clean = step_name_clean.split('@', 2)[-1]
+                return step_name_clean
+        
+        # 在區塊外往上找
+        for i in range(start_idx, max(0, start_idx - 50), -1):
+            step_match = self.step_pattern.search(raw_lines[i])
+            if step_match:
+                step_name_clean = step_match.group(1).strip()
+                # 移除 @STEPxxx@ 前綴，只保留後面的名稱
+                if step_name_clean.startswith('@STEP') and '@' in step_name_clean[1:]:
+                    step_name_clean = step_name_clean.split('@', 2)[-1]
+                return step_name_clean
+        
+        return "Unknown Step"
+    
+    def _generate_ui_annotations(self, raw_lines, is_pass_log):
+        """產生UI標註資訊"""
+        annotations = []
+        
+        for idx, line in enumerate(raw_lines):
+            annotation = {
+                'line_idx': idx,
+                'line_content': line,
+                'color': 'black',
+                'background': 'white',
+                'is_clickable': False,
+                'hover_color': None
+            }
+            
+            # Step 區塊標註
+            if self.step_pattern.search(line):
+                annotation['color'] = 'green' if is_pass_log else 'blue'
+                annotation['background'] = '#E8F4FD' if idx % 2 == 0 else '#F0E8FF'
+                annotation['is_clickable'] = True
+                annotation['hover_color'] = '#FFFF99'
+            
+            # PASS/FAIL 標註
+            elif 'PASS' in line.upper():
+                annotation['color'] = 'green'
+            elif any(keyword in line.upper() for keyword in ['FAIL', 'ERROR']):
+                annotation['color'] = 'red'
+            
+            # 指令/回應標註
+            elif self.cmd_pattern.search(line):
+                annotation['color'] = 'blue'
+            elif self.resp_pattern.search(line):
+                annotation['color'] = 'purple'
+            
+            annotations.append(annotation)
+        
+        return annotations
+    
+    def parse_log_folder(self, folder_path):
+        """
+        解析資料夾內所有log檔案，回傳彙總結果
+        """
+        pass_items = []
+        fail_items = []
+        
+        for root, dirs, files in os.walk(folder_path):
+            for file in files:
+                if file.lower().endswith('.log'):
+                    file_path = os.path.join(root, file)
+                    try:
+                        result = self.parse_log_file(file_path)
+                        pass_items.extend(result['pass_items'])
+                        fail_items.extend(result['fail_items'])
+                    except Exception as e:
+                        print(f"解析檔案 {file_path} 失敗: {e}")
+        
+        return {
+            'pass_items': pass_items,
+            'fail_items': fail_items,
+            'raw_lines': [],
+            'last_fail': fail_items[-1] if fail_items else None,
+            'fail_line_idx': None,
+            'log_type': 'MULTI'
+        }

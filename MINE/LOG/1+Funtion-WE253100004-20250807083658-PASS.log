@@ -1,0 +1,1273 @@
+2025/08/07 08:36:58 [1]	System Version is 1.1.8.64.
+2025/08/07 08:36:58 [1]	Script File is VALO360_TestFlow_20250407_Function.xlsx.
+2025/08/07 08:36:58 [1]	Script Version is 2508061510160.
+2025/08/07 08:36:58 [1]	Script Creator is jovian_li.
+2025/08/07 08:36:58 [1]	Utility Version is 1.0.9.21.
+2025/08/07 08:36:58 [1]	DeviceID is 125313.
+2025/08/07 08:36:58 [1]	SFIS is off.
+2025/08/07 08:36:58 [1]	MiniCloud2 is on.
+2025/08/07 08:36:58 [1]	FTP is off.
+2025/08/07 08:36:58 [1]	Active IPs:
+乙太網路:[6CB311319DBC]#192.168.11.3#
+DUT:[6CB311319DBD]#169.254.30.167#
+sfis:[FC34973B7871]#10.197.60.68#
+2025/08/07 08:36:58 [1]	Script has 1 phase cases
+2025/08/07 08:36:58 [1]	Script has 97 phase cases
+2025/08/07 08:36:58 [1]	QCODE: (1P) HWNDUSES1096;;(S) WE253100004;;(18V) 18VLENOK;;(10D) 250730;;(4L) MADE IN TAIWAN
+****************************************************************************************************
+2025/08/07 08:36:58 [1]	Execute Phase 0 Test.
+2025/08/07 08:36:58 [1]	Do @STEP002@Get Qcode info FOR PEGA
+2025/08/07 08:36:58 [1]	Run ITIF013-000:Compare Qrcode USER	Mode: 1, Retry: 3
+2025/08/07 08:36:58 [1]	> :GetVal,"$QCODE"
+2025/08/07 08:36:58 [1]	< (1P) HWNDUSES1096;;(S) WE253100004;;(18V) 18VLENOK;;(10D) 250730;;(4L) MADE IN TAIWAN
+2025/08/07 08:36:58 [1]	WithinString: WE253100004
+2025/08/07 08:36:58 [1]	Compare Qrcode USER Result: SSN=WE253100004
+2025/08/07 08:36:58 [1]	CurrentTestID:ITIF013-0000 - The validation: SSN = WE253100004 (@WE,)
+2025/08/07 08:36:58 [1]	ITIF013-000:@STEP002@Get Qcode info FOR PEGA Test is Pass ! 		----- 0.0300114 Sec.
+2025/08/07 08:36:58 [1]	Do @STEP003@READ ME
+2025/08/07 08:36:58 [1]	Run B7PL025-002:SET DEFAULT N3C2401C	Mode: 1, Retry: 3
+2025/08/07 08:36:58 [1]	> :SetVal,"$G_VALO360_MODEL","N3C2401C"
+2025/08/07 08:36:58 [1]	< 0
+2025/08/07 08:36:58 [1]	Run B7PL025-003:GET DEFAULT VALUE	Mode: 1, Retry: 3
+2025/08/07 08:36:58 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 08:36:58 [1]	< N3C2401C
+2025/08/07 08:36:58 [1]	Run B7PL025-004:Disconnect UART	Mode: 3, Retry: 3
+[08:36:58.950][PC] [Disconnect UART]++
+2025/08/07 08:36:58 [1]	> :Disconnect,"UART"
+2025/08/07 08:36:58 [1]	< 0
+[08:36:58.960][PC] [Disconnect UART]--
+2025/08/07 08:36:58 [1]	[PC] [Disconnect UART] ~~ TestTime:0.009995 sec
+2025/08/07 08:36:58 [1]	Run B7PL025-005:Disconnect UARTF	Mode: 3, Retry: 3
+[08:36:58.960][PC] [Disconnect UARTF]++
+2025/08/07 08:36:58 [1]	> :Disconnect,"UARTF"
+2025/08/07 08:36:58 [1]	< 0
+[08:36:58.970][PC] [Disconnect UARTF]--
+2025/08/07 08:36:58 [1]	[PC] [Disconnect UARTF] ~~ TestTime:0.0099957 sec
+2025/08/07 08:36:58 [1]	Run OTFX079-006:Open UART	Mode: 2, Retry: 3
+2025/08/07 08:36:58 [1]	> :Connect,"UARTF"
+2025/08/07 08:36:59 [1]	< 0
+2025/08/07 08:36:59 [1]	OTFX079-006:@STEP003@READ ME Test is Pass ! 		----- 0.16022 Sec.
+2025/08/07 08:36:59 [1]	DUT Test Completed !        ----- 0.230183 Sec.
+2025/08/07 08:36:59 [1]	Execute Phase 1 Test.
+2025/08/07 08:36:59 [1]	Do @STEP005@CheckRoute
+2025/08/07 08:36:59 [1]	Run B7PL025-007:Show SSN  to UI	Mode: 0, Retry: 3
+[08:36:59.200][PC] [Show SSN  to UI]++
+2025/08/07 08:36:59 [1]	> :ShowISN,"WE253100004"
+2025/08/07 08:36:59 [1]	< 0
+[08:36:59.200][PC] [Show SSN  to UI]--
+2025/08/07 08:36:59 [1]	[PC] [Show SSN  to UI] ~~ TestTime:0 sec
+2025/08/07 08:36:59 [1]	B7PL025-007:@STEP005@CheckRoute Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:36:59 [1]	Do @STEP006@GETSSN
+2025/08/07 08:36:59 [1]	:@STEP006@GETSSN Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:36:59 [1]	Do @STEP007@GET sfisHW
+2025/08/07 08:36:59 [1]	:@STEP007@GET sfisHW Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:36:59 [1]	Do @STEP008@GET sfisSKU
+2025/08/07 08:36:59 [1]	:@STEP008@GET sfisSKU Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:36:59 [1]	Do @STEP009@GET sfisETH MAC
+2025/08/07 08:36:59 [1]	:@STEP009@GET sfisETH MAC Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:36:59 [1]	Do @STEP010@GET sfisIVKEY
+2025/08/07 08:36:59 [1]	Pop window skips by ExecMode = 6.
+2025/08/07 08:36:59 [1]	:@STEP010@GET sfisIVKEY Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:36:59 [1]	Do @STEP011@GET sfisMOKP_SN
+2025/08/07 08:36:59 [1]	:@STEP011@GET sfisMOKP_SN Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:36:59 [1]	DUT Test Completed !        ----- 0.0499739 Sec.
+2025/08/07 08:36:59 [1]	Execute Phase 2 Test.
+2025/08/07 08:36:59 [1]	Do @STEP013@Check Valo360 model
+2025/08/07 08:36:59 [1]	Run B7PL025-018:Chack Custom data	Mode: 1, Retry: 3
+2025/08/07 08:36:59 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 08:36:59 [1]	< N3C2401C
+2025/08/07 08:36:59 [1]	B7PL025-018:@STEP013@Check Valo360 model Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:36:59 [1]	Do @STEP014@SET iplus Modelname_Valo360_5G
+2025/08/07 08:36:59 [1]	Run B7PL025-019:Chack Custom data	Mode: 4, Retry: 3
+2025/08/07 08:36:59 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 08:36:59 [1]	< N3C2401C
+2025/08/07 08:36:59 [1]	Run B7PL025-020:Set Iplus modename	Mode: 1, Retry: 3
+2025/08/07 08:36:59 [1]	> :SetModelName,"N3C2401C"
+2025/08/07 08:36:59 [1]	< N3C2401C
+2025/08/07 08:36:59 [1]	Run B7PL025-021:Get Iplus modename	Mode: 1, Retry: 3
+2025/08/07 08:36:59 [1]	> :GetModelName
+2025/08/07 08:36:59 [1]	< N3C2401C
+2025/08/07 08:36:59 [1]	Run B7PL025-022:WaitBoot	Mode: 1, Retry: 3
+2025/08/07 08:36:59 [1]	> :Delay,"0"
+2025/08/07 08:36:59 [1]	< 0
+2025/08/07 08:36:59 [1]	B7PL025-022:@STEP014@SET iplus Modelname_Valo360_5G Test is Pass ! 		----- 0.0199898 Sec.
+2025/08/07 08:36:59 [1]	Do @STEP015@SET iplus Modelname_Valo360_WIFI
+2025/08/07 08:36:59 [1]	Run B7PL025-023:Chack Custom data	Mode: 4, Retry: 3
+2025/08/07 08:36:59 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 08:36:59 [1]	< N3C2401C
+2025/08/07 08:36:59 [1]	Run B7PL025-026:WaitBoot	Mode: 1, Retry: 3
+2025/08/07 08:36:59 [1]	> :Delay,"0"
+2025/08/07 08:36:59 [1]	< 0
+2025/08/07 08:36:59 [1]	B7PL025-026:@STEP015@SET iplus Modelname_Valo360_WIFI Test is Pass ! 		----- 0.0099949 Sec.
+2025/08/07 08:36:59 [1]	Do @STEP016@SET iplus Modelname_Valo360_noBattery
+2025/08/07 08:36:59 [1]	Run B7PL025-027:Chack Custom data	Mode: 4, Retry: 3
+2025/08/07 08:36:59 [1]	> :GetVal,"$N3C2401NB"
+2025/08/07 08:36:59 [1]	< Not Found
+2025/08/07 08:36:59 [1]	Run B7PL025-030:WaitBoot	Mode: 1, Retry: 3
+2025/08/07 08:36:59 [1]	> :Delay,"0"
+2025/08/07 08:36:59 [1]	< 0
+2025/08/07 08:36:59 [1]	Pop window skips by ExecMode = 6.
+2025/08/07 08:36:59 [1]	B7PL025-030:@STEP016@SET iplus Modelname_Valo360_noBattery Test is Pass ! 		----- 0.0199895 Sec.
+2025/08/07 08:36:59 [1]	DUT Test Completed !        ----- 0.079838 Sec.
+2025/08/07 08:36:59 [1]	Execute Phase 3 Test.
+2025/08/07 08:36:59 [1]	Do @STEP018@Login
+2025/08/07 08:36:59 [1]	Run OTFX079-032:Open UART	Mode: 2, Retry: 3
+2025/08/07 08:36:59 [1]	> :Connect,"UARTF"
+2025/08/07 08:36:59 [1]	< 0
+2025/08/07 08:36:59 [1]	Run B7PL025-033:Power ON	Mode: 0, Retry: 3
+[08:36:59.560][FIXTURE] [Power ON]++
+2025/08/07 08:36:59 [1]	(UARTF) > G
+
+2025/08/07 08:36:59 [1]	(UARTF) < 
+[08:36:59.570][FIXTURE] [Power ON]--
+2025/08/07 08:36:59 [1]	[FIXTURE] [Power ON] ~~ TestTime:0.0099948 sec
+2025/08/07 08:36:59 [1]	Run B7PL025-034:Wait Boot	Mode: 1, Retry: 3
+2025/08/07 08:36:59 [1]	> :Delay,"1000"
+2025/08/07 08:37:00 [1]	< 0
+2025/08/07 08:37:00 [1]	Run OTFX079-035:PC##Ping Ethernet Test	Mode: 2, Retry: 3
+2025/08/07 08:37:00 [1]	> :Utility.PING,"192.168.11.143","70000","192.168.11.3"
+2025/08/07 08:37:37 [1]	< 
+2025/08/07 08:37:37 [1]	< 0
+2025/08/07 08:37:37 [1]	Run OTFX079-036:Wait	Mode: 1, Retry: 3
+[08:37:37.759][PC] [Wait]++
+2025/08/07 08:37:37 [1]	> :Delay,"2000"
+2025/08/07 08:37:39 [1]	< 0
+[08:37:39.778][PC] [Wait]--
+2025/08/07 08:37:39 [1]	[PC] [Wait] ~~ TestTime:2.0189252 sec
+2025/08/07 08:37:39 [1]	OTFX079-036:@STEP018@Login Test is Pass ! 			----- 40.2181368 Sec.
+2025/08/07 08:37:39 [1]	Do @STEP019@check bootup
+2025/08/07 08:37:39 [1]	Run OTFX079-037:Open UART	Mode: 0, Retry: 3
+2025/08/07 08:37:39 [1]	> :Connect,"UART"
+2025/08/07 08:37:39 [1]	< 0
+2025/08/07 08:37:39 [1]	Run OTFX079-038:Wait	Mode: 1, Retry: 3
+[08:37:39.918][PC] [Wait]++
+2025/08/07 08:37:39 [1]	> :Delay,"10000"
+2025/08/07 08:37:49 [1]	< 0
+[08:37:49.925][PC] [Wait]--
+2025/08/07 08:37:49 [1]	[PC] [Wait] ~~ TestTime:10.0070525 sec
+2025/08/07 08:37:49 [1]	Run OTFX079-039:Check Boot	Mode: 2, Retry: 3
+[08:37:49.925][DUT] [Check Boot]++
+2025/08/07 08:37:49 [1]	(UART) > 
+
+2025/08/07 08:37:49 [1]	(UART) < 
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:37:49.965][DUT] [Check Boot]--
+2025/08/07 08:37:49 [1]	[DUT] [Check Boot] ~~ TestTime:0.0401124 sec
+2025/08/07 08:37:49 [1]	OTFX079-039:@STEP019@check bootup Test is Pass ! 		----- 10.1774323 Sec.
+2025/08/07 08:37:49 [1]	DUT Test Completed !        ----- 50.4148597 Sec.
+2025/08/07 08:37:50 [1]	Execute Phase 4 Test.
+2025/08/07 08:37:50 [1]	Do @STEP021@Check FW version
+2025/08/07 08:37:50 [1]	Run B7PL025-040:Open UART	Mode: 1, Retry: 3
+[08:37:50.045][PC] [Open UART]++
+2025/08/07 08:37:50 [1]	> :Connect,"UART"
+2025/08/07 08:37:50 [1]	< 0
+[08:37:50.045][PC] [Open UART]--
+2025/08/07 08:37:50 [1]	[PC] [Open UART] ~~ TestTime:0 sec
+2025/08/07 08:37:50 [1]	Run B7PL025-041:BOOT UP OK	Mode: 2, Retry: 3
+[08:37:50.045][PC] [BOOT UP OK]++
+2025/08/07 08:37:50 [1]	(UART) > 
+
+2025/08/07 08:37:50 [1]	(UART) < 
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:37:50.095][PC] [BOOT UP OK]--
+2025/08/07 08:37:50 [1]	[PC] [BOOT UP OK] ~~ TestTime:0.0499395 sec
+2025/08/07 08:37:50 [1]	Run B7PL025-042:Wait	Mode: 0, Retry: 3
+2025/08/07 08:37:50 [1]	> :Delay,"5000"
+2025/08/07 08:37:55 [1]	< 0
+2025/08/07 08:37:55 [1]	Run VSCH026-043:Chec Frimware version	Mode: 0, Retry: 3
+[08:37:55.109][DUT] [Chec Frimware version]++
+2025/08/07 08:37:55 [1]	(UART) > pegacmd version
+
+2025/08/07 08:37:55 [1]	(UART) < pegacmd version
+0.5.4.38.0_715bae2
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:37:55.169][DUT] [Chec Frimware version]--
+2025/08/07 08:37:55 [1]	[DUT] [Chec Frimware version] ~~ TestTime:0.0599436 sec
+2025/08/07 08:37:55 [1]	Run IOET151-044:Check ETH LINK status	Mode: 1, Retry: 3
+[08:37:55.169][PC] [Check ETH LINK status]++
+2025/08/07 08:37:55 [1]	(UART) > diag -g status eth0
+
+2025/08/07 08:37:56 [1]	(UART) < diag -g status eth0
+link: up
+duplex: full
+speed: 1000
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:37:56.190][PC] [Check ETH LINK status]--
+2025/08/07 08:37:56 [1]	[PC] [Check ETH LINK status] ~~ TestTime:1.0217337 sec
+2025/08/07 08:37:56 [1]	Run B7PL025-045:Wait	Mode: 0, Retry: 3
+[08:37:56.190][PC] [Wait]++
+2025/08/07 08:37:56 [1]	> :Delay,"0"
+2025/08/07 08:37:56 [1]	< 0
+[08:37:56.190][PC] [Wait]--
+2025/08/07 08:37:56 [1]	[PC] [Wait] ~~ TestTime:0 sec
+2025/08/07 08:37:56 [1]	B7PL025-045:@STEP021@Check FW version Test is Pass ! 		----- 6.145596 Sec.
+2025/08/07 08:37:56 [1]	DUT Test Completed !        ----- 6.145596 Sec.
+2025/08/07 08:37:56 [1]	Execute Phase 5 Test.
+2025/08/07 08:37:56 [1]	Do @STEP023@SET Product_SKU
+2025/08/07 08:37:56 [1]	Run B7PL025-046:Check SFIS Enabled	Mode: 4, Retry: 3
+2025/08/07 08:37:56 [1]	> :SfEnabled
+2025/08/07 08:37:56 [1]	< 0
+2025/08/07 08:37:56 [1]	Run B7PL025-050:Wait	Mode: 0, Retry: 3
+[08:37:56.310][PC] [Wait]++
+2025/08/07 08:37:56 [1]	> :Delay,"0"
+2025/08/07 08:37:56 [1]	< 0
+[08:37:56.320][PC] [Wait]--
+2025/08/07 08:37:56 [1]	[PC] [Wait] ~~ TestTime:0.0099888 sec
+2025/08/07 08:37:56 [1]	B7PL025-050:@STEP023@SET Product_SKU Test is Pass ! 		----- 0.0099888 Sec.
+2025/08/07 08:37:56 [1]	DUT Test Completed !        ----- 0.0196703 Sec.
+2025/08/07 08:37:56 [1]	Execute Phase 6 Test.
+2025/08/07 08:37:56 [1]	Do @STEP025@CHECK  BATTERY
+2025/08/07 08:37:56 [1]	Run OTFX076-051:Check SKU	Mode: 4, Retry: 3
+[08:37:56.430][DUT] [Check SKU]++
+2025/08/07 08:37:56 [1]	(UART) > diag -g sku
+
+2025/08/07 08:37:58 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:37:58.441][DUT] [Check SKU]--
+2025/08/07 08:37:58 [1]	[DUT] [Check SKU] ~~ TestTime:2.0112087 sec
+2025/08/07 08:37:58 [1]	Run B7PL025-052:Disable Battery shiping mode	Mode: 1, Retry: 3
+[08:37:58.441][PC] [Disable Battery shiping mode]++
+2025/08/07 08:37:58 [1]	(UART) > kill_processor.sh monitoring-shutdown.sh
+
+2025/08/07 08:37:58 [1]	(UART) < kill_processor.sh monitoring-shutdown.sh
+Killed
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:37:58.501][PC] [Disable Battery shiping mode]--
+2025/08/07 08:37:58 [1]	[PC] [Disable Battery shiping mode] ~~ TestTime:0.0599682 sec
+2025/08/07 08:37:58 [1]	Run B7PL025-053:Disable Battery limit on 55%	Mode: 1, Retry: 3
+[08:37:58.501][PC] [Disable Battery limit on 55%]++
+2025/08/07 08:37:58 [1]	(UART) > echo 0 > /sys/bus/i2c/devices/14-0055/charger_monitor_perc
+
+2025/08/07 08:37:58 [1]	(UART) < echo 0 > /sys/bus/i2c/devices/14-0055/charger
+_monitor_perc
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:37:58.561][PC] [Disable Battery limit on 55%]--
+2025/08/07 08:37:58 [1]	[PC] [Disable Battery limit on 55%] ~~ TestTime:0.0599773 sec
+2025/08/07 08:37:58 [1]	Run B7PL025-054:HW ASK Wait battery stable	Mode: 0, Retry: 3
+[08:37:58.561][PC] [HW ASK Wait battery stable]++
+2025/08/07 08:37:58 [1]	> :Delay,"20000"
+2025/08/07 08:38:18 [1]	< 0
+[08:38:18.582][PC] [HW ASK Wait battery stable]--
+2025/08/07 08:38:18 [1]	[PC] [HW ASK Wait battery stable] ~~ TestTime:20.0201533 sec
+2025/08/07 08:38:18 [1]	Run IPIO006-055:read Battery info	Mode: 1, Retry: 3
+[08:38:18.582][DUT] [read Battery info]++
+2025/08/07 08:38:18 [1]	(UART) > cat /sys/bus/i2c/devices/2-0009/cmpout_gpio
+
+2025/08/07 08:38:23 [1]	(UART) < cat /sys/bus/i2c/d[   64.655294] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+evices/2-0009/cmpout_gpio
+[   64.662494] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+0
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360[   64.675152] bq27xxx-battery 14-0055: error reading temperature
+:/root$ [   64.688105] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   64.694876] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   64.708810] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   64.715581] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   64.729514] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   64.736293] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   64.747472] nvt_i2c 2f014e000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   64.756252] bq27xxx-battery 14-0055: bq27xxx_battery_i2c_read() failed to do i2c_transfer()
+[   64.775559] power_supply bq28z610-0: driver failed to report `temp' property: -16
+
+[08:38:23.584][DUT] [read Battery info]--
+2025/08/07 08:38:23 [1]	[DUT] [read Battery info] ~~ TestTime:5.0027552 sec
+2025/08/07 08:38:23 [1]	Run IPIO006-056:read Battery info	Mode: 1, Retry: 3
+[08:38:23.584][DUT] [read Battery info]++
+2025/08/07 08:38:23 [1]	(UART) > cat /sys/bus/i2c/devices/14-0055/registers
+
+
+2025/08/07 08:38:28 [1]	(UART) < cat /sys/bus/i2c/devices/14-0055/registers
+
+============ showing gauge bq28z610-0 registers ============
+[0x06][ R ]Temperature          = 0x001C(   28)??C
+[0x08][ R ]Voltage              = 0x1DF5( 7669)mV
+[0x0A][ R ]Battery Status       = 0x0080(  128)Chk Spec.
+[0x0C][ R ]Current              = 0x0683( 1667)mA
+[0x10][ R ]Remaining Capacity   = 0x0630( 1584)mA
+[0x12][ R ]Full Charge Capacity = 0x0B98( 2968)mA
+[0x14][ R ]Average Current      = 0x05F0( 1520)mA
+[0x16][ R ]Time To Empty        = 0xFFFF(65535)min
+[0x18][ R ]Time To Full         = 0x007B(  123)min
+[0x28][ R ]Internal Temperature = 0x001C(   28)??C
+[0x2A][ R ]Cycle Count          = 0x0001(    1)times
+[0x2C][ R ]State Of Charge      = 0x0036(   54)%
+[0x2E][ R ]State Of Health      = 0x0064(  100)%
+[0x30][ R ]Charging Voltage     = 0x203A( 8250)mV
+[0x32][ R ]Charging Current     = 0x06A4( 1700)mA
+[0x3C][ R ]Design Capacity      = 0x0B54( 2900)mA
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:38:28.597][DUT] [read Battery info]--
+2025/08/07 08:38:28 [1]	[DUT] [read Battery info] ~~ TestTime:5.0123215 sec
+2025/08/07 08:38:28 [1]	Run B7PL025-057:Wait	Mode: 0, Retry: 3
+[08:38:28.597][PC] [Wait]++
+2025/08/07 08:38:28 [1]	> :Delay,"1000"
+2025/08/07 08:38:29 [1]	< 0
+[08:38:29.608][PC] [Wait]--
+2025/08/07 08:38:29 [1]	[PC] [Wait] ~~ TestTime:1.010976 sec
+2025/08/07 08:38:29 [1]	Run IPIO009-058:Check Battery_tempture	Mode: 1, Retry: 3
+[08:38:29.608][PC] [Check Battery_tempture]++
+2025/08/07 08:38:29 [1]	(UART) > diag -g temp bat
+
+2025/08/07 08:38:34 [1]	(UART) < diag -g temp bat
+28
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:38:34 [1]	Check Battery_tempture Result: gBattery_tempture=28
+2025/08/07 08:38:34 [1]	CurrentTestID:IPIO009-0580 - The validation: gBattery_tempture = 28 (10,50)
+[08:38:34.609][PC] [Check Battery_tempture]--
+2025/08/07 08:38:34 [1]	[PC] [Check Battery_tempture] ~~ TestTime:5.0017623 sec
+2025/08/07 08:38:34 [1]	Run IPIO008-059:Check Battery_voltage	Mode: 1, Retry: 3
+[08:38:34.609][PC] [Check Battery_voltage]++
+2025/08/07 08:38:34 [1]	(UART) > diag -g voltage bat
+
+2025/08/07 08:38:39 [1]	(UART) < diag -g voltage bat
+7681
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:38:39 [1]	Check Battery_voltage Result: gBattery_voltage=7681
+2025/08/07 08:38:39 [1]	CurrentTestID:IPIO008-0590 - The validation: gBattery_voltage = 7681 (6000,8500)
+[08:38:39.611][PC] [Check Battery_voltage]--
+2025/08/07 08:38:39 [1]	[PC] [Check Battery_voltage] ~~ TestTime:5.0011962 sec
+2025/08/07 08:38:39 [1]	Run IPIO006-060:Check Battery_percent	Mode: 1, Retry: 3
+[08:38:39.611][PC] [Check Battery_percent]++
+2025/08/07 08:38:39 [1]	(UART) > diag -g bat percent
+
+2025/08/07 08:38:44 [1]	(UART) < diag -g bat percent
+54
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:38:44 [1]	Check Battery_percent Result: gBattery_percent=54
+2025/08/07 08:38:44 [1]	CurrentTestID:IPIO006-0600 - The validation: gBattery_percent = 54 (1,100)
+[08:38:44.612][PC] [Check Battery_percent]--
+2025/08/07 08:38:44 [1]	[PC] [Check Battery_percent] ~~ TestTime:5.001445 sec
+2025/08/07 08:38:44 [1]	Run B7PL025-061:Wait	Mode: 0, Retry: 3
+[08:38:44.612][PC] [Wait]++
+2025/08/07 08:38:44 [1]	> :Delay,"1000"
+2025/08/07 08:38:45 [1]	< 0
+[08:38:45.622][PC] [Wait]--
+2025/08/07 08:38:45 [1]	[PC] [Wait] ~~ TestTime:1.0098477 sec
+2025/08/07 08:38:45 [1]	B7PL025-061:@STEP025@CHECK  BATTERY Test is Pass ! 		----- 49.1916114 Sec.
+2025/08/07 08:38:45 [1]	DUT Test Completed !        ----- 49.2012829 Sec.
+2025/08/07 08:38:45 [1]	Execute Phase 7 Test.
+2025/08/07 08:38:45 [1]	Do @STEP027@GET BT MAC
+2025/08/07 08:38:45 [1]	Run BTBT018-062:BT init	Mode: 1, Retry: 3
+[08:38:45.741][DUT] [BT init]++
+2025/08/07 08:38:45 [1]	(UART) > bt_init
+
+2025/08/07 08:38:52 [1]	(UART) < bt_init
+{[9][]}
+killall: brcm_patchram_plus: no process killed
+gpio 201 = 0
+gpio 201 = 1
+BT reinit
+{[1][]}
+{[2][]}
+{[3][]}
+{[4][]}
+{[5][]}
+Done setting line discpline
+{[6][Done setting line discpline]}
+BT init succeeds
+root@NOKIA360Camera-Va
+[08:38:52.674][DUT] [BT init]--
+2025/08/07 08:38:52 [1]	[DUT] [BT init] ~~ TestTime:6.9326973 sec
+2025/08/07 08:38:52 [1]	BTBT018-062:@STEP027@GET BT MAC Test is Pass ! 		----- 6.9326973 Sec.
+2025/08/07 08:38:52 [1]	Do @STEP028@GET CHIP SN
+2025/08/07 08:38:52 [1]	Run IPIO024-064:get MicroChip SN	Mode: 1, Retry: 3
+[08:38:52.684][DUT] [get MicroChip SN]++
+2025/08/07 08:38:52 [1]	(UART) > cryptoauth_test sernum
+
+2025/08/07 08:38:53 [1]	(UART) < bluetoothd[1111]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/source/1
+bluetoothd[1111]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/sink/2
+bluetoothd[1111]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/source/2
+bluetoothd[1111]: Endpoint registered: sender=:1.1 path=/org/bluez/hci0/A2DP/SBC/sink/1
+bluetoothd[1111]: Failed to set privacy: Rejected (0x0b)
+cryptoauth_test sernum
+
+[   98.783693] nvt_i2c 2f014f000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   98.791239] nvt_i2c 2f014f000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[   98.815663] nvt_i2c 2f014f000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[   98.821700] nvt_i2c 2f014f000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+serial number:
+01 23 A0 72 8D 35 8B D4 01
+
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:38:53 [1]	WithinString: 0123A0728D358BD401
+2025/08/07 08:38:53 [1]	get MicroChip SN Result: MicroChip_SN=0123A0728D358BD401
+[08:38:53.704][DUT] [get MicroChip SN]--
+2025/08/07 08:38:53 [1]	[DUT] [get MicroChip SN] ~~ TestTime:1.0198152 sec
+2025/08/07 08:38:53 [1]	IPIO024-064:@STEP028@GET CHIP SN Test is Pass ! 		----- 1.0198152 Sec.
+2025/08/07 08:38:53 [1]	DUT Test Completed !        ----- 7.971823 Sec.
+2025/08/07 08:38:53 [1]	Execute Phase 8 Test.
+2025/08/07 08:38:53 [1]	Do @STEP030@CHECK Temptrue sensor
+2025/08/07 08:38:53 [1]	Run WUIF006-065:Get CAM temp s0	Mode: 1, Retry: 3
+[08:38:53.813][PC] [Get CAM temp s0]++
+2025/08/07 08:38:53 [1]	(UART) > diag -g temp s0
+
+2025/08/07 08:38:54 [1]	(UART) < diag -g temp s0
+27
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:38:54 [1]	Get CAM temp s0 Result: gCAM_temp0=27
+2025/08/07 08:38:54 [1]	CurrentTestID:WUIF006-0650 - The validation: gCAM_temp0 = 27 (10,50)
+[08:38:54.833][PC] [Get CAM temp s0]--
+2025/08/07 08:38:54 [1]	[PC] [Get CAM temp s0] ~~ TestTime:1.0202011 sec
+2025/08/07 08:38:54 [1]	Run WUIF007-066:Get CAM temp s1	Mode: 1, Retry: 3
+[08:38:54.833][PC] [Get CAM temp s1]++
+2025/08/07 08:38:54 [1]	(UART) > diag -g temp s1
+
+2025/08/07 08:38:55 [1]	(UART) < diag -g temp s1
+27
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:38:55 [1]	Get CAM temp s1 Result: gCAM_temp1=27
+2025/08/07 08:38:55 [1]	CurrentTestID:WUIF007-0660 - The validation: gCAM_temp1 = 27 (10,50)
+[08:38:55.856][PC] [Get CAM temp s1]--
+2025/08/07 08:38:55 [1]	[PC] [Get CAM temp s1] ~~ TestTime:1.022135 sec
+2025/08/07 08:38:55 [1]	Run WUIF008-067:Get CAM temp s2	Mode: 1, Retry: 3
+[08:38:55.856][PC] [Get CAM temp s2]++
+2025/08/07 08:38:55 [1]	(UART) > diag -g temp s2
+
+2025/08/07 08:38:56 [1]	(UART) < diag -g temp s2
+27
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:38:56 [1]	Get CAM temp s2 Result: gCAM_temp2=27
+2025/08/07 08:38:56 [1]	CurrentTestID:WUIF008-0670 - The validation: gCAM_temp2 = 27 (10,50)
+[08:38:56.886][PC] [Get CAM temp s2]--
+2025/08/07 08:38:56 [1]	[PC] [Get CAM temp s2] ~~ TestTime:1.0306499 sec
+2025/08/07 08:38:56 [1]	Run WUIF009-068:Get CAM temp s3	Mode: 1, Retry: 3
+[08:38:56.886][PC] [Get CAM temp s3]++
+2025/08/07 08:38:56 [1]	(UART) > diag -g temp s3
+
+2025/08/07 08:38:57 [1]	(UART) < diag -g temp s3
+27
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:38:57 [1]	Get CAM temp s3 Result: gCAM_temp3=27
+2025/08/07 08:38:57 [1]	CurrentTestID:WUIF009-0680 - The validation: gCAM_temp3 = 27 (10,50)
+[08:38:57.918][PC] [Get CAM temp s3]--
+2025/08/07 08:38:57 [1]	[PC] [Get CAM temp s3] ~~ TestTime:1.0321516 sec
+2025/08/07 08:38:57 [1]	WUIF009-068:@STEP030@CHECK Temptrue sensor Test is Pass ! 		----- 4.1051376 Sec.
+2025/08/07 08:38:57 [1]	Do @STEP031@only dealy
+2025/08/07 08:38:57 [1]	Run OTFX157-069:Wait	Mode: 1, Retry: 3
+[08:38:57.928][PC] [Wait]++
+2025/08/07 08:38:57 [1]	> :Delay,"1000"
+2025/08/07 08:38:58 [1]	< 0
+[08:38:58.949][PC] [Wait]--
+2025/08/07 08:38:58 [1]	[PC] [Wait] ~~ TestTime:1.0209526 sec
+2025/08/07 08:38:58 [1]	OTFX157-069:@STEP031@only dealy Test is Pass ! 		----- 1.0209526 Sec.
+2025/08/07 08:38:58 [1]	DUT Test Completed !        ----- 5.1454111 Sec.
+2025/08/07 08:38:59 [1]	Execute Phase 9 Test.
+2025/08/07 08:38:59 [1]	Do @STEP033@Check DisCharging
+2025/08/07 08:38:59 [1]	Run OTFX076-070:Check SKU	Mode: 4, Retry: 3
+[08:38:59.059][DUT] [Check SKU]++
+2025/08/07 08:38:59 [1]	(UART) > diag -g sku
+
+2025/08/07 08:38:59 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA36
+[08:38:59.089][DUT] [Check SKU]--
+2025/08/07 08:38:59 [1]	[DUT] [Check SKU] ~~ TestTime:0.0303154 sec
+2025/08/07 08:38:59 [1]	Run B7PL025-071:Remove POE	Mode: 1, Retry: 3
+[08:38:59.089][FIXTURE] [Remove POE]++
+2025/08/07 08:38:59 [1]	(UARTF) > L
+
+2025/08/07 08:38:59 [1]	(UARTF) < 
+[08:38:59.089][FIXTURE] [Remove POE]--
+2025/08/07 08:38:59 [1]	[FIXTURE] [Remove POE] ~~ TestTime:0 sec
+2025/08/07 08:38:59 [1]	Run B7PL025-072:Wait	Mode: 0, Retry: 3
+[08:38:59.089][PC] [Wait]++
+2025/08/07 08:38:59 [1]	> :Delay,"5000"
+2025/08/07 08:39:04 [1]	< 0
+[08:39:04.103][PC] [Wait]--
+2025/08/07 08:39:04 [1]	[PC] [Wait] ~~ TestTime:5.0141863 sec
+2025/08/07 08:39:04 [1]	Run OTFX035-073:Check Battery_discharger	Mode: 1, Retry: 3
+[08:39:04.103][PC] [Check Battery_discharger]++
+2025/08/07 08:39:04 [1]	(UART) > diag -g current bat
+
+2025/08/07 08:39:04 [1]	(UART) < diag -g current bat
+-446
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:39:04 [1]	Check Battery_discharger Result: gBattery_current=-446
+2025/08/07 08:39:04 [1]	CurrentTestID:OTFX035-0730 - The validation: gBattery_current = -446 (-1800,-100)
+[08:39:04.173][PC] [Check Battery_discharger]--
+2025/08/07 08:39:04 [1]	[PC] [Check Battery_discharger] ~~ TestTime:0.0699521 sec
+2025/08/07 08:39:04 [1]	Run B7PL025-074:Power POE ON	Mode: 1, Retry: 3
+[08:39:04.173][FIXTURE] [Power POE ON]++
+2025/08/07 08:39:04 [1]	(UARTF) > G
+
+2025/08/07 08:39:04 [1]	(UARTF) < 
+[08:39:04.173][FIXTURE] [Power POE ON]--
+2025/08/07 08:39:04 [1]	[FIXTURE] [Power POE ON] ~~ TestTime:0 sec
+2025/08/07 08:39:04 [1]	Run B7PL025-075:Wait	Mode: 0, Retry: 3
+[08:39:04.173][PC] [Wait]++
+2025/08/07 08:39:04 [1]	> :Delay,"5000"
+2025/08/07 08:39:09 [1]	< 0
+[08:39:09.184][PC] [Wait]--
+2025/08/07 08:39:09 [1]	[PC] [Wait] ~~ TestTime:5.0107861 sec
+2025/08/07 08:39:09 [1]	Run B7PL025-076:Wait	Mode: 0, Retry: 3
+[08:39:09.184][PC] [Wait]++
+2025/08/07 08:39:09 [1]	> :Delay,"000"
+2025/08/07 08:39:09 [1]	< 0
+[08:39:09.184][PC] [Wait]--
+2025/08/07 08:39:09 [1]	[PC] [Wait] ~~ TestTime:0 sec
+2025/08/07 08:39:09 [1]	B7PL025-076:@STEP033@Check DisCharging Test is Pass ! 		----- 10.1252399 Sec.
+2025/08/07 08:39:09 [1]	DUT Test Completed !        ----- 10.1349043 Sec.
+2025/08/07 08:39:09 [1]	Execute Phase 10 Test.
+2025/08/07 08:39:09 [1]	Do @STEP035@CHECK  wifi status
+2025/08/07 08:39:09 [1]	Run NUVO008-077:Get wifi status UUID	Mode: 1, Retry: 3
+[08:39:09.304][DUT] [Get wifi status UUID]++
+2025/08/07 08:39:09 [1]	(UART) > wpa_cli status
+
+2025/08/07 08:39:14 [1]	(UART) < wpa_cli status
+Selected interface 'wlan0'
+wpa_state=INTERFACE_DISABLED
+p2p_device_address=9e:b8:b4:f7:b8:9c
+address=9c:b8:b4:f7:b8:9c
+uuid=50625644-5e4d-5992-929d-c801d1347322
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:39:14 [1]	WithinString: 50625644-5e4d-5992-929d-c801d1347322
+2025/08/07 08:39:14 [1]	Get wifi status UUID Result: gWIFI_status=50625644-5e4d-5992-929d-c801d1347322
+[08:39:14.316][DUT] [Get wifi status UUID]--
+2025/08/07 08:39:14 [1]	[DUT] [Get wifi status UUID] ~~ TestTime:5.011701 sec
+2025/08/07 08:39:14 [1]	Run VSCH024-078:set WIFI UP	Mode: 1, Retry: 3
+[08:39:14.316][DUT] [set WIFI UP]++
+2025/08/07 08:39:14 [1]	(UART) > ifconfig wlan0 up
+
+2025/08/07 08:39:14 [1]	(UART) < ifconfig wlan0 up
+
+[08:39:14.356][DUT] [set WIFI UP]--
+2025/08/07 08:39:14 [1]	[DUT] [set WIFI UP] ~~ TestTime:0.0399871 sec
+2025/08/07 08:39:14 [1]	VSCH024-078:@STEP035@CHECK  wifi status Test is Pass ! 		----- 5.0516881 Sec.
+2025/08/07 08:39:14 [1]	DUT Test Completed !        ----- 5.0616828 Sec.
+2025/08/07 08:39:14 [1]	Execute Phase 11 Test.
+2025/08/07 08:39:14 [1]	Do @STEP037@Write WIFI parameter
+2025/08/07 08:39:14 [1]	Run VSCH024-079:Check WIFI ver	Mode: 4, Retry: 3
+[08:39:14.435][DUT] [Check WIFI ver]++
+2025/08/07 08:39:14 [1]	(UART) > wl ver
+
+2025/08/07 08:39:15 [1]	(UART) < wl ver
+
+[  120.751973] [dhd] STATIC-MSG) dhd_wlan_mem_prealloc : section 9, size 32896
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ wl ver
+1.333.2 (wlan=r829962-20230602-1 BCMINT)
+wl0: Jan  5 2022 01:27:10 version 18.35.387.23.108 (WLTEST) (g34a0fd51) FWID 01-d7aecb64
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:15.457][DUT] [Check WIFI ver]--
+2025/08/07 08:39:15 [1]	[DUT] [Check WIFI ver] ~~ TestTime:1.0214174 sec
+2025/08/07 08:39:15 [1]	Run B7PL025-082:Wait	Mode: 0, Retry: 3
+[08:39:15.457][PC] [Wait]++
+2025/08/07 08:39:15 [1]	> :Delay,"000"
+2025/08/07 08:39:15 [1]	< 0
+[08:39:15.457][PC] [Wait]--
+2025/08/07 08:39:15 [1]	[PC] [Wait] ~~ TestTime:0 sec
+2025/08/07 08:39:15 [1]	B7PL025-082:@STEP037@Write WIFI parameter Test is Pass ! 		----- 1.0214174 Sec.
+2025/08/07 08:39:15 [1]	DUT Test Completed !        ----- 1.0310694 Sec.
+2025/08/07 08:39:15 [1]	Execute Phase 12 Test.
+2025/08/07 08:39:15 [1]	Do @STEP039@SET Eth_MAC to DUT
+2025/08/07 08:39:15 [1]	:@STEP039@SET Eth_MAC to DUT Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:39:15 [1]	Do @STEP040@GET WIF_MAC
+2025/08/07 08:39:15 [1]	Run B7PL025-086:Wait	Mode: 0, Retry: 3
+[08:39:15.566][PC] [Wait]++
+2025/08/07 08:39:15 [1]	> :Delay,"1000"
+2025/08/07 08:39:16 [1]	< 0
+[08:39:16.578][PC] [Wait]--
+2025/08/07 08:39:16 [1]	[PC] [Wait] ~~ TestTime:1.0113952 sec
+2025/08/07 08:39:16 [1]	B7PL025-086:@STEP040@GET WIF_MAC Test is Pass ! 		----- 1.0113952 Sec.
+2025/08/07 08:39:16 [1]	DUT Test Completed !        ----- 1.0310346 Sec.
+2025/08/07 08:39:16 [1]	Execute Phase 13 Test.
+2025/08/07 08:39:16 [1]	Do @STEP042@SET IVA KEY to DUT
+2025/08/07 08:39:16 [1]	Run B7PL025-087:Check SFIS Enabled	Mode: 4, Retry: 3
+2025/08/07 08:39:16 [1]	> :SfEnabled
+2025/08/07 08:39:16 [1]	< 0
+2025/08/07 08:39:16 [1]	Run B7PL025-092:Wait	Mode: 0, Retry: 3
+[08:39:16.687][PC] [Wait]++
+2025/08/07 08:39:16 [1]	> :Delay,"000"
+2025/08/07 08:39:16 [1]	< 0
+[08:39:16.697][PC] [Wait]--
+2025/08/07 08:39:16 [1]	[PC] [Wait] ~~ TestTime:0.0099673 sec
+2025/08/07 08:39:16 [1]	B7PL025-092:@STEP042@SET IVA KEY to DUT Test is Pass ! 		----- 0.0099673 Sec.
+2025/08/07 08:39:16 [1]	DUT Test Completed !        ----- 0.0196345 Sec.
+2025/08/07 08:39:16 [1]	Execute Phase 14 Test.
+2025/08/07 08:39:16 [1]	Do @STEP044@Check Charging
+2025/08/07 08:39:16 [1]	Run OTFX076-093:Check SKU	Mode: 4, Retry: 3
+[08:39:16.807][DUT] [Check SKU]++
+2025/08/07 08:39:16 [1]	(UART) > diag -g sku
+
+2025/08/07 08:39:16 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:16.868][DUT] [Check SKU]--
+2025/08/07 08:39:16 [1]	[DUT] [Check SKU] ~~ TestTime:0.0602535 sec
+2025/08/07 08:39:16 [1]	Run B7PL025-094:Wait	Mode: 0, Retry: 3
+[08:39:16.868][PC] [Wait]++
+2025/08/07 08:39:16 [1]	> :Delay,"10000"
+2025/08/07 08:39:26 [1]	< 0
+[08:39:26.883][PC] [Wait]--
+2025/08/07 08:39:26 [1]	[PC] [Wait] ~~ TestTime:10.0151282 sec
+2025/08/07 08:39:26 [1]	Run OTFX035-095:Check Battery_charger	Mode: 4, Retry: 3
+[08:39:26.883][PC] [Check Battery_charger]++
+2025/08/07 08:39:26 [1]	(UART) > diag -g current bat
+
+2025/08/07 08:39:31 [1]	(UART) < diag -g current bat
+1667
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:39:31 [1]	Check Battery_charger Result: gBattery_current=1667
+2025/08/07 08:39:31 [1]	CurrentTestID:OTFX035-0950 - The validation: gBattery_current = 1667 (100,3000)
+[08:39:31.884][PC] [Check Battery_charger]--
+2025/08/07 08:39:31 [1]	[PC] [Check Battery_charger] ~~ TestTime:5.0011596 sec
+2025/08/07 08:39:31 [1]	Run B7PL025-098:Wait	Mode: 1, Retry: 3
+[08:39:31.884][PC] [Wait]++
+2025/08/07 08:39:31 [1]	> :Delay,"1000"
+2025/08/07 08:39:32 [1]	< 0
+[08:39:32.894][PC] [Wait]--
+2025/08/07 08:39:32 [1]	[PC] [Wait] ~~ TestTime:1.0102675 sec
+2025/08/07 08:39:32 [1]	B7PL025-098:@STEP044@Check Charging Test is Pass ! 		----- 16.0868088 Sec.
+2025/08/07 08:39:32 [1]	Do @STEP045@SET HW version
+2025/08/07 08:39:32 [1]	:@STEP045@SET HW version Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:39:32 [1]	Do @STEP046@SET SSN
+2025/08/07 08:39:32 [1]	:@STEP046@SET SSN Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:39:32 [1]	DUT Test Completed !        ----- 16.116494 Sec.
+2025/08/07 08:39:32 [1]	Execute Phase 15 Test.
+2025/08/07 08:39:32 [1]	Do @STEP048@GET 5gModule_SN+IMEI
+2025/08/07 08:39:32 [1]	Run OTFX076-103:Check SKU	Mode: 4, Retry: 3
+[08:39:32.994][DUT] [Check SKU]++
+2025/08/07 08:39:32 [1]	(UART) > diag -g sku
+
+2025/08/07 08:39:33 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:33.074][DUT] [Check SKU]--
+2025/08/07 08:39:33 [1]	[DUT] [Check SKU] ~~ TestTime:0.0802162 sec
+2025/08/07 08:39:33 [1]	Run WUIF004-107:Get 5G PCI status	Mode: 1, Retry: 3
+[08:39:33.074][DUT] [Get 5G PCI status]++
+2025/08/07 08:39:33 [1]	(UART) > lspci
+
+2025/08/07 08:39:34 [1]	(UART) < lspci
+0000:00:00.0 Class 0604: Device 1e09:0006 (rev 01)
+0000:01:00.0 Class 0280: Device 14e4:449d (rev 02)
+0001:10:00.0 Class 0604: Device 1e09:0006 (rev 01)
+0001:11:00.0 Class ff00: Device 17cb:0308
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:34.103][DUT] [Get 5G PCI status]--
+2025/08/07 08:39:34 [1]	[DUT] [Get 5G PCI status] ~~ TestTime:1.0295224 sec
+2025/08/07 08:39:34 [1]	Run B7PL025-108:Wait	Mode: 0, Retry: 3
+[08:39:34.103][PC] [Wait]++
+2025/08/07 08:39:34 [1]	> :Delay,"0000"
+2025/08/07 08:39:34 [1]	< 0
+[08:39:34.103][PC] [Wait]--
+2025/08/07 08:39:34 [1]	[PC] [Wait] ~~ TestTime:0 sec
+2025/08/07 08:39:34 [1]	B7PL025-108:@STEP048@GET 5gModule_SN+IMEI Test is Pass ! 		----- 1.1097386 Sec.
+2025/08/07 08:39:34 [1]	DUT Test Completed !        ----- 1.1196317 Sec.
+2025/08/07 08:39:34 [1]	Execute Phase 16 Test.
+2025/08/07 08:39:34 [1]	Do @STEP050@CHECK SIM CARD
+2025/08/07 08:39:34 [1]	Run OTFX076-109:Check SKU	Mode: 4, Retry: 3
+[08:39:34.183][DUT] [Check SKU]++
+2025/08/07 08:39:34 [1]	(UART) > diag -g sku
+
+2025/08/07 08:39:34 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:34.263][DUT] [Check SKU]--
+2025/08/07 08:39:34 [1]	[DUT] [Check SKU] ~~ TestTime:0.0803051 sec
+2025/08/07 08:39:34 [1]	Run ITIF010-110:Check SIMCARD	Mode: 1, Retry: 3
+[08:39:34.263][DUT] [Check SIMCARD]++
+2025/08/07 08:39:34 [1]	(UART) > test5g at+cfun=1
+
+2025/08/07 08:39:34 [1]	(UART) < test5g at+cfun=1
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:34.293][DUT] [Check SIMCARD]--
+2025/08/07 08:39:34 [1]	[DUT] [Check SIMCARD] ~~ TestTime:0.0299686 sec
+2025/08/07 08:39:34 [1]	Run B7PL025-111:Wait	Mode: 0, Retry: 3
+[08:39:34.293][PC] [Wait]++
+2025/08/07 08:39:34 [1]	> :Delay,"2000"
+2025/08/07 08:39:36 [1]	< 0
+[08:39:36.305][PC] [Wait]--
+2025/08/07 08:39:36 [1]	[PC] [Wait] ~~ TestTime:2.0116645 sec
+2025/08/07 08:39:36 [1]	Run ITIF010-112:Check SIM  CIMI	Mode: 1, Retry: 3
+[08:39:36.305][DUT] [Check SIM  CIMI]++
+2025/08/07 08:39:36 [1]	(UART) > test5g at+cimi
+
+2025/08/07 08:39:37 [1]	(UART) < test5g at+cimi
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ at+cimi
+454006313652344
+OK
+[5G]:SMS DONE
+
+[08:39:37.315][DUT] [Check SIM  CIMI]--
+2025/08/07 08:39:37 [1]	[DUT] [Check SIM  CIMI] ~~ TestTime:1.0099151 sec
+2025/08/07 08:39:37 [1]	Run B7PL025-113:Wait Boot	Mode: 0, Retry: 3
+2025/08/07 08:39:37 [1]	> :Delay,"0"
+2025/08/07 08:39:37 [1]	< 0
+2025/08/07 08:39:37 [1]	B7PL025-113:@STEP050@CHECK SIM CARD Test is Pass ! 		----- 3.1318533 Sec.
+2025/08/07 08:39:37 [1]	Do @STEP051@CHECK SD  Inserted
+2025/08/07 08:39:37 [1]	Run NBHM004-114:SD card inserted	Mode: 1, Retry: 3
+[08:39:37.325][DUT] [SD card inserted]++
+2025/08/07 08:39:37 [1]	(UART) > diag -g status sd
+
+2025/08/07 08:39:37 [1]	(UART) < diag -g status sd
+inserted
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:37.405][DUT] [SD card inserted]--
+2025/08/07 08:39:37 [1]	[DUT] [SD card inserted] ~~ TestTime:0.0803086 sec
+2025/08/07 08:39:37 [1]	Run PDSC003-115:Check SD RW	Mode: 1, Retry: 3
+[08:39:37.405][DUT] [Check SD RW]++
+2025/08/07 08:39:37 [1]	(UART) > mount |grep sd
+
+2025/08/07 08:39:37 [1]	(UART) < mount |grep sd
+/dev/mmcblk0p1 on /mnt/sd type vfat (rw,dirsync,relatime,fmask=0000,dmask=0000,allow_utime=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,tz=UTC,errors=remount-ro)
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:37.464][DUT] [Check SD RW]--
+2025/08/07 08:39:37 [1]	[DUT] [Check SD RW] ~~ TestTime:0.0596251 sec
+2025/08/07 08:39:37 [1]	Run PDSC003-116:Check SD RW	Mode: 1, Retry: 3
+[08:39:37.464][DUT] [Check SD RW]++
+2025/08/07 08:39:37 [1]	(UART) > echo "1234" > /mnt/sd/test_sd
+
+2025/08/07 08:39:37 [1]	(UART) < echo "1234" > /mnt/sd/test_sd
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:37.535][DUT] [Check SD RW]--
+2025/08/07 08:39:37 [1]	[DUT] [Check SD RW] ~~ TestTime:0.0707025 sec
+2025/08/07 08:39:37 [1]	Run PDSC003-117:Check SD RW	Mode: 1, Retry: 3
+[08:39:37.535][DUT] [Check SD RW]++
+2025/08/07 08:39:37 [1]	(UART) > cat /mnt/sd/test_sd
+
+2025/08/07 08:39:37 [1]	(UART) < cat /mnt/sd/test_sd
+1234
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:37.565][DUT] [Check SD RW]--
+2025/08/07 08:39:37 [1]	[DUT] [Check SD RW] ~~ TestTime:0.0296315 sec
+2025/08/07 08:39:37 [1]	BT init skips by ExecMode = 6.
+2025/08/07 08:39:37 [1]	PDSC003-117:@STEP051@CHECK SD  Inserted Test is Pass ! 		----- 0.2402677 Sec.
+2025/08/07 08:39:37 [1]	DUT Test Completed !        ----- 3.3913969 Sec.
+2025/08/07 08:39:37 [1]	Execute Phase 17 Test.
+2025/08/07 08:39:37 [1]	Do @STEP053@GET BT MAC
+2025/08/07 08:39:37 [1]	Run BTBT016-119:Get BT MAC	Mode: 1, Retry: 3
+[08:39:37.685][DUT] [Get BT MAC]++
+2025/08/07 08:39:37 [1]	(UART) > hciconfig hci0 revision
+
+2025/08/07 08:39:38 [1]	(UART) < hciconfig hci0 revision
+hci0:	Type: Primary  Bus: UART
+	BD Address: 9C:B8:B4:F7:B8:9D  ACL MTU: 1021:8  SCO MTU: 64:1
+	Firmware 0.17 / 17
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ [5G]:PB DONE
+
+2025/08/07 08:39:38 [1]	WithinString: 9C:B8:B4:F7:B8:9D
+2025/08/07 08:39:38 [1]	Get BT MAC Result: MAC3_BT=9CB8B4F7B89D
+[08:39:38.697][DUT] [Get BT MAC]--
+2025/08/07 08:39:38 [1]	[DUT] [Get BT MAC] ~~ TestTime:1.0123265 sec
+2025/08/07 08:39:38 [1]	BTBT016-119:@STEP053@GET BT MAC Test is Pass ! 		----- 1.0123265 Sec.
+2025/08/07 08:39:38 [1]	Do @STEP054@GET CHIP SN
+2025/08/07 08:39:38 [1]	Run IPIO024-120:get MicroChip SN	Mode: 1, Retry: 3
+[08:39:38.707][DUT] [get MicroChip SN]++
+2025/08/07 08:39:38 [1]	(UART) > cryptoauth_test sernum
+
+2025/08/07 08:39:39 [1]	(UART) < cryptoauth_test sern[  144.779808] nvt_i2c 2f014f000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+um
+
+[  144.786180] nvt_i2c 2f014f000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+[  144.815649] nvt_i2c 2f014f000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+[  144.821693] nvt_i2c 2f014f000.i2c: i2c_nvtim_rst_module: staus 0x10000000
+serial number:
+01 23 A0 72 8D 35 8B D4 01
+
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:39:39 [1]	WithinString: 0123A0728D358BD401
+2025/08/07 08:39:39 [1]	get MicroChip SN Result: MicroChip_SN=0123A0728D358BD401
+[08:39:39.737][DUT] [get MicroChip SN]--
+2025/08/07 08:39:39 [1]	[DUT] [get MicroChip SN] ~~ TestTime:1.0297772 sec
+2025/08/07 08:39:39 [1]	IPIO024-120:@STEP054@GET CHIP SN Test is Pass ! 		----- 1.0297772 Sec.
+2025/08/07 08:39:39 [1]	DUT Test Completed !        ----- 2.0615419 Sec.
+2025/08/07 08:39:39 [1]	Execute Phase 18 Test.
+2025/08/07 08:39:39 [1]	Do @STEP056@GET EMMC_ID
+2025/08/07 08:39:39 [1]	Run WUIF018-121:get EMMC_ID	Mode: 1, Retry: 3
+[08:39:39.866][DUT] [get EMMC_ID]++
+2025/08/07 08:39:39 [1]	(UART) > diag -g status emmc
+
+2025/08/07 08:39:40 [1]	(UART) < diag -g status emmc
+name: MMC128
+manfid: 0x000032
+oemid: 0x0101
+serial: 0x0106682d
+date: 11/2024
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+2025/08/07 08:39:40 [1]	WithinString: 0x0106682d
+2025/08/07 08:39:40 [1]	get EMMC_ID Result: EMMC_ID=0x0106682d
+[08:39:40.868][DUT] [get EMMC_ID]--
+2025/08/07 08:39:40 [1]	[DUT] [get EMMC_ID] ~~ TestTime:1.0017106 sec
+2025/08/07 08:39:40 [1]	WUIF018-121:@STEP056@GET EMMC_ID Test is Pass ! 		----- 1.0017106 Sec.
+2025/08/07 08:39:40 [1]	DUT Test Completed !        ----- 1.0114131 Sec.
+2025/08/07 08:39:40 [1]	Execute Phase 19 Test.
+2025/08/07 08:39:40 [1]	Do @STEP058@check WIFI no 5G module
+2025/08/07 08:39:40 [1]	Run OTFX076-122:Check SKU	Mode: 4, Retry: 3
+[08:39:40.998][DUT] [Check SKU]++
+2025/08/07 08:39:40 [1]	(UART) > diag -g sku
+
+2025/08/07 08:39:43 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:43.000][DUT] [Check SKU]--
+2025/08/07 08:39:43 [1]	[DUT] [Check SKU] ~~ TestTime:2.0019417 sec
+2025/08/07 08:39:43 [1]	Run B7PL025-126:Wait time@#$	Mode: 3, Retry: 3
+[08:39:43.000][PC] [Wait time@#$]++
+2025/08/07 08:39:43 [1]	> :Delay,"000"
+2025/08/07 08:39:43 [1]	< 0
+[08:39:43.000][PC] [Wait time@#$]--
+2025/08/07 08:39:43 [1]	[PC] [Wait time@#$] ~~ TestTime:0 sec
+2025/08/07 08:39:43 [1]	B7PL025-126:@STEP058@check WIFI no 5G module Test is Pass ! 		----- 2.0019417 Sec.
+2025/08/07 08:39:43 [1]	DUT Test Completed !        ----- 2.0116236 Sec.
+2025/08/07 08:39:43 [1]	Execute Phase 20 Test.
+2025/08/07 08:39:43 [1]	Do @STEP060@Check LED
+2025/08/07 08:39:43 [1]	Run B7PL025-127:Obtain Device	Mode: 0, Retry: 3
+2025/08/07 08:39:43 [1]	> :ObtainDevice
+2025/08/07 08:39:43 [1]	< 0
+2025/08/07 08:39:43 [1]	Run OTFX079-128:PUSH LED to fixture	Mode: 1, Retry: 3
+[08:39:43.240][FIXTURE] [PUSH LED to fixture]++
+2025/08/07 08:39:43 [1]	(UARTF) > I
+
+2025/08/07 08:39:43 [1]	(UARTF) < 
+[08:39:43.240][FIXTURE] [PUSH LED to fixture]--
+2025/08/07 08:39:43 [1]	[FIXTURE] [PUSH LED to fixture] ~~ TestTime:0 sec
+2025/08/07 08:39:43 [1]	OTFX079-128:@STEP060@Check LED Test is Pass ! 		----- 0.12026 Sec.
+2025/08/07 08:39:43 [1]	Do @STEP061@set LED ALL OFF
+2025/08/07 08:39:43 [1]	Run NBLE008-129:LED  GREEN OFF	Mode: 1, Retry: 3
+[08:39:43.250][DUT] [LED  GREEN OFF]++
+2025/08/07 08:39:43 [1]	(UART) > diag -s led g off
+
+2025/08/07 08:39:48 [1]	(UART) < diag -s led g off
+diag: set status led g off done
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:48.264][DUT] [LED  GREEN OFF]--
+2025/08/07 08:39:48 [1]	[DUT] [LED  GREEN OFF] ~~ TestTime:5.0144156 sec
+2025/08/07 08:39:48 [1]	Run NBLE008-130:LED  RED OFF	Mode: 1, Retry: 3
+[08:39:48.264][DUT] [LED  RED OFF]++
+2025/08/07 08:39:48 [1]	(UART) > diag -s led o off
+
+2025/08/07 08:39:53 [1]	(UART) < diag -s led o off
+diag: set status led o off done
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:39:53.297][DUT] [LED  RED OFF]--
+2025/08/07 08:39:53 [1]	[DUT] [LED  RED OFF] ~~ TestTime:5.0331875 sec
+2025/08/07 08:39:53 [1]	Run B7PL025-131:Wait	Mode: 0, Retry: 3
+[08:39:53.297][PC] [Wait]++
+2025/08/07 08:39:53 [1]	> :Delay,"500"
+2025/08/07 08:39:53 [1]	< 0
+[08:39:53.807][PC] [Wait]--
+2025/08/07 08:39:53 [1]	[PC] [Wait] ~~ TestTime:0.5101366 sec
+2025/08/07 08:39:53 [1]	Run B7PL025-132:##Capture LED	Mode: 1, Retry: 3
+2025/08/07 08:39:53 [1]	> :Dev.All_Combo_channel,"1"
+2025/08/07 08:39:54 [1]	< 0
+2025/08/07 08:39:54 [1]	##Capture LED Result: MB_LED1=000,000,000,00000,999.99,999,00000
+2025/08/07 08:39:54 [1]	Run B7PL025-133:Check LED ALL OFF	Mode: 2, Retry: 3
+[08:39:54.867][DUT] [Check LED ALL OFF]++
+2025/08/07 08:39:54 [1]	> :GetVal,"MB_LED1"
+2025/08/07 08:39:54 [1]	< 000,000,000,00000,999.99,999,00000
+2025/08/07 08:39:54 [1]	Check LED ALL OFF Result: MB_LED1_R=000; MB_LED1_G=000; MB_LED1_B=000
+2025/08/07 08:39:54 [1]	CurrentTestID:B7PL025-1330 - The validation: MB_LED1_R = 000 (0,50)
+2025/08/07 08:39:54 [1]	CurrentTestID:B7PL025-1331 - The validation: MB_LED1_G = 000 (0,50)
+2025/08/07 08:39:54 [1]	CurrentTestID:B7PL025-1332 - The validation: MB_LED1_B = 000 (0,50)
+[08:39:54.867][DUT] [Check LED ALL OFF]--
+2025/08/07 08:39:54 [1]	[DUT] [Check LED ALL OFF] ~~ TestTime:0 sec
+2025/08/07 08:39:54 [1]	Run B7PL025-134:ReleaseDevice	Mode: 3, Retry: 3
+2025/08/07 08:39:54 [1]	> :ReleaseSubDevice
+2025/08/07 08:39:54 [1]	< 0
+2025/08/07 08:39:54 [1]	B7PL025-134:@STEP061@set LED ALL OFF Test is Pass ! 		----- 11.6175981 Sec.
+2025/08/07 08:39:54 [1]	LED_Test Test Completed !        ----- 11.7571925 Sec.
+2025/08/07 08:39:54 [1]	Execute Phase 21 Test.
+2025/08/07 08:39:55 [1]	Do @STEP063@Check LED_GREEN
+2025/08/07 08:39:55 [1]	Run B7PL025-135:Obtain Device	Mode: 0, Retry: 3
+2025/08/07 08:39:55 [1]	> :ObtainDevice
+2025/08/07 08:39:55 [1]	< 0
+2025/08/07 08:39:55 [1]	Run B7PL025-136:Wait	Mode: 0, Retry: 3
+[08:39:55.108][PC] [Wait]++
+2025/08/07 08:39:55 [1]	> :Delay,"500"
+2025/08/07 08:39:55 [1]	< 0
+[08:39:55.617][PC] [Wait]--
+2025/08/07 08:39:55 [1]	[PC] [Wait] ~~ TestTime:0.5096785 sec
+2025/08/07 08:39:55 [1]	Run NBLE008-137:Set LED Green ON	Mode: 1, Retry: 3
+[08:39:55.617][DUT] [Set LED Green ON]++
+2025/08/07 08:39:55 [1]	(UART) > diag -s led g on
+
+2025/08/07 08:40:00 [1]	(UART) < diag -s led g on
+diag: set status led g on done
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:40:00.642][DUT] [Set LED Green ON]--
+2025/08/07 08:40:00 [1]	[DUT] [Set LED Green ON] ~~ TestTime:5.0243362 sec
+2025/08/07 08:40:00 [1]	Run B7PL025-138:Wait	Mode: 0, Retry: 3
+[08:40:00.642][PC] [Wait]++
+2025/08/07 08:40:00 [1]	> :Delay,"500"
+2025/08/07 08:40:01 [1]	< 0
+[08:40:01.152][PC] [Wait]--
+2025/08/07 08:40:01 [1]	[PC] [Wait] ~~ TestTime:0.5108585 sec
+2025/08/07 08:40:01 [1]	Run B7PL025-139:##Capture LED	Mode: 1, Retry: 3
+2025/08/07 08:40:01 [1]	> :Dev.All_Combo_channel,"1"
+2025/08/07 08:40:02 [1]	< 0
+2025/08/07 08:40:02 [1]	##Capture LED Result: MB_LED1=002,242,011,05554,122.22,098,05554
+2025/08/07 08:40:02 [1]	Run IOET173-140:Check LED GREEN	Mode: 2, Retry: 3
+[08:40:02.215][DUT] [Check LED GREEN]++
+2025/08/07 08:40:02 [1]	> :GetVal,"MB_LED1"
+2025/08/07 08:40:02 [1]	< 002,242,011,05554,122.22,098,05554
+2025/08/07 08:40:02 [1]	Check LED GREEN Result: MB_LED1_R=002; MB_LED1_G=242; MB_LED1_B=011
+2025/08/07 08:40:02 [1]	CurrentTestID:IOET173-1400 - The validation: MB_LED1_R = 002 (0,70)
+2025/08/07 08:40:02 [1]	CurrentTestID:IOET173-1401 - The validation: MB_LED1_G = 242 (100,255)
+2025/08/07 08:40:02 [1]	CurrentTestID:IOET173-1402 - The validation: MB_LED1_B = 011 (0,70)
+[08:40:02.215][DUT] [Check LED GREEN]--
+2025/08/07 08:40:02 [1]	[DUT] [Check LED GREEN] ~~ TestTime:0.0096282 sec
+2025/08/07 08:40:02 [1]	Run B7PL025-141:ReleaseDevice	Mode: 3, Retry: 3
+2025/08/07 08:40:02 [1]	> :ReleaseSubDevice
+2025/08/07 08:40:02 [1]	< 0
+2025/08/07 08:40:02 [1]	Run NBLE008-142:LED Grenn OFF	Mode: 1, Retry: 3
+[08:40:02.215][DUT] [LED Grenn OFF]++
+2025/08/07 08:40:02 [1]	(UART) > diag -s led g off
+
+2025/08/07 08:40:07 [1]	(UART) < diag -s led g off
+diag: set status led g off done
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:40:07.229][DUT] [LED Grenn OFF]--
+2025/08/07 08:40:07 [1]	[DUT] [LED Grenn OFF] ~~ TestTime:5.0147811 sec
+2025/08/07 08:40:07 [1]	NBLE008-142:@STEP063@Check LED_GREEN Test is Pass ! 		----- 12.2220524 Sec.
+2025/08/07 08:40:07 [1]	LED_Test Test Completed !        ----- 12.2320744 Sec.
+2025/08/07 08:40:07 [1]	Execute Phase 22 Test.
+2025/08/07 08:40:07 [1]	Do @STEP065@CheckLED_Red
+2025/08/07 08:40:07 [1]	Run B7PL025-143:Obtain Device	Mode: 0, Retry: 3
+2025/08/07 08:40:07 [1]	> :ObtainDevice
+2025/08/07 08:40:07 [1]	< 0
+2025/08/07 08:40:07 [1]	Run B7PL025-144:Wait	Mode: 0, Retry: 3
+[08:40:07.420][PC] [Wait]++
+2025/08/07 08:40:07 [1]	> :Delay,"500"
+2025/08/07 08:40:07 [1]	< 0
+[08:40:07.931][PC] [Wait]--
+2025/08/07 08:40:07 [1]	[PC] [Wait] ~~ TestTime:0.5112715 sec
+2025/08/07 08:40:07 [1]	Run NBLE008-145:Set LED Red ON	Mode: 1, Retry: 3
+[08:40:07.931][DUT] [Set LED Red ON]++
+2025/08/07 08:40:07 [1]	(UART) > diag -s led o on
+
+2025/08/07 08:40:12 [1]	(UART) < diag -s led o on
+diag: set status led o on done
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:40:12.943][DUT] [Set LED Red ON]--
+2025/08/07 08:40:12 [1]	[DUT] [Set LED Red ON] ~~ TestTime:5.0122529 sec
+2025/08/07 08:40:12 [1]	Run B7PL025-146:Wait	Mode: 0, Retry: 3
+[08:40:12.943][PC] [Wait]++
+2025/08/07 08:40:12 [1]	> :Delay,"500"
+2025/08/07 08:40:13 [1]	< 0
+[08:40:13.463][PC] [Wait]--
+2025/08/07 08:40:13 [1]	[PC] [Wait] ~~ TestTime:0.5199639 sec
+2025/08/07 08:40:13 [1]	Run B7PL025-147:##Capture LED	Mode: 1, Retry: 3
+2025/08/07 08:40:13 [1]	> :Dev.All_Combo_channel,"1"
+2025/08/07 08:40:14 [1]	< 0
+2025/08/07 08:40:14 [1]	##Capture LED Result: MB_LED1=253,002,000,04270,000.49,100,04270
+2025/08/07 08:40:14 [1]	Run IOET174-148:Check LED RED	Mode: 2, Retry: 3
+[08:40:14.515][DUT] [Check LED RED]++
+2025/08/07 08:40:14 [1]	> :GetVal,"MB_LED1"
+2025/08/07 08:40:14 [1]	< 253,002,000,04270,000.49,100,04270
+2025/08/07 08:40:14 [1]	Check LED RED Result: MB_LED1_R=253; MB_LED1_G=002; MB_LED1_B=000
+2025/08/07 08:40:14 [1]	CurrentTestID:IOET174-1480 - The validation: MB_LED1_R = 253 (100,255)
+2025/08/07 08:40:14 [1]	CurrentTestID:IOET174-1481 - The validation: MB_LED1_G = 002 (0,70)
+2025/08/07 08:40:14 [1]	CurrentTestID:IOET174-1482 - The validation: MB_LED1_B = 000 (0,70)
+[08:40:14.524][DUT] [Check LED RED]--
+2025/08/07 08:40:14 [1]	[DUT] [Check LED RED] ~~ TestTime:0.0096258 sec
+2025/08/07 08:40:14 [1]	Run B7PL025-149:ReleaseDevice	Mode: 3, Retry: 3
+2025/08/07 08:40:14 [1]	> :ReleaseSubDevice
+2025/08/07 08:40:14 [1]	< 0
+2025/08/07 08:40:14 [1]	Run OTFX15A-150:Remove LED to Fixture	Mode: 1, Retry: 3
+[08:40:14.524][FIXTURE] [Remove LED to Fixture]++
+2025/08/07 08:40:14 [1]	(UARTF) > N
+
+2025/08/07 08:40:14 [1]	(UARTF) < 
+[08:40:14.524][FIXTURE] [Remove LED to Fixture]--
+2025/08/07 08:40:14 [1]	[FIXTURE] [Remove LED to Fixture] ~~ TestTime:0 sec
+2025/08/07 08:40:14 [1]	Run OTFX157-151:Wait	Mode: 1, Retry: 3
+[08:40:14.524][PC] [Wait]++
+2025/08/07 08:40:14 [1]	> :Delay,"2000"
+2025/08/07 08:40:16 [1]	< 0
+[08:40:16.536][PC] [Wait]--
+2025/08/07 08:40:16 [1]	[PC] [Wait] ~~ TestTime:2.0112553 sec
+2025/08/07 08:40:16 [1]	OTFX157-151:@STEP065@CheckLED_Red Test is Pass ! 		----- 9.2266577 Sec.
+2025/08/07 08:40:16 [1]	LED_Test Test Completed !        ----- 9.2363433 Sec.
+2025/08/07 08:40:16 [1]	Execute Phase 23 Test.
+2025/08/07 08:40:16 [1]	Do @STEP067@CHECK  5G Antenna(SAM need)
+2025/08/07 08:40:16 [1]	Run OTFX076-152:Check SKU	Mode: 4, Retry: 3
+[08:40:16.625][DUT] [Check SKU]++
+2025/08/07 08:40:16 [1]	(UART) > diag -g sku
+
+2025/08/07 08:40:16 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:40:16.685][DUT] [Check SKU]--
+2025/08/07 08:40:16 [1]	[DUT] [Check SKU] ~~ TestTime:0.0602201 sec
+2025/08/07 08:40:16 [1]	Run WUIO003-153:check 5g module ANT	Mode: 1, Retry: 3
+[08:40:16.685][DUT] [check 5g module ANT]++
+2025/08/07 08:40:16 [1]	(UART) > test5g AT+CSYSSEL=?
+
+2025/08/07 08:40:16 [1]	(UART) < test5g AT+CSYSSEL=?
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ AT+CSYSSEL=?
++CSYSSEL: "nr5g_disable",(0-2)
++CSYSSEL: "nr5g_band",1:2:3:5:7:8:12:13:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79
++CSYSSEL: "nsa_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "nrdc_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "lte_band",1:2:3:4:5:7:8:12:13:14:17:18:19:20:25:26:28:29:30:32:34:38:39:40:41:42:43:46:48:66:71
++CSYSSEL: "w_band",1:2:4:5:6:8:19
++CSYSSEL: "rat_acq_order",5:9:12
+OK
+
+[08:40:16.895][DUT] [check 5g module ANT]--
+2025/08/07 08:40:16 [1]	[DUT] [check 5g module ANT] ~~ TestTime:0.2099606 sec
+2025/08/07 08:40:16 [1]	Run WUIO003-154:check 5g module ANT	Mode: 1, Retry: 3
+[08:40:16.895][DUT] [check 5g module ANT]++
+2025/08/07 08:40:16 [1]	(UART) > test5g AT+CSYSSEL=?
+
+2025/08/07 08:40:17 [1]	(UART) < test5g AT+CSYSSEL=?
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ AT+CSYSSEL=?
++CSYSSEL: "nr5g_disable",(0-2)
++CSYSSEL: "nr5g_band",1:2:3:5:7:8:12:13:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79
++CSYSSEL: "nsa_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "nrdc_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "lte_band",1:2:3:4:5:7:8:12:13:14:17:18:19:20:25:26:28:29:30:32:34:38:39:40:41:42:43:46:48:66:71
++CSYSSEL: "w_band",1:2:4:5:6:8:19
++CSYSSEL: "rat_acq_order",5:9:12
+OK
+
+[08:40:17.105][DUT] [check 5g module ANT]--
+2025/08/07 08:40:17 [1]	[DUT] [check 5g module ANT] ~~ TestTime:0.2098856 sec
+2025/08/07 08:40:17 [1]	Run WUIO003-155:check 5g module ANT	Mode: 1, Retry: 3
+[08:40:17.105][DUT] [check 5g module ANT]++
+2025/08/07 08:40:17 [1]	(UART) > test5g AT+CSYSSEL=?
+
+2025/08/07 08:40:17 [1]	(UART) < test5g AT+CSYSSEL=?
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ AT+CSYSSEL=?
++CSYSSEL: "nr5g_disable",(0-2)
++CSYSSEL: "nr5g_band",1:2:3:5:7:8:12:13:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79
++CSYSSEL: "nsa_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "nrdc_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "lte_band",1:2:3:4:5:7:8:12:13:14:17:18:19:20:25:26:28:29:30:32:34:38:39:40:41:42:43:46:48:66:71
++CSYSSEL: "w_band",1:2:4:5:6:8:19
++CSYSSEL: "rat_acq_order",5:9:12
+OK
+
+[08:40:17.315][DUT] [check 5g module ANT]--
+2025/08/07 08:40:17 [1]	[DUT] [check 5g module ANT] ~~ TestTime:0.2098854 sec
+2025/08/07 08:40:17 [1]	Run WUIO003-156:check 5g module ANT	Mode: 1, Retry: 3
+[08:40:17.315][DUT] [check 5g module ANT]++
+2025/08/07 08:40:17 [1]	(UART) > test5g AT+CSYSSEL=?
+
+2025/08/07 08:40:17 [1]	(UART) < test5g AT+CSYSSEL=?
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ AT+CSYSSEL=?
++CSYSSEL: "nr5g_disable",(0-2)
++CSYSSEL: "nr5g_band",1:2:3:5:7:8:12:13:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79
++CSYSSEL: "nsa_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "nrdc_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "lte_band",1:2:3:4:5:7:8:12:13:14:17:18:19:20:25:26:28:29:30:32:34:38:39:40:41:42:43:46:48:66:71
++CSYSSEL: "w_band",1:2:4:5:6:8:19
++CSYSSEL: "rat_acq_order",5:9:12
+OK
+
+[08:40:17.515][DUT] [check 5g module ANT]--
+2025/08/07 08:40:17 [1]	[DUT] [check 5g module ANT] ~~ TestTime:0.1998943 sec
+2025/08/07 08:40:17 [1]	Run WUIO003-157:check 5g module ANT	Mode: 1, Retry: 3
+[08:40:17.515][DUT] [check 5g module ANT]++
+2025/08/07 08:40:17 [1]	(UART) > test5g AT+CSYSSEL=?
+
+2025/08/07 08:40:17 [1]	(UART) < test5g AT+CSYSSEL=?
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ AT+CSYSSEL=?
++CSYSSEL: "nr5g_disable",(0-2)
++CSYSSEL: "nr5g_band",1:2:3:5:7:8:12:13:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79
++CSYSSEL: "nsa_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "nrdc_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "lte_band",1:2:3:4:5:7:8:12:13:14:17:18:19:20:25:26:28:29:30:32:34:38:39:40:41:42:43:46:48:66:71
++CSYSSEL: "w_band",1:2:4:5:6:8:19
++CSYSSEL: "rat_acq_order",5:9:12
+OK
+
+[08:40:17.725][DUT] [check 5g module ANT]--
+2025/08/07 08:40:17 [1]	[DUT] [check 5g module ANT] ~~ TestTime:0.2102966 sec
+2025/08/07 08:40:17 [1]	Run WUIO003-158:check 5g module ANT	Mode: 1, Retry: 3
+[08:40:17.725][DUT] [check 5g module ANT]++
+2025/08/07 08:40:17 [1]	(UART) > test5g AT+CSYSSEL=?
+
+2025/08/07 08:40:17 [1]	(UART) < test5g AT+CSYSSEL=?
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ AT+CSYSSEL=?
++CSYSSEL: "nr5g_disable",(0-2)
++CSYSSEL: "nr5g_band",1:2:3:5:7:8:12:13:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79
++CSYSSEL: "nsa_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "nrdc_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "lte_band",1:2:3:4:5:7:8:12:13:14:17:18:19:20:25:26:28:29:30:32:34:38:39:40:41:42:43:46:48:66:71
++CSYSSEL: "w_band",1:2:4:5:6:8:19
++CSYSSEL: "rat_acq_order",5:9:12
+OK
+
+[08:40:17.935][DUT] [check 5g module ANT]--
+2025/08/07 08:40:17 [1]	[DUT] [check 5g module ANT] ~~ TestTime:0.2098803 sec
+2025/08/07 08:40:17 [1]	Run WUIO003-159:check 5g module ANT	Mode: 1, Retry: 3
+[08:40:17.935][DUT] [check 5g module ANT]++
+2025/08/07 08:40:17 [1]	(UART) > test5g AT+CSYSSEL=?
+
+2025/08/07 08:40:18 [1]	(UART) < test5g AT+CSYSSEL=?
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ AT+CSYSSEL=?
++CSYSSEL: "nr5g_disable",(0-2)
++CSYSSEL: "nr5g_band",1:2:3:5:7:8:12:13:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79
++CSYSSEL: "nsa_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "nrdc_nr5g_band",1:2:3:5:7:8:12:14:18:20:25:26:28:29:30:38:40:41:48:66:71:75:76:77:78:79:257:258:260:261
++CSYSSEL: "lte_band",1:2:3:4:5:7:8:12:13:14:17:18:19:20:25:26:28:29:30:32:34:38:39:40:41:42:43:46:48:66:71
++CSYSSEL: "w_band",1:2:4:5:6:8:19
++CSYSSEL: "rat_acq_order",5:9:12
+OK
+
+[08:40:18.135][DUT] [check 5g module ANT]--
+2025/08/07 08:40:18 [1]	[DUT] [check 5g module ANT] ~~ TestTime:0.1998723 sec
+2025/08/07 08:40:18 [1]	Run B7PL025-160:Wait	Mode: 0, Retry: 3
+[08:40:18.135][PC] [Wait]++
+2025/08/07 08:40:18 [1]	> :Delay,"2000"
+2025/08/07 08:40:20 [1]	< 0
+[08:40:20.146][PC] [Wait]--
+2025/08/07 08:40:20 [1]	[PC] [Wait] ~~ TestTime:2.0105318 sec
+2025/08/07 08:40:20 [1]	Run WUIO003-161:check 5g module ANT	Mode: 1, Retry: 3
+[08:40:20.146][DUT] [check 5g module ANT]++
+2025/08/07 08:40:20 [1]	(UART) > test5g at+cqcnv
+
+2025/08/07 08:40:20 [1]	(UART) < test5g at+cqcnv
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ at+cqcnv
++CQCNV: "SDX65_131_SIM8380G-M2-HS_B3J2W550_QTM545_838_900_P1.03_20250103"
+OK
+
+[08:40:20.296][DUT] [check 5g module ANT]--
+2025/08/07 08:40:20 [1]	[DUT] [check 5g module ANT] ~~ TestTime:0.1503193 sec
+2025/08/07 08:40:20 [1]	Run WUIO003-162:check 5g module ANT	Mode: 1, Retry: 3
+[08:40:20.296][DUT] [check 5g module ANT]++
+2025/08/07 08:40:20 [1]	(UART) > test5g at+csub
+
+2025/08/07 08:40:20 [1]	(UART) < test5g at+csub
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ at+csub
++CSUB: B02V02
++CSUB: SDX65_LE131_M2_M44_PCIE_HS_V1.05_250121
+OK
+
+[08:40:20.466][DUT] [check 5g module ANT]--
+2025/08/07 08:40:20 [1]	[DUT] [check 5g module ANT] ~~ TestTime:0.1701597 sec
+2025/08/07 08:40:20 [1]	Run B7PL025-163:Wait	Mode: 0, Retry: 3
+[08:40:20.466][PC] [Wait]++
+2025/08/07 08:40:20 [1]	> :Delay,"000"
+2025/08/07 08:40:20 [1]	< 0
+[08:40:20.466][PC] [Wait]--
+2025/08/07 08:40:20 [1]	[PC] [Wait] ~~ TestTime:0 sec
+2025/08/07 08:40:20 [1]	B7PL025-163:@STEP067@CHECK  5G Antenna(SAM need) Test is Pass ! 		----- 3.840906 Sec.
+2025/08/07 08:40:20 [1]	DUT Test Completed !        ----- 3.8505865 Sec.
+2025/08/07 08:40:20 [1]	Execute Phase 24 Test.
+2025/08/07 08:40:20 [1]	Do @STEP069@UPLOAD DATA  to SFIS
+2025/08/07 08:40:20 [1]	:@STEP069@UPLOAD DATA  to SFIS Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:40:20 [1]	Do @STEP070@UPLOAD DATA  only 5G SFIS
+2025/08/07 08:40:20 [1]	Run OTFX076-175:Check SKU	Mode: 4, Retry: 3
+[08:40:20.566][DUT] [Check SKU]++
+2025/08/07 08:40:20 [1]	(UART) > diag -g sku
+
+2025/08/07 08:40:20 [1]	(UART) < diag -g sku
+diag: sku N3C2401C
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:40:20.626][DUT] [Check SKU]--
+2025/08/07 08:40:20 [1]	[DUT] [Check SKU] ~~ TestTime:0.0602497 sec
+2025/08/07 08:40:20 [1]	Run B7PL025-178:Wait	Mode: 1, Retry: 3
+[08:40:20.626][PC] [Wait]++
+2025/08/07 08:40:20 [1]	> :Delay,"000"
+2025/08/07 08:40:20 [1]	< 0
+[08:40:20.626][PC] [Wait]--
+2025/08/07 08:40:20 [1]	[PC] [Wait] ~~ TestTime:0 sec
+2025/08/07 08:40:20 [1]	B7PL025-178:@STEP070@UPLOAD DATA  only 5G SFIS Test is Pass ! 		----- 0.0602497 Sec.
+2025/08/07 08:40:20 [1]	DUT Test Completed !        ----- 0.0802401 Sec.
+2025/08/07 08:40:20 [1]	All Test Completed !        ----- 201.5360641 Sec.
+2025/08/07 08:40:20 [1]	TotalCount:7-YR:14%
+2025/08/07 08:40:20 [1]	Report name: Funtion_WE253100004_2025-08-07_08-40-20.ct
+2025/08/07 08:40:20 [1]	Execute Phase 97 Test.
+2025/08/07 08:40:20 [1]	Do @STEP072@Disconnect UART
+2025/08/07 08:40:20 [1]	Run B7PL025-179:Disconnect UART	Mode: 3, Retry: 3
+[08:40:20.746][PC] [Disconnect UART]++
+2025/08/07 08:40:20 [1]	> :Disconnect,"UART"
+2025/08/07 08:40:20 [1]	< 0
+[08:40:20.876][PC] [Disconnect UART]--
+2025/08/07 08:40:20 [1]	[PC] [Disconnect UART] ~~ TestTime:0.1302576 sec
+2025/08/07 08:40:20 [1]	Run B7PL025-180:Close SSH	Mode: 3, Retry: 3
+[08:40:20.876][PC] [Close SSH]++
+2025/08/07 08:40:20 [1]	> :Disconnect,"UARTF"
+2025/08/07 08:40:20 [1]	< 0
+[08:40:20.886][PC] [Close SSH]--
+2025/08/07 08:40:20 [1]	[PC] [Close SSH] ~~ TestTime:0.0096401 sec
+2025/08/07 08:40:20 [1]	Run B7PL025-181:Force reboot	Mode: 0, Retry: 3
+[08:40:20.886][DUT] [Force reboot]++
+2025/08/07 08:40:20 [1]	(UART) > shutdown.sh
+
+2025/08/07 08:40:22 [1]	(UART) < shutdown.sh
+[0;41mPlease unplug POE! (1)[0m
+
+
+[08:40:22.066][DUT] [Force reboot]--
+2025/08/07 08:40:22 [1]	[DUT] [Force reboot] ~~ TestTime:1.1805422 sec
+2025/08/07 08:40:22 [1]	Run B7PL025-182:Power OFF	Mode: 0, Retry: 3
+[08:40:22.066][FIXTURE] [Power OFF]++
+2025/08/07 08:40:22 [1]	(UARTF) > L
+
+2025/08/07 08:40:22 [1]	(UARTF) < 
+[08:40:22.177][FIXTURE] [Power OFF]--
+2025/08/07 08:40:22 [1]	[FIXTURE] [Power OFF] ~~ TestTime:0.1103131 sec
+2025/08/07 08:40:22 [1]	Run B7PL025-183:Power OFF	Mode: 0, Retry: 3
+[08:40:22.177][FIXTURE] [Power OFF]++
+2025/08/07 08:40:22 [1]	(UARTF) > N
+
+2025/08/07 08:40:22 [1]	(UARTF) < 
+[08:40:22.177][FIXTURE] [Power OFF]--
+2025/08/07 08:40:22 [1]	[FIXTURE] [Power OFF] ~~ TestTime:0 sec
+2025/08/07 08:40:22 [1]	Run B7PL025-184:Power OFF	Mode: 0, Retry: 3
+[08:40:22.177][FIXTURE] [Power OFF]++
+2025/08/07 08:40:22 [1]	(UARTF) > M
+
+2025/08/07 08:40:22 [1]	(UARTF) < 
+[08:40:22.177][FIXTURE] [Power OFF]--
+2025/08/07 08:40:22 [1]	[FIXTURE] [Power OFF] ~~ TestTime:0 sec
+2025/08/07 08:40:22 [1]	B7PL025-184:@STEP072@Disconnect UART Test is Pass ! 		----- 1.430753 Sec.
+2025/08/07 08:40:22 [1]	Change color at 97 phase... Status:True... Error:PASS
+2025/08/07 08:40:22 [1]	All phase Total Test Time !        ----- 203.4665716 Sec.
+2025/08/07 08:40:22 [1]	DUT Test Completed !        ----- 1.4903951 Sec.

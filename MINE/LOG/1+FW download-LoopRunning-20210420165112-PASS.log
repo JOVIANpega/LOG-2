@@ -1,0 +1,89 @@
+2021/04/20 16:51:12 [1]	System Version is 1.1.7.11.
+2021/04/20 16:51:12 [1]	Script File is Scram_TestFlow_20210415_ER.XLSX.
+2021/04/20 16:51:12 [1]	Script Version is 2104191709001.
+2021/04/20 16:51:12 [1]	Script Creator is jovian.
+2021/04/20 16:51:12 [1]	DeviceID is 110005.
+2021/04/20 16:51:12 [1]	SFIS is off.
+2021/04/20 16:51:12 [1]	MiniCloud2 is off.
+2021/04/20 16:51:12 [1]	FTP is off.
+2021/04/20 16:51:12 [1]	Script has 1 phase cases
+2021/04/20 16:51:12 [1]	Script has 98/99 phase cases
+****************************************************************************************************
+2021/04/20 16:51:12 [1]	Execute Phase 1 Test.
+2021/04/20 16:51:12 [1]	Do @STEP002@ScanLabel
+2021/04/20 16:51:12 [1]	Run CACK088-201:Show ISN to UI	Mode: 0, Retry: 3
+2021/04/20 16:51:12 [1]	> :ShowISN,"LoopRunning"
+2021/04/20 16:51:12 [1]	< 0
+2021/04/20 16:51:12 [1]	CACK088-201:@STEP002@ScanLabel Test is Pass ! 		----- 0.0153158 Sec.
+2021/04/20 16:51:12 [1]	@STEP003@CheckLabel Skipped.
+2021/04/20 16:51:12 [1]	DUT Test Completed !        ----- 0.0153158 Sec.
+2021/04/20 16:51:12 [1]	Execute Phase 2 Test.
+2021/04/20 16:51:13 [1]	Do @STEP005@CheckRoute
+2021/04/20 16:51:13 [1]	Run B7PL025-204:Dealy	Mode: 0, Retry: 3
+2021/04/20 16:51:13 [1]	> :Delay,"1000"
+2021/04/20 16:51:14 [1]	< 0
+2021/04/20 16:51:14 [1]	Run SCSC001-205:ReleaseDevice	Mode: 0, Retry: 3
+2021/04/20 16:51:14 [1]	> :ReleaseDevice
+2021/04/20 16:51:14 [1]	< 0
+2021/04/20 16:51:14 [1]	SCSC001-205:@STEP005@CheckRoute Test is Pass ! 		----- 1.0324692 Sec.
+2021/04/20 16:51:14 [1]	DUT Test Completed !        ----- 1.0826156 Sec.
+2021/04/20 16:51:14 [1]	Execute Phase 3 Test.
+2021/04/20 16:51:14 [1]	Do @STEP007@call JProg.bat
+2021/04/20 16:51:14 [1]	Run OTSC002-206::Disconnect,"CmdConsole"	Mode: 0, Retry: 2
+2021/04/20 16:51:14 [1]	> :Disconnect,"CmdConsole"
+2021/04/20 16:51:14 [1]	< 0
+2021/04/20 16:51:14 [1]	Run OTSC002-207::Connect,"CmdConsole"	Mode: 0, Retry: 2
+2021/04/20 16:51:14 [1]	> :Connect,"CmdConsole"
+2021/04/20 16:51:14 [1]	< 0
+2021/04/20 16:51:14 [1]	Run VSCH002-208:CmdConsole@cmd /c JProg.bat \r\n	Mode: 0, Retry: 2
+2021/04/20 16:51:14 [1]	> cmd /c CALL_JProg.bat 
+
+2021/04/20 16:51:28 [1]	< cmd /c CALL_JProg.bat 
+
+D:\(((COSAIR Project\CODE\Centimani_COSAIR_SCREAM_20210115>cd\
+
+D:\>C:
+
+C:\>cd C:\Program Files (x86)\SEGGER\JLink\ 
+
+C:\Program Files (x86)\SEGGER\JLink>JProg.bat
+Open a project and data file, start auto processing and exit
+PASS
+
+D:\(((COSAIR Project\CODE\Centimani_COSAIR_SCREAM_20210115>
+2021/04/20 16:51:28 [1]	Run OTSC002-209::Disconnect,"CmdConsole"	Mode: 0, Retry: 2
+2021/04/20 16:51:28 [1]	> :Disconnect,"CmdConsole"
+2021/04/20 16:51:28 [1]	< 0
+2021/04/20 16:51:28 [1]	Run B7PL025-210:Dealy	Mode: 0, Retry: 2
+2021/04/20 16:51:28 [1]	> :Delay,"10000"
+2021/04/20 16:51:38 [1]	< 0
+2021/04/20 16:51:38 [1]	B7PL025-210:@STEP007@call JProg.bat Test is Pass ! 		----- 24.6035873 Sec.
+2021/04/20 16:51:38 [1]	DUT Test Completed !        ----- 24.665837 Sec.
+2021/04/20 16:51:38 [1]	Execute Phase 4 Test.
+2021/04/20 16:51:38 [1]	Do @STEP009@Check Mainboard
+2021/04/20 16:51:38 [1]	Run B7PL025-211:USB.Connect	Mode: 0, Retry: 3
+2021/04/20 16:51:38 [1]	> :USB.Connect
+2021/04/20 16:51:38 [1]	< 
+2021/04/20 16:51:38 [1]	< 0
+2021/04/20 16:51:38 [1]	Run SCSC001-212:Read FW VER	Mode: 0, Retry: 3
+2021/04/20 16:51:38 [1]	> :USB.Command,"08 02 13 00","14"
+2021/04/20 16:51:38 [1]	< 
+2021/04/20 16:51:38 [1]	< 0
+2021/04/20 16:51:38 [1]	Read FW VER Result: gRPT=00 02 00 00 00
+2021/04/20 16:51:38 [1]	CurrentTestID:SCSC001-2120 - The validation: gRPT = 00 02 00 00 00 (00 02 00 00 00,)
+2021/04/20 16:51:38 [1]	Run SCSC001-213:Check DIP 0	Mode: 4, Retry: 3
+2021/04/20 16:51:38 [1]	> :USB.Command,"08 02 35 00","14"
+2021/04/20 16:51:38 [1]	< 
+2021/04/20 16:51:38 [1]	< 0
+2021/04/20 16:51:38 [1]	Check DIP 0 Result: gRPT=00 02 00 00 00
+2021/04/20 16:51:38 [1]	CurrentTestID:SCSC001-2130 - The validation: gRPT = 00 02 00 00 00 (00 02 00 00 00,)
+2021/04/20 16:51:38 [1]	Run B7PL025-216:Dealy	Mode: 0, Retry: 3
+2021/04/20 16:51:38 [1]	> :Delay,"10000"
+2021/04/20 16:51:49 [1]	< 0
+2021/04/20 16:51:49 [1]	Run SCSC001-217:USB.Disconnect	Mode: 2, Retry: 3
+2021/04/20 16:51:49 [1]	> :USB.Disconnect
+2021/04/20 16:51:49 [1]	< 
+2021/04/20 16:51:49 [1]	< 0
+2021/04/20 16:51:49 [1]	SCSC001-217:@STEP009@Check Mainboard Test is Pass ! 		----- 10.1054686 Sec.
+2021/04/20 16:51:49 [1]	DUT Test Completed !        ----- 10.1362152 Sec.
+2021/04/20 16:51:49 [1]	All Test Completed !        ----- 36.3119889 Sec.

@@ -1,0 +1,253 @@
+2025/08/07 08:34:17 [1]	System Version is 1.1.8.64.
+2025/08/07 08:34:17 [1]	Script File is VALO360_TestFlow_20250407_Function.xlsx.
+2025/08/07 08:34:17 [1]	Script Version is 2508061510160.
+2025/08/07 08:34:17 [1]	Script Creator is jovian_li.
+2025/08/07 08:34:17 [1]	Utility Version is 1.0.9.21.
+2025/08/07 08:34:17 [1]	DeviceID is 125313.
+2025/08/07 08:34:17 [1]	SFIS is off.
+2025/08/07 08:34:17 [1]	MiniCloud2 is on.
+2025/08/07 08:34:17 [1]	FTP is off.
+2025/08/07 08:34:17 [1]	Active IPs:
+乙太網路:[6CB311319DBC]#192.168.11.3#
+DUT:[6CB311319DBD]#169.254.30.167#
+sfis:[FC34973B7871]#10.197.60.68#
+2025/08/07 08:34:17 [1]	Script has 1 phase cases
+2025/08/07 08:34:17 [1]	Script has 97 phase cases
+2025/08/07 08:34:17 [1]	QCODE: (1P) HWNDUSES1096;;(S) WE253100004;;(18V) 18VLENOK;;(10D) 250730;;(4L) MADE IN TAIWAN
+****************************************************************************************************
+2025/08/07 08:34:17 [1]	Execute Phase 0 Test.
+2025/08/07 08:34:17 [1]	Do @STEP002@Get Qcode info FOR PEGA
+2025/08/07 08:34:17 [1]	Run ITIF013-000:Compare Qrcode USER	Mode: 1, Retry: 3
+2025/08/07 08:34:17 [1]	> :GetVal,"$QCODE"
+2025/08/07 08:34:17 [1]	< (1P) HWNDUSES1096;;(S) WE253100004;;(18V) 18VLENOK;;(10D) 250730;;(4L) MADE IN TAIWAN
+2025/08/07 08:34:17 [1]	WithinString: WE253100004
+2025/08/07 08:34:17 [1]	Compare Qrcode USER Result: SSN=WE253100004
+2025/08/07 08:34:17 [1]	CurrentTestID:ITIF013-0000 - The validation: SSN = WE253100004 (@WE,)
+2025/08/07 08:34:17 [1]	ITIF013-000:@STEP002@Get Qcode info FOR PEGA Test is Pass ! 		----- 0.0096659 Sec.
+2025/08/07 08:34:17 [1]	Do @STEP003@READ ME
+2025/08/07 08:34:17 [1]	Run B7PL025-002:SET DEFAULT N3C2401C	Mode: 1, Retry: 3
+2025/08/07 08:34:17 [1]	> :SetVal,"$G_VALO360_MODEL","N3C2401C"
+2025/08/07 08:34:17 [1]	< 0
+2025/08/07 08:34:17 [1]	Run B7PL025-003:GET DEFAULT VALUE	Mode: 1, Retry: 3
+2025/08/07 08:34:17 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 08:34:17 [1]	< N3C2401C
+2025/08/07 08:34:17 [1]	Run B7PL025-004:Disconnect UART	Mode: 3, Retry: 3
+[08:34:17.881][PC] [Disconnect UART]++
+2025/08/07 08:34:17 [1]	> :Disconnect,"UART"
+2025/08/07 08:34:17 [1]	< 0
+[08:34:17.891][PC] [Disconnect UART]--
+2025/08/07 08:34:17 [1]	[PC] [Disconnect UART] ~~ TestTime:0.0099958 sec
+2025/08/07 08:34:17 [1]	Run B7PL025-005:Disconnect UARTF	Mode: 3, Retry: 3
+[08:34:17.891][PC] [Disconnect UARTF]++
+2025/08/07 08:34:17 [1]	> :Disconnect,"UARTF"
+2025/08/07 08:34:17 [1]	< 0
+[08:34:17.901][PC] [Disconnect UARTF]--
+2025/08/07 08:34:17 [1]	[PC] [Disconnect UARTF] ~~ TestTime:0.0099751 sec
+2025/08/07 08:34:17 [1]	Run OTFX079-006:Open UART	Mode: 2, Retry: 3
+2025/08/07 08:34:17 [1]	> :Connect,"UARTF"
+2025/08/07 08:34:18 [1]	< 0
+2025/08/07 08:34:18 [1]	OTFX079-006:@STEP003@READ ME Test is Pass ! 		----- 0.1402703 Sec.
+2025/08/07 08:34:18 [1]	DUT Test Completed !        ----- 0.1601601 Sec.
+2025/08/07 08:34:18 [1]	Execute Phase 1 Test.
+2025/08/07 08:34:18 [1]	Do @STEP005@CheckRoute
+2025/08/07 08:34:18 [1]	Run B7PL025-007:Show SSN  to UI	Mode: 0, Retry: 3
+[08:34:18.111][PC] [Show SSN  to UI]++
+2025/08/07 08:34:18 [1]	> :ShowISN,"WE253100004"
+2025/08/07 08:34:18 [1]	< 0
+[08:34:18.121][PC] [Show SSN  to UI]--
+2025/08/07 08:34:18 [1]	[PC] [Show SSN  to UI] ~~ TestTime:0.009668 sec
+2025/08/07 08:34:18 [1]	B7PL025-007:@STEP005@CheckRoute Test is Pass ! 		----- 0.009668 Sec.
+2025/08/07 08:34:18 [1]	Do @STEP006@GETSSN
+2025/08/07 08:34:18 [1]	:@STEP006@GETSSN Test is Pass ! 		----- 0.009994 Sec.
+2025/08/07 08:34:18 [1]	Do @STEP007@GET sfisHW
+2025/08/07 08:34:18 [1]	:@STEP007@GET sfisHW Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:34:18 [1]	Do @STEP008@GET sfisSKU
+2025/08/07 08:34:18 [1]	:@STEP008@GET sfisSKU Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:34:18 [1]	Do @STEP009@GET sfisETH MAC
+2025/08/07 08:34:18 [1]	:@STEP009@GET sfisETH MAC Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:34:18 [1]	Do @STEP010@GET sfisIVKEY
+2025/08/07 08:34:18 [1]	Pop window skips by ExecMode = 6.
+2025/08/07 08:34:18 [1]	:@STEP010@GET sfisIVKEY Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:34:18 [1]	Do @STEP011@GET sfisMOKP_SN
+2025/08/07 08:34:18 [1]	:@STEP011@GET sfisMOKP_SN Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:34:18 [1]	DUT Test Completed !        ----- 0.0496463 Sec.
+2025/08/07 08:34:18 [1]	Execute Phase 2 Test.
+2025/08/07 08:34:18 [1]	Do @STEP013@Check Valo360 model
+2025/08/07 08:34:18 [1]	Run B7PL025-018:Chack Custom data	Mode: 1, Retry: 3
+2025/08/07 08:34:18 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 08:34:18 [1]	< N3C2401C
+2025/08/07 08:34:18 [1]	B7PL025-018:@STEP013@Check Valo360 model Test is Pass ! 		----- 0 Sec.
+2025/08/07 08:34:18 [1]	Do @STEP014@SET iplus Modelname_Valo360_5G
+2025/08/07 08:34:18 [1]	Run B7PL025-019:Chack Custom data	Mode: 4, Retry: 3
+2025/08/07 08:34:18 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 08:34:18 [1]	< N3C2401C
+2025/08/07 08:34:18 [1]	Run B7PL025-020:Set Iplus modename	Mode: 1, Retry: 3
+2025/08/07 08:34:18 [1]	> :SetModelName,"N3C2401C"
+2025/08/07 08:34:18 [1]	< N3C2401C
+2025/08/07 08:34:18 [1]	Run B7PL025-021:Get Iplus modename	Mode: 1, Retry: 3
+2025/08/07 08:34:18 [1]	> :GetModelName
+2025/08/07 08:34:18 [1]	< N3C2401C
+2025/08/07 08:34:18 [1]	Run B7PL025-022:WaitBoot	Mode: 1, Retry: 3
+2025/08/07 08:34:18 [1]	> :Delay,"0"
+2025/08/07 08:34:18 [1]	< 0
+2025/08/07 08:34:18 [1]	B7PL025-022:@STEP014@SET iplus Modelname_Valo360_5G Test is Pass ! 		----- 0.0099937 Sec.
+2025/08/07 08:34:18 [1]	Do @STEP015@SET iplus Modelname_Valo360_WIFI
+2025/08/07 08:34:18 [1]	Run B7PL025-023:Chack Custom data	Mode: 4, Retry: 3
+2025/08/07 08:34:18 [1]	> :GetVal,"$G_VALO360_MODEL"
+2025/08/07 08:34:18 [1]	< N3C2401C
+2025/08/07 08:34:18 [1]	Run B7PL025-026:WaitBoot	Mode: 1, Retry: 3
+2025/08/07 08:34:18 [1]	> :Delay,"0"
+2025/08/07 08:34:18 [1]	< 0
+2025/08/07 08:34:18 [1]	B7PL025-026:@STEP015@SET iplus Modelname_Valo360_WIFI Test is Pass ! 		----- 0.0099937 Sec.
+2025/08/07 08:34:18 [1]	Do @STEP016@SET iplus Modelname_Valo360_noBattery
+2025/08/07 08:34:18 [1]	Run B7PL025-027:Chack Custom data	Mode: 4, Retry: 3
+2025/08/07 08:34:18 [1]	> :GetVal,"$N3C2401NB"
+2025/08/07 08:34:18 [1]	< Not Found
+2025/08/07 08:34:18 [1]	Run B7PL025-030:WaitBoot	Mode: 1, Retry: 3
+2025/08/07 08:34:18 [1]	> :Delay,"0"
+2025/08/07 08:34:18 [1]	< 0
+2025/08/07 08:34:18 [1]	Pop window skips by ExecMode = 6.
+2025/08/07 08:34:18 [1]	B7PL025-030:@STEP016@SET iplus Modelname_Valo360_noBattery Test is Pass ! 		----- 0.0100107 Sec.
+2025/08/07 08:34:18 [1]	DUT Test Completed !        ----- 0.0698641 Sec.
+2025/08/07 08:34:18 [1]	Execute Phase 3 Test.
+2025/08/07 08:34:18 [1]	Do @STEP018@Login
+2025/08/07 08:34:18 [1]	Run OTFX079-032:Open UART	Mode: 2, Retry: 3
+2025/08/07 08:34:18 [1]	> :Connect,"UARTF"
+2025/08/07 08:34:18 [1]	< 0
+2025/08/07 08:34:18 [1]	Run B7PL025-033:Power ON	Mode: 0, Retry: 3
+[08:34:18.431][FIXTURE] [Power ON]++
+2025/08/07 08:34:18 [1]	(UARTF) > G
+
+2025/08/07 08:34:18 [1]	(UARTF) < 
+[08:34:18.431][FIXTURE] [Power ON]--
+2025/08/07 08:34:18 [1]	[FIXTURE] [Power ON] ~~ TestTime:0 sec
+2025/08/07 08:34:18 [1]	Run B7PL025-034:Wait Boot	Mode: 1, Retry: 3
+2025/08/07 08:34:18 [1]	> :Delay,"1000"
+2025/08/07 08:34:19 [1]	< 0
+2025/08/07 08:34:19 [1]	Run OTFX079-035:PC##Ping Ethernet Test	Mode: 2, Retry: 3
+2025/08/07 08:34:19 [1]	> :Utility.PING,"192.168.11.143","70000","192.168.11.3"
+2025/08/07 08:34:54 [1]	< 
+2025/08/07 08:34:54 [1]	< 0
+2025/08/07 08:34:54 [1]	Run OTFX079-036:Wait	Mode: 1, Retry: 3
+[08:34:54.774][PC] [Wait]++
+2025/08/07 08:34:54 [1]	> :Delay,"2000"
+2025/08/07 08:34:56 [1]	< 0
+[08:34:56.783][PC] [Wait]--
+2025/08/07 08:34:56 [1]	[PC] [Wait] ~~ TestTime:2.0092653 sec
+2025/08/07 08:34:56 [1]	OTFX079-036:@STEP018@Login Test is Pass ! 			----- 38.3522783 Sec.
+2025/08/07 08:34:56 [1]	Do @STEP019@check bootup
+2025/08/07 08:34:56 [1]	Run OTFX079-037:Open UART	Mode: 0, Retry: 3
+2025/08/07 08:34:56 [1]	> :Connect,"UART"
+2025/08/07 08:34:56 [1]	< 0
+2025/08/07 08:34:56 [1]	Run OTFX079-038:Wait	Mode: 1, Retry: 3
+[08:34:56.923][PC] [Wait]++
+2025/08/07 08:34:56 [1]	> :Delay,"10000"
+2025/08/07 08:35:06 [1]	< 0
+[08:35:06.938][PC] [Wait]--
+2025/08/07 08:35:06 [1]	[PC] [Wait] ~~ TestTime:10.015478 sec
+2025/08/07 08:35:06 [1]	Run OTFX079-039:Check Boot	Mode: 2, Retry: 3
+[08:35:06.938][DUT] [Check Boot]++
+2025/08/07 08:35:06 [1]	(UART) > 
+
+2025/08/07 08:35:06 [1]	(UART) < 
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:35:06.969][DUT] [Check Boot]--
+2025/08/07 08:35:06 [1]	[DUT] [Check Boot] ~~ TestTime:0.0303164 sec
+2025/08/07 08:35:06 [1]	OTFX079-039:@STEP019@check bootup Test is Pass ! 		----- 10.176057 Sec.
+2025/08/07 08:35:06 [1]	DUT Test Completed !        ----- 48.5478895 Sec.
+2025/08/07 08:35:07 [1]	Execute Phase 4 Test.
+2025/08/07 08:35:07 [1]	Do @STEP021@Check FW version
+2025/08/07 08:35:07 [1]	Run B7PL025-040:Open UART	Mode: 1, Retry: 3
+[08:35:07.058][PC] [Open UART]++
+2025/08/07 08:35:07 [1]	> :Connect,"UART"
+2025/08/07 08:35:07 [1]	< 0
+[08:35:07.058][PC] [Open UART]--
+2025/08/07 08:35:07 [1]	[PC] [Open UART] ~~ TestTime:0 sec
+2025/08/07 08:35:07 [1]	Run B7PL025-041:BOOT UP OK	Mode: 2, Retry: 3
+[08:35:07.058][PC] [BOOT UP OK]++
+2025/08/07 08:35:07 [1]	(UART) > 
+
+2025/08/07 08:35:07 [1]	(UART) < 
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ 
+[08:35:07.099][PC] [BOOT UP OK]--
+2025/08/07 08:35:07 [1]	[PC] [BOOT UP OK] ~~ TestTime:0.0403052 sec
+2025/08/07 08:35:07 [1]	Run B7PL025-042:Wait	Mode: 0, Retry: 3
+2025/08/07 08:35:07 [1]	> :Delay,"5000"
+2025/08/07 08:35:12 [1]	< 0
+2025/08/07 08:35:12 [1]	Run VSCH026-043:Chec Frimware version	Mode: 0, Retry: 3
+[08:35:12.106][DUT] [Chec Frimware version]++
+2025/08/07 08:35:12 [1]	(UART) > pegacmd version
+
+2025/08/07 08:35:17 [1]	(UART) < pegacmd version
+0.5.4.38.0_715bae2
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ AT+CFUN=5
+OK
+
+2025/08/07 08:35:17 [1]	UART@pegacmd version
+ executes fail. Reply="pegacmd version
+0.5.4.38.0_715bae2
+root@NOKIA360Camera-Valo360:/root$ 
+root@NOKIA360Camera-Valo360:/root$ AT+CFUN=5
+OK
+" doesn't match @0.5.4.37.0_b5838c4
+2025/08/07 08:35:17 [1]	UART@pegacmd version
+ executes fail. 
+[08:35:17.114][DUT] [Chec Frimware version]--
+2025/08/07 08:35:17 [1]	[DUT] [Chec Frimware version] ~~ TestTime:5.0080322 sec
+2025/08/07 08:35:17 [1]	VSCH026-043:Chec Frimware version is Fail ! <ErrorCode: BSFR18>     ----- 10.0556643 Sec.
+2025/08/07 08:35:17 [1]	DUT Test Completed !        ----- 10.0653312 Sec.
+2025/08/07 08:35:19 [1]	All Test Aborted !  ErrorCode: BSFR18     ----- 61.2712368 Sec.
+2025/08/07 08:35:19 [1]	TotalCount:6-YR:0%
+2025/08/07 08:35:19 [1]	Report name: Funtion_WE253100004_2025-08-07_08-35-19.ct
+2025/08/07 08:35:19 [1]	Execute Phase 97 Test.
+2025/08/07 08:35:19 [1]	Do @STEP072@Disconnect UART
+2025/08/07 08:35:19 [1]	Run B7PL025-179:Disconnect UART	Mode: 3, Retry: 3
+[08:35:19.382][PC] [Disconnect UART]++
+2025/08/07 08:35:19 [1]	> :Disconnect,"UART"
+2025/08/07 08:35:19 [1]	< 0
+[08:35:19.503][PC] [Disconnect UART]--
+2025/08/07 08:35:19 [1]	[PC] [Disconnect UART] ~~ TestTime:0.1202734 sec
+2025/08/07 08:35:19 [1]	Run B7PL025-180:Close SSH	Mode: 3, Retry: 3
+[08:35:19.503][PC] [Close SSH]++
+2025/08/07 08:35:19 [1]	> :Disconnect,"UARTF"
+2025/08/07 08:35:19 [1]	< 0
+[08:35:19.512][PC] [Close SSH]--
+2025/08/07 08:35:19 [1]	[PC] [Close SSH] ~~ TestTime:0.0096301 sec
+2025/08/07 08:35:19 [1]	Run B7PL025-181:Force reboot	Mode: 0, Retry: 3
+[08:35:19.512][DUT] [Force reboot]++
+2025/08/07 08:35:19 [1]	(UART) > shutdown.sh
+
+2025/08/07 08:35:20 [1]	(UART) < shutdown.sh
+[0;41mPlease unplug POE! (1)[0m
+
+
+[08:35:20.682][DUT] [Force reboot]--
+2025/08/07 08:35:20 [1]	[DUT] [Force reboot] ~~ TestTime:1.1693745 sec
+2025/08/07 08:35:20 [1]	Run B7PL025-182:Power OFF	Mode: 0, Retry: 3
+[08:35:20.682][FIXTURE] [Power OFF]++
+2025/08/07 08:35:20 [1]	(UARTF) > L
+
+2025/08/07 08:35:20 [1]	(UARTF) < 
+[08:35:20.792][FIXTURE] [Power OFF]--
+2025/08/07 08:35:20 [1]	[FIXTURE] [Power OFF] ~~ TestTime:0.1103021 sec
+2025/08/07 08:35:20 [1]	Run B7PL025-183:Power OFF	Mode: 0, Retry: 3
+[08:35:20.792][FIXTURE] [Power OFF]++
+2025/08/07 08:35:20 [1]	(UARTF) > N
+
+2025/08/07 08:35:20 [1]	(UARTF) < 
+[08:35:20.792][FIXTURE] [Power OFF]--
+2025/08/07 08:35:20 [1]	[FIXTURE] [Power OFF] ~~ TestTime:0 sec
+2025/08/07 08:35:20 [1]	Run B7PL025-184:Power OFF	Mode: 0, Retry: 3
+[08:35:20.792][FIXTURE] [Power OFF]++
+2025/08/07 08:35:20 [1]	(UARTF) > M
+
+2025/08/07 08:35:20 [1]	(UARTF) < 
+[08:35:20.792][FIXTURE] [Power OFF]--
+2025/08/07 08:35:20 [1]	[FIXTURE] [Power OFF] ~~ TestTime:0 sec
+2025/08/07 08:35:20 [1]	B7PL025-184:@STEP072@Disconnect UART Test is Pass ! 		----- 1.4095801 Sec.
+2025/08/07 08:35:20 [1]	Change color at 97 phase... Status:False... Error:BSFR18
+2025/08/07 08:35:20 [1]	All phase Total Test Time !        ----- 63.0306376 Sec.
+2025/08/07 08:35:20 [1]	DUT Test Completed !        ----- 1.4289267 Sec.
