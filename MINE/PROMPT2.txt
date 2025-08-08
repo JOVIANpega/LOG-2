@@ -4,10 +4,58 @@ curl "https://acli.atlassian.com/windows/latest/acli_windows_amd64/acli.exe"
 
 
 
-pyinstaller --onefile --noconsole  main_enhanced.py
+pyinstaller --onefile --noconsole  main.py
 
 
 
+
+FAIL測試標籤 
+EX: 下面顯示這一區塊內容 錯誤原因自動顯示
+內容 只要 FAIL 原因 如下範例
+
+錯誤原因擷取這段文字 例如': 
+2025/08/07 08:53:36 [1]	VSCH026-043:Chec Frimware version is Fail ! <ErrorCode: BSFR18>     ----- 10.0648777 Sec.
+
+大字體是顯示這文字
+Chec Frimware version is Fail 
+
+其他維持不用修改
+
+
+====
+
+以上修改做完只要 顯示做完了 不用解釋一大堆你在幹嘛
+
+GUI的標籤頁 鼠標靠近顯示深綠色黑色文字
+
+FAIL測試標籤 再分割成兩個上下視窗
+上面維持不變
+下面則顯示 FAIL的錯誤字串 
+上下可以調整拖拉大小 並記錄在設定區塊 關閉開啟GUI要寫入\讀取
+
+EX: 下面顯示這一區塊內容 這邊鼠標不用靠近錯誤原因自己就顯示
+縣市內容 不是全部錯誤字串 只要 FAIL 原因 如下範例
+
+不要顯示這麼多文字
+2025/08/07 09:27:53 [1]	IPIO009-0580:Check Battery_tempture is Fail ! <ErrorCode: HHFE15>     ----- 53.2010722 Sec.
+應該這樣顯示
+主題就是 Check Battery_tempture is Fail (大字體 紅色文字 白底)
+
+其他錯誤就白底黑色顯示
+ 370. 2025/08/07 09:17:45 [1]	Check Battery_tempture Result: gBattery_tempture=[   91.877681] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK!
+ 371. 2025/08/07 09:17:45 [1]	CurrentTestID:IPIO009-0580 - The validation: gBattery_tempture = [   91.877681] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! (10,50)
+ 372. 2025/08/07 09:17:45 [1]	The type of [   91.877681] nvt_i2c 2f014e000.i2c: i2c_nvtim_xfer_msg(773) NACK! is not int or float.
+ 373. [09:17:45.146][PC] [Check Battery_tempture]--
+ 374. 2025/08/07 09:17:45 [1]	[PC] [Check Battery_tempture] ~~ TestTime:5.0073274 sec
+ 375. 2025/08/07 09:17:45 [1]	IPIO009-0580:Check Battery_tempture is Fail ! <ErrorCode: HHFE15>     ----- 53.2126816 Sec.
+ 376. 2025/08/07 09:17:45 [1]	DUT Test Completed !        ----- 53.2223204 Sec.
+ 377. 2025/08/07 09:17:47 [1]	All Test Aborted !  ErrorCode: HHFE15     ----- 112.2097647 Sec.
+ 378. 2025/08/07 09:17:47 [1]	TotalCount:13-YR:31%
+ 379. 2025/08/07 09:17:47 [1]	Report name: Funtion_WE253100001_2025-08-07_09-17-47.ct
+ 380. 2025/08/07 09:17:47 [1]	Execute Phase 97 Test.
+
+字體大小也要聯動這邊 清除結果按鈕 也要清除這邊
+以上修改做完只要 顯示做完了 不用解釋一大堆你在幹嘛
 
 
 現在來修改FAIL測項標籤 

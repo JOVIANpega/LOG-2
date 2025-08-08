@@ -100,9 +100,7 @@ class LogAnalyzerGUI:
         button_frame = ttk.Frame(parent)
         button_frame.grid(row=3, column=0, columnspan=3, pady=(0, 10))
         
-        self.analyze_button = ttk.Button(button_frame, text="開始分析", 
-                                        command=self._start_analysis, style="Accent.TButton")
-        self.analyze_button.pack(side=tk.LEFT, padx=(0, 10))
+        # 移除開始分析按鈕 - 改為自動分析
         
         self.export_button = ttk.Button(button_frame, text="匯出Excel", 
                                        command=self._export_excel, state="disabled")

@@ -1,3 +1,24 @@
-git hub commit "V1.5.5 彈出視窗新增上下一頁"
-git hub 切換到main /master
+
+
+git hub commit "V1.5.6"
+提交訊息：V1.5.6 - 優化FAIL測試項目的標籤內容
+推送到：https://github.com/JOVIANpega/LOG_analyser
+
+ 
+
+
+
+FAIL測試標籤 
+EX: 下面顯示這一區塊內容 錯誤原因自動顯示
+內容 只要 FAIL 原因 如下範例
+
+錯誤原因擷取這段文字 例如': 
+2025/08/07 08:53:36 [1]	VSCH026-043:Chec Frimware version is Fail ! <ErrorCode: BSFR18>     ----- 10.0648777 Sec.
+
+大字體是顯示這文字
+Chec Frimware version is Fail 
+
+其他維持不用修改
+
+
 以上修改做完只要 顯示做完了 不用解釋一大堆你在幹嘛

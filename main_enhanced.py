@@ -171,13 +171,7 @@ class EnhancedLogAnalyzerApp:
             foldername = os.path.basename(self.settings.get('last_folder_path'))
             self.file_info_label.config(text=f"上次選擇資料夾：{foldername}", fg='#666')
         
-        # 分析按鈕
-        self.analyze_btn = tk.Button(file_frame, text="🔍 開始分析", 
-                                    command=self._analyze_enhanced_log, 
-                                    bg='#FF9800', fg='white', font=('Arial', 12, 'bold'))
-        self.analyze_btn.pack(fill=tk.X, pady=(10, 5))
-        self.font_scaler.register(self.analyze_btn)
-        self.analyze_btn.config(state=tk.DISABLED)
+        # 移除開始分析按鈕 - 改為自動分析
         
         # 清除結果按鈕
         btn_clear = tk.Button(file_frame, text="🗑️ 清除結果", 
@@ -248,6 +242,8 @@ class EnhancedLogAnalyzerApp:
         """設定標籤頁樣式"""
         style = ttk.Style()
         style.configure('TNotebook.Tab', font=('Arial', self.ui_font_size))
+        # 鼠標靠近標籤頁時顯示綠色背景，黑色文字
+        style.map('TNotebook.Tab', background=[('active', '#00FF00')], foreground=[('active', 'black')])
     
     def _build_enhanced_pass_tab(self):
         """建立PASS標籤頁"""
@@ -260,14 +256,177 @@ class EnhancedLogAnalyzerApp:
         self.pass_tree_enhanced.pack_with_scrollbars(fill=tk.BOTH, expand=1)
     
     def _build_enhanced_fail_tab(self):
-        """建立FAIL標籤頁"""
+        """建立FAIL標籤頁 - 分割成上下兩個視窗"""
         self.tab_fail = ttk.Frame(self.notebook)
         self.notebook.add(self.tab_fail, text="❌ FAIL測項")
         
-        # 使用增強型TreeView
+        # 創建上下分割視窗
+        self.fail_paned = tk.PanedWindow(self.tab_fail, orient=tk.VERTICAL, sashrelief=tk.RAISED)
+        self.fail_paned.pack(fill=tk.BOTH, expand=1)
+        
+        # 上半部 - FAIL測項列表
+        self.fail_upper_frame = tk.Frame(self.fail_paned)
         fail_columns = ("Step Name", "指令", "錯誤回應", "Retry次數", "錯誤原因")
-        self.fail_tree_enhanced = EnhancedTreeview(self.tab_fail, fail_columns)
+        self.fail_tree_enhanced = EnhancedTreeview(self.fail_upper_frame, fail_columns)
         self.fail_tree_enhanced.pack_with_scrollbars(fill=tk.BOTH, expand=1)
+        self.fail_paned.add(self.fail_upper_frame, minsize=200)
+        
+        # 下半部 - FAIL錯誤詳細資訊
+        self.fail_lower_frame = tk.Frame(self.fail_paned, bg='white')
+        
+        # 錯誤標題
+        self.fail_error_title = tk.Label(self.fail_lower_frame, text="選擇FAIL項目查看詳細錯誤", 
+                                        font=('Arial', 16, 'bold'), fg='red', bg='white')
+        self.fail_error_title.pack(pady=10)
+        
+        # 錯誤內容文字框
+        error_text_frame = tk.Frame(self.fail_lower_frame)
+        error_text_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=5)
+        
+        self.fail_error_text = tk.Text(error_text_frame, wrap=tk.WORD, 
+                                      bg='white', fg='black', font=('Consolas', 12))
+        self.fail_error_text.grid(row=0, column=0, sticky='nsew')
+        
+        # 滾動條
+        error_scrollbar = tk.Scrollbar(error_text_frame, command=self.fail_error_text.yview)
+        error_scrollbar.grid(row=0, column=1, sticky='ns')
+        self.fail_error_text.config(yscrollcommand=error_scrollbar.set)
+        
+        error_text_frame.grid_rowconfigure(0, weight=1)
+        error_text_frame.grid_columnconfigure(0, weight=1)
+        
+        self.fail_paned.add(self.fail_lower_frame, minsize=150)
+        
+        # 載入FAIL分割視窗設定
+        fail_pane_position = self.settings.get('fail_pane_position', 300)
+        self.root.after(100, lambda: self._set_fail_pane_position(fail_pane_position))
+        
+        # 綁定分割視窗調整事件
+        self.fail_paned.bind('<ButtonRelease-1>', self._on_fail_pane_adjust)
+        
+        # 綁定選擇事件
+        self.fail_tree_enhanced.tree.bind('<<TreeviewSelect>>', self._on_fail_item_select)
+        
+        # 自動顯示第一個FAIL項目（如果有的話）
+        self.root.after(500, self._auto_select_first_fail)
+    
+    
+    def _set_fail_pane_position(self, position):
+        """設定FAIL分割視窗位置"""
+        try:
+            if hasattr(self, 'fail_paned'):
+                self.fail_paned.sash_place(0, 0, position)
+        except Exception as e:
+            print(f"設定FAIL分割視窗位置失敗: {e}")
+    
+    def _on_fail_pane_adjust(self, event):
+        """處理FAIL分割視窗調整事件"""
+        try:
+            if hasattr(self, 'fail_paned'):
+                position = self.fail_paned.sash_coord(0)[1]
+                self.settings['fail_pane_position'] = position
+                save_settings(self.settings)
+        except Exception as e:
+            print(f"保存FAIL分割視窗位置失敗: {e}")
+    
+    def _auto_select_first_fail(self):
+        """自動選擇第一個FAIL項目"""
+        try:
+            if hasattr(self, 'fail_tree_enhanced'):
+                children = self.fail_tree_enhanced.tree.get_children()
+                if children:
+                    first_item = children[0]
+                    self.fail_tree_enhanced.tree.selection_set(first_item)
+                    self._on_fail_item_select(None)
+        except Exception as e:
+            print(f"自動選擇第一個FAIL項目失敗: {e}")
+    
+    def _on_fail_item_select(self, event):
+        """處理FAIL項目選擇事件"""
+        try:
+            selection = self.fail_tree_enhanced.tree.selection()
+            if selection:
+                item_id = selection[0]
+                values = self.fail_tree_enhanced.tree.item(item_id, 'values')
+                
+                if values:
+                    step_name = values[0]
+                    error_code = values[4] if len(values) > 4 else "未知錯誤"
+                    
+                    # 更新標題 - 主題用大字體紅色文字白底
+                    # 從錯誤原因中擷取測試名稱部分
+                    # 例如：VSCH026-043:Chec Frimware version is Fail ! <ErrorCode: BSFR18>
+                    # 要顯示：Chec Frimware version is Fail
+                    main_error = error_code
+                    if ":" in error_code and "is Fail" in error_code:
+                        # 擷取冒號後的部分
+                        after_colon = error_code.split(":", 1)[1].strip()
+                        # 找到 "is Fail" 的位置
+                        if "is Fail" in after_colon:
+                            fail_pos = after_colon.find("is Fail")
+                            # 擷取到 "is Fail" 結束的部分，去掉後面的 <ErrorCode: xxx>
+                            test_name_with_fail = after_colon[:fail_pos + 7].strip()  # 7 = len("is Fail")
+                            main_error = test_name_with_fail
+                    
+                    # 顯示大字體紅色文字白底
+                    self.fail_error_title.config(text=main_error, 
+                                                font=('Arial', 20, 'bold'), fg='red', bg='white')
+                    
+                    # 從存儲中獲取完整內容，只顯示FAIL原因部分
+                    full_content = self.fail_tree_enhanced.full_content_storage.get(item_id, '')
+                    fail_reason_content = self._extract_fail_reason(full_content)
+                    
+                    # 更新錯誤內容
+                    self.fail_error_text.config(state=tk.NORMAL)
+                    self.fail_error_text.delete('1.0', tk.END)
+                    self._insert_formatted_fail_content(fail_reason_content)
+                    self.fail_error_text.config(state=tk.NORMAL)
+                else:
+                    self.fail_error_title.config(text="無詳細錯誤資訊")
+                    self.fail_error_text.config(state=tk.NORMAL)
+                    self.fail_error_text.delete('1.0', tk.END)
+                    self.fail_error_text.insert('1.0', "沒有詳細錯誤內容可顯示")
+                    self.fail_error_text.config(state=tk.NORMAL)
+        except Exception as e:
+            print(f"處理FAIL項目選擇失敗: {e}")
+    
+    def _extract_fail_reason(self, full_content):
+        """提取FAIL原因部分，不是全部錯誤字串"""
+        if not full_content:
+            return "沒有詳細錯誤內容可顯示"
+        
+        lines = full_content.split('\n')
+        fail_reason_lines = []
+        
+        # 找到包含關鍵錯誤資訊的行
+        for line in lines:
+            # 移除行號前綴（如 "370. "）
+            clean_line = line
+            if '. ' in line and line.split('. ', 1)[0].strip().isdigit():
+                clean_line = line.split('. ', 1)[1]
+            
+            # 包含重要錯誤資訊的行
+            if any(keyword in clean_line for keyword in [
+                'Result:', 'validation:', 'type of', 'TestTime:', 'is Fail', 
+                'ErrorCode:', 'Test Completed', 'Test Aborted', 'TotalCount:', 
+                'Report name:', 'Execute Phase'
+            ]):
+                fail_reason_lines.append(clean_line)
+        
+        return '\n'.join(fail_reason_lines) if fail_reason_lines else full_content
+    
+    def _insert_formatted_fail_content(self, content):
+        """插入格式化的FAIL內容，特定行顯示紅色"""
+        lines = content.split('\n')
+        for line in lines:
+            # 檢查是否包含 "is Fail" 的行，顯示紅色
+            if "is Fail" in line:
+                self.fail_error_text.insert(tk.END, line + '\n', 'fail_red')
+            else:
+                self.fail_error_text.insert(tk.END, line + '\n')
+        
+        # 設定紅色文字標籤
+        self.fail_error_text.tag_configure('fail_red', foreground='red', font=('Consolas', 12, 'bold'))
     
     def _build_enhanced_log_tab(self):
         """建立原始LOG標籤頁"""
@@ -469,7 +628,6 @@ class EnhancedLogAnalyzerApp:
         if file_path:
             self.current_mode = 'single'
             self.current_log_path = file_path
-            self.analyze_btn.config(state=tk.NORMAL)
             filename = os.path.basename(file_path)
             self.file_info_label.config(text=f"已選擇：{filename}", fg='green')
             
@@ -495,7 +653,6 @@ class EnhancedLogAnalyzerApp:
         if folder_path:
             self.current_mode = 'multi'
             self.current_log_path = folder_path
-            self.analyze_btn.config(state=tk.NORMAL)
             
             foldername = os.path.basename(folder_path)
             self.file_info_label.config(text=f"已選擇資料夾：{foldername}", fg='blue')
@@ -503,6 +660,9 @@ class EnhancedLogAnalyzerApp:
             # 儲存選擇的路徑到設定
             self.settings['last_folder_path'] = folder_path
             self._save_settings_silent()
+            
+            # 自動開始分析（enhanced）
+            self._analyze_enhanced_log()
     
     def _analyze_enhanced_log(self):
         """分析log檔案並更新增強版GUI顯示"""
@@ -619,8 +779,13 @@ class EnhancedLogAnalyzerApp:
         self.pass_tree_enhanced.clear()
         self.fail_tree_enhanced.clear()
         self.log_text_enhanced.clear()
-        self.analyze_btn.config(state=tk.DISABLED)
-        # self.export_btn.config(state=tk.DISABLED) # 移除此行
+        # 清除FAIL錯誤顯示區域
+        if hasattr(self, 'fail_error_title'):
+            self.fail_error_title.config(text="選擇FAIL項目查看詳細錯誤")
+        if hasattr(self, 'fail_error_text'):
+            self.fail_error_text.config(state=tk.NORMAL)
+            self.fail_error_text.delete('1.0', tk.END)
+            self.fail_error_text.config(state=tk.NORMAL)
         self.file_info_label.config(text="未選擇檔案", fg='#666')
         self.current_log_path = ''
         self.current_mode = 'single'
@@ -675,6 +840,8 @@ class EnhancedLogAnalyzerApp:
         # 更新標籤頁名稱字體（介面文字控制）
         style = ttk.Style()
         style.configure('TNotebook.Tab', font=('Arial', self.ui_font_size))
+        # 重新設定標籤頁懸停效果
+        style.map('TNotebook.Tab', background=[('active', '#00FF00')], foreground=[('active', 'black')])
         
         # 更新增強型元件的內容字體（內容字體控制）
         if hasattr(self, 'log_text_enhanced'):
@@ -689,6 +856,12 @@ class EnhancedLogAnalyzerApp:
         # 更新錯誤詳情面板內容字體
         if hasattr(self, 'fail_details'):
             self.fail_details.error_text.configure(font=('Consolas', self.content_font_size))
+        
+        # 更新FAIL錯誤顯示區域字體
+        if hasattr(self, 'fail_error_text'):
+            self.fail_error_text.configure(font=('Consolas', self.content_font_size))
+        if hasattr(self, 'fail_error_title'):
+            self.fail_error_title.configure(font=('Arial', self.ui_font_size + 4, 'bold'))
         
         # 更新TreeView展開視窗的內容字體
         if hasattr(self, 'pass_tree_enhanced'):
