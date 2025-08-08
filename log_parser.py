@@ -541,7 +541,36 @@ class LogParser:
         """尋找錯誤原因"""
         for line in block_lines:
             line_lower = line.lower()
-            if any(keyword in line_lower for keyword in ['failed', 'error', 'nack', 'timeout']):
+            if any(keyword in line_lower for keyword in ['failed', 'error', 'nack', 'timeout', 'fail']):
+                # 處理類似 "VSCH026-043:Chec Frimware version is Fail ! <ErrorCode: BSFR18>" 的格式
+                # 提取冒號後到 "is Fail" 或 "is Failed" 的部分
+                if ':' in line and ('is fail' in line_lower or 'is failed' in line_lower):
+                    # 找到冒號的位置
+                    colon_pos = line.find(':')
+                    if colon_pos != -1:
+                        # 提取冒號後的部分
+                        after_colon = line[colon_pos + 1:].strip()
+                        # 尋找 "is Fail" 或 "is Failed" 的位置
+                        fail_pos = -1
+                        if 'is fail !' in after_colon.lower():
+                            fail_pos = after_colon.lower().find('is fail !')
+                            end_pos = fail_pos + 8  # "is Fail !" 的長度
+                        elif 'is failed !' in after_colon.lower():
+                            fail_pos = after_colon.lower().find('is failed !')
+                            end_pos = fail_pos + 10  # "is Failed !" 的長度
+                        elif 'is fail' in after_colon.lower():
+                            fail_pos = after_colon.lower().find('is fail')
+                            end_pos = fail_pos + 7  # "is Fail" 的長度
+                        elif 'is failed' in after_colon.lower():
+                            fail_pos = after_colon.lower().find('is failed')
+                            end_pos = fail_pos + 9  # "is Failed" 的長度
+                        
+                        if fail_pos != -1:
+                            # 提取錯誤訊息部分
+                            error_msg = after_colon[:end_pos].strip()
+                            return error_msg
+                
+                # 如果沒有找到特定格式，返回整行
                 return line.strip()
         return "Unknown Error"
     

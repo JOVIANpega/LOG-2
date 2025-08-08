@@ -4,21 +4,21 @@ git hub commit "V1.5.6"
 提交訊息：V1.5.6 - 優化FAIL測試項目的標籤內容
 推送到：https://github.com/JOVIANpega/LOG_analyser
 
- 
+ 做好後
+
 
 
 
 FAIL測試標籤 
-EX: 下面顯示這一區塊內容 錯誤原因自動顯示
-內容 只要 FAIL 原因 如下範例
+EX: 下面顯示這一區塊內容 錯誤原因自動顯示內容 不需要去點擊 只要切換到FIAL標籤就會顯示了
 
-錯誤原因擷取這段文字 例如': 
+錯誤原因目前擷取這段文字是錯誤的 題目名稱太長 例如': 
 2025/08/07 08:53:36 [1]	VSCH026-043:Chec Frimware version is Fail ! <ErrorCode: BSFR18>     ----- 10.0648777 Sec.
 
-大字體是顯示這文字
+大字體要顯示這樣的文字
 Chec Frimware version is Fail 
 
-其他維持不用修改
+其他已經寫好的維持不用修改
 
 
 以上修改做完只要 顯示做完了 不用解釋一大堆你在幹嘛
