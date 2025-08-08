@@ -10,6 +10,7 @@ class EnhancedTreeview:
     def __init__(self, parent, columns, show='headings'):
         self.tree = ttk.Treeview(parent, columns=columns, show=show)
         self.full_content_storage = {}  # 用字典存儲完整內容
+        self.all_items_data = []  # 存儲所有測試項的資料
         self.font_size = 11
         self._hover_popup = None
         self._hover_row = None
@@ -108,7 +109,7 @@ class EnhancedTreeview:
             # 從字典中獲取完整內容
             full_content = self.full_content_storage.get(item)
             if full_content:
-                self._show_detail_dialog(full_content)
+                self._show_detail_dialog(full_content, current_item_id=item)
             else:
                 print("沒有找到詳細內容")
 
@@ -240,7 +241,7 @@ class EnhancedTreeview:
         enhanced_values = list(values)
         step_name = f"{step_number}. {enhanced_values[0]}"
         
-        # 只有當真正有RETRY時才添加紅色標記
+        # 只有當真正有RETRY時才添加標記，但用黑色文字
         if has_retry:
             step_name += " [RETRY但PASS]"
         
@@ -249,7 +250,7 @@ class EnhancedTreeview:
         
         item_id = self.tree.insert('', 'end', values=enhanced_values)
         
-        # 設定標籤和顏色 - PASS項目文字全部為黑色，只有真正的RETRY才顯示紅色
+        # 設定標籤和顏色 - PASS項目文字全部為黑色，包括RETRY
         command_value = str(enhanced_values[1]) if len(enhanced_values) > 1 else ""
         
         # 檢查是否有"未找到指令"，如果有則確保顯示為黑色
@@ -258,9 +259,9 @@ class EnhancedTreeview:
             self.tree.item(item_id, tags=('pass_normal',))
             self.tree.tag_configure('pass_normal', foreground='black')
         elif has_retry:
-            # 只有真正的RETRY才標記為紅色
+            # RETRY項目也顯示為黑色（不再是紅色）
             self.tree.item(item_id, tags=('pass_retry',))
-            self.tree.tag_configure('pass_retry', foreground='red')
+            self.tree.tag_configure('pass_retry', foreground='black')
         else:
             # 正常PASS項目顯示為黑色
             self.tree.item(item_id, tags=('pass',))
@@ -269,6 +270,19 @@ class EnhancedTreeview:
         # 儲存完整回應內容到字典中
         if full_response:
             self.full_content_storage[item_id] = full_response
+        
+        # 存儲測試項資料到 all_items_data 中
+        item_data = {
+            'item_id': item_id,
+            'step_name': step_name,
+            'command': command_value,
+            'response': enhanced_values[2] if len(enhanced_values) > 2 else "",
+            'result': enhanced_values[3] if len(enhanced_values) > 3 else "",
+            'full_response': full_response,
+            'has_retry': has_retry,
+            'type': 'pass'
+        }
+        self.all_items_data.append(item_data)
         
         return item_id
     
@@ -309,6 +323,20 @@ class EnhancedTreeview:
         if full_response:
             self.full_content_storage[item_id] = full_response
         
+        # 存儲測試項資料到 all_items_data 中
+        item_data = {
+            'item_id': item_id,
+            'step_name': enhanced_values[0],
+            'command': command_value,
+            'response': enhanced_values[2] if len(enhanced_values) > 2 else "",
+            'result': enhanced_values[3] if len(enhanced_values) > 3 else "",
+            'error': error_value,
+            'full_response': full_response,
+            'is_main_fail': is_main_fail,
+            'type': 'fail'
+        }
+        self.all_items_data.append(item_data)
+        
         return item_id
     
     def clear(self):
@@ -316,8 +344,9 @@ class EnhancedTreeview:
         for item in self.tree.get_children():
             self.tree.delete(item)
         self.full_content_storage.clear()  # 清空存儲字典
+        self.all_items_data.clear()  # 清空所有測試項資料
     
-    def _show_detail_dialog(self, content):
+    def _show_detail_dialog(self, content, current_item_id=None):
         """顯示詳細內容對話框（測項指令內容）"""
         try:
             detail_window = tk.Toplevel()
@@ -366,6 +395,24 @@ class EnhancedTreeview:
             btn_frame = tk.Frame(detail_window)
             btn_frame.pack(pady=10)
             
+            # 找到當前項目在 all_items_data 中的索引
+            current_index = -1
+            if current_item_id and self.all_items_data:
+                for i, item_data in enumerate(self.all_items_data):
+                    if item_data['item_id'] == current_item_id:
+                        current_index = i
+                        break
+            
+            # 上一頁按鈕
+            prev_btn = tk.Button(btn_frame, text="上一頁", 
+                               command=lambda: self._show_previous_item(detail_window, text_widget, current_index))
+            prev_btn.pack(side=tk.LEFT, padx=5)
+            
+            # 下一頁按鈕
+            next_btn = tk.Button(btn_frame, text="下一頁", 
+                               command=lambda: self._show_next_item(detail_window, text_widget, current_index))
+            next_btn.pack(side=tk.LEFT, padx=5)
+            
             # 複製全部按鈕
             copy_btn = tk.Button(btn_frame, text="複製全部", 
                                command=lambda: self._copy_to_clipboard(content))
@@ -375,8 +422,97 @@ class EnhancedTreeview:
             close_btn = tk.Button(btn_frame, text="關閉", command=detail_window.destroy)
             close_btn.pack(side=tk.LEFT, padx=5)
             
+            # 更新按鈕狀態
+            self._update_navigation_buttons(prev_btn, next_btn, current_index)
+            
         except Exception as e:
             print(f"顯示詳細內容對話框失敗: {e}")
+    
+    def _show_previous_item(self, detail_window, text_widget, current_index):
+        """顯示上一個測試項"""
+        if current_index > 0 and self.all_items_data:
+            prev_index = current_index - 1
+            prev_item_data = self.all_items_data[prev_index]
+            content = prev_item_data.get('full_response', '沒有詳細內容可顯示')
+            
+            # 更新文字內容
+            text_widget.config(state=tk.NORMAL)
+            text_widget.delete('1.0', tk.END)
+            text_widget.insert('1.0', str(content))
+            self._apply_syntax_highlighting(text_widget, str(content))
+            text_widget.config(state=tk.NORMAL)
+            
+            # 更新標題
+            detail_window.title(f"測項指令內容 - {prev_item_data['step_name']}")
+            
+            # 更新按鈕狀態
+            self._update_navigation_buttons_in_window(detail_window, prev_index)
+    
+    def _show_next_item(self, detail_window, text_widget, current_index):
+        """顯示下一個測試項"""
+        if self.all_items_data and current_index < len(self.all_items_data):
+            # 計算下一個索引，如果已經是最後一個，就保持在最後一個
+            next_index = min(current_index + 1, len(self.all_items_data) - 1)
+            next_item_data = self.all_items_data[next_index]
+            content = next_item_data.get('full_response', '沒有詳細內容可顯示')
+            
+            # 更新文字內容
+            text_widget.config(state=tk.NORMAL)
+            text_widget.delete('1.0', tk.END)
+            text_widget.insert('1.0', str(content))
+            self._apply_syntax_highlighting(text_widget, str(content))
+            text_widget.config(state=tk.NORMAL)
+            
+            # 更新標題
+            detail_window.title(f"測項指令內容 - {next_item_data['step_name']}")
+            
+            # 更新按鈕狀態
+            self._update_navigation_buttons_in_window(detail_window, next_index)
+    
+    def _update_navigation_buttons(self, prev_btn, next_btn, current_index):
+        """更新導航按鈕狀態"""
+        if prev_btn and next_btn:
+            # 更新上一頁按鈕狀態
+            if current_index <= 0:
+                prev_btn.config(state=tk.DISABLED)
+            else:
+                prev_btn.config(state=tk.NORMAL)
+            
+            # 更新下一頁按鈕狀態
+            if current_index >= len(self.all_items_data) - 1:
+                next_btn.config(state=tk.DISABLED)
+            else:
+                next_btn.config(state=tk.NORMAL)
+    
+    def _update_navigation_buttons_in_window(self, detail_window, current_index):
+        """更新視窗中的導航按鈕狀態"""
+        prev_btn = None
+        next_btn = None
+        
+        for widget in detail_window.winfo_children():
+            if isinstance(widget, tk.Frame) and widget.winfo_children():
+                for child in widget.winfo_children():
+                    if isinstance(child, tk.Button):
+                        if child.cget('text') == '上一頁':
+                            prev_btn = child
+                        elif child.cget('text') == '下一頁':
+                            next_btn = child
+                if prev_btn and next_btn:
+                    break
+        
+        # 更新按鈕狀態
+        if prev_btn and next_btn:
+            # 更新上一頁按鈕狀態
+            if current_index <= 0:
+                prev_btn.config(state=tk.DISABLED)
+            else:
+                prev_btn.config(state=tk.NORMAL)
+            
+            # 更新下一頁按鈕狀態 - 允許進行到最後一個項目
+            if current_index >= len(self.all_items_data) - 1:
+                next_btn.config(state=tk.DISABLED)
+            else:
+                next_btn.config(state=tk.NORMAL)
     
     def _apply_syntax_highlighting(self, text_widget, content):
         """對詳細內容應用語法高亮"""

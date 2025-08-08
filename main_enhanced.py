@@ -536,7 +536,7 @@ class EnhancedLogAnalyzerApp:
         # Tab1: PASS - 顯示所有通過的測項
         for idx, item in enumerate(pass_items, 1):
             full_response = item.get('full_response', '')
-            has_retry = item.get('retry', 0) > 0
+            has_retry = item.get('has_retry_but_pass', False)  # 使用 has_retry_but_pass 屬性
             self.pass_tree_enhanced.insert_pass_item(
                 (item['step_name'], item['command'], item['response'], item['result']),
                 step_number=idx,
@@ -587,7 +587,7 @@ class EnhancedLogAnalyzerApp:
         # Tab1: PASS - 顯示所有通過的測項
         for idx, item in enumerate(pass_items, 1):
             full_response = item.get('full_response', '')
-            has_retry = item.get('retry', 0) > 0
+            has_retry = item.get('has_retry_but_pass', False)  # 使用 has_retry_but_pass 屬性
             self.pass_tree_enhanced.insert_pass_item(
                 (item['step_name'], item['command'], item['response'], item['result']),
                 step_number=idx,

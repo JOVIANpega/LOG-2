@@ -63,10 +63,12 @@ class LogParser:
         - Do @STEPxxx@ 行視為測項開始
         - @STEPxxx@ Test is Pass ! 行視為測項結束
         - 結果一律標記 "PASS"
-        - 檢查是否有 "Retry: N" 關鍵字，若有且N>1 用紅字註記（RETRY）
+        - 檢查是否有 "Retry: N" 關鍵字，若有且N>1 不需要紅字註記了，用黑色文字
+        - 將"未找到指令"的項目集合成一大塊，顯示為"未找到指令xN"
         """
         pass_items = []
         current_step = None
+        no_command_steps = []  # 收集"未找到指令"的步驟
         
         for idx, line in enumerate(raw_lines):
             # 找到 Do @STEPxxx@ 行 - 測項開始
@@ -75,7 +77,7 @@ class LogParser:
                 # 完成前一個測項
                 if current_step:
                     current_step['end_idx'] = idx - 1
-                    self._finalize_pass_step(current_step, pass_items)
+                    self._finalize_pass_step(current_step, pass_items, no_command_steps)
                 
                 # 開始新測項
                 step_name_clean = step_match.group(1).strip()
@@ -111,7 +113,7 @@ class LogParser:
                 # 檢查是否為測項結束行（@STEPxxx@ Test is Pass !）
                 if self._is_step_end_line(line, current_step.get('step_number', '')):
                     current_step['end_idx'] = idx
-                    self._finalize_pass_step(current_step, pass_items)
+                    self._finalize_pass_step(current_step, pass_items, no_command_steps)
                     current_step = None
                     continue
                 
@@ -131,7 +133,10 @@ class LogParser:
         # 處理最後一個測項
         if current_step:
             current_step['end_idx'] = len(raw_lines) - 1
-            self._finalize_pass_step(current_step, pass_items)
+            self._finalize_pass_step(current_step, pass_items, no_command_steps)
+        
+        # 處理"未找到指令"的集合
+        self._consolidate_no_command_steps(pass_items, no_command_steps)
         
         return {
             'pass_items': pass_items,
@@ -154,7 +159,7 @@ class LogParser:
         end_pattern = re.compile(rf'@{step_number}@.*Test is Pass !', re.IGNORECASE)
         return end_pattern.search(line) is not None
     
-    def _finalize_pass_step(self, step, pass_items):
+    def _finalize_pass_step(self, step, pass_items, no_command_steps):
         """完成PASS步驟的處理"""
         # 為展開內容加上數字編碼
         numbered_content = []
@@ -178,7 +183,7 @@ class LogParser:
                 retry_count = int(retry_match.group(1))
                 break
         
-        # 只有當真正有"Retry: N"關鍵字且N>1時才標記為RETRY
+        # 只有當真正有"Retry: N"關鍵字且N>1時才標記為RETRY，但用黑色文字
         if retry_count > 1:
             step['has_retry_but_pass'] = True
             step['retry'] = retry_count
@@ -188,7 +193,11 @@ class LogParser:
             step['retry'] = 0
             step['result'] = 'PASS'
         
-        pass_items.append(step)
+        # 檢查是否為"未找到指令"
+        if step['command'] == '未找到指令':
+            no_command_steps.append(step)
+        else:
+            pass_items.append(step)
 
     def _annotate_attempts(self, lines):
         """在完整內容中為每次指令嘗試加入 Attempt 1/2/3 標註（已棄用）"""
@@ -513,3 +522,42 @@ class LogParser:
             'fail_line_idx': None,
             'log_type': 'MULTI'
         }
+
+    def _consolidate_no_command_steps(self, pass_items, no_command_steps):
+        """將"未找到指令"的步驟集合成一個大項目"""
+        if not no_command_steps:
+            return
+        
+        # 按順序收集所有"未找到指令"的步驟
+        consolidated_content = []
+        for i, step in enumerate(no_command_steps, 1):
+            # 添加步驟名稱和內容
+            step_header = f"步驟 {i}: {step['step_name']}"
+            consolidated_content.append(step_header)
+            
+            # 添加該步驟的完整日誌內容
+            for j, line in enumerate(step['full_log'], 1):
+                consolidated_content.append(f"  {j:4d}. {line}")
+            consolidated_content.append("")  # 空行分隔
+        
+        # 創建一個新的"未找到指令"集合項目
+        consolidated_step = {
+            'step_name': f"未找到指令 x{len(no_command_steps)}",
+            'test_id': '',
+            'command': '未找到指令',
+            'response': '未找到回應',
+            'result': 'PASS',
+            'retry': 0,
+            'error': '',
+            'full_response': '\n'.join(consolidated_content),
+            'full_log': consolidated_content,
+            'raw_idx': no_command_steps[0]['raw_idx'],
+            'start_idx': no_command_steps[0]['start_idx'],
+            'end_idx': no_command_steps[-1]['end_idx'],
+            'step_number': '',
+            'has_retry_but_pass': False,
+            'is_consolidated': True  # 標記為集合項目
+        }
+        
+        # 將集合項目添加到 pass_items 中
+        pass_items.append(consolidated_step)
