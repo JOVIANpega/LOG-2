@@ -157,6 +157,35 @@ class EnhancedLogAnalyzerApp:
         btn_folder.pack(fill=tk.X, pady=2)
         self.font_scaler.register(btn_folder)
         
+        # 清除結果按鈕
+        btn_clear = tk.Button(file_frame, text="🗑️ 清除結果", 
+                             command=self._clear_enhanced_results, bg='#F44336', fg='white')
+        btn_clear.pack(fill=tk.X, pady=2)
+        self.font_scaler.register(btn_clear)
+        
+        # 左三個按鈕：加粗與hover
+        try:
+            from ui_components import make_bold, apply_button_hover
+            make_bold(btn_single)
+            make_bold(btn_folder)
+            make_bold(btn_clear)
+            # 針對彩色底按鈕，hover 時略微變亮
+            apply_button_hover(btn_single, hover_bg="#66BB6A", hover_fg='white', normal_bg='#4CAF50', normal_fg='white')
+            apply_button_hover(btn_folder, hover_bg="#64B5F6", hover_fg='white', normal_bg='#2196F3', normal_fg='white')
+            apply_button_hover(btn_clear,  hover_bg="#EF5350", hover_fg='white', normal_bg='#F44336', normal_fg='white')
+        except Exception:
+            pass
+        
+        # 說明文件按鈕
+        help_btn = tk.Button(parent, text="📖 查看說明(README)", command=self._open_markdown_help, bg="#607D8B", fg="white")
+        help_btn.pack(fill=tk.X, padx=10, pady=(8, 8))
+        self.font_scaler.register(help_btn)
+        try:
+            make_bold(help_btn)
+            apply_button_hover(help_btn, hover_bg="#78909C", hover_fg='white', normal_bg='#607D8B', normal_fg='white')
+        except Exception:
+            pass
+        
         # 顯示選擇的檔案
         self.file_info_label = tk.Label(file_frame, text="未選擇檔案", 
                                        fg='#666', wraplength=200)
@@ -172,12 +201,6 @@ class EnhancedLogAnalyzerApp:
             self.file_info_label.config(text=f"上次選擇資料夾：{foldername}", fg='#666')
         
         # 移除開始分析按鈕 - 改為自動分析
-        
-        # 清除結果按鈕
-        btn_clear = tk.Button(file_frame, text="🗑️ 清除結果", 
-                             command=self._clear_enhanced_results, bg='#F44336', fg='white')
-        btn_clear.pack(fill=tk.X, pady=2)
-        self.font_scaler.register(btn_clear)
         
         # 字體控制
         font_frame = tk.LabelFrame(parent, text="介面設定", padx=10, pady=10)
@@ -330,13 +353,14 @@ class EnhancedLogAnalyzerApp:
             print(f"保存FAIL分割視窗位置失敗: {e}")
     
     def _auto_select_first_fail(self):
-        """自動選擇第一個FAIL項目"""
+        """自動選擇第一個FAIL項目並顯示錯誤原因"""
         try:
             if hasattr(self, 'fail_tree_enhanced'):
                 children = self.fail_tree_enhanced.tree.get_children()
                 if children:
                     first_item = children[0]
                     self.fail_tree_enhanced.tree.selection_set(first_item)
+                    # 自動觸發選擇事件，顯示錯誤原因
                     self._on_fail_item_select(None)
         except Exception as e:
             print(f"自動選擇第一個FAIL項目失敗: {e}")
@@ -409,7 +433,7 @@ class EnhancedLogAnalyzerApp:
             if any(keyword in clean_line for keyword in [
                 'Result:', 'validation:', 'type of', 'TestTime:', 'is Fail', 
                 'ErrorCode:', 'Test Completed', 'Test Aborted', 'TotalCount:', 
-                'Report name:', 'Execute Phase'
+                'Report name:', 'Execute Phase', 'FAIL', 'ERROR', 'NACK'
             ]):
                 fail_reason_lines.append(clean_line)
         
@@ -966,6 +990,46 @@ class EnhancedLogAnalyzerApp:
             self.left_frame.configure(width=default_width)
             self.paned.update_idletasks()
         save_settings(self.settings)
+
+    def _open_markdown_help(self):
+        """開啟並顯示 docs/README.md 內容（使用內容字體大小）"""
+        try:
+            from ui_components import get_resource_path
+            md_path = get_resource_path(os.path.join('docs', 'README.md'))
+            content = ''
+            try:
+                with open(md_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+            except Exception:
+                # 若 README.md 不存在，嘗試 QUICK_START.md
+                alt_path = get_resource_path(os.path.join('docs', 'QUICK_START.md'))
+                with open(alt_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+            self._show_text_viewer_window("README 說明", content)
+        except Exception as e:
+            try:
+                messagebox.showerror("錯誤", f"無法讀取說明：{e}")
+            except Exception:
+                pass
+
+    def _show_text_viewer_window(self, title: str, content: str):
+        """顯示純文字的查看視窗（簡易Markdown檢視），字體使用內容字體大小"""
+        win = tk.Toplevel(self.root)
+        win.title(title)
+        win.geometry("1000x750")
+        frame = tk.Frame(win)
+        frame.pack(fill=tk.BOTH, expand=1)
+        text = tk.Text(frame, wrap=tk.WORD, font=('Consolas', self.content_font_size))
+        vs = tk.Scrollbar(frame, orient=tk.VERTICAL, command=text.yview)
+        hs = tk.Scrollbar(frame, orient=tk.HORIZONTAL, command=text.xview)
+        text.configure(yscrollcommand=vs.set, xscrollcommand=hs.set)
+        text.grid(row=0, column=0, sticky='nsew')
+        vs.grid(row=0, column=1, sticky='ns')
+        hs.grid(row=1, column=0, sticky='ew')
+        frame.grid_rowconfigure(0, weight=1)
+        frame.grid_columnconfigure(0, weight=1)
+        text.insert('1.0', content)
+        text.config(state=tk.NORMAL)
 
 def main_enhanced():
     """增強版主程式"""

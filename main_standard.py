@@ -30,6 +30,8 @@ class LogAnalyzerApp:
         self.current_log_path = ''
         self._build_ui()
         self._apply_font_size()
+        # 綁定關閉事件以保存設定
+        self.root.protocol("WM_DELETE_WINDOW", self._on_closing)
 
     def _build_ui(self):
         """建立標準版UI"""
@@ -44,6 +46,11 @@ class LogAnalyzerApp:
         self.right_frame = tk.Frame(self.paned)
         self._build_right_panel(self.right_frame)
         self.paned.add(self.right_frame, minsize=600)
+        # 綁定分隔線調整事件，調整後即時保存
+        self.paned.bind('<ButtonRelease-1>', self._on_pane_adjust)
+        # 初始套用左側寬度
+        pane_width = self.settings.get('pane_width', 250)
+        self.root.after(100, lambda: self._apply_initial_pane_width(pane_width))
 
     def _build_left_panel(self, parent):
         """建立左側面板"""
@@ -58,6 +65,19 @@ class LogAnalyzerApp:
         btn_folder.pack(fill=tk.X, padx=10, pady=2)
         self.font_scaler.register(btn_folder)
         
+        # 將左三個按鈕字體加粗與加入hover效果
+        try:
+            from ui_components import make_bold, apply_button_hover
+            make_bold(btn_file)
+            make_bold(btn_folder)
+        except Exception:
+            pass
+        try:
+            apply_button_hover(btn_file, hover_bg="#e8f4fd")
+            apply_button_hover(btn_folder, hover_bg="#e8f4fd")
+        except Exception:
+            pass
+        
         # 測試腳本選擇
         script_label = tk.Label(parent, text="選擇測試腳本Excel（可選）：")
         script_label.pack(pady=(15, 5), anchor='w')
@@ -66,6 +86,23 @@ class LogAnalyzerApp:
         btn_script = tk.Button(parent, text="選擇腳本", command=self._select_script)
         btn_script.pack(fill=tk.X, padx=10, pady=2)
         self.font_scaler.register(btn_script)
+        
+        # 第三個按鈕也加粗與hover
+        try:
+            make_bold(btn_script)
+            apply_button_hover(btn_script, hover_bg="#e8f4fd")
+        except Exception:
+            pass
+        
+        # 查看說明（Markdown）
+        help_btn = tk.Button(parent, text="📖 查看說明(README)", command=self._open_markdown_help, bg="#607D8B", fg="white")
+        help_btn.pack(fill=tk.X, padx=10, pady=(6, 6))
+        self.font_scaler.register(help_btn)
+        try:
+            make_bold(help_btn)
+            apply_button_hover(help_btn, hover_bg="#78909C", hover_fg='white', normal_bg='#607D8B', normal_fg='white')
+        except Exception:
+            pass
         
         self.script_path = ""
         self.script_label = tk.Label(parent, text="未選擇腳本", fg="#888")
@@ -99,6 +136,48 @@ class LogAnalyzerApp:
         self.font_size_label = tk.Label(parent, text=f"目前字體：{self.font_size}")
         self.font_size_label.pack(pady=(5, 0))
         self.font_scaler.register(self.font_size_label)
+
+    def _apply_initial_pane_width(self, width: int):
+        """在UI建立後設定左側面板寬度"""
+        try:
+            if width and width > 0:
+                try:
+                    self.paned.paneconfigure(self.left_frame, width=width)
+                except Exception:
+                    pass
+                # 直接放置sash位置
+                try:
+                    self.paned.update_idletasks()
+                    self.paned.sash_place(0, width, 1)
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+    def _on_pane_adjust(self, event=None):
+        """分隔線調整後保存左側寬度到設定"""
+        try:
+            if hasattr(self, 'left_frame'):
+                left_width = self.left_frame.winfo_width()
+                if left_width and left_width > 0:
+                    self.settings['pane_width'] = left_width
+                    save_settings(self.settings)
+        except Exception:
+            pass
+
+    def _on_closing(self):
+        """關閉視窗時保存設定"""
+        try:
+            # 保存目前左側寬度與字體大小
+            if hasattr(self, 'left_frame'):
+                lw = self.left_frame.winfo_width()
+                if lw and lw > 0:
+                    self.settings['pane_width'] = lw
+            self.settings['font_size'] = getattr(self, 'font_size', 11)
+            save_settings(self.settings)
+        except Exception:
+            pass
+        self.root.destroy()
 
     def _on_drop(self, event):
         """處理拖拉檔案/資料夾"""
@@ -705,6 +784,46 @@ class LogAnalyzerApp:
         if match:
             return match.group(0)
         return None
+
+    def _open_markdown_help(self):
+        """開啟並顯示 docs/README.md 內容"""
+        try:
+            from ui_components import get_resource_path
+            md_path = get_resource_path(os.path.join('docs', 'README.md'))
+            content = ''
+            try:
+                with open(md_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+            except Exception:
+                # 若 README.md 不存在，嘗試 QUICK_START.md
+                alt_path = get_resource_path(os.path.join('docs', 'QUICK_START.md'))
+                with open(alt_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+            self._show_text_viewer_window("README 說明", content)
+        except Exception as e:
+            try:
+                messagebox.showerror("錯誤", f"無法讀取說明：{e}")
+            except Exception:
+                pass
+
+    def _show_text_viewer_window(self, title: str, content: str):
+        """顯示純文字的查看視窗（簡易Markdown檢視）"""
+        win = tk.Toplevel(self.root)
+        win.title(title)
+        win.geometry("900x700")
+        frame = tk.Frame(win)
+        frame.pack(fill=tk.BOTH, expand=1)
+        text = tk.Text(frame, wrap=tk.WORD)
+        vs = tk.Scrollbar(frame, orient=tk.VERTICAL, command=text.yview)
+        hs = tk.Scrollbar(frame, orient=tk.HORIZONTAL, command=text.xview)
+        text.configure(yscrollcommand=vs.set, xscrollcommand=hs.set)
+        text.grid(row=0, column=0, sticky='nsew')
+        vs.grid(row=0, column=1, sticky='ns')
+        hs.grid(row=1, column=0, sticky='ew')
+        frame.grid_rowconfigure(0, weight=1)
+        frame.grid_columnconfigure(0, weight=1)
+        text.insert('1.0', content)
+        text.config(state=tk.NORMAL)
 
 def main():
     """標準版主程式"""
