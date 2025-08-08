@@ -1,0 +1,3 @@
+git hub commit "V1.5.5 彈出視窗新增上下一頁"
+git hub 切換到main /master
+以上修改做完只要 顯示做完了 不用解釋一大堆你在幹嘛

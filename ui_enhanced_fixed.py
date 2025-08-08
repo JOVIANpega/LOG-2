@@ -450,9 +450,9 @@ class EnhancedTreeview:
     
     def _show_next_item(self, detail_window, text_widget, current_index):
         """顯示下一個測試項"""
-        if self.all_items_data and current_index < len(self.all_items_data):
-            # 計算下一個索引，如果已經是最後一個，就保持在最後一個
-            next_index = min(current_index + 1, len(self.all_items_data) - 1)
+        if self.all_items_data and current_index < len(self.all_items_data) - 1:
+            # 計算下一個索引
+            next_index = current_index + 1
             next_item_data = self.all_items_data[next_index]
             content = next_item_data.get('full_response', '沒有詳細內容可顯示')
             
@@ -488,20 +488,22 @@ class EnhancedTreeview:
         """更新視窗中的導航按鈕狀態"""
         prev_btn = None
         next_btn = None
+        text_widget = None
         
+        # 找到文字框和按鈕
         for widget in detail_window.winfo_children():
-            if isinstance(widget, tk.Frame) and widget.winfo_children():
+            if isinstance(widget, tk.Frame):
                 for child in widget.winfo_children():
-                    if isinstance(child, tk.Button):
+                    if isinstance(child, tk.Text):
+                        text_widget = child
+                    elif isinstance(child, tk.Button):
                         if child.cget('text') == '上一頁':
                             prev_btn = child
                         elif child.cget('text') == '下一頁':
                             next_btn = child
-                if prev_btn and next_btn:
-                    break
         
-        # 更新按鈕狀態
-        if prev_btn and next_btn:
+        # 更新按鈕狀態和命令
+        if prev_btn and next_btn and text_widget:
             # 更新上一頁按鈕狀態
             if current_index <= 0:
                 prev_btn.config(state=tk.DISABLED)
@@ -513,6 +515,10 @@ class EnhancedTreeview:
                 next_btn.config(state=tk.DISABLED)
             else:
                 next_btn.config(state=tk.NORMAL)
+                
+            # 更新按鈕的命令，使用正確的參數和閉包
+            prev_btn.config(command=lambda idx=current_index: self._show_previous_item(detail_window, text_widget, idx))
+            next_btn.config(command=lambda idx=current_index: self._show_next_item(detail_window, text_widget, idx))
     
     def _apply_syntax_highlighting(self, text_widget, content):
         """對詳細內容應用語法高亮"""

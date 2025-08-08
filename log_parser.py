@@ -198,6 +198,51 @@ class LogParser:
             no_command_steps.append(step)
         else:
             pass_items.append(step)
+    
+    def _finalize_step(self, step, pass_items, fail_items, no_command_steps):
+        """完成步驟的處理，根據結果分類到PASS或FAIL"""
+        # 為展開內容加上數字編碼
+        numbered_content = []
+        for i, line in enumerate(step['full_log'], 1):
+            numbered_content.append(f"{i:4d}. {line}")
+        
+        # 設定完整回應為整個測項內容
+        step['full_response'] = '\n'.join(numbered_content)
+        
+        # 設定預設值
+        if not step.get('command'):
+            step['command'] = '未找到指令'
+        if not step.get('response'):
+            step['response'] = '未找到回應'
+        
+        # 檢查RETRY
+        retry_count = 0
+        for line in step['full_log']:
+            retry_match = self.retry_pattern.search(line)
+            if retry_match:
+                retry_count = int(retry_match.group(1))
+                break
+        
+        if retry_count > 1:
+            step['has_retry_but_pass'] = True
+            step['retry'] = retry_count
+            if step['result'] == 'PASS':
+                step['result'] = f"PASS (Retry {retry_count})"
+        else:
+            step['has_retry_but_pass'] = False
+            step['retry'] = 0
+        
+        # 根據結果分類
+        if step.get('is_pass', True) and step['result'] != 'FAIL':
+            # PASS項目
+            if step['command'] == '未找到指令':
+                no_command_steps.append(step)
+            else:
+                pass_items.append(step)
+        else:
+            # FAIL項目
+            step['is_main_fail'] = True
+            fail_items.append(step)
 
     def _annotate_attempts(self, lines):
         """在完整內容中為每次指令嘗試加入 Attempt 1/2/3 標註（已棄用）"""
@@ -207,35 +252,100 @@ class LogParser:
     def _parse_fail_log(self, raw_lines, file_path):
         """
         FAIL分析邏輯：
-        - 從檔案底部往上找 FAIL、FAILED、ERROR 關鍵字
-        - 最先找到的是主要FAIL原因
-        - 繼續往上找其他FAIL（歷史FAIL）
-        - 每個FAIL區塊從指令開始到root@結束
+        - 按照PASS邏輯解析所有測項
+        - PASS的項目放到PASS區塊
+        - FAIL的項目放到FAIL區塊
+        - 支援"未找到指令"集合功能
         """
+        pass_items = []
         fail_items = []
+        no_command_steps = []
+        current_step = None
         
-        # 從底部往上找所有FAIL區塊
-        fail_blocks = self._find_fail_blocks_from_bottom(raw_lines)
-        
-        last_fail = None
-        fail_line_idx = None
-        
-        for i, fail_block in enumerate(fail_blocks):
-            step_info = self._extract_fail_step_info(fail_block, raw_lines)
+        for idx, line in enumerate(raw_lines):
+            # 找到 Do @STEPxxx@ 行 - 測項開始
+            step_match = self.step_pattern.search(line)
+            if step_match:
+                # 完成前一個測項
+                if current_step:
+                    current_step['end_idx'] = idx - 1
+                    self._finalize_step(current_step, pass_items, fail_items, no_command_steps)
+                
+                # 開始新測項
+                step_name_clean = step_match.group(1).strip()
+                # 提取STEP號碼
+                step_number = ''
+                if step_name_clean.startswith('@STEP') and '@' in step_name_clean[1:]:
+                    step_parts = step_name_clean.split('@')
+                    if len(step_parts) >= 2:
+                        step_number = step_parts[1]
+                    step_name_clean = step_name_clean.split('@', 2)[-1]
+                
+                current_step = {
+                    'step_name': step_name_clean,
+                    'test_id': '',
+                    'command': '',
+                    'response': '',
+                    'result': 'UNKNOWN',
+                    'retry': 0,
+                    'error': '',
+                    'raw_idx': idx,
+                    'full_log': [line],
+                    'has_retry_but_pass': False,
+                    'start_idx': idx,
+                    'end_idx': None,
+                    'step_number': step_number,
+                    'is_pass': None  # 待確定
+                }
+                continue
             
-            # 標記是否為主要FAIL（最後發生的）
-            if i == 0:
-                step_info['is_main_fail'] = True
-                last_fail = step_info
-                fail_line_idx = step_info.get('fail_idx', 0)
-            else:
-                step_info['is_main_fail'] = False
-                step_info['step_name'] = f"[歷史FAIL] {step_info['step_name']}"
-            
-            fail_items.append(step_info)
+            if current_step:
+                current_step['full_log'].append(line)
+                
+                # 檢查是否為PASS結束行
+                if self._is_step_end_line(line, current_step.get('step_number', '')):
+                    current_step['end_idx'] = idx
+                    current_step['is_pass'] = True
+                    current_step['result'] = 'PASS'
+                    self._finalize_step(current_step, pass_items, fail_items, no_command_steps)
+                    current_step = None
+                    continue
+                
+                # 檢查是否為FAIL行
+                if any(keyword in line.upper() for keyword in ['FAIL', 'FAILED', 'ERROR']):
+                    current_step['is_pass'] = False
+                    current_step['result'] = 'FAIL'
+                    current_step['error'] = line.strip()
+                
+                # 檢查指令行
+                cmd_match = self.cmd_pattern.search(line)
+                if cmd_match and not current_step['command']:
+                    current_step['command'] = cmd_match.group(1).strip()
+                
+                # 檢查回應行
+                if not current_step['response']:
+                    resp_match = self.resp_pattern.search(line)
+                    if resp_match:
+                        current_step['response'] = resp_match.group(1).strip()
+        
+        # 處理最後一個測項
+        if current_step:
+            current_step['end_idx'] = len(raw_lines) - 1
+            # 如果沒有明確的PASS/FAIL標記，根據是否有錯誤判斷
+            if current_step['is_pass'] is None:
+                current_step['is_pass'] = not bool(current_step['error'])
+                current_step['result'] = 'PASS' if current_step['is_pass'] else 'FAIL'
+            self._finalize_step(current_step, pass_items, fail_items, no_command_steps)
+        
+        # 處理"未找到指令"的集合
+        self._consolidate_no_command_steps(pass_items, no_command_steps)
+        
+        # 找到主要FAIL
+        last_fail = fail_items[0] if fail_items else None
+        fail_line_idx = last_fail.get('raw_idx', 0) if last_fail else None
         
         return {
-            'pass_items': [],
+            'pass_items': pass_items,
             'fail_items': fail_items,
             'raw_lines': raw_lines,
             'last_fail': last_fail,
@@ -524,13 +634,61 @@ class LogParser:
         }
 
     def _consolidate_no_command_steps(self, pass_items, no_command_steps):
-        """將"未找到指令"的步驟集合成一個大項目"""
+        """將連續的"未找到指令"步驟集合成多個分組，不一次收集全部"""
         if not no_command_steps:
             return
         
-        # 按順序收集所有"未找到指令"的步驟
+        # 按照在 pass_items 中的順序重新排序 no_command_steps
+        # 找出每個 no_command_step 在原始順序中的位置
+        no_command_with_order = []
+        for step in no_command_steps:
+            no_command_with_order.append((step['raw_idx'], step))
+        
+        # 按原始順序排序
+        no_command_with_order.sort(key=lambda x: x[0])
+        
+        # 將 pass_items 和 no_command_steps 合併並按順序排序
+        all_steps = []
+        for step in pass_items:
+            all_steps.append((step['raw_idx'], step, 'normal'))
+        
+        for raw_idx, step in no_command_with_order:
+            all_steps.append((raw_idx, step, 'no_command'))
+        
+        # 按原始順序排序
+        all_steps.sort(key=lambda x: x[0])
+        
+        # 重新構建 pass_items，將連續的"未找到指令"集合起來
+        new_pass_items = []
+        current_no_command_group = []
+        
+        for raw_idx, step, step_type in all_steps:
+            if step_type == 'no_command':
+                # 收集連續的"未找到指令"
+                current_no_command_group.append(step)
+            else:
+                # 遇到正常步驟，先處理之前收集的"未找到指令"組
+                if current_no_command_group:
+                    consolidated_step = self._create_consolidated_step(current_no_command_group)
+                    new_pass_items.append(consolidated_step)
+                    current_no_command_group = []
+                
+                # 添加正常步驟
+                new_pass_items.append(step)
+        
+        # 處理最後一組"未找到指令"
+        if current_no_command_group:
+            consolidated_step = self._create_consolidated_step(current_no_command_group)
+            new_pass_items.append(consolidated_step)
+        
+        # 更新 pass_items
+        pass_items.clear()
+        pass_items.extend(new_pass_items)
+    
+    def _create_consolidated_step(self, no_command_group):
+        """創建一個"未找到指令"集合項目"""
         consolidated_content = []
-        for i, step in enumerate(no_command_steps, 1):
+        for i, step in enumerate(no_command_group, 1):
             # 添加步驟名稱和內容
             step_header = f"步驟 {i}: {step['step_name']}"
             consolidated_content.append(step_header)
@@ -540,9 +698,9 @@ class LogParser:
                 consolidated_content.append(f"  {j:4d}. {line}")
             consolidated_content.append("")  # 空行分隔
         
-        # 創建一個新的"未找到指令"集合項目
-        consolidated_step = {
-            'step_name': f"未找到指令 x{len(no_command_steps)}",
+        # 創建集合項目
+        return {
+            'step_name': f"未找到指令 x{len(no_command_group)}",
             'test_id': '',
             'command': '未找到指令',
             'response': '未找到回應',
@@ -551,13 +709,10 @@ class LogParser:
             'error': '',
             'full_response': '\n'.join(consolidated_content),
             'full_log': consolidated_content,
-            'raw_idx': no_command_steps[0]['raw_idx'],
-            'start_idx': no_command_steps[0]['start_idx'],
-            'end_idx': no_command_steps[-1]['end_idx'],
+            'raw_idx': no_command_group[0]['raw_idx'],
+            'start_idx': no_command_group[0]['start_idx'],
+            'end_idx': no_command_group[-1]['end_idx'],
             'step_number': '',
             'has_retry_but_pass': False,
             'is_consolidated': True  # 標記為集合項目
         }
-        
-        # 將集合項目添加到 pass_items 中
-        pass_items.append(consolidated_step)

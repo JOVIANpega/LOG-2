@@ -1,11 +1,11 @@
 {
   "ui_font_size": 12,
-  "content_font_size": 10,
-  "last_log_path": "M:/PYTHON/LOG_analyser-main/MINE/LOG/1+Funtion-WE253100001-20250807091554-IPIO009-0580.log",
+  "content_font_size": 11,
+  "last_log_path": "M:/PYTHON/LOG_analyser-main/MINE/LOG/1+MB FUNCTION-222-20250805162911-ITIF009-06G0.log",
   "last_folder_path": "",
   "window_width": 1400,
   "window_height": 900,
-  "pane_width": 346,
+  "pane_width": 249,
   "font_size": 11,
   "auto_analyze": true,
   "remember_path": true
