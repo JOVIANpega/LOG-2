@@ -575,7 +575,7 @@ class LogAnalyzerApp:
         
         # Tab1: PASS - 顯示所有通過的測項
         for item in pass_items:
-            display_resp = item['response'] + ('  [+展開]' if item.get('full_response') else '')
+            display_resp = item['response'] + ('  [+點擊詳細]' if item.get('full_response') else '')
             iid = self.pass_tree.insert('', 'end', values=(item['step_name'], item['command'], display_resp, item['result']))
             if item.get('full_response'):
                 self._pass_full_map[iid] = item['full_response']
@@ -583,7 +583,7 @@ class LogAnalyzerApp:
         # Tab2: FAIL - 顯示所有FAIL區塊（第一個為主要FAIL，其餘為歷史FAIL）
         for idx, item in enumerate(fail_items):
             step_name = item.get('step_name', '')
-            display_resp = item.get('response', '') + ('  [+展開]' if item.get('full_response') else '')
+            display_resp = item.get('response', '') + ('  [+點擊詳細]' if item.get('full_response') else '')
             command = item.get('command', '')
             iid = self.fail_tree.insert('', 'end', values=(step_name, command, display_resp, item.get('retry',0), item.get('error','')))
             
@@ -629,14 +629,14 @@ class LogAnalyzerApp:
         
         # Tab1: PASS - 顯示所有通過的測項
         for item in pass_items:
-            display_resp = item['response'] + ('  [+展開]' if item.get('full_response') else '')
+            display_resp = item['response'] + ('  [+點擊詳細]' if item.get('full_response') else '')
             iid = self.pass_tree.insert('', 'end', values=(item['step_name'], item['command'], display_resp, item['result']))
             if item.get('full_response'):
                 self._pass_full_map[iid] = item['full_response']
         
         # Tab2: FAIL - 顯示所有失敗的測項
         for item in fail_items:
-            display_resp = item.get('response','') + ('  [+展開]' if item.get('full_response') else '')
+            display_resp = item.get('response','') + ('  [+點擊詳細]' if item.get('full_response') else '')
             iid = self.fail_tree.insert('', 'end', values=(item['step_name'], item['command'], display_resp, item['retry'], item['error']))
             if item.get('full_response'):
                 self._fail_full_map[iid] = item['full_response']

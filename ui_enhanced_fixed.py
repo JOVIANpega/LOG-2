@@ -246,7 +246,7 @@ class EnhancedTreeview:
             step_name += " [RETRY但PASS]"
         
         enhanced_values[0] = step_name
-        enhanced_values[2] = enhanced_values[2] + " [+展開]"
+        enhanced_values[2] = enhanced_values[2] + " [+點擊詳細]"
         
         item_id = self.tree.insert('', 'end', values=enhanced_values)
         
@@ -290,7 +290,7 @@ class EnhancedTreeview:
         """插入FAIL項目"""
         # 處理錯誤回應內容
         enhanced_values = list(values)
-        enhanced_values[2] = enhanced_values[2] + " [+展開]"
+        enhanced_values[2] = enhanced_values[2] + " [+點擊詳細]"
         
         item_id = self.tree.insert('', 'end', values=enhanced_values)
         

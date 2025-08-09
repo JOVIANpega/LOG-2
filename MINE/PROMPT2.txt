@@ -3,11 +3,66 @@ curl "https://acli.atlassian.com/windows/latest/acli_windows_amd64/acli.exe"
 
 
 
+git hub commit "V1.5.6" "優化按鍵視窗"
+git hub branch 轉成 main 
+提交訊息：V1.5.1 - 修正PASS測項retry判斷邏輯和展開內容
+
+
+git hub commit "V1.5.7" "優化PASS 顯示內容"
+已成功推送到：https://github.com/JOVIANpega/LOG_analyser
 
 pyinstaller --onefile --noconsole  main.py
 
 
 
+
+
+
+未找到指令時 例如下面就顯示 @Write ISN to MB 不要顯示 	未找到指令 
+
+步驟 1: Write ISN to MB
+     1. 2025/03/27 01:58:26 [1]	Do @STEP012@Write ISN to MB
+     2. 2025/03/27 01:58:26 [1]	Check ISN from MB skips by ExecMode = 6.
+     3. 2025/03/27 01:58:26 [1]	:@STEP012@Write ISN to MB Test is Pass ! 		----- 0 Sec.
+
+Do @STEP012@Write ISN to MB
+
+
+這種未找到指令 修正這個現象
+如下面就顯示 @CheckRoute ，目前是 未找到指令 
+如下面就顯示 @READ ME 不要顯示 	未找到指令 
+步驟 1: CheckRoute
+     1. 2025/03/27 01:58:13 [1]	Do @STEP002@CheckRoute
+     2. 2025/03/27 01:58:13 [1]	Run B7PL025-000:Show ISN to UI	Mode: 1, Retry: 4
+     3. [01:58:13.472][PC] [Show ISN to UI]++
+     4. 2025/03/27 01:58:13 [1]	> :ShowISN,"LoopRunning"
+     5. 2025/03/27 01:58:13 [1]	< 0
+     6. [01:58:13.478][PC] [Show ISN to UI]--
+     7. 2025/03/27 01:58:13 [1]	[PC] [Show ISN to UI] ~~ TestTime:0.0077035 sec
+     8. 2025/03/27 01:58:13 [1]	Run B7PL025-001:Disconnect,"UART"	Mode: 1, Retry: 4
+     9. [01:58:13.478][PC] [Disconnect,"UART"]++
+    10. 2025/03/27 01:58:13 [1]	> :Disconnect,"UART"
+    11. 2025/03/27 01:58:13 [1]	< 0
+    12. [01:58:13.487][PC] [Disconnect,"UART"]--
+    13. 2025/03/27 01:58:13 [1]	[PC] [Disconnect,"UART"] ~~ TestTime:0.0090226 sec
+    14. 2025/03/27 01:58:13 [1]	B7PL025-001:@STEP002@CheckRoute Test is Pass ! 		----- 0.0167261 Sec.
+
+步驟 2: READ ME
+     1. 2025/03/27 01:58:13 [1]	Do @STEP003@READ ME
+     2. 2025/03/27 01:58:13 [1]	Run B7PL025-003:Pop window	Mode: 0, Retry: 4
+     3. [01:58:13.498][PC] [Pop window]++
+     4. 2025/03/27 01:58:13 [1]	> :ShowConfirmBox,"you need SD and SIM","YES"
+     5. 2025/03/27 01:58:13 [1]	Skip by LoopRunning is enable.
+     6. 2025/03/27 01:58:13 [1]	< YES
+     7. [01:58:13.507][PC] [Pop window]--
+     8. 2025/03/27 01:58:13 [1]	[PC] [Pop window] ~~ TestTime:0.0091451 sec
+     9. 2025/03/27 01:58:13 [1]	B7PL025-003:@STEP003@READ ME Test is Pass ! 		----- 0.0091451 Sec.
+
+
+
+
+
+====
 
 FAIL測試標籤 
 EX: 下面顯示這一區塊內容 錯誤原因自動顯示

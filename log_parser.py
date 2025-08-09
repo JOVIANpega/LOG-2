@@ -9,8 +9,10 @@ class LogParser:
         # 正則表達式模式
         self.step_pattern = re.compile(r'Do\s+(@STEP\d+@[^@\n]+)')
         self.test_id_pattern = re.compile(r'Run ([A-Z0-9]+-\d+):')
-        self.cmd_pattern = re.compile(r'\(UART\)\s*>\s*(.+)')
-        self.resp_pattern = re.compile(r'\(UART\)\s*<\s*(.+)')
+        # 放寬：支援 (XXX) 或 [XXX] 或無前綴的指令/回應行，例如：
+        # "> :Delay,\"1000\""、"< 0"、"(PC) > :..."、"[DUT] < ..."
+        self.cmd_pattern = re.compile(r'(?:\([A-Za-z0-9_ ]+\)|\[[A-Za-z0-9_ ]+\])?\s*>\s*(.+)')
+        self.resp_pattern = re.compile(r'(?:\([A-Za-z0-9_ ]+\)|\[[A-Za-z0-9_ ]+\])?\s*<\s*(.+)')
         self.retry_pattern = re.compile(r'Retry:\s*(\d+)')
         self.root_pattern = re.compile(r'root@.*:/root\$')
         self.fail_keywords = ['FAIL', 'FAILED', 'ERROR', 'failed', 'error', 'NACK', 'timeout']
@@ -171,17 +173,13 @@ class LogParser:
         
         # 設定預設值
         if not step.get('command'):
-            step['command'] = '未找到指令'
+            # 若沒有找到指令，預設顯示為 @步驟名稱（例如 @CheckRoute）
+            step['command'] = f"@{step.get('step_name','')}"
         if not step.get('response'):
-            step['response'] = '未找到回應'
+            step['response'] = '無收到反饋值'
         
-        # 基於"Retry: N"關鍵字判斷RETRY，而不是指令出現次數
-        retry_count = 0
-        for line in step['full_log']:
-            retry_match = self.retry_pattern.search(line)
-            if retry_match:
-                retry_count = int(retry_match.group(1))
-                break
+        # 基於有效的 Retry: N 判斷（忽略出現在 Run 行上的 Retry 參數）
+        retry_count = self._get_effective_retry_count(step['full_log'])
         
         # 只有當真正有"Retry: N"關鍵字且N>1時才標記為RETRY，但用黑色文字
         if retry_count > 1:
@@ -211,17 +209,14 @@ class LogParser:
         
         # 設定預設值
         if not step.get('command'):
-            step['command'] = '未找到指令'
+            # 對 PASS 步驟：若沒有找到指令，顯示為 @步驟名稱；FAIL 步驟仍顯示未找到指令
+            is_pass_like = step.get('is_pass') is True or step.get('result') == 'PASS'
+            step['command'] = f"@{step.get('step_name','')}" if is_pass_like else '未找到指令'
         if not step.get('response'):
-            step['response'] = '未找到回應'
+            step['response'] = '無收到反饋值'
         
-        # 檢查RETRY
-        retry_count = 0
-        for line in step['full_log']:
-            retry_match = self.retry_pattern.search(line)
-            if retry_match:
-                retry_count = int(retry_match.group(1))
-                break
+        # 檢查RETRY（忽略 Run 行上的 Retry 欄位）
+        retry_count = self._get_effective_retry_count(step['full_log'])
         
         if retry_count > 1:
             step['has_retry_but_pass'] = True
@@ -493,13 +488,8 @@ class LogParser:
                 response = resp_match.group(1).strip()
                 break
         
-        # Retry 次數
-        retry_count = 0
-        for line in block_lines:
-            retry_match = self.retry_pattern.search(line)
-            if retry_match:
-                retry_count = int(retry_match.group(1))
-                break
+        # Retry 次數（忽略 Run 行上的 Retry 欄位）
+        retry_count = self._get_effective_retry_count(block_lines)
         
         # 錯誤原因 - 從錯誤訊息行擷取
         error_reason = self._find_error_reason(block_lines)
@@ -511,7 +501,7 @@ class LogParser:
         if not command:
             command = '未找到指令'
         if not response:
-            response = '未找到回應'
+            response = '無收到反饋值'
         
         return {
             'step_name': step_name,
@@ -732,7 +722,7 @@ class LogParser:
             'step_name': f"未找到指令 x{len(no_command_group)}",
             'test_id': '',
             'command': '未找到指令',
-            'response': '未找到回應',
+            'response': '無收到反饋值',
             'result': 'PASS',
             'retry': 0,
             'error': '',
@@ -745,3 +735,17 @@ class LogParser:
             'has_retry_but_pass': False,
             'is_consolidated': True  # 標記為集合項目
         }
+    
+    def _get_effective_retry_count(self, lines):
+        """取得有效的 Retry 次數：忽略出現在 Run 行（含 Mode: x, Retry: y）的說明性參數"""
+        for line in lines:
+            if 'Run ' in line:
+                # 跳過包含 Run 的描述行，例如：Run XXX:YYY\tMode: 0, Retry: 3
+                continue
+            retry_match = self.retry_pattern.search(line)
+            if retry_match:
+                try:
+                    return int(retry_match.group(1))
+                except Exception:
+                    pass
+        return 0
