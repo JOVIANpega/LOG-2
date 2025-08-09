@@ -350,20 +350,31 @@ class EnhancedTreeview:
         """顯示詳細內容對話框（測項指令內容）"""
         try:
             detail_window = tk.Toplevel()
-            detail_window.title("測項指令內容")
+            # 解析步驟名稱
+            try:
+                summary, step_label = self._build_cmd_resp_summary_and_label(content)
+            except Exception:
+                summary, step_label = (None, None)
+            title = "測項指令內容" if not step_label else f"{step_label} +測項指令內容"
+            detail_window.title(title)
+            # 視窗背景改回白色（僅標題深藍）
+            try:
+                detail_window.configure(bg="#FFFFFF")
+            except Exception:
+                pass
             detail_window.geometry("1000x700")
             
-            # 標題
-            title_label = tk.Label(detail_window, text="測項指令內容", 
-                                  font=('Arial', 14, 'bold'), fg='#2E86AB')
-            title_label.pack(pady=10)
+            # 標題（深藍底白字）
+            title_label = tk.Label(detail_window, text=title, 
+                                   font=('Arial', 14, 'bold'), fg='#FFFFFF', bg="#0B1D39")
+            title_label.pack(fill=tk.X, pady=(0, 0))
             
-            # 文字框架
-            text_frame = tk.Frame(detail_window)
-            text_frame.pack(fill=tk.BOTH, expand=1, padx=10, pady=5)
+            # 文字框架（白底）
+            text_frame = tk.Frame(detail_window, bg="#FFFFFF")
+            text_frame.pack(fill=tk.BOTH, expand=1, padx=8, pady=8)
             
-            # 文字框（可選取複製）
-            text_widget = tk.Text(text_frame, wrap=tk.NONE, font=('Consolas', self.font_size))
+            # 文字框（白底黑字）
+            text_widget = tk.Text(text_frame, wrap=tk.NONE, font=('Consolas', self.font_size), bg='white', fg='black', highlightthickness=0, borderwidth=0)
             text_widget.grid(row=0, column=0, sticky='nsew')
             
             # 垂直滾動條 - 做大一點，靠近文字區
@@ -380,10 +391,18 @@ class EnhancedTreeview:
             
             text_widget.config(yscrollcommand=v_scrollbar.set, xscrollcommand=h_scrollbar.set)
             
-            # 插入內容
-            if content:
-                text_widget.insert('1.0', str(content))
-                # 設定語法高亮
+            # 插入內容（前置加入整理）
+            merged = str(content)
+            try:
+                summary = self._build_cmd_resp_summary(str(content))
+                if summary.strip():
+                    separator = "************************我是分隔線**************************************"
+                    merged = summary + f"\n\n{separator}\n\n" + str(content)
+            except Exception:
+                pass
+            if merged:
+                text_widget.insert('1.0', merged)
+                # 設定語法高亮（針對原始內容部分）
                 self._apply_syntax_highlighting(text_widget, str(content))
             else:
                 text_widget.insert('1.0', "沒有詳細內容可顯示")
@@ -391,9 +410,9 @@ class EnhancedTreeview:
             # 允許選取但不允許編輯
             text_widget.config(state=tk.NORMAL)
             
-            # 按鈕框架
-            btn_frame = tk.Frame(detail_window)
-            btn_frame.pack(pady=10)
+            # 按鈕框架（白底）
+            btn_frame = tk.Frame(detail_window, bg="#FFFFFF")
+            btn_frame.pack(pady=10, fill=tk.X)
             
             # 找到當前項目在 all_items_data 中的索引
             current_index = -1
@@ -405,17 +424,17 @@ class EnhancedTreeview:
             
             # 上一頁按鈕
             prev_btn = tk.Button(btn_frame, text="上一頁", 
-                               command=lambda: self._show_previous_item(detail_window, text_widget, current_index))
+                                 command=lambda: self._show_previous_item(detail_window, text_widget, current_index))
             prev_btn.pack(side=tk.LEFT, padx=5)
             
             # 下一頁按鈕
             next_btn = tk.Button(btn_frame, text="下一頁", 
-                               command=lambda: self._show_next_item(detail_window, text_widget, current_index))
+                                 command=lambda: self._show_next_item(detail_window, text_widget, current_index))
             next_btn.pack(side=tk.LEFT, padx=5)
             
             # 複製全部按鈕
             copy_btn = tk.Button(btn_frame, text="複製全部", 
-                               command=lambda: self._copy_to_clipboard(content))
+                                 command=lambda: self._copy_to_clipboard(merged))
             copy_btn.pack(side=tk.LEFT, padx=5)
             
             # 關閉按鈕
@@ -427,6 +446,58 @@ class EnhancedTreeview:
             
         except Exception as e:
             print(f"顯示詳細內容對話框失敗: {e}")
+ 
+    def _build_cmd_resp_summary(self, content: str) -> str:
+        """從內容中擷取所有 > 與其後續的 < 行，條列「指令1. 指令2. …」"""
+        try:
+            summary, _ = self._build_cmd_resp_summary_and_label(content)
+            return summary
+        except Exception:
+            return "[指令/回應整理]\n(產生摘要時發生例外)"
+
+    def _build_cmd_resp_summary_and_label(self, content: str):
+        """回傳 (summary_text, step_label) 供標題使用"""
+        try:
+            import re
+            groups = []
+            current = None
+            step_label = None
+            for raw in str(content).splitlines():
+                line = re.sub(r'^\s*\d+\.\s*', '', raw)
+                if step_label is None and 'Do @STEP' in line:
+                    try:
+                        pos = line.index('Do @STEP')
+                        step_label = line[pos:].strip()
+                    except Exception:
+                        step_label = line.strip()
+                m_cmd = re.search(r'>\s*(.+)$', line)
+                m_resp = re.search(r'<\s*(.*)$', line)
+                if m_cmd:
+                    if current:
+                        groups.append(current)
+                    current = {'cmd': m_cmd.group(1), 'resps': []}
+                    continue
+                if m_resp:
+                    if not current:
+                        current = {'cmd': '', 'resps': []}
+                    current['resps'].append(m_resp.group(1))
+            if current:
+                groups.append(current)
+            count = len(groups)
+            header = "[指令/回應整理]" if step_label is None else f"{step_label}    [指令/回應整理 {count}筆]"
+            out_lines = [header] if step_label else [f"[指令/回應整理 {count}筆]"]
+            if not groups:
+                out_lines.append("(未偵測到 >/< 指令或回應)")
+                return ("\n".join(out_lines), step_label)
+            for idx, g in enumerate(groups, 1):
+                out_lines.append(f"指令{idx}.")
+                out_lines.append(f"> {g.get('cmd','')}")
+                for r in g.get('resps', []):
+                    out_lines.append(f"< {r}")
+                out_lines.append("")
+            return ("\n".join(out_lines).rstrip(), step_label)
+        except Exception:
+            return ("[指令/回應整理]\n(產生摘要時發生例外)", None)
     
     def _show_previous_item(self, detail_window, text_widget, current_index):
         """顯示上一個測試項"""

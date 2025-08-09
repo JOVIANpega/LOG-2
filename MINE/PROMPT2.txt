@@ -16,7 +16,33 @@ pyinstaller --onefile --noconsole  main.py
 
 
 
+# 1️⃣ 把所有變更（已追蹤與未追蹤的檔案）加入暫存區
+git add .
 
+# 2️⃣ 提交變更，附上版本與描述
+git commit -m "V1.5.7 優化PASS 顯示內容"
+
+# 3️⃣ 推送到 GitHub main 分支
+git push origin main
+
+
+
+
+預覽視窗點擊後彈出測項指令內容
+我要做優化
+首先最上面要整理並顯示所有> and < 的內容，並且1234條列出 
+例如:
+
+1.
+> :GetVal,"$g5GModel"
+< RG530F-NA
+
+2.
+> :Utility.PY,"D:\Centimani_Kangaroo_UpdateFW\py\adb.py","shell atcli at+qgmr","ON","-1","0"
+< 
+< standard output#
+
+====
 
 未找到指令時 例如下面就顯示 @Write ISN to MB 不要顯示 	未找到指令 
 

@@ -289,12 +289,27 @@ class LogAnalyzerApp:
     def _show_full_content_window(self, title, content):
         """顯示完整內容視窗"""
         win = tk.Toplevel(self.root)
+        # 先取得摘要與步驟名稱，更新標題
+        summary, step_label = self._build_cmd_resp_summary_and_label(content)
+        if step_label:
+            title = f"{step_label} +測項指令內容"
         win.title(title)
+        # 視窗背景深藍色
+        try:
+            win.configure(bg="#0B1D39")
+        except Exception:
+            pass
         win.geometry("1000x700")
+        
+        # 頂部標題（顯示步驟名稱 +測項指令內容）
+        header_text = title
+        header = tk.Label(win, text=header_text, font=('Arial', 14, 'bold'), fg='#FFFFFF', bg="#0B1D39")
+        header.pack(pady=(10, 0))
+        
         # 文字框與滾動條
-        frame = tk.Frame(win)
-        frame.pack(fill=tk.BOTH, expand=1)
-        text = tk.Text(frame, wrap=tk.NONE, font=('Consolas', self.font_size))
+        frame = tk.Frame(win, bg="#0B1D39")
+        frame.pack(fill=tk.BOTH, expand=1, padx=8, pady=8)
+        text = tk.Text(frame, wrap=tk.NONE, font=('Consolas', self.font_size), bg='#0B1D39', fg='#FFFFFF', highlightthickness=0, borderwidth=0, insertbackground='#FFFFFF')
         
         # 垂直滾動條 - 做大一點，靠近文字區
         vs = tk.Scrollbar(frame, orient=tk.VERTICAL, command=text.yview, width=20)
@@ -308,14 +323,70 @@ class LogAnalyzerApp:
         text.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
         
         # 內容
-        text.insert('1.0', content)
+        separator = "************************我是分隔線**************************************"
+        merged = summary + f"\n\n{separator}\n\n" + content if summary.strip() else content
+        text.insert('1.0', merged)
         # 可選複製
         text.config(state=tk.NORMAL)
         # 底部按鈕
-        btn_frame = tk.Frame(win)
+        btn_frame = tk.Frame(win, bg="#0B1D39")
         btn_frame.pack(fill=tk.X)
-        tk.Button(btn_frame, text="複製全部", command=lambda: self._copy_to_clipboard(content)).pack(side=tk.LEFT, padx=6, pady=6)
+        tk.Button(btn_frame, text="複製全部", command=lambda: self._copy_to_clipboard(merged)).pack(side=tk.LEFT, padx=6, pady=6)
         tk.Button(btn_frame, text="關閉", command=win.destroy).pack(side=tk.RIGHT, padx=6, pady=6)
+
+    def _build_cmd_resp_summary_and_label(self, content: str):
+        """回傳 (summary_text, step_label)"""
+        try:
+            import re
+            groups = []
+            current = None
+            step_label = None
+            for raw in content.splitlines():
+                # 去掉可能的行號前綴 "   1. "
+                line = re.sub(r'^\s*\d+\.\s*', '', raw)
+                # 嘗試抓步驟標題（行內包含 Do @STEPxxx@）
+                if step_label is None and 'Do @STEP' in line:
+                    try:
+                        pos = line.index('Do @STEP')
+                        step_label = line[pos:].strip()
+                    except Exception:
+                        step_label = line.strip()
+                m_cmd = re.search(r'>\s*(.+)$', line)
+                m_resp = re.search(r'<\s*(.*)$', line)
+                if m_cmd:
+                    if current:
+                        groups.append(current)
+                    current = {'cmd': m_cmd.group(1), 'resps': []}
+                    continue
+                if m_resp:
+                    if not current:
+                        current = {'cmd': '', 'resps': []}
+                    current['resps'].append(m_resp.group(1))
+            if current:
+                groups.append(current)
+            count = len(groups)
+            header = "[指令/回應整理]" if step_label is None else f"{step_label}    [指令/回應整理 {count}筆]"
+            out_lines = [header] if step_label else [f"[指令/回應整理 {count}筆]"]
+            if not groups:
+                out_lines.append("(未偵測到 >/< 指令或回應)")
+                return ("\n".join(out_lines), step_label)
+            for idx, g in enumerate(groups, 1):
+                out_lines.append(f"指令{idx}.")
+                out_lines.append(f"> {g.get('cmd','')}")
+                for r in g.get('resps', []):
+                    out_lines.append(f"< {r}")
+                out_lines.append("")
+            return ("\n".join(out_lines).rstrip(), step_label)
+        except Exception:
+            return ("[指令/回應整理]\n(產生摘要時發生例外)", None)
+
+    def _build_cmd_resp_summary(self, content: str) -> str:
+        """從內容中擷取所有 > 與其後續的 < 行，條列 1,2,3... 顯示"""
+        try:
+            summary, _ = self._build_cmd_resp_summary_and_label(content)
+            return summary
+        except Exception:
+            return "[指令/回應整理]\n(產生摘要時發生例外)"
 
     def _on_pass_tree_hover(self, event):
         """PASS TreeView懸停事件"""
