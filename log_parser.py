@@ -638,6 +638,12 @@ class LogParser:
                     file_path = os.path.join(root, file)
                     try:
                         result = self.parse_log_file(file_path)
+                        file_name = os.path.basename(file_path)
+                        # 為每筆結果加上來源檔名，便於彙整與匯出
+                        for it in result['pass_items']:
+                            it['file_name'] = file_name
+                        for it in result['fail_items']:
+                            it['file_name'] = file_name
                         pass_items.extend(result['pass_items'])
                         fail_items.extend(result['fail_items'])
                     except Exception as e:

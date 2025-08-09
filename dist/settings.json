@@ -1,11 +1,12 @@
 {
-  "ui_font_size": 12,
-  "content_font_size": 11,
-  "last_log_path": "M:/PYTHON/LOG_analyser-main/MINE/LOG/1+Funtion-WE253100004-20250807083658-PASS.log",
-  "last_folder_path": "",
+  "ui_font_size": 13,
+  "content_font_size": 10,
+  "last_log_path": "M:/PYTHON/LOG_analyser-main/MINE/LOG/1+Funtion-WE33-20250708141022-PASS.log",
+  "last_folder_path": "M:/PYTHON/LOG_analyser-main/MINE/FUNCTION_LOG",
   "window_width": 1536,
   "window_height": 801,
-  "pane_width": 243,
+  "pane_width": 235,
+  "app_title": "PEGA test log Aanlyser",
   "auto_analyze": true,
   "remember_path": true
 }

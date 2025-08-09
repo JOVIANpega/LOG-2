@@ -13,10 +13,11 @@ import sys
 import json
 from settings_loader import load_settings, save_settings
 from log_parser import LogParser
-from ui_components import FontScaler
+from ui_components import FontScaler, build_output_dir, get_resource_path
 from ui_enhanced_fixed import EnhancedTreeview, EnhancedText, FailDetailsPanel
 from enhanced_settings import build_settings_content
 from enhanced_left_panel import build_left_panel
+from excel_writer import ExcelWriter
 
 class EnhancedLogAnalyzerApp:
     """增強版LOG分析器應用程式"""
@@ -24,10 +25,11 @@ class EnhancedLogAnalyzerApp:
     def __init__(self, root):
         """初始化增強版應用程式"""
         self.root = root
-        self.root.title("測試Log分析器 - 增強版")
-        
-        # 載入設定
+        # 先載入設定再設定標題
         self.settings = load_settings()
+        self.root.title(self.settings.get('app_title', 'PEGA test log Aanlyser'))
+        
+        # 載入設定（其餘）
         self.ui_font_size = self.settings.get('ui_font_size', 11)
         self.content_font_size = self.settings.get('content_font_size', 11)
         
@@ -39,6 +41,7 @@ class EnhancedLogAnalyzerApp:
         # 初始化模組
         self.font_scaler = FontScaler(root, default_size=self.ui_font_size)
         self.log_parser = LogParser()
+        self.excel_writer = ExcelWriter()
         
         # 狀態變數
         self.current_mode = 'single'
@@ -223,6 +226,310 @@ class EnhancedLogAnalyzerApp:
         # 自動顯示第一個FAIL項目（如果有的話）
         self.root.after(500, self._auto_select_first_fail)
     
+    def _build_enhanced_log_tab(self):
+        """建立原始LOG標籤頁"""
+        self.tab_log = ttk.Frame(self.notebook)
+        self.notebook.add(self.tab_log, text="📄 原始LOG")
+        
+        # 使用增強型文字元件
+        self.log_text_enhanced = EnhancedText(self.tab_log)
+        self.log_text_enhanced.pack(fill=tk.BOTH, expand=1)
+
+    def _build_enhanced_settings_tab(self):
+        """建立設定標籤頁"""
+        self.tab_settings = ttk.Frame(self.notebook)
+        self.notebook.add(self.tab_settings, text="⚙️ 設定")
+        
+        # 建立滾動框架
+        canvas = tk.Canvas(self.tab_settings)
+        scrollbar = ttk.Scrollbar(self.tab_settings, orient="vertical", command=canvas.yview)
+        scrollable_frame = ttk.Frame(canvas)
+        
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+        
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+        
+        # 設定區域
+        self._build_settings_content(scrollable_frame)
+        
+        # 打包滾動元件
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+        
+        # 綁定滾動事件
+        def _on_mousewheel(event):
+            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        canvas.bind_all("<MouseWheel>", _on_mousewheel)
+    
+    def _build_settings_content(self, parent):
+        """建立設定內容（抽離至模組）"""
+        build_settings_content(self, parent)
+    
+    def _get_default_directory(self):
+        """獲取預設目錄 - EXE或PY檔案所在目錄"""
+        try:
+            # 如果是EXE檔案，使用sys.executable
+            if getattr(sys, 'frozen', False):
+                # 打包成EXE的情況
+                default_dir = os.path.dirname(sys.executable)
+            else:
+                # 直接執行PY檔案的情況
+                default_dir = os.path.dirname(os.path.abspath(__file__))
+            
+            # 如果目錄不存在，使用當前工作目錄
+            if not os.path.exists(default_dir):
+                default_dir = os.getcwd()
+            
+            return default_dir
+        except Exception:
+            # 如果出現任何錯誤，使用當前工作目錄
+            return os.getcwd()
+    
+    def _select_file(self):
+        """選擇單一檔案"""
+        # 優先使用上次選擇的路徑，如果沒有則使用預設路徑
+        if self.settings.get('last_log_path') and os.path.exists(self.settings.get('last_log_path')):
+            default_dir = os.path.dirname(self.settings.get('last_log_path'))
+        else:
+            default_dir = self._get_default_directory()
+        
+        file_path = filedialog.askopenfilename(
+            title="選擇Log檔案", 
+            filetypes=[("Log檔案", "*.log"), ("所有檔案", "*.*")],
+            initialdir=default_dir
+        )
+        if file_path:
+            self.current_mode = 'single'
+            self.current_log_path = file_path
+            filename = os.path.basename(file_path)
+            self.file_info_label.config(text=f"已選擇：{filename}", fg='green')
+            
+            # 儲存選擇的路徑到設定
+            self.settings['last_log_path'] = file_path
+            self._save_settings_silent()
+            
+            # 自動開始分析（enhanced）
+            self._analyze_enhanced_log()
+    
+    def _select_folder(self):
+        """選擇資料夾"""
+        # 優先使用上次選擇的路徑，如果沒有則使用預設路徑
+        if self.settings.get('last_folder_path') and os.path.exists(self.settings.get('last_folder_path')):
+            default_dir = self.settings.get('last_folder_path')
+        else:
+            default_dir = self._get_default_directory()
+        
+        # 先讓使用者看到所有內容物（僅視覺，實際只處理 .log）
+        folder_path = filedialog.askdirectory(
+            title="選擇Log資料夾",
+            initialdir=default_dir
+        )
+        if folder_path:
+            self.current_mode = 'multi'
+            self.current_log_path = folder_path
+            
+            foldername = os.path.basename(folder_path)
+            self.file_info_label.config(text=f"已選擇資料夾：{foldername}", fg='blue')
+            
+            # 儲存選擇的路徑到設定
+            self.settings['last_folder_path'] = folder_path
+            self._save_settings_silent()
+            
+            # 自動開始分析（enhanced）
+            self._analyze_enhanced_log()
+    
+    def _analyze_enhanced_log(self):
+        """分析log檔案並更新增強版GUI顯示"""
+        if not self.current_log_path:
+            messagebox.showwarning("警告", "請先選擇log檔案或資料夾")
+            return
+            
+        # 清空現有內容
+        self.pass_tree_enhanced.clear()
+        self.fail_tree_enhanced.clear()
+        self.log_text_enhanced.clear()
+
+        
+        try:
+            if self.current_mode == 'single':
+                self._analyze_enhanced_single_file()
+            else:
+                self._analyze_enhanced_multiple_files()
+                
+        except Exception as e:
+            messagebox.showerror("分析錯誤", f"分析過程中發生錯誤：\n{str(e)}")
+    
+    def _analyze_enhanced_single_file(self):
+        """分析單一檔案（增強版）"""
+        result = self.log_parser.parse_log_file(self.current_log_path)
+        pass_items = result['pass_items']
+        fail_items = result['fail_items']
+        raw_lines = result['raw_lines']
+        last_fail = result['last_fail']
+        fail_line_idx = result['fail_line_idx']
+        
+        # Tab1: PASS - 顯示所有通過的測項
+        for idx, item in enumerate(pass_items, 1):
+            full_response = item.get('full_response', '')
+            has_retry = item.get('has_retry_but_pass', False)  # 使用 has_retry_but_pass 屬性
+            self.pass_tree_enhanced.insert_pass_item(
+                (item['step_name'], item['command'], item['response'], item['result']),
+                step_number=idx,
+                full_response=full_response,
+                has_retry=has_retry
+            )
+        
+        # Tab2: FAIL - 顯示所有FAIL區塊
+        for idx, item in enumerate(fail_items):
+            is_main_fail = item.get('is_main_fail', False)
+            full_response = item.get('full_response', '')
+            self.fail_tree_enhanced.insert_fail_item(
+                (item['step_name'], item['command'], item['response'], item['retry'], item['error']),
+                full_response=full_response,
+                is_main_fail=is_main_fail
+            )
+        
+        # Tab3: 原始LOG，標紅錯誤行並自動跳轉
+        if raw_lines:
+            # 將raw_lines轉換為字符串
+            log_content = '\n'.join(raw_lines)
+            self.log_text_enhanced.insert_log_with_highlighting(log_content, {
+                'fail_line_idx': fail_line_idx,
+                'pass_items': pass_items,
+                'fail_items': fail_items
+            })
+            
+            # 如果有錯誤行，跳轉到錯誤位置
+            if fail_line_idx is not None and fail_line_idx < len(raw_lines):
+                self.log_text_enhanced.highlight_error_block(fail_line_idx + 1, fail_line_idx + 1)
+                self.log_text_enhanced.text.see(f"{fail_line_idx + 1}.0")
+        
+        # 自動切換到相關Tab
+        if fail_items:
+            self.notebook.select(self.tab_fail)
+        else:
+            self.notebook.select(self.tab_pass)
+    
+    def _analyze_enhanced_multiple_files(self):
+        """分析多個檔案（增強版）"""
+        # 逐檔案解析，按照檔名是否含 PASS 分類
+        folder = self.current_log_path
+        # 顯示將被處理的 .log 檔清單預覽
+        try:
+            self._show_log_file_preview(folder)
+        except Exception:
+            pass
+        pass_logs = []
+        fail_logs = []
+        total_files = 0
+        for root, dirs, files in os.walk(folder):
+            for fn in files:
+                if not fn.lower().endswith('.log'):
+                    continue
+                total_files += 1
+                path = os.path.join(root, fn)
+                res = self.log_parser.parse_log_file(path)
+                # 擷取必要資訊供 Excel 與 Summary Tab 使用
+                entry = {
+                    'file_path': path,
+                    'file_name': os.path.basename(path),
+                    'raw_lines': res.get('raw_lines') or [],
+                    'ui_annotations': res.get('ui_annotations') or [],
+                    'pass_items': res.get('pass_items') or [],
+                    'fail_items': res.get('fail_items') or [],
+                    'summary': self._extract_file_summary(res, path),
+                    'step_marks': self._build_step_marks(res.get('raw_lines') or [])
+                }
+                if 'PASS' in fn.upper():
+                    pass_logs.append(entry)
+                else:
+                    # 記錄第一個 FAIL 原因到 summary
+                    if res.get('fail_items'):
+                        entry['summary']['FAIL原因'] = res['fail_items'][0].get('error', '')
+                    fail_logs.append(entry)
+        # 將 pass/fail 測項分別展示於 PASS/FAIL 標籤頁（聚合）
+        for idx, entry in enumerate(pass_logs, 1):
+            for j, item in enumerate(entry['pass_items'], 1):
+                self.pass_tree_enhanced.insert_pass_item(
+                    (item['step_name'], item['command'], item['response'], item['result']),
+                    step_number=j,
+                    full_response=item.get('full_response', ''),
+                    has_retry=item.get('has_retry_but_pass', False)
+                )
+        for entry in fail_logs:
+            for item in entry['fail_items']:
+                self.fail_tree_enhanced.insert_fail_item(
+                    (item['step_name'], item['command'], item['response'], item['retry'], item['error']),
+                    full_response=item.get('full_response', ''),
+                    is_main_fail=item.get('is_main_fail', False)
+                )
+        # 匯出 Excel：PASS匯總/FAIL匯總，放同資料夾
+        try:
+            # 在 LOG 目錄下建立 LOG集總整理 子目錄
+            out_dir = build_output_dir(folder, 'LOG集總整理')
+            pass_path, fail_path = self.excel_writer.export_pass_fail_workbooks(out_dir, pass_logs, fail_logs)
+            # 清空 PASS/FAIL 顯示內容（多檔案只產報表，不保留清單）
+            self.pass_tree_enhanced.clear()
+            self.fail_tree_enhanced.clear()
+            # 完成提示 + 開啟資料夾（黑底紅字）
+            self._show_open_folder_prompt(out_dir, total_files, len(pass_logs), len(fail_logs), pass_path, fail_path)
+        except Exception as e:
+            messagebox.showerror("匯出失敗", f"產生Excel時發生錯誤：\n{e}")
+        # 自動切到匯總報表（取消）
+        # self.notebook.select(self.tab_summary)
+
+
+    def _extract_file_summary(self, parse_result: dict, file_path: str) -> dict:
+        """從檔名或檔案內容提取測試日期時間、SFIS狀態、測試總時間、主要FAIL原因（若有）"""
+        name = os.path.basename(file_path)
+        # 從檔名猜測日期時間（yyyyMMddHHmmss）
+        import re
+        dt = ''
+        m = re.search(r'(20\d{12})', name)
+        if m:
+            s = m.group(1)
+            try:
+                dt = f"{s[0:4]}-{s[4:6]}-{s[6:8]} {s[8:10]}:{s[10:12]}:{s[12:14]}"
+            except Exception:
+                dt = ''
+        # SFIS 狀態：簡單從內容找 ON/OFF 關鍵詞
+        raw_lines = parse_result.get('raw_lines') or []
+        sfis = ''
+        for line in raw_lines[:200]:  # 前200行掃描
+            if 'SFIS' in line.upper():
+                if 'ON' in line.upper():
+                    sfis = 'ON'
+                    break
+                if 'OFF' in line.upper():
+                    sfis = 'OFF'
+                    break
+        # 測試總時間：從最後 200 行抓取 pattern 例如 "TestTime: 00:05:32" 或 "Total time: 12.3s"
+        total_time = ''
+        for line in (raw_lines[-200:] if raw_lines else []):
+            if 'TestTime' in line or 'Total time' in line or '總時間' in line:
+                total_time = line.strip()
+                break
+        return {
+            '測試日期時間': dt,
+            'SFIS': sfis,
+            '測試總時間': total_time,
+        }
+
+    def _build_step_marks(self, raw_lines: list) -> dict:
+        """建立步驟起始行的標號對照，key 為 raw_lines 索引，value 為 1..n"""
+        marks = {}
+        import re
+        step_re = re.compile(r'Do\s+@STEP\d+@')
+        count = 0
+        for idx, line in enumerate(raw_lines):
+            if step_re.search(line):
+                count += 1
+                marks[idx] = count
+        return marks
     
     def _set_fail_pane_position(self, position):
         """設定FAIL分割視窗位置"""
@@ -314,7 +621,7 @@ class EnhancedLogAnalyzerApp:
         
         # 找到包含關鍵錯誤資訊的行
         for line in lines:
-            # 移除行號前綴（如 "370. "）
+            # 移除行號前綴（如 "370. ")
             clean_line = line
             if '. ' in line and line.split('. ', 1)[0].strip().isdigit():
                 clean_line = line.split('. ', 1)[1]
@@ -341,275 +648,6 @@ class EnhancedLogAnalyzerApp:
         
         # 設定紅色文字標籤
         self.fail_error_text.tag_configure('fail_red', foreground='red', font=('Consolas', 12, 'bold'))
-    
-    def _build_enhanced_log_tab(self):
-        """建立原始LOG標籤頁"""
-        self.tab_log = ttk.Frame(self.notebook)
-        self.notebook.add(self.tab_log, text="📄 原始LOG")
-        
-        # 使用增強型文字元件
-        self.log_text_enhanced = EnhancedText(self.tab_log)
-        self.log_text_enhanced.pack(fill=tk.BOTH, expand=1)
-    
-    def _build_enhanced_settings_tab(self):
-        """建立設定標籤頁"""
-        self.tab_settings = ttk.Frame(self.notebook)
-        self.notebook.add(self.tab_settings, text="⚙️ 設定")
-        
-        # 建立滾動框架
-        canvas = tk.Canvas(self.tab_settings)
-        scrollbar = ttk.Scrollbar(self.tab_settings, orient="vertical", command=canvas.yview)
-        scrollable_frame = ttk.Frame(canvas)
-        
-        scrollable_frame.bind(
-            "<Configure>",
-            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
-        )
-        
-        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
-        canvas.configure(yscrollcommand=scrollbar.set)
-        
-        # 設定區域
-        self._build_settings_content(scrollable_frame)
-        
-        # 打包滾動元件
-        canvas.pack(side="left", fill="both", expand=True)
-        scrollbar.pack(side="right", fill="y")
-        
-        # 綁定滾動事件
-        def _on_mousewheel(event):
-            canvas.yview_scroll(int(-1*(event.delta/120)), "units")
-        canvas.bind_all("<MouseWheel>", _on_mousewheel)
-    
-    def _build_settings_content(self, parent):
-        """建立設定內容（抽離至模組）"""
-        build_settings_content(self, parent)
-    
-    def _get_default_directory(self):
-        """獲取預設目錄 - EXE或PY檔案所在目錄"""
-        try:
-            # 如果是EXE檔案，使用sys.executable
-            if getattr(sys, 'frozen', False):
-                # 打包成EXE的情況
-                default_dir = os.path.dirname(sys.executable)
-            else:
-                # 直接執行PY檔案的情況
-                default_dir = os.path.dirname(os.path.abspath(__file__))
-            
-            # 如果目錄不存在，使用當前工作目錄
-            if not os.path.exists(default_dir):
-                default_dir = os.getcwd()
-            
-            return default_dir
-        except Exception:
-            # 如果出現任何錯誤，使用當前工作目錄
-            return os.getcwd()
-    
-    def _select_file(self):
-        """選擇單一檔案"""
-        # 優先使用上次選擇的路徑，如果沒有則使用預設路徑
-        if self.settings.get('last_log_path') and os.path.exists(self.settings.get('last_log_path')):
-            default_dir = os.path.dirname(self.settings.get('last_log_path'))
-        else:
-            default_dir = self._get_default_directory()
-        
-        file_path = filedialog.askopenfilename(
-            title="選擇Log檔案", 
-            filetypes=[("Log檔案", "*.log"), ("所有檔案", "*.*")],
-            initialdir=default_dir
-        )
-        if file_path:
-            self.current_mode = 'single'
-            self.current_log_path = file_path
-            filename = os.path.basename(file_path)
-            self.file_info_label.config(text=f"已選擇：{filename}", fg='green')
-            
-            # 儲存選擇的路徑到設定
-            self.settings['last_log_path'] = file_path
-            self._save_settings_silent()
-            
-            # 自動開始分析（enhanced）
-            self._analyze_enhanced_log()
-    
-    def _select_folder(self):
-        """選擇資料夾"""
-        # 優先使用上次選擇的路徑，如果沒有則使用預設路徑
-        if self.settings.get('last_folder_path') and os.path.exists(self.settings.get('last_folder_path')):
-            default_dir = self.settings.get('last_folder_path')
-        else:
-            default_dir = self._get_default_directory()
-        
-        folder_path = filedialog.askdirectory(
-            title="選擇Log資料夾",
-            initialdir=default_dir
-        )
-        if folder_path:
-            self.current_mode = 'multi'
-            self.current_log_path = folder_path
-            
-            foldername = os.path.basename(folder_path)
-            self.file_info_label.config(text=f"已選擇資料夾：{foldername}", fg='blue')
-            
-            # 儲存選擇的路徑到設定
-            self.settings['last_folder_path'] = folder_path
-            self._save_settings_silent()
-            
-            # 自動開始分析（enhanced）
-            self._analyze_enhanced_log()
-    
-    def _analyze_enhanced_log(self):
-        """分析log檔案並更新增強版GUI顯示"""
-        if not self.current_log_path:
-            messagebox.showwarning("警告", "請先選擇log檔案或資料夾")
-            return
-            
-        # 清空現有內容
-        self.pass_tree_enhanced.clear()
-        self.fail_tree_enhanced.clear()
-        self.log_text_enhanced.clear()
-        
-        try:
-            if self.current_mode == 'single':
-                self._analyze_enhanced_single_file()
-            else:
-                self._analyze_enhanced_multiple_files()
-                
-        except Exception as e:
-            messagebox.showerror("分析錯誤", f"分析過程中發生錯誤：\n{str(e)}")
-    
-    def _analyze_enhanced_single_file(self):
-        """分析單一檔案（增強版）"""
-        result = self.log_parser.parse_log_file(self.current_log_path)
-        pass_items = result['pass_items']
-        fail_items = result['fail_items']
-        raw_lines = result['raw_lines']
-        last_fail = result['last_fail']
-        fail_line_idx = result['fail_line_idx']
-        
-        # Tab1: PASS - 顯示所有通過的測項
-        for idx, item in enumerate(pass_items, 1):
-            full_response = item.get('full_response', '')
-            has_retry = item.get('has_retry_but_pass', False)  # 使用 has_retry_but_pass 屬性
-            self.pass_tree_enhanced.insert_pass_item(
-                (item['step_name'], item['command'], item['response'], item['result']),
-                step_number=idx,
-                full_response=full_response,
-                has_retry=has_retry
-            )
-        
-        # Tab2: FAIL - 顯示所有FAIL區塊
-        for idx, item in enumerate(fail_items):
-            is_main_fail = item.get('is_main_fail', False)
-            full_response = item.get('full_response', '')
-            self.fail_tree_enhanced.insert_fail_item(
-                (item['step_name'], item['command'], item['response'], item['retry'], item['error']),
-                full_response=full_response,
-                is_main_fail=is_main_fail
-            )
-        
-        # Tab3: 原始LOG，標紅錯誤行並自動跳轉
-        if raw_lines:
-            # 將raw_lines轉換為字符串
-            log_content = '\n'.join(raw_lines)
-            self.log_text_enhanced.insert_log_with_highlighting(log_content, {
-                'fail_line_idx': fail_line_idx,
-                'pass_items': pass_items,
-                'fail_items': fail_items
-            })
-            
-            # 如果有錯誤行，跳轉到錯誤位置
-            if fail_line_idx is not None and fail_line_idx < len(raw_lines):
-                self.log_text_enhanced.highlight_error_block(fail_line_idx + 1, fail_line_idx + 1)
-                self.log_text_enhanced.text.see(f"{fail_line_idx + 1}.0")
-        
-        # 單一檔案模式禁用Excel匯出
-        # self.export_btn.config(state=tk.DISABLED) # 移除此行
-        
-        # 自動切換到相關Tab
-        if fail_items:
-            self.notebook.select(self.tab_fail)
-        else:
-            self.notebook.select(self.tab_pass)
-    
-    def _analyze_enhanced_multiple_files(self):
-        """分析多個檔案（增強版）"""
-        result = self.log_parser.parse_log_folder(self.current_log_path)
-        pass_items = result['pass_items']
-        fail_items = result['fail_items']
-        
-        # Tab1: PASS - 顯示所有通過的測項
-        for idx, item in enumerate(pass_items, 1):
-            full_response = item.get('full_response', '')
-            has_retry = item.get('has_retry_but_pass', False)  # 使用 has_retry_but_pass 屬性
-            self.pass_tree_enhanced.insert_pass_item(
-                (item['step_name'], item['command'], item['response'], item['result']),
-                step_number=idx,
-                full_response=full_response,
-                has_retry=has_retry
-            )
-        
-        # Tab2: FAIL - 顯示所有失敗的測項
-        for item in fail_items:
-            full_response = item.get('full_response', '')
-            self.fail_tree_enhanced.insert_fail_item(
-                (item['step_name'], item['command'], item['response'], item['retry'], item['error']),
-                full_response=full_response,
-                is_main_fail=False
-            )
-        
-        # Tab3: 清空原始LOG（多檔案模式不顯示原始內容）
-        self.log_text_enhanced.clear()
-        self.log_text_enhanced.text.insert(tk.END, "多檔案分析模式：請查看PASS/FAIL分頁檢視結果")
-        
-        # 多檔案模式啟用Excel匯出
-        # self.export_btn.config(state=tk.NORMAL if (pass_items or fail_items) else tk.DISABLED) # 移除此行
-        
-        # 自動切換到PASS分頁
-        self.notebook.select(self.tab_pass)
-    
-    def _clear_enhanced_results(self):
-        """清除增強版分析結果"""
-        self.pass_tree_enhanced.clear()
-        self.fail_tree_enhanced.clear()
-        self.log_text_enhanced.clear()
-        # 清除FAIL錯誤顯示區域
-        if hasattr(self, 'fail_error_title'):
-            self.fail_error_title.config(text="選擇FAIL項目查看詳細錯誤")
-        if hasattr(self, 'fail_error_text'):
-            self.fail_error_text.config(state=tk.NORMAL)
-            self.fail_error_text.delete('1.0', tk.END)
-            self.fail_error_text.config(state=tk.NORMAL)
-        self.file_info_label.config(text="未選擇檔案", fg='#666')
-        self.current_log_path = ''
-        self.current_mode = 'single'
-    
-    def _increase_ui_font(self):
-        """增加介面文字字體大小"""
-        if self.ui_font_size < 15:
-            self.ui_font_size += 1
-            self._apply_font_size()
-            self._save_settings_silent()
-    
-    def _decrease_ui_font(self):
-        """減少介面文字字體大小"""
-        if self.ui_font_size > 10:
-            self.ui_font_size -= 1
-            self._apply_font_size()
-            self._save_settings_silent()
-    
-    def _increase_content_font(self):
-        """增加內容字體大小"""
-        if self.content_font_size < 15:
-            self.content_font_size += 1
-            self._apply_font_size()
-            self._save_settings_silent()
-    
-    def _decrease_content_font(self):
-        """減少內容字體大小"""
-        if self.content_font_size > 10:
-            self.content_font_size -= 1
-            self._apply_font_size()
-            self._save_settings_silent()
     
     def _apply_font_size(self):
         """套用字體大小"""
@@ -645,6 +683,12 @@ class EnhancedLogAnalyzerApp:
             self._apply_treeview_font(self.pass_tree_enhanced.tree)
         if hasattr(self, 'fail_tree_enhanced'):
             self._apply_treeview_font(self.fail_tree_enhanced.tree)
+        
+        # 更新匯總 Summary Tree 字體
+        if hasattr(self, 'pass_summary_tree'):
+            style = ttk.Style()
+            style.configure('Treeview', font=('Arial', self.content_font_size))
+            style.configure('Treeview.Heading', font=('Arial', self.content_font_size, 'bold'))
         
         # 更新錯誤詳情面板內容字體
         if hasattr(self, 'fail_details'):
@@ -715,62 +759,49 @@ class EnhancedLogAnalyzerApp:
         if hasattr(self, 'remember_path_var'):
             self.settings['remember_path'] = self.remember_path_var.get()
         
+        # 保存標題
+        if hasattr(self, 'app_title_var'):
+            self.settings['app_title'] = self.app_title_var.get().strip() or 'PEGA test log Aanlyser'
         save_settings(self.settings)
+        # 立即套用標題
+        try:
+            self.root.title(self.settings['app_title'])
+        except Exception:
+            pass
         messagebox.showinfo("設定保存", "設定已成功保存！")
-    
 
-    
-    def _decrease_pane_width(self):
-        """減少左側面板寬度"""
-        current_width = self.settings.get('pane_width', 250)
-        if current_width > 100:  # 至少保留一個最小寬度
-            new_width = current_width - 10
-            self.settings['pane_width'] = new_width
-            if hasattr(self, 'pane_width_label'):
-                self.pane_width_label.config(text=f"{new_width}px")
-            # 更新分割視窗的面板寬度
-            if hasattr(self, 'left_frame'):
-                self.left_frame.configure(width=new_width)
-                self.paned.update_idletasks()
-            save_settings(self.settings)
-    
-    def _increase_pane_width(self):
-        """增加左側面板寬度"""
-        current_width = self.settings.get('pane_width', 250)
-        if current_width < 500:  # 最大寬度限制
-            new_width = current_width + 10
-            self.settings['pane_width'] = new_width
-            if hasattr(self, 'pane_width_label'):
-                self.pane_width_label.config(text=f"{new_width}px")
-            # 更新分割視窗的面板寬度
-            if hasattr(self, 'left_frame'):
-                self.left_frame.configure(width=new_width)
-                self.paned.update_idletasks()
-            save_settings(self.settings)
-    
-    def _reset_pane_width(self):
-        """重置左側面板寬度為預設值"""
-        default_width = 250
-        self.settings['pane_width'] = default_width
-        if hasattr(self, 'pane_width_label'):
-            self.pane_width_label.config(text=f"{default_width}px")
-        # 更新分割視窗的面板寬度
-        if hasattr(self, 'left_frame'):
-            self.left_frame.configure(width=default_width)
-            self.paned.update_idletasks()
-        save_settings(self.settings)
+    def _clear_enhanced_results(self):
+        """清除增強版分析結果（供左側按鈕呼叫）"""
+        try:
+            self.pass_tree_enhanced.clear()
+            self.fail_tree_enhanced.clear()
+            self.log_text_enhanced.clear()
+            if hasattr(self, 'pass_summary_tree'):
+                self.pass_summary_tree.delete(*self.pass_summary_tree.get_children())
+            if hasattr(self, 'fail_summary_tree'):
+                self.fail_summary_tree.delete(*self.fail_summary_tree.get_children())
+            # 清除FAIL錯誤顯示區域
+            if hasattr(self, 'fail_error_title'):
+                self.fail_error_title.config(text="選擇FAIL項目查看詳細錯誤")
+            if hasattr(self, 'fail_error_text'):
+                self.fail_error_text.config(state=tk.NORMAL)
+                self.fail_error_text.delete('1.0', tk.END)
+                self.fail_error_text.config(state=tk.NORMAL)
+            self.file_info_label.config(text="未選擇檔案", fg='#666')
+            self.current_log_path = ''
+            self.current_mode = 'single'
+        except Exception:
+            pass
 
     def _open_markdown_help(self):
-        """開啟並顯示 docs/README.md 內容（使用內容字體大小）"""
+        """開啟並顯示 docs/README.md 或 QUICK_START.md 內容"""
         try:
-            from ui_components import get_resource_path
             md_path = get_resource_path(os.path.join('docs', 'README.md'))
             content = ''
             try:
                 with open(md_path, 'r', encoding='utf-8') as f:
                     content = f.read()
             except Exception:
-                # 若 README.md 不存在，嘗試 QUICK_START.md
                 alt_path = get_resource_path(os.path.join('docs', 'QUICK_START.md'))
                 with open(alt_path, 'r', encoding='utf-8') as f:
                     content = f.read()
@@ -782,7 +813,7 @@ class EnhancedLogAnalyzerApp:
                 pass
 
     def _show_text_viewer_window(self, title: str, content: str):
-        """顯示純文字的查看視窗（簡易Markdown檢視），字體使用內容字體大小"""
+        """顯示純文字視窗（使用內容字體大小）"""
         win = tk.Toplevel(self.root)
         win.title(title)
         win.geometry("1000x750")
@@ -799,6 +830,110 @@ class EnhancedLogAnalyzerApp:
         frame.grid_columnconfigure(0, weight=1)
         text.insert('1.0', content)
         text.config(state=tk.NORMAL)
+
+    # === UI 字體調整 ===
+    def _increase_ui_font(self):
+        """增加介面文字字體大小"""
+        if self.ui_font_size < 15:
+            self.ui_font_size += 1
+            self._apply_font_size()
+            self._save_settings_silent()
+
+    def _decrease_ui_font(self):
+        """減少介面文字字體大小"""
+        if self.ui_font_size > 10:
+            self.ui_font_size -= 1
+            self._apply_font_size()
+            self._save_settings_silent()
+
+    def _increase_content_font(self):
+        """增加內容字體大小"""
+        if self.content_font_size < 15:
+            self.content_font_size += 1
+            self._apply_font_size()
+            self._save_settings_silent()
+
+    def _decrease_content_font(self):
+        """減少內容字體大小"""
+        if self.content_font_size > 10:
+            self.content_font_size -= 1
+            self._apply_font_size()
+            self._save_settings_silent()
+
+    # === 左側面板寬度調整 ===
+    def _decrease_pane_width(self):
+        """減少左側面板寬度"""
+        current_width = self.settings.get('pane_width', 250)
+        if current_width > 100:  # 至少保留一個最小寬度
+            new_width = current_width - 10
+            self.settings['pane_width'] = new_width
+            if hasattr(self, 'pane_width_label'):
+                self.pane_width_label.config(text=f"{new_width}px")
+            # 更新分割視窗的面板寬度
+            if hasattr(self, 'left_frame'):
+                self.left_frame.configure(width=new_width)
+                self.paned.update_idletasks()
+            save_settings(self.settings)
+
+    def _increase_pane_width(self):
+        """增加左側面板寬度"""
+        current_width = self.settings.get('pane_width', 250)
+        if current_width < 500:  # 最大寬度限制
+            new_width = current_width + 10
+            self.settings['pane_width'] = new_width
+            if hasattr(self, 'pane_width_label'):
+                self.pane_width_label.config(text=f"{new_width}px")
+            # 更新分割視窗的面板寬度
+            if hasattr(self, 'left_frame'):
+                self.left_frame.configure(width=new_width)
+                self.paned.update_idletasks()
+            save_settings(self.settings)
+
+    def _reset_pane_width(self):
+        """重置左側面板寬度為預設值"""
+        default_width = 250
+        self.settings['pane_width'] = default_width
+        if hasattr(self, 'pane_width_label'):
+            self.pane_width_label.config(text=f"{default_width}px")
+        # 更新分割視窗的面板寬度
+        if hasattr(self, 'left_frame'):
+            self.left_frame.configure(width=default_width)
+            self.paned.update_idletasks()
+        save_settings(self.settings)
+
+    def _show_open_folder_prompt(self, out_dir: str, total_files: int, pass_count: int, fail_count: int, pass_path: str, fail_path: str):
+        """白底視窗，僅問題段落以黃底黑字反白"""
+        win = tk.Toplevel(self.root)
+        win.title("匯出完成")
+        win.geometry("700x300")
+        try:
+            win.configure(bg='white')
+        except Exception:
+            pass
+        info = (
+            f"匯出完成 / 共 {total_files} 個檔案\n\n"
+            f"PASS: {pass_count}\nFAIL: {fail_count}\n\n"
+            f"已產生：\n{pass_path}\n{fail_path}\n"
+        )
+        lbl_info = tk.Label(win, text=info, bg='white', fg='black', font=('Microsoft JhengHei', 11))
+        lbl_info.pack(fill=tk.BOTH, expand=1, padx=16, pady=(16, 6))
+        lbl_ask = tk.Label(win, text="是否要開啟輸出資料夾？", bg='#FFF176', fg='black', font=('Microsoft JhengHei', 11, 'bold'))
+        lbl_ask.pack(fill=tk.X, padx=16, pady=(0, 8))
+        btns = tk.Frame(win, bg='white')
+        btns.pack(pady=8)
+        def on_yes():
+            try:
+                os.startfile(out_dir)
+            except Exception:
+                pass
+            win.destroy()
+        def on_no():
+            win.destroy()
+        yes = tk.Button(btns, text="開啟資料夾", command=on_yes)
+        no = tk.Button(btns, text="關閉", command=on_no)
+        yes.pack(side=tk.LEFT, padx=10)
+        no.pack(side=tk.LEFT, padx=10)
+
 
 def main_enhanced():
     """增強版主程式"""

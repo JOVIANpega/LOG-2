@@ -11,7 +11,8 @@ DEFAULT_SETTINGS = {
     'last_folder_path': '',   # 上次選擇的資料夾路徑
     'window_width': 1400,     # 主視窗寬度
     'window_height': 900,     # 主視窗高度
-    'pane_width': 250         # 左側面板寬度
+    'pane_width': 250,        # 左側面板寬度
+    'app_title': 'PEGA test log Aanlyser'  # 應用程式標題（可在設定頁修改並保存）
 }
 
 def load_settings():

@@ -108,4 +108,22 @@ def get_resource_path(relative_path: str) -> str:
         base_path = getattr(sys, '_MEIPASS', os.path.abspath('.'))
         return os.path.join(base_path, relative_path)
     except Exception:
-        return relative_path 
+        return relative_path
+
+# 路徑與輸出輔助：集中資料夾判斷與建立
+def ensure_dir(path: str) -> str:
+    """確保資料夾存在，若不存在則建立；回傳路徑本身"""
+    try:
+        os.makedirs(path, exist_ok=True)
+    except Exception:
+        pass
+    return path
+
+def build_output_dir(base_dir: str, subfolder_name: str) -> str:
+    """在指定基底資料夾下建立輸出子資料夾並回傳其路徑"""
+    try:
+        out_dir = os.path.join(base_dir, subfolder_name)
+        ensure_dir(out_dir)
+        return out_dir
+    except Exception:
+        return base_dir 

@@ -18,6 +18,19 @@ def build_settings_content(app, parent):
     window_frame = tk.LabelFrame(parent, text="視窗大小設定", padx=20, pady=20)
     window_frame.pack(fill=tk.X, padx=20, pady=10)
     
+    # 應用程式標題設定
+    title_edit_frame = tk.Frame(window_frame)
+    title_edit_frame.pack(fill=tk.X, pady=10)
+    tk.Label(title_edit_frame, text="應用程式標題：", font=('Arial', 12)).pack(side=tk.LEFT)
+    app.app_title_var = tk.StringVar(value=app.settings.get('app_title', 'PEGA test log Aanlyser'))
+    app_title_entry = tk.Entry(title_edit_frame, textvariable=app.app_title_var, width=40)
+    app_title_entry.pack(side=tk.LEFT, padx=8)
+    def _apply_title():
+        app.settings['app_title'] = app.app_title_var.get().strip() or 'PEGA test log Aanlyser'
+        app.root.title(app.settings['app_title'])
+    apply_title_btn = tk.Button(title_edit_frame, text="套用", command=_apply_title)
+    apply_title_btn.pack(side=tk.LEFT, padx=6)
+    
     # 左側面板寬度控制
     pane_frame = tk.Frame(window_frame)
     pane_frame.pack(fill=tk.X, pady=10)
