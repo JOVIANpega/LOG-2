@@ -30,6 +30,20 @@ def build_settings_content(app, parent):
         app.root.title(app.settings['app_title'])
     apply_title_btn = tk.Button(title_edit_frame, text="套用", command=_apply_title)
     apply_title_btn.pack(side=tk.LEFT, padx=6)
+
+    # GUI 左側大標題設定
+    header_edit_frame = tk.Frame(window_frame)
+    header_edit_frame.pack(fill=tk.X, pady=10)
+    tk.Label(header_edit_frame, text="GUI 標題（左側大標）：", font=('Arial', 12)).pack(side=tk.LEFT)
+    app.gui_header_var = tk.StringVar(value=app.settings.get('gui_header', 'ONLY FOR CENTIMANIA LOG'))
+    gui_header_entry = tk.Entry(header_edit_frame, textvariable=app.gui_header_var, width=40)
+    gui_header_entry.pack(side=tk.LEFT, padx=8)
+    def _apply_gui_header():
+        app.settings['gui_header'] = app.gui_header_var.get().strip() or 'ONLY FOR CENTIMANIA LOG'
+        if hasattr(app, 'left_title_label'):
+            app.left_title_label.config(text=app.settings['gui_header'])
+    apply_header_btn = tk.Button(header_edit_frame, text="套用", command=_apply_gui_header)
+    apply_header_btn.pack(side=tk.LEFT, padx=6)
     
     # 左側面板寬度控制
     pane_frame = tk.Frame(window_frame)

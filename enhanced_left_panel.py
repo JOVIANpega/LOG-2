@@ -11,10 +11,12 @@ def build_left_panel(app, parent):
     title_frame = tk.Frame(parent, bg='#E6F3FF', relief=tk.RAISED, bd=2)
     title_frame.pack(fill=tk.X, padx=10, pady=(10, 20))
     
-    title_label = tk.Label(title_frame, text="測試LOG分析器", 
+    title_label = tk.Label(title_frame, text=app.settings.get('gui_header', 'ONLY FOR CENTIMANIA LOG'), 
                           font=('Arial', 26, 'bold'), fg='#2E86AB', bg='#E6F3FF')
     title_label.pack(pady=10)
     app.font_scaler.register(title_label)
+    # 讓設定頁面可即時更新此標題
+    app.left_title_label = title_label
     
     # 檔案選擇區域
     file_frame = tk.LabelFrame(parent, text="檔案選擇", padx=10, pady=10)
@@ -50,8 +52,8 @@ def build_left_panel(app, parent):
     except Exception:
         pass
     
-    # 說明文件按鈕
-    help_btn = tk.Button(parent, text="📖 查看說明(README)", command=app._open_markdown_help, bg="#607D8B", fg="white")
+    # 說明文件按鈕（HTML操作說明）
+    help_btn = tk.Button(parent, text="📖 查看操作說明(HTML)", command=app._open_html_help, bg="#607D8B", fg="white")
     help_btn.pack(fill=tk.X, padx=10, pady=(8, 8))
     app.font_scaler.register(help_btn)
     try:

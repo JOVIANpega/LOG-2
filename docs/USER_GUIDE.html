@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<title>操作說明（快速上手）</title>
+<style>
+ body { font-family: 'Microsoft JhengHei', Arial, sans-serif; line-height: 1.7; margin: 26px; }
+ h1 { color: #1b5e20; margin-bottom: 8px; }
+ h2 { color: #0d47a1; margin-top: 20px; }
+ ul, ol { margin-left: 22px; }
+ code, pre { background: #f5f5f5; padding: 8px 10px; border-radius: 4px; display: block; }
+ .tip { background: #fff9c4; padding: 10px 12px; border-left: 4px solid #fbc02d; }
+ .warn { background: #ffebee; padding: 10px 12px; border-left: 4px solid #e53935; }
+ .kbd { border: 1px solid #ccc; padding: 1px 6px; border-radius: 4px; background: #fafafa; }
+</style>
+</head>
+<body>
+<h1>操作說明（快速上手）</h1>
+<p>此工具用於分析測試 LOG，並輸出 PASS/FAIL 匯總 Excel（僅針對 CENTIMANIA 格式）。以下只介紹最常用的按鈕與各標籤頁如何操作。</p>
+
+<h2>一、左側按鈕區</h2>
+<ul>
+  <li><strong>📁 選擇單一檔案</strong>：挑一個 <code>.log</code> 檔進行分析。完成後可在三個標籤頁（PASS / FAIL / 原始LOG）查看結果。</li>
+  <li><strong>📂 選擇資料夾</strong>：一次分析資料夾內所有 <code>.log</code> 檔，並自動在該資料夾下建立 <code>LOG集總整理/</code>，輸出
+      <code>PASS匯總.xlsx</code> 與 <code>FAIL匯總.xlsx</code>。完成時跳出白底提示窗，可一鍵開啟輸出資料夾。</li>
+  <li><strong>🗑️ 清除結果</strong>：清空 PASS/FAIL/原始LOG 的畫面內容。</li>
+  <li><strong>📖 查看操作說明(HTML)</strong>：開啟本頁。</li>
+</ul>
+<p class="tip">左上「已選擇：檔案/資料夾」會顯示目前的選擇，字體大小跟「內容字體」聯動。</p>
+
+<h2>二、PASS 標籤頁（✅ PASS測項）</h2>
+<ul>
+  <li>顯示所有通過的測試步驟清單，欄位：<strong>Step Name / 指令 / 回應 / 結果</strong>。</li>
+  <li>內容字體可由左側「介面設定 → 內容字體」加減調整。</li>
+  <li>若需檢視完整原始內容，切到「📄 原始LOG」。</li>
+</ul>
+
+<h2>三、FAIL 標籤頁（❌ FAIL測項）</h2>
+<ul>
+  <li>畫面上下分割：</li>
+  <ul>
+    <li><strong>上方表格</strong>：欄位為 <strong>Step Name / 指令 / 錯誤回應 / Retry次數 / 錯誤原因</strong>。</li>
+    <li><strong>下方區域</strong>：顯示詳細錯誤內容，含紅色標示的 <em>is Fail</em> 文字。</li>
+  </ul>
+  <li>點選上方任一列，會即時更新下方詳細內容。</li>
+  <li>打開檔案時會自動選取第一筆 FAIL 方便查看。</li>
+</ul>
+
+<h2>四、📄 原始LOG 標籤頁</h2>
+<ul>
+  <li>顯示完整原始 LOG 文字。</li>
+  <li>若有錯誤行，會自動捲動到錯誤處並套用醒目標示。</li>
+</ul>
+
+<h2>五、匯出 Excel（僅「選擇資料夾」時自動執行）</h2>
+<ul>
+  <li>輸出路徑：所選資料夾內的 <code>LOG集總整理/</code>。</li>
+  <li><strong>PASS匯總.xlsx</strong>：
+    <ul>
+      <li>Summary 工作表：
+        <ul>
+          <li>欄位：<strong>檔名</strong>、<strong>PASS項目</strong>（超過 25 筆會水平分欄為 PASS項目2、3…）。</li>
+          <li>相同 PASS 項目集合會合併成一組，檔名欄以換行列出所有對應檔名，包含 SFIS 與測試總秒數。</li>
+          <li>底部提供「工作表快速連結（點擊跳轉）」；僅此區有超連結與懸停預覽（約 400x500）。</li>
+        </ul>
+      </li>
+      <li>各 LOG 工作表：第 1 行檔名（綠底白字），第 2 行 PASS 項目清單，第 3 行起貼上原始 LOG。</li>
+    </ul>
+  </li>
+  <li><strong>FAIL匯總.xlsx</strong>：
+    <ul>
+      <li>Summary 工作表：欄位 <strong>檔名 / FAIL原因</strong>，原因取自單檔主錯（例如：<em>IPIO009-0580:Check Battery_tempture is Fail !</em>）。</li>
+      <li>各 LOG 工作表：第 1 行檔名（紅底白字），第 2 行主要錯誤原因，第 3 行 PASS 項目，第 4 行起為原始 LOG。</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>六、常見問題</h2>
+<ul>
+  <li>檔名是中文？→ 支援繁體中文檔名。</li>
+  <li>Excel 提示修復？→ 已做文字清理與格式保護；仍發生時，請先更新 Office 版本，並回報樣本 LOG。</li>
+  <li>看不到預覽視窗？→ 只有 Summary 底部的「工作表快速連結」具備懸停預覽。</li>
+</ul>
+
+</body>
+</html> 

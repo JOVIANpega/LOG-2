@@ -12,6 +12,7 @@ import os
 import sys
 import json
 from settings_loader import load_settings, save_settings
+import webbrowser
 from log_parser import LogParser
 from ui_components import FontScaler, build_output_dir, get_resource_path
 from ui_enhanced_fixed import EnhancedTreeview, EnhancedText, FailDetailsPanel
@@ -660,6 +661,12 @@ class EnhancedLogAnalyzerApp:
         
         if hasattr(self, 'content_font_size_label'):
             self.content_font_size_label.config(text=str(self.content_font_size), font=('Arial', self.content_font_size))
+        # 檔案名稱顯示應跟隨內容字體大小
+        if hasattr(self, 'file_info_label'):
+            try:
+                self.file_info_label.configure(font=('Arial', self.content_font_size))
+            except Exception:
+                pass
         
         # 更新設定標籤頁中的字體大小標籤
         if hasattr(self, 'settings_ui_font_size_label'):
@@ -730,6 +737,8 @@ class EnhancedLogAnalyzerApp:
         """無聲儲存設定（不顯示確認視窗）"""
         self.settings['ui_font_size'] = self.ui_font_size
         self.settings['content_font_size'] = self.content_font_size
+        if hasattr(self, 'gui_header_var'):
+            self.settings['gui_header'] = self.gui_header_var.get().strip() or 'ONLY FOR CENTIMANIA LOG'
         # 保存面板寬度
         if hasattr(self, 'left_frame'):
             left_width = self.left_frame.winfo_width()
@@ -762,10 +771,14 @@ class EnhancedLogAnalyzerApp:
         # 保存標題
         if hasattr(self, 'app_title_var'):
             self.settings['app_title'] = self.app_title_var.get().strip() or 'PEGA test log Aanlyser'
+        if hasattr(self, 'gui_header_var'):
+            self.settings['gui_header'] = self.gui_header_var.get().strip() or 'ONLY FOR CENTIMANIA LOG'
         save_settings(self.settings)
         # 立即套用標題
         try:
             self.root.title(self.settings['app_title'])
+            if hasattr(self, 'left_title_label'):
+                self.left_title_label.config(text=self.settings['gui_header'])
         except Exception:
             pass
         messagebox.showinfo("設定保存", "設定已成功保存！")
@@ -809,6 +822,20 @@ class EnhancedLogAnalyzerApp:
         except Exception as e:
             try:
                 messagebox.showerror("錯誤", f"無法讀取說明：{e}")
+            except Exception:
+                pass
+
+    def _open_html_help(self):
+        """以系統預設瀏覽器開啟操作說明 HTML（docs/USER_GUIDE.html）"""
+        try:
+            html_path = get_resource_path(os.path.join('docs', 'USER_GUIDE.html'))
+            if not os.path.exists(html_path):
+                # 後備使用 README
+                return self._open_markdown_help()
+            webbrowser.open(f"file:///{html_path}")
+        except Exception as e:
+            try:
+                messagebox.showerror("錯誤", f"無法開啟操作說明：{e}")
             except Exception:
                 pass
 

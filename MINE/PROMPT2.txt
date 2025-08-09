@@ -14,7 +14,8 @@ git hub commit "V1.5.7" "優化PASS 顯示內容"
 pyinstaller --onefile --noconsole  main.py
 
 
-
+在 Windows 上右鍵檔案→內容→詳細資料，看到 FileVersion/ProductVersion 皆為 1.0.0.0。
+需要我將版本提升到指定號碼（例如 1.0.1.0
 
 # 1️⃣ 把所有變更（已追蹤與未追蹤的檔案）加入暫存區
 git add .
@@ -28,8 +29,17 @@ git push origin main
 
 
 git add .
-git commit -m "V1.6.0 優化PASS 顯示內容3"
+git commit -m "V1.6.2 優化HTML 說明文件"
 git push origin main
+
+
+開啟gui後 會根據 檔名有沒有pass決定要不要產生fail標籤頁
+例如 開啟 XXX PASS.LOG 
+那fail側項的標籤頁 隱藏不顯示
+
+但fail的不影響，因為fail也是會有pass項目
+
+
 
 
 
@@ -39,7 +49,12 @@ git push origin main
 
 
 
-GUI\\設定標籤
+GUI\設定標籤
+再多增加一個GUI標題
+可以修改測試LOG分析器 的文字 ，修改預設文字 為 測試log分析器 改成為ONLY FOR CENTIMANIA LOG 
+這些文字可以修改儲存，按下保存設定立刻修改 且寫到設定檔
+
+
 可以修改測試LOG分析器 的文字 ，修改預設文字 為 PEGA test log Aanlyser
 這些文字可以修改儲存，按下保存設定立刻修改 且寫到設定檔
 
