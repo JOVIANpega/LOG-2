@@ -15,6 +15,8 @@ from settings_loader import load_settings, save_settings
 from log_parser import LogParser
 from ui_components import FontScaler
 from ui_enhanced_fixed import EnhancedTreeview, EnhancedText, FailDetailsPanel
+from enhanced_settings import build_settings_content
+from enhanced_left_panel import build_left_panel
 
 class EnhancedLogAnalyzerApp:
     """增強版LOG分析器應用程式"""
@@ -131,120 +133,8 @@ class EnhancedLogAnalyzerApp:
             print(f"保存面板寬度失敗: {e}")
     
     def _build_enhanced_left_panel(self, parent):
-        """建立增強版左側面板"""
-        # 標題 - 使用大方塊淺藍色背景
-        title_frame = tk.Frame(parent, bg='#E6F3FF', relief=tk.RAISED, bd=2)
-        title_frame.pack(fill=tk.X, padx=10, pady=(10, 20))
-        
-        title_label = tk.Label(title_frame, text="測試LOG分析器", 
-                              font=('Arial', 26, 'bold'), fg='#2E86AB', bg='#E6F3FF')
-        title_label.pack(pady=10)
-        self.font_scaler.register(title_label)
-        
-        # 檔案選擇區域
-        file_frame = tk.LabelFrame(parent, text="檔案選擇", padx=10, pady=10)
-        file_frame.pack(fill=tk.X, padx=10, pady=5)
-        
-        # 單一檔案選擇
-        btn_single = tk.Button(file_frame, text="📁 選擇單一檔案", 
-                              command=self._select_file, bg='#4CAF50', fg='white')
-        btn_single.pack(fill=tk.X, pady=2)
-        self.font_scaler.register(btn_single)
-        
-        # 資料夾選擇
-        btn_folder = tk.Button(file_frame, text="📂 選擇資料夾", 
-                              command=self._select_folder, bg='#2196F3', fg='white')
-        btn_folder.pack(fill=tk.X, pady=2)
-        self.font_scaler.register(btn_folder)
-        
-        # 清除結果按鈕
-        btn_clear = tk.Button(file_frame, text="🗑️ 清除結果", 
-                             command=self._clear_enhanced_results, bg='#F44336', fg='white')
-        btn_clear.pack(fill=tk.X, pady=2)
-        self.font_scaler.register(btn_clear)
-        
-        # 左三個按鈕：加粗與hover
-        try:
-            from ui_components import make_bold, apply_button_hover
-            make_bold(btn_single)
-            make_bold(btn_folder)
-            make_bold(btn_clear)
-            # 針對彩色底按鈕，hover 時略微變亮
-            apply_button_hover(btn_single, hover_bg="#66BB6A", hover_fg='white', normal_bg='#4CAF50', normal_fg='white')
-            apply_button_hover(btn_folder, hover_bg="#64B5F6", hover_fg='white', normal_bg='#2196F3', normal_fg='white')
-            apply_button_hover(btn_clear,  hover_bg="#EF5350", hover_fg='white', normal_bg='#F44336', normal_fg='white')
-        except Exception:
-            pass
-        
-        # 說明文件按鈕
-        help_btn = tk.Button(parent, text="📖 查看說明(README)", command=self._open_markdown_help, bg="#607D8B", fg="white")
-        help_btn.pack(fill=tk.X, padx=10, pady=(8, 8))
-        self.font_scaler.register(help_btn)
-        try:
-            make_bold(help_btn)
-            apply_button_hover(help_btn, hover_bg="#78909C", hover_fg='white', normal_bg='#607D8B', normal_fg='white')
-        except Exception:
-            pass
-        
-        # 顯示選擇的檔案
-        self.file_info_label = tk.Label(file_frame, text="未選擇檔案", 
-                                       fg='#666', wraplength=200)
-        self.file_info_label.pack(pady=(5, 0))
-        self.font_scaler.register(self.file_info_label)
-        
-        # 如果有上次選擇的路徑，顯示出來
-        if self.settings.get('last_log_path') and os.path.exists(self.settings.get('last_log_path')):
-            filename = os.path.basename(self.settings.get('last_log_path'))
-            self.file_info_label.config(text=f"上次選擇：{filename}", fg='#666')
-        elif self.settings.get('last_folder_path') and os.path.exists(self.settings.get('last_folder_path')):
-            foldername = os.path.basename(self.settings.get('last_folder_path'))
-            self.file_info_label.config(text=f"上次選擇資料夾：{foldername}", fg='#666')
-        
-        # 移除開始分析按鈕 - 改為自動分析
-        
-        # 字體控制
-        font_frame = tk.LabelFrame(parent, text="介面設定", padx=10, pady=10)
-        font_frame.pack(fill=tk.X, padx=10, pady=5)
-        
-        # 介面文字大小控制
-        ui_font_frame = tk.Frame(font_frame)
-        ui_font_frame.pack(fill=tk.X, pady=2)
-        
-        tk.Label(ui_font_frame, text="介面文字：").pack(side=tk.LEFT)
-        
-        btn_ui_minus = tk.Button(ui_font_frame, text="－", width=3, 
-                                command=self._decrease_ui_font)
-        btn_ui_minus.pack(side=tk.LEFT, padx=2)
-        self.font_scaler.register(btn_ui_minus)
-        
-        self.ui_font_size_label = tk.Label(ui_font_frame, text=str(self.ui_font_size), 
-                                          width=3, relief=tk.SUNKEN, font=('Arial', self.ui_font_size))
-        self.ui_font_size_label.pack(side=tk.LEFT, padx=2)
-        
-        btn_ui_plus = tk.Button(ui_font_frame, text="＋", width=3, 
-                              command=self._increase_ui_font)
-        btn_ui_plus.pack(side=tk.LEFT, padx=2)
-        self.font_scaler.register(btn_ui_plus)
-        
-        # 內容字體大小控制
-        content_font_frame = tk.Frame(font_frame)
-        content_font_frame.pack(fill=tk.X, pady=2)
-        
-        tk.Label(content_font_frame, text="內容字體：").pack(side=tk.LEFT)
-        
-        btn_content_minus = tk.Button(content_font_frame, text="－", width=3, 
-                                    command=self._decrease_content_font)
-        btn_content_minus.pack(side=tk.LEFT, padx=2)
-        self.font_scaler.register(btn_content_minus)
-        
-        self.content_font_size_label = tk.Label(content_font_frame, text=str(self.content_font_size), 
-                                              width=3, relief=tk.SUNKEN, font=('Arial', self.content_font_size))
-        self.content_font_size_label.pack(side=tk.LEFT, padx=2)
-        
-        btn_content_plus = tk.Button(content_font_frame, text="＋", width=3, 
-                                     command=self._increase_content_font)
-        btn_content_plus.pack(side=tk.LEFT, padx=2)
-        self.font_scaler.register(btn_content_plus)
+        """建立增強版左側面板（抽離至模組）"""
+        build_left_panel(self, parent)
     
     def _build_enhanced_right_panel(self, parent):
         """建立增強版右側面板"""
@@ -492,129 +382,8 @@ class EnhancedLogAnalyzerApp:
         canvas.bind_all("<MouseWheel>", _on_mousewheel)
     
     def _build_settings_content(self, parent):
-        """建立設定內容"""
-        # 標題
-        title_label = tk.Label(parent, text="應用程式設定", 
-                              font=('Arial', 16, 'bold'), fg='#2E86AB')
-        title_label.pack(pady=(20, 30))
-        
-        # 視窗大小設定區域
-        window_frame = tk.LabelFrame(parent, text="視窗大小設定", padx=20, pady=20)
-        window_frame.pack(fill=tk.X, padx=20, pady=10)
-        
-        # 左側面板寬度控制
-        pane_frame = tk.Frame(window_frame)
-        pane_frame.pack(fill=tk.X, pady=10)
-        
-        tk.Label(pane_frame, text="左側面板寬度：", font=('Arial', 12)).pack(side=tk.LEFT)
-        
-        # 獲取當前左側面板寬度
-        current_pane_width = self.settings.get('pane_width', 250)
-        
-        # 減少按鈕
-        btn_pane_minus = tk.Button(pane_frame, text="－", width=3, 
-                                  command=self._decrease_pane_width)
-        btn_pane_minus.pack(side=tk.LEFT, padx=5)
-        
-        # 顯示當前寬度
-        self.pane_width_label = tk.Label(pane_frame, text=f"{current_pane_width}px", 
-                                        width=8, relief=tk.SUNKEN, font=('Arial', 12))
-        self.pane_width_label.pack(side=tk.LEFT, padx=5)
-        
-        # 增加按鈕
-        btn_pane_plus = tk.Button(pane_frame, text="＋", width=3, 
-                                 command=self._increase_pane_width)
-        btn_pane_plus.pack(side=tk.LEFT, padx=5)
-        
-        # 重置按鈕
-        btn_pane_reset = tk.Button(pane_frame, text="重置", 
-                                  command=self._reset_pane_width)
-        btn_pane_reset.pack(side=tk.LEFT, padx=10)
-        
-        # 說明文字
-        info_label = tk.Label(window_frame, text="調整左側面板的寬度，影響檔案選擇區域的大小", 
-                             fg='#666', font=('Arial', 10))
-        info_label.pack(pady=(10, 0))
-        
-        # 分隔線
-        separator = ttk.Separator(parent, orient='horizontal')
-        separator.pack(fill=tk.X, padx=20, pady=20)
-        
-        # 字體設定區域
-        font_frame = tk.LabelFrame(parent, text="字體設定", padx=20, pady=20)
-        font_frame.pack(fill=tk.X, padx=20, pady=10)
-        
-        # 介面文字大小控制
-        ui_font_frame = tk.Frame(font_frame)
-        ui_font_frame.pack(fill=tk.X, pady=5)
-        
-        tk.Label(ui_font_frame, text="介面文字大小：", font=('Arial', 12)).pack(side=tk.LEFT)
-        
-        btn_ui_minus = tk.Button(ui_font_frame, text="－", width=3, 
-                                command=self._decrease_ui_font)
-        btn_ui_minus.pack(side=tk.LEFT, padx=5)
-        
-        self.settings_ui_font_size_label = tk.Label(ui_font_frame, text=str(self.ui_font_size), 
-                                          width=3, relief=tk.SUNKEN, font=('Arial', 12))
-        self.settings_ui_font_size_label.pack(side=tk.LEFT, padx=5)
-        
-        btn_ui_plus = tk.Button(ui_font_frame, text="＋", width=3, 
-                              command=self._increase_ui_font)
-        btn_ui_plus.pack(side=tk.LEFT, padx=5)
-        
-        # 內容字體大小控制
-        content_font_frame = tk.Frame(font_frame)
-        content_font_frame.pack(fill=tk.X, pady=5)
-        
-        tk.Label(content_font_frame, text="內容字體大小：", font=('Arial', 12)).pack(side=tk.LEFT)
-        
-        btn_content_minus = tk.Button(content_font_frame, text="－", width=3, 
-                                    command=self._decrease_content_font)
-        btn_content_minus.pack(side=tk.LEFT, padx=5)
-        
-        self.settings_content_font_size_label = tk.Label(content_font_frame, text=str(self.content_font_size), 
-                                              width=3, relief=tk.SUNKEN, font=('Arial', 12))
-        self.settings_content_font_size_label.pack(side=tk.LEFT, padx=5)
-        
-        btn_content_plus = tk.Button(content_font_frame, text="＋", width=3, 
-                                     command=self._increase_content_font)
-        btn_content_plus.pack(side=tk.LEFT, padx=5)
-        
-        # 分隔線
-        separator2 = ttk.Separator(parent, orient='horizontal')
-        separator2.pack(fill=tk.X, padx=20, pady=20)
-        
-        # 其他設定區域
-        other_frame = tk.LabelFrame(parent, text="其他設定", padx=20, pady=20)
-        other_frame.pack(fill=tk.X, padx=20, pady=10)
-        
-        # 自動分析設定
-        self.auto_analyze_var = tk.BooleanVar(value=self.settings.get('auto_analyze', True))
-        auto_analyze_check = tk.Checkbutton(other_frame, text="選擇檔案後自動開始分析", 
-                                           variable=self.auto_analyze_var, 
-                                           font=('Arial', 12))
-        auto_analyze_check.pack(anchor=tk.W, pady=5)
-        
-        # 路徑記憶設定
-        self.remember_path_var = tk.BooleanVar(value=self.settings.get('remember_path', True))
-        remember_path_check = tk.Checkbutton(other_frame, text="記住上次選擇的路徑", 
-                                            variable=self.remember_path_var, 
-                                            font=('Arial', 12))
-        remember_path_check.pack(anchor=tk.W, pady=5)
-        
-        # 分隔線
-        separator3 = ttk.Separator(parent, orient='horizontal')
-        separator3.pack(fill=tk.X, padx=20, pady=20)
-        
-        # 按鈕區域
-        button_frame = tk.Frame(parent)
-        button_frame.pack(fill=tk.X, padx=20, pady=20)
-        
-        # 保存設定按鈕
-        save_btn = tk.Button(button_frame, text="保存設定", 
-                            command=self._save_settings,
-                            bg='#4CAF50', fg='white', font=('Arial', 12, 'bold'))
-        save_btn.pack(side=tk.RIGHT, padx=5)
+        """建立設定內容（抽離至模組）"""
+        build_settings_content(self, parent)
     
     def _get_default_directory(self):
         """獲取預設目錄 - EXE或PY檔案所在目錄"""
