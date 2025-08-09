@@ -5,8 +5,9 @@
   "last_folder_path": "M:/PYTHON/LOG_analyser-main/MINE/LOG",
   "window_width": 1536,
   "window_height": 801,
-  "pane_width": 235,
+  "pane_width": 261,
   "app_title": "PEGA test log Aanlyser",
+  "gui_header": "ONLY FOR CENTIMANIA LOG",
   "auto_analyze": true,
   "remember_path": true
 }
