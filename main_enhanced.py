@@ -809,13 +809,13 @@ class EnhancedLogAnalyzerApp:
     def _open_markdown_help(self):
         """開啟並顯示 docs/README.md 或 QUICK_START.md 內容"""
         try:
-            md_path = get_resource_path(os.path.join('docs', 'README.md'))
+            md_path = get_resource_path(os.path.join('dioc', 'README.md'))
             content = ''
             try:
                 with open(md_path, 'r', encoding='utf-8') as f:
                     content = f.read()
             except Exception:
-                alt_path = get_resource_path(os.path.join('docs', 'QUICK_START.md'))
+                alt_path = get_resource_path(os.path.join('dioc', 'QUICK_START.md'))
                 with open(alt_path, 'r', encoding='utf-8') as f:
                     content = f.read()
             self._show_text_viewer_window("README 說明", content)

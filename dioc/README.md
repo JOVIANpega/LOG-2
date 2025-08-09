@@ -139,6 +139,12 @@ README.md         # 專案說明文件
 
 ## 版本歷史
 
+### v1.0.1
+- 搬移所有 Markdown 說明文件至 `dioc/`
+- 更新程式中說明文件路徑（`main_enhanced.py`, `main_standard.py`）
+- 維持 HTML 說明於 `docs/USER_GUIDE.html`
+- 更新 EXE 檔版本資訊為 1.0.1.0（`assets/version_info.txt`）
+
 ### v1.0.0
 - 初始版本發布
 - 基本Log分析功能
