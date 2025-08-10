@@ -1021,7 +1021,7 @@ class EnhancedLogAnalyzerApp:
             pass
 
     def _open_markdown_help(self):
-        """開啟並顯示 docs/README.md 或 QUICK_START.md 內容"""
+        """開啟並顯示 dioc/README.md 或 QUICK_START.md 內容"""
         try:
             md_path = get_resource_path(os.path.join('dioc', 'README.md'))
             content = ''

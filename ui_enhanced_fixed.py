@@ -43,6 +43,13 @@ class EnhancedTreeview:
         self.tree.bind('<Leave>', self._on_leave)
         self.tree.bind('<Double-1>', self._on_double_click)
         self.tree.bind('<Control-c>', self._on_copy)  # 支援Ctrl+C複製
+        
+        # 綁定選擇改變事件
+        self.tree.bind('<<TreeviewSelect>>', self._on_selection_change)
+        
+        # 綁定ENTER鍵事件
+        self.tree.bind('<Return>', self._on_enter_key)
+        
         self.current_hover_item = None
     
     def setup_scrollbars(self, parent):
@@ -112,6 +119,36 @@ class EnhancedTreeview:
                 self._show_detail_dialog(full_content, current_item_id=item)
             else:
                 print("沒有找到詳細內容")
+    
+    def _on_selection_change(self, event):
+        """處理選擇改變事件，同步彈窗顯示"""
+        selected_items = self.tree.selection()
+        if not selected_items:
+            # 沒有選中項目時隱藏彈窗
+            self._hide_hover_popup()
+            return
+        
+        current_item = selected_items[0]
+        if current_item != self._hover_row:
+            # 如果當前項目有內容，顯示彈窗
+            if self.full_content_storage.get(current_item):
+                self._maybe_show_hover_popup_for_keyboard(current_item)
+    
+    def _on_enter_key(self, event):
+        """ENTER鍵處理，開啟詳細視窗"""
+        selected_items = self.tree.selection()
+        if not selected_items:
+            return "break"
+        
+        current_item = selected_items[0]
+        # 從字典中獲取完整內容
+        full_content = self.full_content_storage.get(current_item)
+        if full_content:
+            self._show_detail_dialog(full_content, current_item_id=current_item)
+        else:
+            print("沒有找到詳細內容")
+        
+        return "break"
 
     def set_font_size(self, size: int):
         """設定展開視窗字體大小"""
@@ -151,6 +188,11 @@ class EnhancedTreeview:
             print(f"複製選中項目失敗: {e}")
     
     def _maybe_show_hover_popup(self, event):
+        """顯示懸停彈窗，支援滑鼠和鍵盤選擇"""
+        # 檢查是否有滑鼠事件
+        if not event or not hasattr(event, 'y'):
+            return
+            
         row = self.tree.identify_row(event.y)
         if not row:
             self._hover_row = None
@@ -180,6 +222,48 @@ class EnhancedTreeview:
             return
         self._hover_row = row
         self._show_hover_popup("完整內容", content, abs_x, abs_y)
+    
+    def _maybe_show_hover_popup_for_keyboard(self, item_id):
+        """為鍵盤選擇的項目顯示彈窗"""
+        if not item_id:
+            return
+        
+        content = self.full_content_storage.get(item_id)
+        if not content:
+            return
+        
+        # 獲取項目位置
+        bbox = self.tree.bbox(item_id, column=0)
+        if not bbox:
+            return
+        
+        x, y, width, height = bbox
+        abs_x = self.tree.winfo_rootx() + x + width + 12
+        abs_y = self.tree.winfo_rooty() + y + 12
+        
+        # 檢查是否靠近螢幕下方，如果是則往上顯示
+        screen_height = self.tree.winfo_screenheight()
+        popup_height = 400
+        if abs_y + popup_height > screen_height - 50:
+            abs_y = screen_height - popup_height - 50
+        
+        # 檢查是否靠近螢幕右側，如果是則往左顯示
+        screen_width = self.tree.winfo_screenwidth()
+        popup_width = 700
+        if abs_x + popup_width > screen_width - 50:
+            abs_x = screen_width - popup_width - 50
+        
+        # 如果彈窗已存在且是同一行，只更新位置
+        if self._hover_row == item_id and self._hover_popup and self._hover_popup.winfo_exists():
+            try:
+                self._hover_popup.geometry(f"700x400+{abs_x}+{abs_y}")
+            except Exception:
+                pass
+            return
+        
+        # 顯示新的彈窗
+        self._hover_row = item_id
+        self._show_hover_popup("完整內容", content, abs_x, abs_y)
 
     def _show_hover_popup(self, title, content, x, y):
         if self._hover_popup and self._hover_popup.winfo_exists():
@@ -188,7 +272,10 @@ class EnhancedTreeview:
                 self._hover_text.delete('1.0', tk.END)
                 self._hover_text.insert('1.0', content)
                 self._hover_text.config(font=('Consolas', self.font_size))
-                self._hover_popup.geometry(f"700x400+{x}+{y}")
+                
+                # 使用改善後的視窗定位邏輯
+                self._position_hover_popup(self._hover_popup, x, y, 700, 400)
+                
                 # 重新應用語法高亮
                 self._apply_syntax_highlighting(self._hover_text, content)
                 return
@@ -202,7 +289,10 @@ class EnhancedTreeview:
         self._hover_popup = tk.Toplevel(self.tree)
         self._hover_popup.overrideredirect(True)
         self._hover_popup.attributes('-topmost', True)
-        self._hover_popup.geometry(f"700x400+{x}+{y}")
+        
+        # 使用改善後的視窗定位邏輯
+        self._position_hover_popup(self._hover_popup, x, y, 700, 400)
+        
         frame = tk.Frame(self._hover_popup, bd=1, relief=tk.SOLID)
         frame.pack(fill=tk.BOTH, expand=1)
         text = tk.Text(frame, wrap=tk.NONE, font=('Consolas', self.font_size))
@@ -225,7 +315,67 @@ class EnhancedTreeview:
         self._apply_syntax_highlighting(text, content)
         self._hover_popup.bind('<Leave>', lambda e: self._hide_hover_popup())
         self._hover_text = text
-
+    
+    def _position_hover_popup(self, popup_window, mouse_x, mouse_y, window_width, window_height):
+        """定位彈出視窗，避免與其他視窗重疊"""
+        try:
+            # 獲取螢幕尺寸
+            screen_width = popup_window.winfo_screenwidth()
+            screen_height = popup_window.winfo_screenheight()
+            
+            # 計算初始位置（滑鼠位置）
+            initial_x = mouse_x
+            initial_y = mouse_y
+            
+            # 檢查是否會超出螢幕邊界
+            if initial_x + window_width > screen_width:
+                initial_x = screen_width - window_width - 10
+            
+            if initial_y + window_height > screen_height:
+                initial_y = screen_height - window_height - 10
+            
+            # 確保不會超出左邊界和上邊界
+            initial_x = max(10, initial_x)
+            initial_y = max(10, initial_y)
+            
+            # 檢查是否會與詳細視窗重疊
+            if hasattr(self, '_detail_window') and self._detail_window and self._detail_window.winfo_exists():
+                detail_x = self._detail_window.winfo_x()
+                detail_y = self._detail_window.winfo_y()
+                detail_width = self._detail_window.winfo_width()
+                detail_height = self._detail_window.winfo_height()
+                
+                # 如果會重疊，調整位置
+                if not (initial_x + window_width <= detail_x or 
+                       detail_x + detail_width <= initial_x or
+                       initial_y + window_height <= detail_y or 
+                       detail_y + detail_height <= initial_y):
+                    
+                    # 嘗試放在詳細視窗的右側
+                    if detail_x + detail_width + window_width <= screen_width:
+                        initial_x = detail_x + detail_width + 10
+                        initial_y = detail_y
+                    # 如果右側空間不夠，放在下方
+                    elif detail_y + detail_height + window_height <= screen_height:
+                        initial_x = detail_x
+                        initial_y = detail_y + detail_height + 10
+                    # 如果下方空間也不夠，放在左側
+                    elif detail_x - window_width >= 10:
+                        initial_x = detail_x - window_width - 10
+                        initial_y = detail_y
+                    # 如果左側空間也不夠，放在上方
+                    elif detail_y - window_height >= 10:
+                        initial_x = detail_x
+                        initial_y = detail_y - window_height - 10
+            
+            # 設定視窗位置
+            popup_window.geometry(f"{window_width}x{window_height}+{initial_x}+{initial_y}")
+            
+        except Exception as e:
+            print(f"定位彈出視窗失敗: {e}")
+            # 使用預設位置
+            popup_window.geometry(f"{window_width}x{window_height}+{mouse_x}+{mouse_y}")
+    
     def _hide_hover_popup(self):
         if self._hover_popup and self._hover_popup.winfo_exists():
             try:
@@ -349,7 +499,38 @@ class EnhancedTreeview:
     def _show_detail_dialog(self, content, current_item_id=None):
         """顯示詳細內容對話框（測項指令內容）"""
         try:
-            detail_window = tk.Toplevel()
+            # 檢查是否已經有詳細視窗存在
+            if hasattr(self, '_detail_window') and self._detail_window and self._detail_window.winfo_exists():
+                # 如果視窗存在，重用現有視窗
+                detail_window = self._detail_window
+                # 清空現有內容
+                for widget in detail_window.winfo_children():
+                    if isinstance(widget, tk.Label) and widget.cget('bg') == '#0B1D39':
+                        # 這是標題標籤，保留
+                        continue
+                    widget.destroy()
+                
+                # 重新創建內容
+                self._create_detail_window_content(detail_window, content, current_item_id)
+                
+                # 將視窗帶到前台
+                detail_window.lift()
+                detail_window.focus_force()
+                return
+            else:
+                # 創建新視窗
+                detail_window = tk.Toplevel()
+                self._detail_window = detail_window  # 保存視窗引用
+                
+                # 創建視窗內容
+                self._create_detail_window_content(detail_window, content, current_item_id)
+            
+        except Exception as e:
+            print(f"顯示詳細內容對話框失敗: {e}")
+    
+    def _create_detail_window_content(self, detail_window, content, current_item_id):
+        """創建詳細視窗的內容"""
+        try:
             # 解析步驟名稱
             try:
                 summary, step_label = self._build_cmd_resp_summary_and_label(content)
@@ -357,20 +538,21 @@ class EnhancedTreeview:
                 summary, step_label = (None, None)
             title = "測項指令內容" if not step_label else f"{step_label} +測項指令內容"
             detail_window.title(title)
+            
             # 視窗背景改回白色（僅標題深藍）
             try:
                 detail_window.configure(bg="#FFFFFF")
             except Exception:
                 pass
+                
             # 先設定最小尺寸，然後根據內容自動調整
-            detail_window.geometry("800x600")
-            detail_window.minsize(600, 400)  # 設定最小尺寸
+            detail_window.geometry("800x700")  # 增加預設高度
+            detail_window.minsize(700, 550)   # 增加最小尺寸，確保按鈕可見
             detail_window.maxsize(1200, 900)  # 設定最大尺寸
             
-            # 讓視窗居中顯示
+            # 讓視窗居中顯示，並確保不重疊
             detail_window.transient(detail_window.master)
             detail_window.grab_set()
-            detail_window.update_idletasks()
             
             # 標題（深藍底白字）
             title_label = tk.Label(detail_window, text=title, 
@@ -418,12 +600,10 @@ class EnhancedTreeview:
             # 允許選取但不允許編輯
             text_widget.config(state=tk.NORMAL)
             
-            # 自動調整視窗大小以適應內容
-            self._auto_resize_window(detail_window, text_widget)
-            
-            # 按鈕框架（白底）
-            btn_frame = tk.Frame(detail_window, bg="#FFFFFF")
-            btn_frame.pack(pady=10, fill=tk.X)
+            # 按鈕框架（白底）- 緊湊佈局
+            btn_frame = tk.Frame(detail_window, bg="#FFFFFF", height=60)  # 減少高度
+            btn_frame.pack(pady=12, fill=tk.X, padx=10)
+            btn_frame.pack_propagate(False)  # 防止框架被壓縮
             
             # 找到當前項目在 all_items_data 中的索引
             current_index = -1
@@ -436,38 +616,361 @@ class EnhancedTreeview:
             # 上一頁按鈕（添加hover效果）
             prev_btn = tk.Button(btn_frame, text="上一頁", 
                                  command=lambda: self._show_previous_item(detail_window, text_widget, current_index),
-                                 relief=tk.RAISED, bd=2, bg='#E8E8E8', fg='#333333',
-                                 font=('Arial', 10, 'bold'), padx=15, pady=5)
-            prev_btn.pack(side=tk.LEFT, padx=5)
+                                 relief=tk.RAISED, bd=1, bg='#E8E8E8', fg='#333333',
+                                 font=('Arial', 9, 'bold'), padx=10, pady=3)
+            prev_btn.pack(side=tk.LEFT, padx=4, pady=6)
             
             # 下一頁按鈕（添加hover效果）
             next_btn = tk.Button(btn_frame, text="下一頁", 
                                  command=lambda: self._show_next_item(detail_window, text_widget, current_index),
-                                 relief=tk.RAISED, bd=2, bg='#E8E8E8', fg='#333333',
-                                 font=('Arial', 10, 'bold'), padx=15, pady=5)
-            next_btn.pack(side=tk.LEFT, padx=5)
+                                 relief=tk.RAISED, bd=1, bg='#E8E8E8', fg='#333333',
+                                 font=('Arial', 9, 'bold'), padx=10, pady=3)
+            next_btn.pack(side=tk.LEFT, padx=4, pady=6)
             
-            # 複製全部按鈕
-            copy_btn = tk.Button(btn_frame, text="複製全部", 
-                                 command=lambda: self._copy_to_clipboard(merged),
-                                 relief=tk.RAISED, bd=2, bg='#E8E8E8', fg='#333333',
-                                 font=('Arial', 10, 'bold'), padx=15, pady=5)
-            copy_btn.pack(side=tk.LEFT, padx=5)
+                        # 複製按鈕（添加hover效果）
+            copy_btn = tk.Button(btn_frame, text="複製內容", 
+                                 command=lambda: self._copy_to_clipboard(text_widget.get('1.0', tk.END)),
+                                 relief=tk.RAISED, bd=1, bg='#E8E8E8', fg='#333333',
+                                 font=('Arial', 9, 'bold'), padx=10, pady=3)
+            copy_btn.pack(side=tk.LEFT, padx=4, pady=6)
             
-            # 關閉按鈕
-            close_btn = tk.Button(btn_frame, text="關閉", command=detail_window.destroy,
-                                 relief=tk.RAISED, bd=2, bg='#E8E8E8', fg='#333333',
-                                 font=('Arial', 10, 'bold'), padx=15, pady=5)
-            close_btn.pack(side=tk.LEFT, padx=5)
+            # 搜尋標籤
+            search_label = tk.Label(btn_frame, text="🔍", bg="#FFFFFF", font=('Arial', 9))
+            search_label.pack(side=tk.LEFT, padx=(8, 2))
             
-            # 為導航按鈕添加hover效果
+            # 搜尋輸入框
+            search_entry = tk.Entry(btn_frame, width=25, font=('Arial', 9))
+            search_entry.pack(side=tk.LEFT, padx=2)
+            
+            # 綁定Enter鍵跳轉到下一個搜尋結果
+            search_entry.bind('<Return>', lambda event: self._jump_to_next_search_result(text_widget, search_entry.get()))
+            
+            # 綁定輸入框內容變化，即時搜尋
+            search_entry.bind('<KeyRelease>', lambda event: self._highlight_search_results(text_widget, search_entry.get()))
+            
+
+            
+            # 設定按鈕hover效果
             self._setup_button_hover_effects(prev_btn, next_btn)
+            self._setup_button_hover_effects(copy_btn, search_btn)
             
-            # 更新按鈕狀態
-            self._update_navigation_buttons(prev_btn, next_btn, current_index)
+            # 更新導航按鈕狀態
+            self._update_navigation_buttons_in_window(detail_window, current_index)
+            
+            # 等待所有UI元素完全建立後再進行視窗定位和尺寸調整
+            detail_window.after(100, lambda: self._finalize_window_setup(detail_window, text_widget))
             
         except Exception as e:
-            print(f"顯示詳細內容對話框失敗: {e}")
+            print(f"創建詳細視窗內容失敗: {e}")
+    
+    def _show_search_dialog_in_detail(self, detail_window, text_widget):
+        """在詳細視窗中顯示搜尋對話框"""
+        try:
+            # 如果已經有搜尋框架，先關閉它
+            if hasattr(self, '_detail_search_frame') and self._detail_search_frame:
+                self._detail_search_frame.destroy()
+            
+            # 創建搜尋框架 - 直接放在按鈕框架之前
+            search_frame = tk.Frame(detail_window, bg='#f0f0f0', relief=tk.RAISED, bd=1)
+            search_frame.pack(fill=tk.X, padx=8, pady=3)
+            
+            # 儲存搜尋框架引用
+            self._detail_search_frame = search_frame
+            
+            # 搜尋標籤
+            search_label = tk.Label(search_frame, text="🔍 搜尋:", bg='#f0f0f0', font=('Arial', 9, 'bold'))
+            search_label.pack(side=tk.LEFT, padx=(8, 3))
+            
+            # 搜尋輸入框
+            search_entry = tk.Entry(search_frame, width=30, font=('Arial', 9))
+            search_entry.pack(side=tk.LEFT, padx=3)
+            search_entry.focus_set()
+            
+            # 搜尋按鈕
+            search_btn = tk.Button(search_frame, text="搜尋", 
+                                   command=lambda: self._find_in_detail_text(text_widget, search_entry.get()),
+                                   bg='#4CAF50', fg='white', font=('Arial', 8, 'bold'),
+                                   padx=6, pady=1, relief=tk.FLAT, bd=1)
+            search_btn.pack(side=tk.LEFT, padx=3)
+            
+            # 下一個按鈕
+            next_btn = tk.Button(search_frame, text="下一個", 
+                                 command=lambda: self._find_next_in_detail(text_widget, search_entry.get()),
+                                 bg='#2196F3', fg='white', font=('Arial', 8, 'bold'),
+                                 padx=6, pady=1, relief=tk.FLAT, bd=1)
+            next_btn.pack(side=tk.LEFT, padx=3)
+            
+            # 上一個按鈕
+            prev_btn = tk.Button(search_frame, text="上一個", 
+                                 command=lambda: self._find_prev_in_detail(text_widget, search_entry.get()),
+                                 bg='#2196F3', fg='white', font=('Arial', 8, 'bold'),
+                                 padx=6, pady=1, relief=tk.FLAT, bd=1)
+            prev_btn.pack(side=tk.LEFT, padx=3)
+            
+            # 關閉按鈕
+            close_btn = tk.Button(search_frame, text="關閉", 
+                                  command=lambda: self._close_detail_search(search_frame),
+                                  bg='#f44336', fg='white', font=('Arial', 8, 'bold'),
+                                  padx=6, pady=1, relief=tk.FLAT, bd=1)
+            close_btn.pack(side=tk.LEFT, padx=3)
+            
+            # 綁定Enter鍵到搜尋
+            search_entry.bind('<Return>', lambda e: self._find_in_detail_text(text_widget, search_entry.get()))
+            
+            # 綁定Escape鍵到關閉
+            search_entry.bind('<Escape>', lambda e: self._close_detail_search(search_frame))
+            
+            print("搜尋對話框創建成功！")
+            
+        except Exception as e:
+            print(f"創建詳細視窗搜尋對話框失敗: {e}")
+            import traceback
+            traceback.print_exc()
+    
+    def _finalize_window_setup(self, detail_window, text_widget):
+        """完成視窗設定：定位、尺寸調整等"""
+        try:
+            # 確保視窗完全建立
+            detail_window.update_idletasks()
+            detail_window.update()
+            
+            # 計算視窗位置，避免重疊
+            self._position_window_avoiding_overlap(detail_window)
+            
+            # 自動調整視窗大小以適應內容
+            self._auto_resize_window(detail_window, text_widget)
+            
+            # 再次確保視窗在最上層
+            detail_window.lift()
+            detail_window.focus_set()
+            
+        except Exception as e:
+            print(f"完成視窗設定失敗: {e}")
+    
+    def _position_window_avoiding_overlap(self, detail_window):
+        """計算視窗位置，避免與其他視窗重疊"""
+        try:
+            # 等待視窗完全建立後再獲取尺寸
+            detail_window.update_idletasks()
+            detail_window.update()
+            
+            # 獲取螢幕尺寸
+            screen_width = detail_window.winfo_screenwidth()
+            screen_height = detail_window.winfo_screenheight()
+            
+            # 獲取視窗尺寸（確保視窗已完全建立）
+            window_width = detail_window.winfo_width()
+            window_height = detail_window.winfo_height()
+            
+            # 如果視窗尺寸為0或太小，使用預設值
+            if window_width <= 100:
+                window_width = 800
+            if window_height <= 100:
+                window_height = 600
+            
+            # 獲取所有現有的詳細視窗
+            existing_windows = self._get_existing_detail_windows(detail_window)
+            
+            # 計算最佳位置，避免重疊
+            best_position = self._calculate_best_window_position(
+                window_width, window_height, screen_width, screen_height, existing_windows
+            )
+            
+            # 設定視窗位置
+            detail_window.geometry(f"{window_width}x{window_height}+{best_position[0]}+{best_position[1]}")
+            
+            # 確保視窗在最上層
+            detail_window.lift()
+            detail_window.attributes('-topmost', True)
+            detail_window.attributes('-topmost', False)
+            
+            # 記錄此視窗位置，供後續視窗參考
+            self._record_window_position(detail_window, best_position[0], best_position[1], window_width, window_height)
+            
+        except Exception as e:
+            print(f"計算視窗位置失敗: {e}")
+            # 如果計算失敗，使用預設居中位置
+            try:
+                screen_width = detail_window.winfo_screenwidth()
+                screen_height = detail_window.winfo_screenheight()
+                window_width = 800
+                window_height = 600
+                new_x = (screen_width - window_width) // 2
+                new_y = (screen_height - window_height) // 2
+                detail_window.geometry(f"{window_width}x{window_height}+{new_x}+{new_y}")
+            except Exception:
+                pass
+    
+    def _get_existing_detail_windows(self, current_window):
+        """獲取所有現有的詳細視窗（排除當前視窗）"""
+        existing_windows = []
+        try:
+            # 檢查是否有其他詳細視窗存在
+            if hasattr(self, '_detail_window') and self._detail_window:
+                if (self._detail_window != current_window and 
+                    self._detail_window.winfo_exists() and 
+                    self._detail_window.winfo_viewable()):
+                    
+                    try:
+                        x = self._detail_window.winfo_x()
+                        y = self._detail_window.winfo_y()
+                        width = self._detail_window.winfo_width()
+                        height = self._detail_window.winfo_height()
+                        
+                        # 確保視窗尺寸有效
+                        if width > 0 and height > 0:
+                            existing_windows.append({
+                                'x': x, 'y': y, 'width': width, 'height': height
+                            })
+                    except Exception:
+                        pass
+            
+            # 檢查是否有記錄的視窗位置
+            if hasattr(self, '_window_positions'):
+                for pos_info in self._window_positions:
+                    if pos_info['window'] != current_window and pos_info['window'].winfo_exists():
+                        existing_windows.append({
+                            'x': pos_info['x'],
+                            'y': pos_info['y'],
+                            'width': pos_info['width'],
+                            'height': pos_info['height']
+                        })
+                        
+        except Exception as e:
+            print(f"獲取現有視窗失敗: {e}")
+        
+        return existing_windows
+    
+    def _calculate_best_window_position(self, window_width, window_height, screen_width, screen_height, existing_windows):
+        """計算最佳視窗位置，避免重疊"""
+        try:
+            # 如果沒有其他視窗，居中顯示
+            if not existing_windows:
+                return ((screen_width - window_width) // 2, (screen_height - window_height) // 2)
+            
+            # 嘗試多個位置，找到最佳的不重疊位置
+            candidate_positions = []
+            
+            # 1. 嘗試放在第一個視窗的右側
+            if existing_windows:
+                first_window = existing_windows[0]
+                right_x = first_window['x'] + first_window['width'] + 20
+                if right_x + window_width <= screen_width:
+                    candidate_positions.append((right_x, first_window['y']))
+            
+            # 2. 嘗試放在第一個視窗的下方
+            if existing_windows:
+                first_window = existing_windows[0]
+                bottom_y = first_window['y'] + first_window['height'] + 20
+                if bottom_y + window_height <= screen_height:
+                    candidate_positions.append((first_window['x'], bottom_y))
+            
+            # 3. 嘗試放在第一個視窗的左側
+            if existing_windows:
+                first_window = existing_windows[0]
+                left_x = first_window['x'] - window_width - 20
+                if left_x >= 0:
+                    candidate_positions.append((left_x, first_window['y']))
+            
+            # 4. 嘗試放在第一個視窗的上方
+            if existing_windows:
+                first_window = existing_windows[0]
+                top_y = first_window['y'] - window_height - 20
+                if top_y >= 0:
+                    candidate_positions.append((first_window['x'], top_y))
+            
+            # 5. 嘗試螢幕的四個角落
+            corner_positions = [
+                (20, 20),  # 左上角
+                (screen_width - window_width - 20, 20),  # 右上角
+                (20, screen_height - window_height - 20),  # 左下角
+                (screen_width - window_width - 20, screen_height - window_height - 20)  # 右下角
+            ]
+            
+            for corner_pos in corner_positions:
+                if (corner_pos[0] >= 0 and corner_pos[0] + window_width <= screen_width and
+                    corner_pos[1] >= 0 and corner_pos[1] + window_height <= screen_height):
+                    candidate_positions.append(corner_pos)
+            
+            # 6. 居中位置作為後備
+            center_pos = ((screen_width - window_width) // 2, (screen_height - window_height) // 2)
+            candidate_positions.append(center_pos)
+            
+            # 評估每個候選位置，選擇重疊最少的位置
+            best_position = center_pos
+            min_overlap = float('inf')
+            
+            for pos in candidate_positions:
+                overlap_score = self._calculate_overlap_score(pos[0], pos[1], window_width, window_height, existing_windows)
+                if overlap_score < min_overlap:
+                    min_overlap = overlap_score
+                    best_position = pos
+            
+            # 確保位置在螢幕範圍內
+            best_x = max(0, min(best_position[0], screen_width - window_width))
+            best_y = max(0, min(best_position[1], screen_height - window_height))
+            
+            return (best_x, best_y)
+            
+        except Exception as e:
+            print(f"計算最佳視窗位置失敗: {e}")
+            # 返回居中位置作為後備
+            return ((screen_width - window_width) // 2, (screen_height - window_height) // 2)
+    
+    def _calculate_overlap_score(self, x, y, width, height, existing_windows):
+        """計算視窗與現有視窗的重疊分數（分數越低越好）"""
+        try:
+            total_overlap = 0
+            for existing in existing_windows:
+                # 檢查兩個矩形是否重疊
+                if not (x + width <= existing['x'] or 
+                       existing['x'] + existing['width'] <= x or
+                       y + height <= existing['y'] or 
+                       existing['y'] + existing['height'] <= y):
+                    
+                    # 計算重疊面積
+                    overlap_width = min(x + width, existing['x'] + existing['width']) - max(x, existing['x'])
+                    overlap_height = min(y + height, existing['y'] + existing['height']) - max(y, existing['y'])
+                    overlap_area = max(0, overlap_width) * max(0, overlap_height)
+                    
+                    # 重疊面積越大，分數越高（越差）
+                    total_overlap += overlap_area
+            
+            # 額外懲罰：距離螢幕邊緣太近
+            edge_penalty = 0
+            if x < 50 or y < 50 or x + width > screen_width - 50 or y + height > screen_height - 50:
+                edge_penalty = 1000
+            
+            return total_overlap + edge_penalty
+            
+        except Exception as e:
+            print(f"計算重疊分數失敗: {e}")
+            return float('inf')
+    
+    def _record_window_position(self, window, x, y, width, height):
+        """記錄視窗位置，供後續視窗參考"""
+        try:
+            if not hasattr(self, '_window_positions'):
+                self._window_positions = []
+            
+            # 移除舊的記錄
+            self._window_positions = [pos for pos in self._window_positions if pos['window'] != window]
+            
+            # 添加新記錄
+            self._window_positions.append({
+                'window': window,
+                'x': x,
+                'y': y,
+                'width': width,
+                'height': height
+            })
+            
+            # 限制記錄數量，避免記憶體洩漏
+            if len(self._window_positions) > 10:
+                self._window_positions = self._window_positions[-10:]
+                
+        except Exception as e:
+            print(f"記錄視窗位置失敗: {e}")
     
     def _setup_button_hover_effects(self, prev_btn, next_btn):
         """為導航按鈕設置hover效果"""
@@ -497,29 +1000,56 @@ class EnhancedTreeview:
             char_width = 8  # 每個字符的寬度
             char_height = 16  # 每行的高度
             
-            # 計算文字區域的寬度和高度（更緊湊的計算）
+            # 計算文字區域的寬度和高度（確保按鈕可見）
             text_width = min(max_line_length * char_width + 80, 800)   # 減少邊距，最大800
             text_height = min(total_lines * char_height + 150, 600)    # 減少邊距，最大600
             
-            # 設定視窗大小（更緊湊）
+            # 設定視窗大小（確保按鈕框架完全可見）
             window_width = max(600, text_width + 40)   # 減少額外寬度
-            window_height = max(400, text_height + 80)  # 減少額外高度，確保導航按鈕可見
+            window_height = max(500, text_height + 120)  # 增加額外高度，確保按鈕框架完全可見
             
             # 限制最大尺寸（更嚴格，避免視窗過大）
             window_width = min(window_width, 900)   # 從1200減少到900
-            window_height = min(window_height, 700)  # 從900減少到700
+            window_height = min(window_height, 800)  # 從700增加到800，確保按鈕可見
             
-            # 更新視窗大小
-            detail_window.geometry(f"{window_width}x{window_height}")
+            # 獲取當前視窗位置
+            current_x = detail_window.winfo_x()
+            current_y = detail_window.winfo_y()
             
-            # 重新居中視窗
-            detail_window.update_idletasks()
-            x = (detail_window.winfo_screenwidth() // 2) - (window_width // 2)
-            y = (detail_window.winfo_screenheight() // 2) - (window_height // 2)
-            detail_window.geometry(f"{window_width}x{window_height}+{x}+{y}")
+            # 更新視窗大小（保持當前位置）
+            detail_window.geometry(f"{window_width}x{window_height}+{current_x}+{current_y}")
+            
+            # 檢查調整後是否會與其他視窗重疊
+            if self._check_window_overlap(detail_window, window_width, window_height):
+                # 如果會重疊，重新計算位置
+                detail_window.update_idletasks()
+                self._position_window_avoiding_overlap(detail_window)
             
         except Exception as e:
             print(f"自動調整視窗大小失敗: {e}")
+    
+    def _check_window_overlap(self, detail_window, window_width, window_height):
+        """檢查視窗是否會與其他視窗重疊"""
+        try:
+            current_x = detail_window.winfo_x()
+            current_y = detail_window.winfo_y()
+            
+            # 獲取所有現有的詳細視窗
+            existing_windows = self._get_existing_detail_windows(detail_window)
+            
+            for existing in existing_windows:
+                # 檢查兩個矩形是否重疊
+                if not (current_x + window_width <= existing['x'] or 
+                       existing['x'] + existing['width'] <= current_x or
+                       current_y + window_height <= existing['y'] or 
+                       existing['y'] + existing['height'] <= current_y):
+                    return True  # 會重疊
+            
+            return False  # 不會重疊
+            
+        except Exception as e:
+            print(f"檢查視窗重疊失敗: {e}")
+            return False
     
     def _update_title_label(self, detail_window, new_title):
         """更新標題標籤"""
@@ -734,6 +1264,291 @@ class EnhancedTreeview:
             print("內容已複製到剪貼板")
         except Exception as e:
             print(f"複製失敗: {e}")
+    
+
+    
+    def _find_in_detail_text(self, text_widget, search_text):
+        """在詳細文字中搜尋文字"""
+        try:
+            if not search_text.strip():
+                return
+            
+            # 清除之前的搜尋標記
+            text_widget.tag_remove('search_highlight', '1.0', tk.END)
+            
+            # 搜尋文字
+            start_pos = '1.0'
+            found_positions = []
+            
+            while True:
+                pos = text_widget.search(search_text, start_pos, tk.END, nocase=True)
+                if not pos:
+                    break
+                
+                end_pos = f"{pos}+{len(search_text)}c"
+                found_positions.append((pos, end_pos))
+                start_pos = end_pos
+            
+            if found_positions:
+                # 高亮所有搜尋結果
+                for start, end in found_positions:
+                    text_widget.tag_add('search_highlight', start, end)
+                
+                # 設定高亮樣式
+                text_widget.tag_configure('search_highlight', background='yellow', foreground='black')
+                
+                # 跳轉到第一個結果
+                text_widget.see(found_positions[0][0])
+                text_widget.mark_set(tk.INSERT, found_positions[0][0])
+                
+                # 保存搜尋狀態
+                self._detail_search_positions = found_positions
+                self._detail_search_current_index = 0
+                
+                print(f"找到 {len(found_positions)} 個搜尋結果")
+            else:
+                print("未找到搜尋結果")
+                
+        except Exception as e:
+            print(f"搜尋失敗: {e}")
+    
+    def _find_next_in_detail(self, text_widget, search_text):
+        """在詳細文字中搜尋下一個"""
+        try:
+            if not hasattr(self, '_detail_search_positions') or not self._detail_search_positions:
+                self._find_in_detail_text(text_widget, search_text)
+                return
+            
+            if self._detail_search_current_index < len(self._detail_search_positions) - 1:
+                self._detail_search_current_index += 1
+            else:
+                self._detail_search_current_index = 0
+            
+            pos = self._detail_search_positions[self._detail_search_current_index]
+            text_widget.see(pos[0])
+            text_widget.mark_set(tk.INSERT, pos[0])
+            
+        except Exception as e:
+            print(f"搜尋下一個失敗: {e}")
+    
+    def _find_prev_in_detail(self, text_widget, search_text):
+        """在詳細文字中搜尋上一個"""
+        try:
+            if not hasattr(self, '_detail_search_positions') or not self._detail_search_positions:
+                self._find_in_detail_text(text_widget, search_text)
+                return
+            
+            if self._detail_search_current_index > 0:
+                self._detail_search_current_index -= 1
+            else:
+                self._detail_search_current_index = len(self._detail_search_positions) - 1
+            
+            pos = self._detail_search_positions[self._detail_search_current_index]
+            text_widget.see(pos[0])
+            text_widget.mark_set(tk.INSERT, pos[0])
+            
+        except Exception as e:
+            print(f"搜尋上一個失敗: {e}")
+    
+    def _close_detail_search(self, search_frame):
+        """關閉詳細視窗的搜尋功能"""
+        try:
+            # 清除搜尋高亮
+            if hasattr(self, '_detail_search_frame') and self._detail_search_frame:
+                # 找到文字元件
+                for widget in self._detail_search_frame.master.winfo_children():
+                    if isinstance(widget, tk.Frame):
+                        for child in widget.winfo_children():
+                            if isinstance(child, tk.Text):
+                                child.tag_remove('search_highlight', '1.0', tk.END)
+                                break
+                        break
+            
+            # 移除搜尋框架
+            search_frame.destroy()
+            self._detail_search_frame = None
+            
+            # 清除搜尋狀態
+            if hasattr(self, '_detail_search_positions'):
+                delattr(self, '_detail_search_positions')
+            if hasattr(self, '_detail_search_current_index'):
+                delattr(self, '_detail_search_current_index')
+                
+        except Exception as e:
+            print(f"關閉搜尋失敗: {e}")
+    
+    def _close_search_in_main(self, btn_frame, text_widget):
+        """關閉主按鈕區域中的搜尋元件"""
+        try:
+            # 找到並移除搜尋相關的元件
+            for widget in btn_frame.winfo_children():
+                if isinstance(widget, (tk.Label, tk.Entry)) or (isinstance(widget, tk.Button) and widget.cget('text') == '✕'):
+                    widget.destroy()
+            
+            # 重新設定搜尋按鈕的點擊事件，讓它可以重新顯示搜尋元件
+            for widget in btn_frame.winfo_children():
+                if isinstance(widget, tk.Button) and widget.cget('text') == '隱藏搜尋':
+                    widget.config(command=lambda: self._show_search_in_main(btn_frame, text_widget))
+                    widget.config(text="搜尋")
+                    break
+                    
+        except Exception as e:
+            print(f"關閉主搜尋元件失敗: {e}")
+    
+    def _show_search_in_main(self, btn_frame, text_widget):
+        """在主按鈕區域顯示搜尋元件"""
+        try:
+            # 搜尋標籤
+            search_label = tk.Label(btn_frame, text="🔍", bg="#FFFFFF", font=('Arial', 9))
+            search_label.pack(side=tk.LEFT, padx=(8, 2))
+            
+            # 搜尋輸入框
+            search_entry = tk.Entry(btn_frame, width=25, font=('Arial', 9))
+            search_entry.pack(side=tk.LEFT, padx=2)
+            search_entry.focus_set()
+            
+            # 關閉搜尋按鈕
+            close_search_btn = tk.Button(btn_frame, text="✕", 
+                                         command=lambda: self._close_search_in_main(btn_frame, text_widget),
+                                         bg='#f44336', fg='white', font=('Arial', 8, 'bold'),
+                                         padx=6, pady=1, relief=tk.FLAT, bd=1)
+            close_search_btn.pack(side=tk.LEFT, padx=2)
+            
+            # 綁定Enter鍵跳轉到下一個搜尋結果
+            search_entry.bind('<Return>', lambda event: self._jump_to_next_search_result(text_widget, search_entry.get()))
+            
+            # 綁定輸入框內容變化，即時搜尋
+            search_entry.bind('<KeyRelease>', lambda event: self._highlight_search_results(text_widget, search_entry.get()))
+            
+            # 關閉按鈕（關閉整個彈出視窗）
+            close_btn = tk.Button(btn_frame, text="✕", 
+                                 command=lambda: detail_window.destroy(),
+                                 bg='#f44336', fg='white', font=('Arial', 8, 'bold'),
+                                 padx=6, pady=1, relief=tk.FLAT, bd=1)
+            close_btn.pack(side=tk.LEFT, padx=2)
+            # 關閉按鈕（關閉整個彈出視窗）
+            close_btn = tk.Button(btn_frame, text="✕", 
+                                 command=lambda: detail_window.destroy(),
+                                 bg='#f44336', fg='white', font=('Arial', 8, 'bold'),
+                                 padx=6, pady=1, relief=tk.FLAT, bd=1)
+            close_btn.pack(side=tk.LEFT, padx=2)
+            # 更新搜尋按鈕的點擊事件，讓它可以關閉搜尋元件
+            for widget in btn_frame.winfo_children():
+                if isinstance(widget, tk.Button) and widget.cget('text') == '搜尋':
+                    widget.config(command=lambda: self._close_search_in_main(btn_frame, text_widget))
+                    widget.config(text="隱藏搜尋")
+                    break
+                    
+        except Exception as e:
+            print(f"顯示主搜尋元件失敗: {e}")
+    
+    def _highlight_search_results(self, text_widget, search_text):
+        """高亮顯示搜尋結果"""
+        try:
+            if not search_text.strip():
+                # 如果搜尋文字為空，清除所有高亮
+                text_widget.tag_remove('search_highlight', '1.0', tk.END)
+                return
+            
+            # 清除之前的高亮
+            text_widget.tag_remove('search_highlight', '1.0', tk.END)
+            
+            # 設定搜尋高亮標籤樣式
+            text_widget.tag_configure('search_highlight', background='#FFFF00', foreground='#000000')
+            
+            # 搜尋並高亮所有匹配的文字
+            start_pos = '1.0'
+            count = 0
+            positions = []  # 儲存所有搜尋結果的位置
+            
+            while True:
+                # 搜尋下一個匹配
+                pos = text_widget.search(search_text, start_pos, tk.END, nocase=True)
+                if not pos:
+                    break
+                
+                # 計算結束位置
+                end_pos = f"{pos}+{len(search_text)}c"
+                
+                # 應用高亮標籤
+                text_widget.tag_add('search_highlight', pos, end_pos)
+                
+                # 儲存位置
+                positions.append(pos)
+                
+                # 移動到下一位置
+                start_pos = end_pos
+                count += 1
+            
+            # 顯示搜尋結果數量
+            if count > 0:
+                print(f"找到 {count} 個搜尋結果")
+                
+                # 儲存搜尋結果位置到實例變數
+                self._search_positions = positions
+                
+                # 如果沒有當前搜尋位置，從第一個開始
+                if not hasattr(self, '_current_search_index'):
+                    self._current_search_index = 0
+                
+                # 確保索引在有效範圍內
+                if self._current_search_index >= len(positions):
+                    self._current_search_index = 0
+                
+                # 跳轉到當前搜尋結果
+                current_pos = positions[self._current_search_index]
+                text_widget.see(current_pos)
+                
+                # 設定游標到當前搜尋結果
+                text_widget.mark_set(tk.INSERT, current_pos)
+                
+                # 更新搜尋索引，為下次Enter鍵做準備
+                self._current_search_index = (self._current_search_index + 1) % count
+                
+            else:
+                print(f"未找到 '{search_text}' 的搜尋結果")
+                # 重置搜尋索引和位置
+                if hasattr(self, '_current_search_index'):
+                    delattr(self, '_current_search_index')
+                if hasattr(self, '_search_positions'):
+                    delattr(self, '_search_positions')
+                
+        except Exception as e:
+            print(f"高亮搜尋結果失敗: {e}")
+    
+    def _jump_to_next_search_result(self, text_widget, search_text):
+        """跳轉到下一個搜尋結果"""
+        try:
+            if not search_text.strip():
+                return
+            
+            # 如果沒有搜尋結果位置，先執行搜尋
+            if not hasattr(self, '_search_positions') or not self._search_positions:
+                self._highlight_search_results(text_widget, search_text)
+                return
+            
+            # 如果沒有當前搜尋索引，從第一個開始
+            if not hasattr(self, '_current_search_index'):
+                self._current_search_index = 0
+            
+            # 確保索引在有效範圍內
+            if self._current_search_index >= len(self._search_positions):
+                self._current_search_index = 0
+            
+            # 跳轉到當前搜尋結果
+            current_pos = self._search_positions[self._current_search_index]
+            text_widget.see(current_pos)
+            
+            # 設定游標到當前搜尋結果
+            text_widget.mark_set(tk.INSERT, current_pos)
+            
+            # 更新搜尋索引，為下次Enter鍵做準備
+            self._current_search_index = (self._current_search_index + 1) % len(self._search_positions)
+            
+            print(f"跳轉到第 {self._current_search_index} 個搜尋結果")
+            
+        except Exception as e:
+            print(f"跳轉搜尋結果失敗: {e}")
 
 # 其他類別保持不變...
 class EnhancedText:

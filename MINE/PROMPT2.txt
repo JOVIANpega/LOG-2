@@ -32,8 +32,13 @@ git push origin main
 右欄：包含其他設定、版本設定和快速操作
 
 git add .
-git commit -m "V1.6.5 fixed 設定標籤頁的"
+git commit -m "V1.6.6 彈出視窗增加搜尋欄位"
 git push origin main
+
+
+
+彈出來的視窗 是否可以用按鍵上下選擇 同時如果有預覽視窗 也跟鼠標經過一樣會同步顯示
+
 
 
 開啟gui後 會根據 檔名有沒有pass決定要不要產生fail標籤頁
