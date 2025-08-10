@@ -362,15 +362,15 @@ class EnhancedTreeview:
                 detail_window.configure(bg="#FFFFFF")
             except Exception:
                 pass
-            detail_window.geometry("1000x700")
+            # 先設定最小尺寸，然後根據內容自動調整
+            detail_window.geometry("800x600")
+            detail_window.minsize(600, 400)  # 設定最小尺寸
+            detail_window.maxsize(1200, 900)  # 設定最大尺寸
             
             # 讓視窗居中顯示
             detail_window.transient(detail_window.master)
             detail_window.grab_set()
             detail_window.update_idletasks()
-            x = (detail_window.winfo_screenwidth() // 2) - (1000 // 2)
-            y = (detail_window.winfo_screenheight() // 2) - (700 // 2)
-            detail_window.geometry(f"1000x700+{x}+{y}")
             
             # 標題（深藍底白字）
             title_label = tk.Label(detail_window, text=title, 
@@ -418,6 +418,9 @@ class EnhancedTreeview:
             # 允許選取但不允許編輯
             text_widget.config(state=tk.NORMAL)
             
+            # 自動調整視窗大小以適應內容
+            self._auto_resize_window(detail_window, text_widget)
+            
             # 按鈕框架（白底）
             btn_frame = tk.Frame(detail_window, bg="#FFFFFF")
             btn_frame.pack(pady=10, fill=tk.X)
@@ -430,30 +433,93 @@ class EnhancedTreeview:
                         current_index = i
                         break
             
-            # 上一頁按鈕
+            # 上一頁按鈕（添加hover效果）
             prev_btn = tk.Button(btn_frame, text="上一頁", 
-                                 command=lambda: self._show_previous_item(detail_window, text_widget, current_index))
+                                 command=lambda: self._show_previous_item(detail_window, text_widget, current_index),
+                                 relief=tk.RAISED, bd=2, bg='#E8E8E8', fg='#333333',
+                                 font=('Arial', 10, 'bold'), padx=15, pady=5)
             prev_btn.pack(side=tk.LEFT, padx=5)
             
-            # 下一頁按鈕
+            # 下一頁按鈕（添加hover效果）
             next_btn = tk.Button(btn_frame, text="下一頁", 
-                                 command=lambda: self._show_next_item(detail_window, text_widget, current_index))
+                                 command=lambda: self._show_next_item(detail_window, text_widget, current_index),
+                                 relief=tk.RAISED, bd=2, bg='#E8E8E8', fg='#333333',
+                                 font=('Arial', 10, 'bold'), padx=15, pady=5)
             next_btn.pack(side=tk.LEFT, padx=5)
             
             # 複製全部按鈕
             copy_btn = tk.Button(btn_frame, text="複製全部", 
-                                 command=lambda: self._copy_to_clipboard(merged))
+                                 command=lambda: self._copy_to_clipboard(merged),
+                                 relief=tk.RAISED, bd=2, bg='#E8E8E8', fg='#333333',
+                                 font=('Arial', 10, 'bold'), padx=15, pady=5)
             copy_btn.pack(side=tk.LEFT, padx=5)
             
             # 關閉按鈕
-            close_btn = tk.Button(btn_frame, text="關閉", command=detail_window.destroy)
+            close_btn = tk.Button(btn_frame, text="關閉", command=detail_window.destroy,
+                                 relief=tk.RAISED, bd=2, bg='#E8E8E8', fg='#333333',
+                                 font=('Arial', 10, 'bold'), padx=15, pady=5)
             close_btn.pack(side=tk.LEFT, padx=5)
+            
+            # 為導航按鈕添加hover效果
+            self._setup_button_hover_effects(prev_btn, next_btn)
             
             # 更新按鈕狀態
             self._update_navigation_buttons(prev_btn, next_btn, current_index)
             
         except Exception as e:
             print(f"顯示詳細內容對話框失敗: {e}")
+    
+    def _setup_button_hover_effects(self, prev_btn, next_btn):
+        """為導航按鈕設置hover效果"""
+        def on_enter(event):
+            event.widget.config(bg='#4CAF50', fg='white')  # 綠色背景，白色文字
+        
+        def on_leave(event):
+            event.widget.config(bg='#E8E8E8', fg='#333333')  # 恢復原始顏色
+        
+        # 綁定hover事件
+        prev_btn.bind('<Enter>', on_enter)
+        prev_btn.bind('<Leave>', on_leave)
+        next_btn.bind('<Enter>', on_enter)
+        next_btn.bind('<Leave>', on_leave)
+    
+    def _auto_resize_window(self, detail_window, text_widget):
+        """根據文字內容自動調整視窗大小，確保導航按鈕始終可見"""
+        try:
+            # 獲取文字內容的行數和最大行寬度
+            content = text_widget.get('1.0', tk.END)
+            lines = content.split('\n')
+            max_line_length = max(len(line) for line in lines) if lines else 0
+            total_lines = len(lines)
+            
+            # 計算合適的視窗尺寸
+            # 每行大約需要 8-10 像素寬度，每行大約需要 16-18 像素高度
+            char_width = 8  # 每個字符的寬度
+            char_height = 16  # 每行的高度
+            
+            # 計算文字區域的寬度和高度（更緊湊的計算）
+            text_width = min(max_line_length * char_width + 80, 800)   # 減少邊距，最大800
+            text_height = min(total_lines * char_height + 150, 600)    # 減少邊距，最大600
+            
+            # 設定視窗大小（更緊湊）
+            window_width = max(600, text_width + 40)   # 減少額外寬度
+            window_height = max(400, text_height + 80)  # 減少額外高度，確保導航按鈕可見
+            
+            # 限制最大尺寸（更嚴格，避免視窗過大）
+            window_width = min(window_width, 900)   # 從1200減少到900
+            window_height = min(window_height, 700)  # 從900減少到700
+            
+            # 更新視窗大小
+            detail_window.geometry(f"{window_width}x{window_height}")
+            
+            # 重新居中視窗
+            detail_window.update_idletasks()
+            x = (detail_window.winfo_screenwidth() // 2) - (window_width // 2)
+            y = (detail_window.winfo_screenheight() // 2) - (window_height // 2)
+            detail_window.geometry(f"{window_width}x{window_height}+{x}+{y}")
+            
+        except Exception as e:
+            print(f"自動調整視窗大小失敗: {e}")
     
     def _update_title_label(self, detail_window, new_title):
         """更新標題標籤"""

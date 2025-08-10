@@ -56,6 +56,10 @@ pyinstaller --onefile --noconsole --icon=assets/icon.ico main.py
 
 ## 版本資訊
 - V1.5.6
+  - FAIL測試標籤優化：
+    - 錯誤原因自動顯示，切換到FAIL標籤即可看到內容，無需點擊
+    - 修正錯誤原因擷取邏輯，只顯示測試項目名稱，不顯示時間戳記和錯誤代碼
+    - 大字體顯示格式：例如 "Chec Frimware version is Fail"
   - 優化按鍵與視窗互動體驗：
     - 左側前三個主要按鈕（選檔/選夾/清除或選擇腳本）字體改為粗體
     - 按鈕新增滑鼠懸停變色（hover）

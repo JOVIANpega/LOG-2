@@ -492,15 +492,16 @@ class LogAnalyzerGUI:
         """顯示測試詳細資訊"""
         detail_window = tk.Toplevel(self.root)
         detail_window.title(title)
+        
+        # 設定最小和最大尺寸
+        detail_window.minsize(400, 300)
+        detail_window.maxsize(1000, 800)
         detail_window.geometry("600x400")
         
         # 讓視窗居中顯示
         detail_window.transient(self.root)
         detail_window.grab_set()
         detail_window.update_idletasks()
-        x = (detail_window.winfo_screenwidth() // 2) - (600 // 2)
-        y = (detail_window.winfo_screenheight() // 2) - (400 // 2)
-        detail_window.geometry(f"600x400+{x}+{y}")
         
         text_widget = scrolledtext.ScrolledText(detail_window, wrap=tk.WORD)
         text_widget.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
@@ -512,6 +513,47 @@ class LogAnalyzerGUI:
         
         text_widget.insert(1.0, detail_text)
         text_widget.config(state=tk.DISABLED)
+        
+        # 自動調整視窗大小以適應內容
+        self._auto_resize_detail_window(detail_window, text_widget)
+    
+    def _auto_resize_detail_window(self, detail_window, text_widget):
+        """根據文字內容自動調整詳細視窗大小，確保導航按鈕始終可見"""
+        try:
+            # 獲取文字內容的行數和最大行寬度
+            content = text_widget.get('1.0', tk.END)
+            lines = content.split('\n')
+            max_line_length = max(len(line) for line in lines) if lines else 0
+            total_lines = len(lines)
+            
+            # 計算合適的視窗尺寸
+            # 每行大約需要 8-10 像素寬度，每行大約需要 16-18 像素高度
+            char_width = 8  # 每個字符的寬度
+            char_height = 16  # 每行的高度
+            
+            # 計算文字區域的寬度和高度（更緊湊的計算）
+            text_width = min(max_line_length * char_width + 80, 700)   # 減少邊距，最大700
+            text_height = min(total_lines * char_height + 120, 500)    # 減少邊距，最大500
+            
+            # 設定視窗大小（更緊湊）
+            window_width = max(400, text_width + 40)   # 減少額外寬度
+            window_height = max(300, text_height + 80)  # 減少額外高度，確保導航按鈕可見
+            
+            # 限制最大尺寸（更嚴格，避免視窗過大）
+            window_width = min(window_width, 800)   # 從1000減少到800
+            window_height = min(window_height, 600)  # 從800減少到600
+            
+            # 更新視窗大小
+            detail_window.geometry(f"{window_width}x{window_height}")
+            
+            # 重新居中視窗
+            detail_window.update_idletasks()
+            x = (detail_window.winfo_screenwidth() // 2) - (window_width // 2)
+            y = (detail_window.winfo_screenheight() // 2) - (window_height // 2)
+            detail_window.geometry(f"{window_width}x{window_height}+{x}+{y}")
+            
+        except Exception as e:
+            print(f"自動調整詳細視窗大小失敗: {e}")
 
 def main():
     """主函數"""

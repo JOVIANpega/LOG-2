@@ -299,15 +299,15 @@ class LogAnalyzerApp:
             win.configure(bg="#0B1D39")
         except Exception:
             pass
-        win.geometry("1000x700")
+        # 設定最小和最大尺寸
+        win.minsize(600, 400)
+        win.maxsize(1200, 900)
+        win.geometry("800x600")
         
         # 讓視窗居中顯示
         win.transient(self.root)
         win.grab_set()
         win.update_idletasks()
-        x = (win.winfo_screenwidth() // 2) - (1000 // 2)
-        y = (win.winfo_screenheight() // 2) - (700 // 2)
-        win.geometry(f"1000x700+{x}+{y}")
         
         # 頂部標題（顯示步驟名稱 +測項指令內容）
         header_text = title
@@ -336,6 +336,10 @@ class LogAnalyzerApp:
         text.insert('1.0', merged)
         # 可選複製
         text.config(state=tk.NORMAL)
+        
+        # 自動調整視窗大小以適應內容
+        self._auto_resize_content_window(win, text)
+        
         # 底部按鈕
         btn_frame = tk.Frame(win, bg="#0B1D39")
         btn_frame.pack(fill=tk.X)
@@ -885,19 +889,58 @@ class LogAnalyzerApp:
             except Exception:
                 pass
 
+    def _auto_resize_content_window(self, win, text_widget):
+        """根據文字內容自動調整內容視窗大小，確保導航按鈕始終可見"""
+        try:
+            # 獲取文字內容的行數和最大行寬度
+            content = text_widget.get('1.0', tk.END)
+            lines = content.split('\n')
+            max_line_length = max(len(line) for line in lines) if lines else 0
+            total_lines = len(lines)
+            
+            # 計算合適的視窗尺寸
+            # 每行大約需要 8-10 像素寬度，每行大約需要 16-18 像素高度
+            char_width = 8  # 每個字符的寬度
+            char_height = 16  # 每行的高度
+            
+            # 計算文字區域的寬度和高度（更緊湊的計算）
+            text_width = min(max_line_length * char_width + 80, 800)   # 減少邊距，最大800
+            text_height = min(total_lines * char_height + 150, 600)    # 減少邊距，最大600
+            
+            # 設定視窗大小（更緊湊）
+            window_width = max(600, text_width + 40)   # 減少額外寬度
+            window_height = max(400, text_height + 80)  # 減少額外高度，確保導航按鈕可見
+            
+            # 限制最大尺寸（更嚴格，避免視窗過大）
+            window_width = min(window_width, 900)   # 從1200減少到900
+            window_height = min(window_height, 700)  # 從900減少到700
+            
+            # 更新視窗大小
+            win.geometry(f"{window_width}x{window_height}")
+            
+            # 重新居中視窗
+            win.update_idletasks()
+            x = (win.winfo_screenwidth() // 2) - (window_width // 2)
+            y = (win.winfo_screenheight() // 2) - (window_height // 2)
+            win.geometry(f"{window_width}x{window_height}+{x}+{y}")
+            
+        except Exception as e:
+            print(f"自動調整內容視窗大小失敗: {e}")
+
     def _show_text_viewer_window(self, title: str, content: str):
         """顯示純文字的查看視窗（簡易Markdown檢視）"""
         win = tk.Toplevel(self.root)
         win.title(title)
-        win.geometry("900x700")
+        
+        # 設定最小和最大尺寸
+        win.minsize(600, 400)
+        win.maxsize(1200, 900)
+        win.geometry("800x600")
         
         # 讓視窗居中顯示
         win.transient(self.root)
         win.grab_set()
         win.update_idletasks()
-        x = (win.winfo_screenwidth() // 2) - (900 // 2)
-        y = (win.winfo_screenheight() // 2) - (700 // 2)
-        win.geometry(f"900x700+{x}+{y}")
         
         frame = tk.Frame(win)
         frame.pack(fill=tk.BOTH, expand=1)
@@ -912,6 +955,9 @@ class LogAnalyzerApp:
         frame.grid_columnconfigure(0, weight=1)
         text.insert('1.0', content)
         text.config(state=tk.NORMAL)
+        
+        # 自動調整視窗大小以適應內容
+        self._auto_resize_content_window(win, text)
 
 def main():
     """標準版主程式"""

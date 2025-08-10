@@ -28,7 +28,9 @@ class EnhancedLogAnalyzerApp:
         self.root = root
         # 先載入設定再設定標題
         self.settings = load_settings()
-        self.root.title(self.settings.get('app_title', 'PEGA test log Aanlyser'))
+        app_title = self.settings.get('app_title', 'PEGA test log Aanlyser')
+        version = self.settings.get('version', 'V1.5.6')
+        self.root.title(f"{app_title} {version}")
         
         # 載入設定（其餘）
         self.ui_font_size = self.settings.get('ui_font_size', 11)
@@ -168,7 +170,7 @@ class EnhancedLogAnalyzerApp:
         self.notebook.add(self.tab_pass, text="✅ PASS測項")
         
         # 使用增強型TreeView
-        pass_columns = ("Step Name", "指令", "回應", "結果")
+        pass_columns = ("測項名稱", "指令", "收到指令", "PASS/FAIL")
         self.pass_tree_enhanced = EnhancedTreeview(self.tab_pass, pass_columns)
         self.pass_tree_enhanced.pack_with_scrollbars(fill=tk.BOTH, expand=1)
     
@@ -183,7 +185,7 @@ class EnhancedLogAnalyzerApp:
         
         # 上半部 - FAIL測項列表
         self.fail_upper_frame = tk.Frame(self.fail_paned)
-        fail_columns = ("Step Name", "指令", "錯誤回應", "Retry次數", "FAIL原因")
+        fail_columns = ("測項名稱", "指令", "錯誤回應", "Retry次數", "FAIL原因")
         self.fail_tree_enhanced = EnhancedTreeview(self.fail_upper_frame, fail_columns)
         self.fail_tree_enhanced.pack_with_scrollbars(fill=tk.BOTH, expand=1)
         self.fail_paned.add(self.fail_upper_frame, minsize=200)
@@ -226,6 +228,9 @@ class EnhancedLogAnalyzerApp:
         
         # 自動顯示第一個FAIL項目（如果有的話）
         self.root.after(500, self._auto_select_first_fail)
+        
+        # 自動顯示FAIL錯誤原因（不需要點擊）
+        self.root.after(1000, self._auto_display_fail_reason)
     
     def _build_enhanced_log_tab(self):
         """建立原始LOG標籤頁"""
@@ -569,6 +574,58 @@ class EnhancedLogAnalyzerApp:
         except Exception as e:
             print(f"自動選擇第一個FAIL項目失敗: {e}")
     
+    def _auto_display_fail_reason(self):
+        """自動顯示FAIL錯誤原因（不需要點擊）"""
+        try:
+            if hasattr(self, 'fail_tree_enhanced') and self.fail_tree_enhanced.tree:
+                items = self.fail_tree_enhanced.tree.get_children()
+                if items:
+                    # 自動選擇第一個項目並顯示錯誤原因
+                    first_item = items[0]
+                    self.fail_tree_enhanced.tree.selection_set(first_item)
+                    self.fail_tree_enhanced.tree.see(first_item)
+                    
+                    # 直接顯示錯誤原因，不需要點擊
+                    self._display_fail_reason_for_item(first_item)
+        except Exception as e:
+            print(f"自動顯示FAIL錯誤原因失敗: {e}")
+    
+    def _display_fail_reason_for_item(self, item_id):
+        """為指定項目顯示FAIL錯誤原因"""
+        try:
+            values = self.fail_tree_enhanced.tree.item(item_id, 'values')
+            
+            if values:
+                step_name = values[0]
+                error_code = values[4] if len(values) > 4 else "未知錯誤"
+                
+                # 從存儲中獲取完整內容
+                full_content = self.fail_tree_enhanced.full_content_storage.get(item_id, '')
+                
+                # 提取主要的FAIL原因作為大字體標題
+                main_error = self._extract_main_fail_reason(full_content)
+                
+                # 顯示大字體紅色文字白底
+                self.fail_error_title.config(text=main_error, 
+                                            font=('Arial', 20, 'bold'), fg='red', bg='white')
+                
+                # 提取FAIL原因部分顯示在下方
+                fail_reason_content = self._extract_fail_reason(full_content)
+                
+                # 更新錯誤內容
+                self.fail_error_text.config(state=tk.NORMAL)
+                self.fail_error_text.delete('1.0', tk.END)
+                self._insert_formatted_fail_content(fail_reason_content)
+                self.fail_error_text.config(state=tk.NORMAL)
+            else:
+                self.fail_error_title.config(text="無詳細錯誤資訊")
+                self.fail_error_text.config(state=tk.NORMAL)
+                self.fail_error_text.delete('1.0', tk.END)
+                self.fail_error_text.insert('1.0', "沒有詳細錯誤內容可顯示")
+                self.fail_error_text.config(state=tk.NORMAL)
+        except Exception as e:
+            print(f"顯示FAIL錯誤原因失敗: {e}")
+    
     def _on_fail_item_select(self, event):
         """處理FAIL項目選擇事件"""
         try:
@@ -655,15 +712,27 @@ class EnhancedLogAnalyzerApp:
             
             # 找到包含 "is Fail" 的行
             if "is Fail" in clean_line:
-                # 處理類似 "IPI0009-0580: Check Battery_tempture is Fail ! <ErrorCode: HHFE15>" 的格式
+                # 處理類似 "VSCH026-043:Chec Frimware version is Fail ! <ErrorCode: BSFR18>" 的格式
                 if ':' in clean_line and "is Fail" in clean_line:
                     # 擷取冒號後的部分
                     after_colon = clean_line.split(":", 1)[1].strip()
                     # 找到 "is Fail" 的位置
                     if "is Fail" in after_colon:
                         fail_pos = after_colon.find("is Fail")
-                        # 擷取到 "is Fail" 結束的部分，去掉後面的 <ErrorCode: xxx>
+                        # 擷取到 "is Fail" 結束的部分，去掉後面的 <ErrorCode: xxx> 和時間戳記
                         test_name_with_fail = after_colon[:fail_pos + 7].strip()  # 7 = len("is Fail")
+                        
+                        # 移除時間戳記（如 "2025/08/07 08:53:36 [1]" 格式）
+                        if '[' in test_name_with_fail and ']' in test_name_with_fail:
+                            bracket_start = test_name_with_fail.find('[')
+                            bracket_end = test_name_with_fail.find(']')
+                            if bracket_start != -1 and bracket_end != -1:
+                                # 檢查括號前是否有時間戳記格式
+                                before_bracket = test_name_with_fail[:bracket_start].strip()
+                                if '/' in before_bracket and ':' in before_bracket:
+                                    # 移除時間戳記部分
+                                    test_name_with_fail = test_name_with_fail[bracket_end + 1:].strip()
+                        
                         return test_name_with_fail
                 elif "is Fail" in clean_line:
                     # 如果沒有冒號但有 "is Fail"，直接擷取到 "is Fail" 結束
@@ -726,6 +795,9 @@ class EnhancedLogAnalyzerApp:
         if hasattr(self, 'settings_content_font_size_label'):
             self.settings_content_font_size_label.config(text=str(self.content_font_size), font=('Arial', self.content_font_size))
         
+        # 更新設定頁面中所有元件的字體大小
+        self._apply_settings_page_fonts()
+        
         # 更新標籤頁名稱字體（介面文字控制）
         style = ttk.Style()
         style.configure('TNotebook.Tab', font=('Arial', self.ui_font_size))
@@ -769,6 +841,67 @@ class EnhancedLogAnalyzerApp:
                 self.fail_tree_enhanced.set_font_size(self.content_font_size)
             except Exception:
                 pass
+
+    def _apply_settings_page_fonts(self):
+        """更新設定頁面中所有元件的字體大小"""
+        try:
+            if not hasattr(self, 'settings_frame'):
+                return
+                
+            # 遞迴更新所有元件的字體
+            def update_widget_font(widget):
+                """遞迴更新元件的字體大小"""
+                try:
+                    # 根據元件的標識符更新字體
+                    if hasattr(widget, '_is_settings_title'):
+                        # 設定頁面標題（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size + 4, 'bold'))
+                    elif hasattr(widget, '_is_settings_label'):
+                        # 設定標籤（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size))
+                    elif hasattr(widget, '_is_settings_button'):
+                        # 設定按鈕（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size))
+                    elif hasattr(widget, '_is_settings_checkbutton'):
+                        # 設定核取方塊（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size))
+                    elif hasattr(widget, '_is_settings_entry'):
+                        # 設定輸入框（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size))
+                    elif hasattr(widget, '_is_info_label'):
+                        # 說明文字（內容字體控制）
+                        widget.config(font=('Arial', self.content_font_size))
+                    elif hasattr(widget, '_is_font_size_label'):
+                        # 字體大小標籤（保持原樣，不更新）
+                        pass
+                    elif isinstance(widget, tk.LabelFrame):
+                        # LabelFrame 標題（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size))
+                    elif isinstance(widget, tk.Label) and not hasattr(widget, '_is_font_size_label') and not hasattr(widget, '_is_info_label'):
+                        # 一般標籤（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size))
+                    elif isinstance(widget, tk.Button):
+                        # 一般按鈕（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size))
+                    elif isinstance(widget, tk.Checkbutton):
+                        # 一般核取方塊（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size))
+                    elif isinstance(widget, tk.Entry):
+                        # 一般輸入框（介面文字控制）
+                        widget.config(font=('Arial', self.ui_font_size))
+                    
+                    # 遞迴處理子元件
+                    for child in widget.winfo_children():
+                        update_widget_font(child)
+                        
+                except Exception as e:
+                    print(f"更新元件字體時發生錯誤: {e}")
+            
+            # 從根元件開始遞迴更新
+            update_widget_font(self.settings_frame)
+            
+        except Exception as e:
+            print(f"更新設定頁面字體時發生錯誤: {e}")
     
     def _apply_treeview_font(self, treeview):
         """套用TreeView字體"""
@@ -802,7 +935,7 @@ class EnhancedLogAnalyzerApp:
         save_settings(self.settings)
     
     def _save_settings(self):
-        """儲存設定（顯示確認視窗）"""
+        """儲存設定並即時顯示（顯示確認視窗）"""
         self.settings['ui_font_size'] = self.ui_font_size
         self.settings['content_font_size'] = self.content_font_size
         # 保存面板寬度
@@ -824,15 +957,45 @@ class EnhancedLogAnalyzerApp:
             self.settings['app_title'] = self.app_title_var.get().strip() or 'PEGA test log Aanlyser'
         if hasattr(self, 'gui_header_var'):
             self.settings['gui_header'] = self.gui_header_var.get().strip() or 'ONLY FOR CENTIMANIA LOG'
+        # 保存版本號碼
+        if hasattr(self, 'version_var'):
+            self.settings['version'] = self.version_var.get().strip() or 'V1.5.6'
+        
         save_settings(self.settings)
-        # 立即套用標題
+        
+        # 立即套用所有設定變更
         try:
-            self.root.title(self.settings['app_title'])
+            # 套用標題和版本號碼
+            app_title = self.settings['app_title']
+            version = self.settings.get('version', 'V1.5.6')
+            self.root.title(f"{app_title} {version}")
+            
+            # 套用左側標題
             if hasattr(self, 'left_title_label'):
                 self.left_title_label.config(text=self.settings['gui_header'])
-        except Exception:
-            pass
-        messagebox.showinfo("設定保存", "設定已成功保存！")
+            
+            # 套用字體大小到所有元件
+            self._apply_font_size()
+            
+            # 套用左側面板寬度
+            if hasattr(self, 'paned_window') and 'pane_width' in self.settings:
+                target_width = self.settings['pane_width']
+                current_width = self.paned_window.sashpos(0)
+                if abs(current_width - target_width) > 5:  # 如果差異超過5px才調整
+                    self.paned_window.sashpos(0, target_width)
+                    if hasattr(self, 'pane_width_label'):
+                        self.pane_width_label.config(text=f"{target_width}px")
+            
+            # 更新設定頁面的字體大小標籤
+            if hasattr(self, 'settings_ui_font_size_label'):
+                self.settings_ui_font_size_label.config(text=str(self.ui_font_size))
+            if hasattr(self, 'settings_content_font_size_label'):
+                self.settings_content_font_size_label.config(text=str(self.content_font_size))
+                
+        except Exception as e:
+            print(f"套用設定時發生錯誤: {e}")
+            
+        messagebox.showinfo("設定保存", "所有設定已成功保存並立即生效！")
 
     def _clear_enhanced_results(self):
         """清除增強版分析結果（供左側按鈕呼叫）"""
@@ -894,15 +1057,15 @@ class EnhancedLogAnalyzerApp:
         """顯示純文字視窗（使用內容字體大小）"""
         win = tk.Toplevel(self.root)
         win.title(title)
-        win.geometry("1000x750")
+        # 設定最小和最大尺寸
+        win.minsize(600, 400)
+        win.maxsize(1200, 900)
+        win.geometry("800x600")
         
         # 讓視窗居中顯示
         win.transient(self.root)
         win.grab_set()
         win.update_idletasks()
-        x = (win.winfo_screenwidth() // 2) - (1000 // 2)
-        y = (win.winfo_screenheight() // 2) - (750 // 2)
-        win.geometry(f"1000x750+{x}+{y}")
         
         frame = tk.Frame(win)
         frame.pack(fill=tk.BOTH, expand=1)
@@ -917,6 +1080,9 @@ class EnhancedLogAnalyzerApp:
         frame.grid_columnconfigure(0, weight=1)
         text.insert('1.0', content)
         text.config(state=tk.NORMAL)
+        
+        # 自動調整視窗大小以適應內容
+        self._auto_resize_text_window(win, text)
 
     # === UI 字體調整 ===
     def _increase_ui_font(self):
@@ -987,6 +1153,46 @@ class EnhancedLogAnalyzerApp:
             self.left_frame.configure(width=default_width)
             self.paned.update_idletasks()
         save_settings(self.settings)
+
+
+
+    def _auto_resize_text_window(self, win, text_widget):
+        """根據文字內容自動調整文字視窗大小，確保導航按鈕始終可見"""
+        try:
+            # 獲取文字內容的行數和最大行寬度
+            content = text_widget.get('1.0', tk.END)
+            lines = content.split('\n')
+            max_line_length = max(len(line) for line in lines) if lines else 0
+            total_lines = len(lines)
+            
+            # 計算合適的視窗尺寸
+            # 每行大約需要 8-10 像素寬度，每行大約需要 16-18 像素高度
+            char_width = 8  # 每個字符的寬度
+            char_height = 16  # 每行的高度
+            
+            # 計算文字區域的寬度和高度（更緊湊的計算）
+            text_width = min(max_line_length * char_width + 80, 800)   # 減少邊距，最大800
+            text_height = min(total_lines * char_height + 150, 600)    # 減少邊距，最大600
+            
+            # 設定視窗大小（更緊湊）
+            window_width = max(600, text_width + 40)   # 減少額外寬度
+            window_height = max(400, text_height + 80)  # 減少額外高度，確保導航按鈕可見
+            
+            # 限制最大尺寸（更嚴格，避免視窗過大）
+            window_width = min(window_width, 900)   # 從1200減少到900
+            window_height = min(window_height, 700)  # 從900減少到700
+            
+            # 更新視窗大小
+            win.geometry(f"{window_width}x{window_height}")
+            
+            # 重新居中視窗
+            win.update_idletasks()
+            x = (win.winfo_screenwidth() // 2) - (window_width // 2)
+            y = (win.winfo_screenheight() // 2) - (window_height // 2)
+            win.geometry(f"{window_width}x{window_height}+{x}+{y}")
+            
+        except Exception as e:
+            print(f"自動調整文字視窗大小失敗: {e}")
 
     def _show_open_folder_prompt(self, out_dir: str, total_files: int, pass_count: int, fail_count: int, pass_path: str, fail_path: str):
         """白底視窗，僅問題段落以黃底黑字反白"""

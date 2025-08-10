@@ -3,7 +3,7 @@ curl "https://acli.atlassian.com/windows/latest/acli_windows_amd64/acli.exe"
 
 
 
-git hub commit "V1.5.6" "優化按鍵視窗"
+git hub commit "V1.6.5" "優化按鍵視窗"
 git hub branch 轉成 main 
 提交訊息：V1.5.1 - 修正PASS測項retry判斷邏輯和展開內容
 
@@ -14,8 +14,8 @@ git hub commit "V1.5.7" "優化PASS 顯示內容"
 pyinstaller --onefile --noconsole  main.py
 
 
-在 Windows 上右鍵檔案→內容→詳細資料，看到 FileVersion/ProductVersion 皆為 1.0.0.0。
-需要我將版本提升到指定號碼（例如 1.0.1.0
+在 Windows 上右鍵檔案→內容→詳細資料，FileVersion/ProductVersion 皆要更新版本號碼。
+
 
 # 1️⃣ 把所有變更（已追蹤與未追蹤的檔案）加入暫存區
 git add .
@@ -27,9 +27,12 @@ git commit -m "V1.6.0 優化PASS 顯示內容3"
 git push origin main
 
 
+兩欄佈局設計
+左欄：包含視窗大小設定和字體設定
+右欄：包含其他設定、版本設定和快速操作
 
 git add .
-git commit -m "V1.6.4 fixed FAIL 標籤頁的大字體標題"
+git commit -m "V1.6.5 fixed 設定標籤頁的"
 git push origin main
 
 
@@ -40,7 +43,7 @@ git push origin main
 但fail的不影響，因為fail也是會有pass項目
 
 
-
+excel title show='headings'，這意味著標題行應該會顯示。現在讓我檢查一下修改後的程式是否能正常運行：
 
 FAIL 標籤頁的大字體標題應該會正確顯示：
 之前：顯示 "2025/08/07 09:27:55 [1] All Test Aborted! ErrorCode: HHFE15 ----- 107.3027727 Sec."

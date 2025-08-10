@@ -1,15 +1,16 @@
 {
-  "ui_font_size": 11,
+  "ui_font_size": 13,
   "content_font_size": 10,
-  "last_log_path": "M:/PYTHON/LOG_analyser-main/MINE/FUNCTION_LOG/1+Funtion-WE253100004-20250807083417-VSCH026-043.log",
+  "last_log_path": "M:/PYTHON/LOG_analyser-main/MINE/FUNCTION_LOG/1+Funtion-WE253100002-20250807091001-PASS.log",
   "last_folder_path": "M:/PYTHON/LOG_analyser-main/MINE/FUNCTION_LOG",
   "window_width": 1536,
   "window_height": 801,
-  "pane_width": 229,
+  "pane_width": 235,
   "app_title": "PEGA test log Aanlyser",
   "gui_header": "ONLY FOR Centimania log",
+  "version": "V1.6.5",
   "font_size": 11,
   "auto_analyze": true,
   "remember_path": true,
-  "fail_pane_position": 343
+  "fail_pane_position": 201
 }
