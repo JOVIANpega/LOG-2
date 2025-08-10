@@ -217,7 +217,7 @@ class LogAnalyzerApp:
         self.notebook.add(self.tab_fail, text="❌ FAIL測項")
         
         # FAIL TreeView
-        fail_columns = ("Step Name", "指令", "錯誤回應", "Retry次數", "錯誤原因")
+        fail_columns = ("Step Name", "指令", "錯誤回應", "Retry次數", "FAIL原因")
         self.fail_tree = ttk.Treeview(self.tab_fail, columns=fail_columns, show='headings')
         for col in fail_columns:
             self.fail_tree.heading(col, text=col)
@@ -300,6 +300,14 @@ class LogAnalyzerApp:
         except Exception:
             pass
         win.geometry("1000x700")
+        
+        # 讓視窗居中顯示
+        win.transient(self.root)
+        win.grab_set()
+        win.update_idletasks()
+        x = (win.winfo_screenwidth() // 2) - (1000 // 2)
+        y = (win.winfo_screenheight() // 2) - (700 // 2)
+        win.geometry(f"1000x700+{x}+{y}")
         
         # 頂部標題（顯示步驟名稱 +測項指令內容）
         header_text = title
@@ -882,6 +890,15 @@ class LogAnalyzerApp:
         win = tk.Toplevel(self.root)
         win.title(title)
         win.geometry("900x700")
+        
+        # 讓視窗居中顯示
+        win.transient(self.root)
+        win.grab_set()
+        win.update_idletasks()
+        x = (win.winfo_screenwidth() // 2) - (900 // 2)
+        y = (win.winfo_screenheight() // 2) - (700 // 2)
+        win.geometry(f"900x700+{x}+{y}")
+        
         frame = tk.Frame(win)
         frame.pack(fill=tk.BOTH, expand=1)
         text = tk.Text(frame, wrap=tk.WORD)

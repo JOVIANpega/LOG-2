@@ -168,7 +168,7 @@ class LogAnalyzerGUI:
     def _create_fail_tab(self):
         """建立FAIL測試分頁"""
         # 建立Treeview
-        columns = ('Step Name', 'Test ID', '指令', '錯誤回應', 'Retry次數', '錯誤原因', '執行時間(秒)')
+        columns = ('Step Name', 'Test ID', '指令', '錯誤回應', 'Retry次數', 'FAIL原因', '執行時間(秒)')
         self.fail_tree = ttk.Treeview(self.fail_frame, columns=columns, show='headings', height=15)
         
         # 設定欄位標題
@@ -493,6 +493,14 @@ class LogAnalyzerGUI:
         detail_window = tk.Toplevel(self.root)
         detail_window.title(title)
         detail_window.geometry("600x400")
+        
+        # 讓視窗居中顯示
+        detail_window.transient(self.root)
+        detail_window.grab_set()
+        detail_window.update_idletasks()
+        x = (detail_window.winfo_screenwidth() // 2) - (600 // 2)
+        y = (detail_window.winfo_screenheight() // 2) - (400 // 2)
+        detail_window.geometry(f"600x400+{x}+{y}")
         
         text_widget = scrolledtext.ScrolledText(detail_window, wrap=tk.WORD)
         text_widget.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)

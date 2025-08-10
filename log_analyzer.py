@@ -351,7 +351,7 @@ class LogAnalyzer:
                 if self.fail_tests:
                     fail_df = pd.DataFrame(self.fail_tests)
                     fail_df = fail_df[['step_name', 'test_id', 'commands', 'responses', 'retry_count', 'error_message', 'execution_time']]
-                    fail_df.columns = ['Step Name', 'Test ID', '指令', '錯誤回應', 'Retry次數', '錯誤原因', '執行時間(秒)']
+                    fail_df.columns = ['Step Name', 'Test ID', '指令', '錯誤回應', 'Retry次數', 'FAIL原因', '執行時間(秒)']
                     fail_df.to_excel(writer, sheet_name='FAIL測試', index=False)
                 
                 # 匯出腳本比對報告

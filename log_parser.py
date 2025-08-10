@@ -491,7 +491,7 @@ class LogParser:
         # Retry 次數（忽略 Run 行上的 Retry 欄位）
         retry_count = self._get_effective_retry_count(block_lines)
         
-        # 錯誤原因 - 從錯誤訊息行擷取
+        # FAIL原因 - 從錯誤訊息行擷取
         error_reason = self._find_error_reason(block_lines)
         
         # full_log - 錯誤區塊完整內容（顯示紅字），加入Attempt標註
@@ -528,7 +528,7 @@ class LogParser:
         return "Unknown Step"
     
     def _find_error_reason(self, block_lines):
-        """尋找錯誤原因"""
+        """尋找FAIL原因"""
         for line in block_lines:
             line_lower = line.lower()
             if any(keyword in line_lower for keyword in ['failed', 'error', 'nack', 'timeout', 'fail']):

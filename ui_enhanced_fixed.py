@@ -364,6 +364,14 @@ class EnhancedTreeview:
                 pass
             detail_window.geometry("1000x700")
             
+            # 讓視窗居中顯示
+            detail_window.transient(detail_window.master)
+            detail_window.grab_set()
+            detail_window.update_idletasks()
+            x = (detail_window.winfo_screenwidth() // 2) - (1000 // 2)
+            y = (detail_window.winfo_screenheight() // 2) - (700 // 2)
+            detail_window.geometry(f"1000x700+{x}+{y}")
+            
             # 標題（深藍底白字）
             title_label = tk.Label(detail_window, text=title, 
                                    font=('Arial', 14, 'bold'), fg='#FFFFFF', bg="#0B1D39")
@@ -446,6 +454,17 @@ class EnhancedTreeview:
             
         except Exception as e:
             print(f"顯示詳細內容對話框失敗: {e}")
+    
+    def _update_title_label(self, detail_window, new_title):
+        """更新標題標籤"""
+        try:
+            # 找到標題標籤並更新
+            for widget in detail_window.winfo_children():
+                if isinstance(widget, tk.Label) and widget.cget('bg') == '#0B1D39':
+                    widget.config(text=new_title)
+                    break
+        except Exception as e:
+            print(f"更新標題標籤失敗: {e}")
  
     def _build_cmd_resp_summary(self, content: str) -> str:
         """從內容中擷取所有 > 與其後續的 < 行，條列「指令1. 指令2. …」"""
@@ -514,7 +533,11 @@ class EnhancedTreeview:
             text_widget.config(state=tk.NORMAL)
             
             # 更新標題
-            detail_window.title(f"測項指令內容 - {prev_item_data['step_name']}")
+            new_title = f"測項指令內容 - {prev_item_data['step_name']}"
+            detail_window.title(new_title)
+            
+            # 更新標題標籤
+            self._update_title_label(detail_window, new_title)
             
             # 更新按鈕狀態
             self._update_navigation_buttons_in_window(detail_window, prev_index)
@@ -535,7 +558,11 @@ class EnhancedTreeview:
             text_widget.config(state=tk.NORMAL)
             
             # 更新標題
-            detail_window.title(f"測項指令內容 - {next_item_data['step_name']}")
+            new_title = f"測項指令內容 - {next_item_data['step_name']}"
+            detail_window.title(new_title)
+            
+            # 更新標題標籤
+            self._update_title_label(detail_window, new_title)
             
             # 更新按鈕狀態
             self._update_navigation_buttons_in_window(detail_window, next_index)

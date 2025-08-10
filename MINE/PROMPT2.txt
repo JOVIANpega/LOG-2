@@ -29,7 +29,7 @@ git push origin main
 
 
 git add .
-git commit -m "V1.6.3 優化 代碼低於一千行"
+git commit -m "V1.6.4 fixed FAIL 標籤頁的大字體標題"
 git push origin main
 
 
@@ -41,6 +41,14 @@ git push origin main
 
 
 
+
+FAIL 標籤頁的大字體標題應該會正確顯示：
+之前：顯示 "2025/08/07 09:27:55 [1] All Test Aborted! ErrorCode: HHFE15 ----- 107.3027727 Sec."
+現在：會顯示 "Check Battery_tempture is Fail !" 這樣的具體錯誤原因
+這樣的修正讓用戶能夠：
+一眼看到具體的失敗原因：大字體標題直接顯示測試項目失敗的具體內容
+避免混淆：不會被 "All Test Aborted" 這樣的通用訊息誤導
+快速定位問題：知道是哪個測試項目（如 Check Battery_tempture）失敗了
 
 
 懸停預覽（Summary 內檔名欄與底部快速連結）

@@ -60,12 +60,12 @@ class ExcelWriter:
             # 清理
             for col in pass_df.columns:
                 pass_df[col] = pass_df[col].apply(self._sanitize_cell_text)
-        # FAIL欄位：Step Name | 指令 | 錯誤回應 | Retry 次數 | 錯誤原因
+        # FAIL欄位：Step Name | 指令 | 錯誤回應 | Retry 次數 | FAIL原因
         fail_df = pd.DataFrame(fail_items)
         if not fail_df.empty:
             cols = [c for c in ['file_name','step_name','command','response','retry','error'] if c in fail_df.columns]
             fail_df = fail_df[cols]
-            new_cols = ['檔名','Step Name','指令','錯誤回應','Retry 次數','錯誤原因'] if 'file_name' in cols else ['Step Name','指令','錯誤回應','Retry 次數','錯誤原因']
+            new_cols = ['檔名','Step Name','指令','錯誤回應','Retry 次數','FAIL原因'] if 'file_name' in cols else ['Step Name','指令','錯誤回應','Retry 次數','FAIL原因']
             fail_df.columns = new_cols
             # 清理
             for col in fail_df.columns:
@@ -92,7 +92,7 @@ class ExcelWriter:
             if 'file_name' not in fail_df.columns:
                 fail_df['file_name'] = ''
             fail_df = fail_df[['file_name','step_name','command','response','retry','error']]
-            fail_df.columns = ['檔名','Step Name','指令','錯誤回應','Retry 次數','錯誤原因']
+            fail_df.columns = ['檔名','Step Name','指令','錯誤回應','Retry 次數','FAIL原因']
         # Summary 建立
         summary_rows = []
         all_files = set()
@@ -108,7 +108,7 @@ class ExcelWriter:
             fail_reason = ''
             if f_cnt > 0 and not fail_df.empty:
                 subset = fail_df[fail_df['檔名'] == fn]
-                fail_reason = subset['錯誤原因'].iloc[0] if not subset.empty else ''
+                fail_reason = subset['FAIL原因'].iloc[0] if not subset.empty else ''
             summary_rows.append({'檔名': fn, '結果': result, 'PASS筆數': p_cnt, 'FAIL筆數': f_cnt, '主要失敗原因': fail_reason})
         summary_df = pd.DataFrame(summary_rows)
         # KPI 概覽

@@ -183,7 +183,7 @@ class EnhancedLogAnalyzerApp:
         
         # 上半部 - FAIL測項列表
         self.fail_upper_frame = tk.Frame(self.fail_paned)
-        fail_columns = ("Step Name", "指令", "錯誤回應", "Retry次數", "錯誤原因")
+        fail_columns = ("Step Name", "指令", "錯誤回應", "Retry次數", "FAIL原因")
         self.fail_tree_enhanced = EnhancedTreeview(self.fail_upper_frame, fail_columns)
         self.fail_tree_enhanced.pack_with_scrollbars(fill=tk.BOTH, expand=1)
         self.fail_paned.add(self.fail_upper_frame, minsize=200)
@@ -304,6 +304,9 @@ class EnhancedLogAnalyzerApp:
             initialdir=default_dir
         )
         if file_path:
+            # 先清除現有結果，避免誤導
+            self._clear_enhanced_results()
+            
             self.current_mode = 'single'
             self.current_log_path = file_path
             filename = os.path.basename(file_path)
@@ -330,6 +333,9 @@ class EnhancedLogAnalyzerApp:
             initialdir=default_dir
         )
         if folder_path:
+            # 先清除現有結果，避免誤導
+            self._clear_enhanced_results()
+            
             self.current_mode = 'multi'
             self.current_log_path = folder_path
             
@@ -551,14 +557,14 @@ class EnhancedLogAnalyzerApp:
             print(f"保存FAIL分割視窗位置失敗: {e}")
     
     def _auto_select_first_fail(self):
-        """自動選擇第一個FAIL項目並顯示錯誤原因"""
+        """自動選擇第一個FAIL項目並顯示FAIL原因"""
         try:
             if hasattr(self, 'fail_tree_enhanced'):
                 children = self.fail_tree_enhanced.tree.get_children()
                 if children:
                     first_item = children[0]
                     self.fail_tree_enhanced.tree.selection_set(first_item)
-                    # 自動觸發選擇事件，顯示錯誤原因
+                    # 自動觸發選擇事件，顯示FAIL原因
                     self._on_fail_item_select(None)
         except Exception as e:
             print(f"自動選擇第一個FAIL項目失敗: {e}")
@@ -575,27 +581,17 @@ class EnhancedLogAnalyzerApp:
                     step_name = values[0]
                     error_code = values[4] if len(values) > 4 else "未知錯誤"
                     
-                    # 更新標題 - 主題用大字體紅色文字白底
-                    # 從錯誤原因中擷取測試名稱部分
-                    # 例如：VSCH026-043:Chec Frimware version is Fail ! <ErrorCode: BSFR18>
-                    # 要顯示：Chec Frimware version is Fail
-                    main_error = error_code
-                    if ":" in error_code and "is Fail" in error_code:
-                        # 擷取冒號後的部分
-                        after_colon = error_code.split(":", 1)[1].strip()
-                        # 找到 "is Fail" 的位置
-                        if "is Fail" in after_colon:
-                            fail_pos = after_colon.find("is Fail")
-                            # 擷取到 "is Fail" 結束的部分，去掉後面的 <ErrorCode: xxx>
-                            test_name_with_fail = after_colon[:fail_pos + 7].strip()  # 7 = len("is Fail")
-                            main_error = test_name_with_fail
+                    # 從存儲中獲取完整內容，優先找到包含 "is Fail" 的行作為標題
+                    full_content = self.fail_tree_enhanced.full_content_storage.get(item_id, '')
+                    
+                    # 優先從完整內容中找到包含 "is Fail" 的行作為大字體標題
+                    main_error = self._extract_main_fail_reason(full_content)
                     
                     # 顯示大字體紅色文字白底
                     self.fail_error_title.config(text=main_error, 
                                                 font=('Arial', 20, 'bold'), fg='red', bg='white')
                     
-                    # 從存儲中獲取完整內容，只顯示FAIL原因部分
-                    full_content = self.fail_tree_enhanced.full_content_storage.get(item_id, '')
+                    # 提取FAIL原因部分顯示在下方
                     fail_reason_content = self._extract_fail_reason(full_content)
                     
                     # 更新錯誤內容
@@ -613,29 +609,84 @@ class EnhancedLogAnalyzerApp:
             print(f"處理FAIL項目選擇失敗: {e}")
     
     def _extract_fail_reason(self, full_content):
-        """提取FAIL原因部分，不是全部錯誤字串"""
+        """提取FAIL原因部分，優先提取包含 'is Fail' 的行"""
         if not full_content:
             return "沒有詳細錯誤內容可顯示"
         
         lines = full_content.split('\n')
         fail_reason_lines = []
+        is_fail_lines = []
         
-        # 找到包含關鍵錯誤資訊的行
+        # 優先找到包含 "is Fail" 的行
         for line in lines:
-            # 移除行號前綴（如 "370. ")
+            # 移除行號前綴（如 "370. "）
             clean_line = line
             if '. ' in line and line.split('. ', 1)[0].strip().isdigit():
                 clean_line = line.split('. ', 1)[1]
             
-            # 包含重要錯誤資訊的行
-            if any(keyword in clean_line for keyword in [
-                'Result:', 'validation:', 'type of', 'TestTime:', 'is Fail', 
+            # 優先提取包含 "is Fail" 的行
+            if "is Fail" in clean_line:
+                is_fail_lines.append(clean_line)
+            # 其他包含重要錯誤資訊的行
+            elif any(keyword in clean_line for keyword in [
+                'Result:', 'validation:', 'type of', 'TestTime:', 
                 'ErrorCode:', 'Test Completed', 'Test Aborted', 'TotalCount:', 
                 'Report name:', 'Execute Phase', 'FAIL', 'ERROR', 'NACK'
             ]):
                 fail_reason_lines.append(clean_line)
         
-        return '\n'.join(fail_reason_lines) if fail_reason_lines else full_content
+        # 優先顯示包含 "is Fail" 的行，然後是其他錯誤資訊
+        result_lines = is_fail_lines + fail_reason_lines
+        return '\n'.join(result_lines) if result_lines else full_content
+    
+    def _extract_main_fail_reason(self, full_content):
+        """提取主要的FAIL原因作為大字體標題"""
+        if not full_content:
+            return "無詳細錯誤資訊"
+        
+        lines = full_content.split('\n')
+        
+        # 優先找到包含 "is Fail" 的行
+        for line in lines:
+            # 移除行號前綴（如 "370. "）
+            clean_line = line
+            if '. ' in line and line.split('. ', 1)[0].strip().isdigit():
+                clean_line = line.split('. ', 1)[1]
+            
+            # 找到包含 "is Fail" 的行
+            if "is Fail" in clean_line:
+                # 處理類似 "IPI0009-0580: Check Battery_tempture is Fail ! <ErrorCode: HHFE15>" 的格式
+                if ':' in clean_line and "is Fail" in clean_line:
+                    # 擷取冒號後的部分
+                    after_colon = clean_line.split(":", 1)[1].strip()
+                    # 找到 "is Fail" 的位置
+                    if "is Fail" in after_colon:
+                        fail_pos = after_colon.find("is Fail")
+                        # 擷取到 "is Fail" 結束的部分，去掉後面的 <ErrorCode: xxx>
+                        test_name_with_fail = after_colon[:fail_pos + 7].strip()  # 7 = len("is Fail")
+                        return test_name_with_fail
+                elif "is Fail" in clean_line:
+                    # 如果沒有冒號但有 "is Fail"，直接擷取到 "is Fail" 結束
+                    fail_pos = clean_line.find("is Fail")
+                    if fail_pos != -1:
+                        # 找到 <ErrorCode: 的位置
+                        error_code_pos = clean_line.find("<ErrorCode:")
+                        if error_code_pos != -1:
+                            return clean_line[:error_code_pos].strip()
+                        else:
+                            return clean_line[:fail_pos + 7].strip()
+        
+        # 如果沒有找到 "is Fail"，嘗試找到其他錯誤資訊
+        for line in lines:
+            clean_line = line
+            if '. ' in line and line.split('. ', 1)[0].strip().isdigit():
+                clean_line = line.split('. ', 1)[1]
+            
+            # 尋找包含 "All Test Aborted" 的行
+            if "All Test Aborted" in clean_line:
+                return clean_line
+        
+        return "未知錯誤"
     
     def _insert_formatted_fail_content(self, content):
         """插入格式化的FAIL內容，特定行顯示紅色"""
@@ -844,6 +895,15 @@ class EnhancedLogAnalyzerApp:
         win = tk.Toplevel(self.root)
         win.title(title)
         win.geometry("1000x750")
+        
+        # 讓視窗居中顯示
+        win.transient(self.root)
+        win.grab_set()
+        win.update_idletasks()
+        x = (win.winfo_screenwidth() // 2) - (1000 // 2)
+        y = (win.winfo_screenheight() // 2) - (750 // 2)
+        win.geometry(f"1000x750+{x}+{y}")
+        
         frame = tk.Frame(win)
         frame.pack(fill=tk.BOTH, expand=1)
         text = tk.Text(frame, wrap=tk.WORD, font=('Consolas', self.content_font_size))
@@ -933,6 +993,15 @@ class EnhancedLogAnalyzerApp:
         win = tk.Toplevel(self.root)
         win.title("匯出完成")
         win.geometry("700x300")
+        
+        # 讓視窗居中顯示
+        win.transient(self.root)
+        win.grab_set()
+        win.update_idletasks()
+        x = (win.winfo_screenwidth() // 2) - (700 // 2)
+        y = (win.winfo_screenheight() // 2) - (300 // 2)
+        win.geometry(f"700x300+{x}+{y}")
+        
         try:
             win.configure(bg='white')
         except Exception:
